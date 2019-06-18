@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
+        tools:context=".ui.contact.ContactActivity">
+
+
+        <android.support.constraint.ConstraintLayout
+           android:id="@+id/Innerlayout"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_23sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:paddingTop="@dimen/_30sdp"
+            android:paddingBottom="@dimen/_30sdp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+
+            <ImageView
+                android:id="@+id/add_imageView"
+                android:layout_marginTop="@dimen/_15sdp"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_addimage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/add_imageView"
+                app:layout_constraintStart_toStartOf="@id/add_imageView"
+                app:layout_constraintEnd_toEndOf="@id/add_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="أضف صورة"
+                />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/textview_stroke"
+            android:gravity="start"
+            android:hint="@string/user_name_label"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toTopOf="@+id/phone_number_editText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Innerlayout"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#707070"
+            app:layout_constraintEnd_toEndOf="@id/textInputEditText"
+            app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintTop_toTopOf="@id/textInputEditText" />
+        <TextView
+            android:id="@+id/user_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/LightGray"
+            android:fontFamily="@font/seguisb"
+            android:paddingTop="@dimen/_3sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
+            android:text="@string/name_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@id/line"
+            app:layout_constraintStart_toStartOf="@id/line"
+            app:layout_constraintTop_toTopOf="@id/line" />
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/phone_number_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_stroke"
+            android:drawablePadding="12dp"
+            android:layout_marginTop="@dimen/_15sdp"
+
+            android:hint="@string/phone_numberlabel"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp"
+            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toTopOf="@id/product_name_editText"
+            app:layout_constraintEnd_toEndOf="@id/textInputEditText"
+            app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintTop_toBottomOf="@id/textInputEditText"
+            app:passwordToggleEnabled="true" />
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#707070"
+            app:layout_constraintEnd_toEndOf="@id/phone_number_editText"
+            app:layout_constraintStart_toStartOf="@id/phone_number_editText"
+            app:layout_constraintTop_toTopOf="@id/phone_number_editText" />
+        <TextView
+            android:id="@+id/phone_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/LightGray"
+            android:fontFamily="@font/seguisb"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
+            android:text="@string/phone_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@id/line3"
+            app:layout_constraintStart_toStartOf="@id/line3"
+            app:layout_constraintTop_toTopOf="@id/line3" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/product_name_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/textview_stroke"
+            android:hint="ادخل اسم المنتج"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toTopOf="@id/productdetails__editText"
+            app:layout_constraintEnd_toEndOf="@id/textInputEditText"
+            app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_editText" />
+
+        <View
+            android:id="@+id/line4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#707070"
+            app:layout_constraintEnd_toEndOf="@id/product_name_editText"
+            app:layout_constraintStart_toStartOf="@id/product_name_editText"
+            app:layout_constraintTop_toTopOf="@id/product_name_editText" />
+        <TextView
+            android:id="@+id/topic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/LightGray"
+            android:fontFamily="@font/seguisb"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
+            android:text="@string/productname_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@id/line4"
+            app:layout_constraintStart_toStartOf="@id/line4"
+            app:layout_constraintTop_toTopOf="@id/line4" />
+
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/productdetails__editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/textview_stroke"
+            android:hint="ادخل نص الرسالة هنا"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingTop="@dimen/_16sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintEnd_toEndOf="@id/textInputEditText"
+            app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintTop_toBottomOf="@id/product_name_editText" />
+
+        <View
+            android:id="@+id/line5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#707070"
+            app:layout_constraintEnd_toEndOf="@id/productdetails__editText"
+            app:layout_constraintStart_toStartOf="@id/productdetails__editText"
+            app:layout_constraintTop_toTopOf="@id/productdetails__editText" />
+        <TextView
+            android:id="@+id/details_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/LightGray"
+            android:fontFamily="@font/seguisb"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_6sdp"
+            android:paddingEnd="@dimen/_6sdp"
+            android:text="@string/productdetails_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@id/line5"
+            app:layout_constraintStart_toStartOf="@id/line5"
+            app:layout_constraintTop_toTopOf="@id/line5" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/productdetails__editText"
+            app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintEnd_toEndOf="@id/textInputEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:paddingTop="@dimen/_9sdp"
+            android:paddingBottom="@dimen/_9sdp"
+           android:background="@color/colorprimary"
+            android:gravity="center"
+            android:textColor="@color/brown"
+            android:text="@string/sendorderlabel"
+            android:fontFamily="@font/seguisb"
+            android:textSize="@dimen/_17ssp"
+
+            />
+
+    </android.support.constraint.ConstraintLayout>
+

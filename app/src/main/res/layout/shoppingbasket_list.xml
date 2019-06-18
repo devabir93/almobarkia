@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:dragEdge="right"
+    app:mode="same_level">
+
+    <FrameLayout
+        android:id="@+id/delete_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_delet" />
+    </FrameLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/celllayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/product_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_86sdp"
+            android:background="@color/white"
+            android:padding="@dimen/_4sdp"
+            android:src="@drawable/ic_productbasket"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/aboutproduct_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:fontFamily="@font/segoeui"
+            android:text="@string/aboutproduct_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintStart_toEndOf="@id/product_imageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/product_color"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/textview_oval"
+            app:layout_constraintStart_toStartOf="@id/aboutproduct_label"
+            app:layout_constraintTop_toBottomOf="@id/aboutproduct_label" />
+
+        <TextView
+            android:id="@+id/product_size"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:text="@string/size_type"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="@id/product_color"
+            app:layout_constraintStart_toEndOf="@id/product_color"
+            app:layout_constraintTop_toTopOf="@id/product_color" />
+
+        <TextView
+            android:id="@+id/product_pice_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/segoeui"
+            android:text="@string/endprice_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="@id/currency_label"
+            app:layout_constraintStart_toStartOf="@id/product_color"
+            app:layout_constraintTop_toTopOf="@id/currency_label" />
+
+        <TextView
+            android:id="@+id/currency_label"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:fontFamily="@font/segoeui"
+            android:text="@string/currency_label"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toEndOf="@id/product_pice_label"
+            app:layout_constraintTop_toBottomOf="@id/product_color" />
+
+        <TextView
+            android:id="@+id/availablesize_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="@dimen/_2sdp"
+            android:text="@string/availableasize_type"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/product_total"
+            app:layout_constraintStart_toEndOf="@id/currency_label"
+            app:layout_constraintTop_toTopOf="@id/currency_label" />
+
+        <TextView
+            android:id="@+id/product_count_label"
+            android:layout_width="@dimen/_75sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/textview_stroke"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/product_total"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="@drawable/textview_rectanglel"
+            android:paddingStart="@dimen/_11sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_11sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="01"
+            android:textColor="@color/brown"
+            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+            app:layout_constraintEnd_toStartOf="@id/product_count_label"
+
+            app:layout_constraintTop_toTopOf="@id/product_count_label" />
+
+        <TextView
+            android:id="@+id/plus_product_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/segoeuib"
+            android:padding="@dimen/_4sdp"
+            android:text="+"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+            app:layout_constraintStart_toStartOf="@id/product_count_label"
+            app:layout_constraintTop_toTopOf="@id/product_count_label" />
+
+        <TextView
+            android:id="@+id/minus_product_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:fontFamily="@font/segoeuib"
+            android:padding="@dimen/_4sdp"
+            android:text="-"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_16ssp"
+            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+            app:layout_constraintEnd_toEndOf="@id/product_count_label"
+            app:layout_constraintTop_toTopOf="@id/product_count_label" />
+    </android.support.constraint.ConstraintLayout>
+</com.daimajia.swipe.SwipeLayout>

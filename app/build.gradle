@@ -1,0 +1,227 @@
+apply plugin: 'com.android.application'
+//TODO uncomment line below after adding fabric api secret and key to fabric.properties
+//apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        applicationId 'com.selsela.example'
+        minSdkVersion 21
+        targetSdkVersion 28
+        testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
+        versionCode 1000
+        // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
+        versionName '0.1.0'
+    }
+
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+    }
+
+    buildTypes {
+        release {
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        debug {
+            versionNameSuffix " Debug"
+            debuggable true
+        }
+    }
+
+    sourceSets {
+        def commonTestDir = 'src/commonTest/java'
+        test {
+            java.srcDir commonTestDir
+        }
+        androidTest {
+            java.srcDir commonTestDir
+        }
+    }
+
+    //Needed because of this https://github.com/square/okio/issues/58
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}
+
+
+dependencies {
+    final PLAY_SERVICES_VERSION = '16.0.0'
+    final SUPPORT_LIBRARY_VERSION = '28.0.0'
+    final MOCKITO_VERSION = '2.6.2'
+    final HAMCREST_VERSION = '1.3'
+    final ESPRESSO_VERSION = '2.2.1'
+    final RUNNER_VERSION = '0.4'
+    final RETROFIT_VERSION = '2.3.0'
+    final DAGGER_VERSION = '2.5'
+    final BUTTERKNIFE_VERSION = '8.8.0'
+    final AUTO_VALUE_VERSION = '1.3'
+    final AUTO_VALUE_GSON_VERSION = '0.8.0'
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    def jUnit = "junit:junit:4.12"
+    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+    implementation files('libs/exp4j-0.4.8.jar')
+    implementation("com.squareup.sqlbrite2:sqlbrite:2.0.0") {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    // App Dependencies
+    implementation "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation "com.android.support:palette-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:percent:$SUPPORT_LIBRARY_VERSION"
+    implementation 'io.apptik.widget:multislider:1.3'
+
+
+    //Api
+    implementation 'com.github.satyan:sugar:1.5'
+    implementation 'com.facebook.stetho:stetho:1.4.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    compileOnly "com.jakewharton.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
+    compileOnly "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    annotationProcessor 'com.google.auto.value:auto-value-annotations:1.6'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.8.0'
+
+    // basic
+    implementation "com.google.android.gms:play-services-gcm:$PLAY_SERVICES_VERSION"
+    implementation 'com.google.firebase:firebase-messaging:17.3.3'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+
+        transitive = true
+
+    }
+    implementation 'org.apache.commons:commons-lang3:3.6'
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.treebo:internetavailabilitychecker:1.0.2'
+
+    /////////// helper
+    //implementation 'com.github.ittianyu:BottomNavigationViewEx:2.0.2'
+    implementation 'com.mikepenz:iconics-core:2.8.1@aar'
+    implementation('com.mikepenz:materialdrawer:5.3.6@aar') {
+        transitive = true
+    }
+    implementation('com.mikepenz:aboutlibraries:5.7.0@aar') {
+        transitive = true
+        exclude module: "fastadapter"
+    }
+    implementation 'com.mikepenz:actionitembadge:3.3.1@aar'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    implementation 'me.zhanghai.android.materialratingbar:library:1.3.1'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation 'com.github.rey5137:material:1.2.5'
+    implementation 'com.jaredrummler:material-spinner:1.2.5'
+    implementation 'org.sufficientlysecure:html-textview:3.6'
+    implementation 'com.github.travijuu:numberpicker:1.0.7'
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    implementation 'com.llollox:androidtoggleswitch:2.0.1'
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    implementation 'klogi.com:rtlviewpager:1.0.0'
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+
+    implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+    implementation 'io.apptik.widget:multislider:1.3'
+    implementation 'com.thoughtbot:expandablecheckrecyclerview:1.4'
+
+    implementation 'com.tapadoo.android:alerter:2.0.5'
+    implementation 'com.daimajia.slider:library:1.1.5@aar'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.squareup.picasso:picasso:2.3.2'
+    implementation 'com.loopeer.lib:shadow:0.0.4-beta3'
+    implementation 'com.yarolegovich:discrete-scrollview:1.4.9'
+    implementation 'com.github.travijuu:numberpicker:1.0.7'
+    implementation 'com.github.ivbaranov:materialfavoritebutton:0.1.5'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.3.1'
+///dialogs
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+
+    ////dimens
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+
+//    implementation 'com.github.esafirm.android-image-picker:imagepicker:2.0.0'
+    // Replace provided dependency below with official AutoValue once this issue is fixed
+    // https://github.com/google/auto/issues/268
+    compileOnly "com.jakewharton.auto.value:auto-value-annotations:$AUTO_VALUE_VERSION"
+    compileOnly "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
+    annotationProcessor "com.google.auto.value:auto-value:$AUTO_VALUE_VERSION"
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.4-rc2'
+    annotationProcessor "com.ryanharter.auto.value:auto-value-gson:$AUTO_VALUE_GSON_VERSION"
+    annotationProcessor 'com.squareup:javapoet:1.7.0'
+    // https://github.com/rharter/auto-value-parcel/issues/64
+
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+    annotationProcessor daggerCompiler
+    testAnnotationProcessor daggerCompiler
+    androidTestAnnotationProcessor daggerCompiler
+
+    // Instrumentation test dependencies
+    androidTestImplementation jUnit
+    androidTestImplementation mockito
+    androidTestImplementation "org.mockito:mockito-android:$MOCKITO_VERSION"
+    androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    androidTestImplementation "com.android.support.test:runner:$RUNNER_VERSION"
+    androidTestImplementation "com.android.support.test:rules:$RUNNER_VERSION"
+
+    // Unit tests dependencies
+    testImplementation jUnit
+    testImplementation mockito
+    testImplementation "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
+    testImplementation "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+    testImplementation "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+    testImplementation 'org.robolectric:robolectric:3.3'
+}

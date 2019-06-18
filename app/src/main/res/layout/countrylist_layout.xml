@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<TextView
+    android:fontFamily="@font/segoeui"
+    android:id="@+id/country_label"
+    android:drawableStart="@drawable/ic_flag"
+    android:drawablePadding="@dimen/_15sdp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:textSize="@dimen/_16ssp"
+    android:textAlignment="viewStart"
+    android:textColor="@color/colorprimary"
+    android:text="@string/country_label"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/phoneKey"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_13ssp"
+        android:padding="@dimen/_4sdp"
+        android:text="+966"
+        android:textAlignment="viewStart"
+        app:layout_constraintTop_toTopOf="@id/country_label"
+        app:layout_constraintBottom_toBottomOf="@id/country_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>

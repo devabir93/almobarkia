@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/icon_home"
+        android:title="@string/title_homear" />
+
+    <item
+        android:id="@+id/navigation_favourites"
+        android:icon="@drawable/ic_like"
+        android:title="@string/title_fav" />
+
+    <item
+        android:id="@+id/navigation_orders"
+        android:icon="@drawable/ic_orders"
+        android:title="@string/title_myorders" />
+    <item
+        android:id="@+id/navigation_specialorder"
+        android:icon="@drawable/ic_specialorder"
+        android:title="@string/title_specialorder" />
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/title_settigs" />
+</menu>

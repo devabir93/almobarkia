@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="locale"
+    android:orientation="vertical"
+    android:textDirection="locale"
+    android:layout_margin="@dimen/_8sdp"
+    android:background="@color/white"
+    tools:context=".ui.productlist.ProductListActivity">
+
+    <ImageView
+        android:id="@+id/productImageview"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        android:src="@drawable/ic_dressgrid"
+        android:background="@color/white"
+        android:padding="@dimen/_6sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/discount_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:background="@drawable/textview_oval"
+        android:fontFamily="@font/segoeui"
+        android:paddingStart="@dimen/_2sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_7sdp"
+        app:layout_constraintTop_toTopOf="@id/productImageview"
+        app:layout_constraintStart_toStartOf="@id/productImageview"
+        android:text="30%"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_12ssp" />
+
+    <ImageView
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:background="@drawable/circle"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/ic_like"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="@id/productImageview"
+        app:layout_constraintEnd_toEndOf="@id/productImageview"
+        app:layout_constraintTop_toTopOf="@id/productprice_label" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:layout_marginBottom="@dimen/_13sdp"
+        android:src="@drawable/ic_liked"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="@id/productImageview"
+        app:layout_constraintEnd_toEndOf="@id/productImageview"
+        app:layout_constraintTop_toTopOf="@id/productprice_label" />
+
+    <TextView
+        android:id="@+id/product_descrption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:fontFamily="@font/segoeui"
+        android:lines="2"
+        android:text="طقم فاخر من الاخر"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="@id/productprice_label"
+        app:layout_constraintTop_toBottomOf="@id/productprice_label" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintStart_toStartOf="@id/productprice_label"
+        app:layout_constraintTop_toBottomOf="@id/product_descrption"
+        app:mrb_progressTint="@color/yellow" />
+
+    <TextView
+        android:id="@+id/rating_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="4.4"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_11ssp"
+        app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+        app:layout_constraintStart_toEndOf="@id/rating_bar"
+        app:layout_constraintTop_toTopOf="@id/rating_bar" />
+
+    <TextView
+        android:layout_marginStart="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/productprice_label"
+        app:layout_constraintTop_toBottomOf="@id/productImageview"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/productprice_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_11ssp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:id="@+id/prprice_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/productprice_label"
+        app:layout_constraintTop_toTopOf="@id/productprice_label"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_11ssp"
+        android:text="140.00"
+        />
+
+
+</android.support.constraint.ConstraintLayout>
+
+
+

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/product_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_350sdp"
+        android:src="@drawable/ic_productdetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/product_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@id/product_imageView"
+        tools:listitem="@layout/product_list"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/size_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:orientation="horizontal"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/product_count_label"
+        app:layout_constraintTop_toBottomOf="@id/product_list"
+        tools:itemCount="5"
+        tools:listitem="@layout/sizecircle_list"
+
+        />
+
+    <TextView
+        android:id="@+id/product_count_label"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/textview_stroke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/size_list" />
+
+    <TextView
+        android:id="@+id/product_total"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/textview_rectanglel"
+        android:paddingStart="@dimen/_11sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_11sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:text="01"
+        android:textColor="@color/brown"
+        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+        app:layout_constraintEnd_toStartOf="@id/product_count_label"
+        app:layout_constraintTop_toTopOf="@id/product_count_label" />
+
+    <TextView
+        android:id="@+id/plus_product_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:fontFamily="@font/segoeuib"
+        android:gravity="center"
+        android:padding="@dimen/_4sdp"
+        android:text="+"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+        app:layout_constraintStart_toStartOf="@id/product_count_label"
+        app:layout_constraintTop_toTopOf="@id/product_count_label" />
+
+    <TextView
+        android:id="@+id/minus_product_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:fontFamily="@font/segoeuib"
+        android:padding="@dimen/_4sdp"
+        android:text="-"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
+        app:layout_constraintEnd_toEndOf="@id/product_count_label"
+        app:layout_constraintTop_toTopOf="@id/product_count_label" />
+
+    <TextView
+        android:id="@+id/maxorder_num"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/segoeui"
+        android:gravity="center"
+        android:text="@string/_maxordernumber_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/product_count_label" />
+
+    <TextView
+        android:id="@+id/shop_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorprimary"
+        android:fontFamily="@font/seguisb"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/contiue_shopping_label"
+        android:textColor="@color/brown"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/maxorder_num"
+        app:layout_constraintEnd_toStartOf="@id/continue_label"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_weight=".22"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/continue_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seguisb"
+        android:gravity="center"
+        android:paddingTop="@dimen/_13sdp"
+        android:paddingBottom="@dimen/_13sdp"
+        android:text="@string/contiue_buying_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_15ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shop_label"
+        app:layout_constraintBottom_toBottomOf="@id/shop_label"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_weight=".22"
+        app:layout_constraintStart_toEndOf="@id/shop_label" />
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

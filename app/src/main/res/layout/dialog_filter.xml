@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
+    android:background="@color/white"
+    tools:context=".ui.productlist.ProductListActivity">
+
+
+
+    <TextView
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:textColor="@color/colorprimary"
+        android:fontFamily="@font/segoeuib"
+        android:textSize="@dimen/_14ssp"
+        android:textAlignment="viewStart"
+        android:id="@+id/flterprice_label"
+        android:text="@string/filtercolors_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/startpric_label"
+        app:layout_constraintTop_toBottomOf="@id/flterprice_label"
+        app:layout_constraintStart_toStartOf="@id/flterprice_label"
+        android:text="@string/mini"
+        android:textAlignment="viewStart"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/colorprimary"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <io.apptik.widget.MultiSlider
+        android:id="@+id/range_slider5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        app:drawThumbsApart="true"
+        app:layout_constraintEnd_toEndOf="@id/endprice_label_box"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/startpric_label"
+        app:layout_constraintTop_toBottomOf="@id/startpric_label"
+        app:stepsThumbsApart="5"
+        app:thumbColor="@color/brown"
+
+        app:thumbNumber="2" />
+
+
+
+    <TextView
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_9sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:text="@string/startprice_label"
+        android:textAlignment="viewStart"
+        android:background="@drawable/textview_rectanglel"
+        app:layout_constraintStart_toEndOf="@id/startpric_label"
+        app:layout_constraintTop_toTopOf="@id/startpric_label"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/endpric_label"
+       app:layout_constraintEnd_toStartOf="@id/endprice_label_box"
+        app:layout_constraintTop_toTopOf="@id/startpric_label"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:text="@string/max"
+        android:textSize="@dimen/_13ssp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/endprice_label_box"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_9sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:text="@string/endprice_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/textview_rectanglel"
+        app:layout_constraintTop_toTopOf="@id/startpric_label"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    
+    <TextView
+        android:id="@+id/fltert_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_list"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/brown"
+        android:fontFamily="@font/seguisb"
+        android:textSize="@dimen/_17ssp"
+        android:gravity="center"
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_16sdp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+<TextView
+    app:layout_constraintStart_toStartOf="@id/flterprice_label"
+    app:layout_constraintTop_toBottomOf="@id/range_slider5"
+    android:layout_marginTop="@dimen/_30sdp"
+    android:text="@string/filtersize_label"
+    android:fontFamily="@font/segoeuib"
+    android:textSize="@dimen/_14ssp"
+    android:id="@+id/filter_size"
+    android:textAlignment="viewStart"
+    android:textColor="@color/colorprimary"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/filter_action"
+        app:layout_constraintTop_toTopOf="@id/fltert_back"
+        app:layout_constraintBottom_toBottomOf="@id/fltert_back"
+        app:layout_constraintStart_toStartOf="@id/fltert_back"
+        app:layout_constraintEnd_toEndOf="@id/fltert_back"
+        android:drawableStart="@drawable/ic_done"
+        android:textColor="@color/colorprimary"
+        android:fontFamily="@font/seguibl"
+        android:textSize="@dimen/_17ssp"
+        android:text="@string/filter_label"
+        android:drawablePadding="@dimen/_8sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/size_list"
+        app:layout_constraintTop_toBottomOf="@id/filter_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        tools:itemCount="4"
+        app:layoutManager="LinearLayoutManager"
+        android:orientation="horizontal"
+        tools:listitem="@layout/sizelist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+<TextView
+    android:id="@+id/colorfilter_label"
+    app:layout_constraintTop_toBottomOf="@id/size_list"
+    app:layout_constraintStart_toStartOf="@id/flterprice_label"
+    android:layout_marginTop="@dimen/_24sdp"
+    android:text="@string/filterprice_label"
+    android:fontFamily="@font/segoeuib"
+    android:textSize="@dimen/_14ssp"
+    android:textAlignment="viewStart"
+    android:textColor="@color/colorprimary"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/color_list"
+      app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/colorfilter_label"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:orientation="horizontal"
+        tools:listitem="@layout/colorslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

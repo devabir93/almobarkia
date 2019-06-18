@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/seguisb"
+        android:id="@+id/country_textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+
+        android:text="@string/choosecountry_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/close_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_close"
+        android:padding="@dimen/_6sdp"
+        app:layout_constraintTop_toTopOf="@id/country_textView"
+        app:layout_constraintBottom_toBottomOf="@id/country_textView"
+         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_15sdp"
+
+        />
+
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/country_list"
+    tools:itemCount="5"
+    app:layoutManager="LinearLayoutManager"
+    android:orientation="vertical"
+    tools:listitem="@layout/countrylist_layout"
+    android:layout_marginTop="@dimen/_20sdp"
+    app:layout_constraintTop_toBottomOf="@id/country_textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+
+</android.support.constraint.ConstraintLayout>

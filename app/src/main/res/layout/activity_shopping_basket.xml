@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/toolbar"></include>
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:orientation="vertical"
+    android:textDirection="locale"
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+
+    tools:context=".ui.shoppingbasket.ShoppingBasketActivity">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/shoppingbasket_list"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    tools:itemCount="3"
+    android:layout_marginTop="@dimen/_12sdp"
+
+    android:layout_marginStart="@dimen/_12sdp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toTopOf="@id/total_amount_label"
+    tools:listitem="@layout/shoppingbasket_list"
+   />
+    <TextView
+        android:id="@+id/total_amount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/contiue_buying_action"
+        app:layout_constraintTop_toTopOf="@id/contiue_buying_action"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_weight=".33"
+        android:fontFamily="@font/segoeui"
+        android:textSize="@dimen/_12ssp"
+        android:paddingTop="@dimen/_17sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        android:textColor="@color/brown"
+        android:background="@color/colorprimary"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/contiue_buying_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_amount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight=".22"
+        android:background="@color/brown"
+        android:paddingTop="@dimen/_17sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        android:gravity="center"
+        android:fontFamily="@font/segoeui"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+    <TextView
+
+        app:layout_constraintStart_toStartOf="@id/contiue_buying_action"
+        app:layout_constraintEnd_toEndOf="@id/contiue_buying_action"
+        app:layout_constraintTop_toTopOf="@id/contiue_buying_action"
+        app:layout_constraintBottom_toBottomOf="@id/contiue_buying_action"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:fontFamily="@font/segoeui"
+        android:textColor="@color/colorprimary"
+        android:text="@string/contiue_buying_label"
+        android:textSize="@dimen/_15ssp"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+    <TextView
+        android:id="@+id/total_amount_label"
+        app:layout_constraintStart_toStartOf="@id/total_amount"
+        app:layout_constraintTop_toTopOf="@id/total_amount"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:textColor="@color/brown"
+        android:fontFamily="@font/segoeui"
+        android:textSize="@dimen/_12ssp"
+        android:text="@string/amount_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        app:layout_constraintStart_toStartOf="@id/total_amount"
+        app:layout_constraintTop_toBottomOf="@+id/total_amount_label"
+        android:layout_marginStart="@dimen/_22sdp"
+        android:textColor="@color/brown"
+        android:fontFamily="@font/segoeui"
+        android:textSize="@dimen/_15ssp"
+        android:text="@string/total_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
