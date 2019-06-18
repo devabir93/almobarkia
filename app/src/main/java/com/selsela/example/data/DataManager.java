@@ -188,6 +188,8 @@ public class DataManager {
                 ;
     }
 
+
+
     public Observable<BaseResponse<HomeData>> get_home() {
         return mSelselaService.get_home(mPreferencesHelper.getCountry().getId(),getUserSession().getId())
                 .concatMap(new Function<BaseResponse<HomeData>, ObservableSource<? extends BaseResponse<HomeData>>>() {
