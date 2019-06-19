@@ -35,7 +35,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     SelselaService provideRibotsService() {
-        return SelselaService.Creator.newRibotsService();
+        return SelselaService.Creator.newRibotsService(mApplication);
     }
 
 }

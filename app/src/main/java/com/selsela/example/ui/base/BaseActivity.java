@@ -109,8 +109,10 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
         ConfigData configData = preferencesHelper.getCurrentUserSetting();
         String cur = configData.getConfig().getCurrency();
         String cur_en = configData.getConfig().getCurrencyEn();
-        return isArabic() ? cur : cur_en;
+        return preferencesHelper.getCountry() == null ? (isArabic() ? cur : cur_en) :
+                preferencesHelper.getCountry().getCurreny();
     }
+
 
     @Override
     public void onInternetConnectivityChanged(boolean isConnected) {

@@ -20,7 +20,7 @@ import timber.log.Timber;
 @Singleton
 public class LanguageUtils {
 
-    PreferencesHelper mPreferencesHelper;
+    @Inject PreferencesHelper mPreferencesHelper;
     private Context context;
 
     @Inject

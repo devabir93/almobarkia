@@ -128,7 +128,6 @@
 
             <TextView
                 android:id="@+id/imagecount"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_19sdp"
@@ -148,10 +147,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_19sdp"
                 android:layout_marginEnd="@dimen/_19sdp"
+                android:gravity="start"
+                app:layout_constraintBottom_toBottomOf="@id/imagecount"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/slider"
-
-                />
+                app:selected_drawable="@drawable/ic_selected"
+                app:unselected_drawable="@drawable/ic_unselected" />
 
             <TextView
                 android:id="@+id/categories_label"
@@ -189,12 +189,13 @@
                 android:id="@+id/categories_homeList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:background="#E1C79B"
+                android:nestedScrollingEnabled="false"
                 android:paddingStart="@dimen/_1sdp"
                 android:paddingTop="@dimen/_12sdp"
                 android:paddingBottom="@dimen/_12sdp"
                 app:layout_constraintTop_toBottomOf="@id/categories_label"
-                tools:layout_editor_absoluteX="0dp"
                 tools:listitem="@layout/categorieslist" />
 
             <TextView
@@ -235,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@id/newcollection_label"
                 tools:listitem="@layout/image_list"
 
@@ -280,6 +281,7 @@
                 android:layout_marginStart="@dimen/_14sdp"
                 android:layout_marginTop="@dimen/_19sdp"
                 android:layout_marginEnd="@dimen/_14sdp"
+                android:nestedScrollingEnabled="false"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
                 app:layout_constraintTop_toBottomOf="@id/themostorder_label"
                 app:spanCount="2"

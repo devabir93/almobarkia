@@ -1,7 +1,10 @@
 package com.selsela.example.data.remote;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
 import com.selsela.example.data.model.config.ConfigData;
@@ -10,6 +13,7 @@ import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.util.RxErrorHandlingCallAdapterFactory;
+import com.selsela.example.util.language.LanguageUtils;
 
 import java.io.IOException;
 
@@ -29,7 +33,7 @@ import retrofit2.http.Query;
 public interface SelselaService {
 
     String ENDPOINT = "http://selsela.info/mobarakia/public/api/";
-    String IMAGE_URL = "http://selsela.info/mobarakia/uploads/";
+    String IMAGE_URL = "http://selsela.info/mobarakia/public/uploads/";
 
     @POST("user/login")
     Observable<BaseResponse<LoginData>> login(@Body UserBody userBody);
@@ -61,8 +65,14 @@ public interface SelselaService {
 
     /******** Helper class that sets up a new services *******/
     class Creator {
+//        @Inject
+//        public LanguageUtils languageUtils;
+//        @Inject
+//        public PreferencesHelper preferencesHelper;
 
-        public static SelselaService newRibotsService() {
+        public static SelselaService newRibotsService(Context context) {
+            final PreferencesHelper sharedPreferences = new PreferencesHelper(context);
+            final LanguageUtils mLanguageUtils = new LanguageUtils(context, sharedPreferences);
             Gson gson = new GsonBuilder()
                     //.registerTypeAdapterFactory(MyGsonTypeAdapterFactory.create())
                     .excludeFieldsWithoutExposeAnnotation()
@@ -78,7 +88,7 @@ public interface SelselaService {
                             .addHeader("Accept", "application/json")
                             .addHeader("Content-Type", "application/x-www-form-urlencoded")
                             .addHeader("X-Requested-With", "XMLHttpRequest")
-                            .addHeader("x-localization", "en")
+                            .addHeader("x-localization", mLanguageUtils.getCurrentLang())
                             .build();
                     return chain.proceed(newRequest);
                 }

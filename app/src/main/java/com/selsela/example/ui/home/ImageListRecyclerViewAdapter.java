@@ -2,9 +2,11 @@ package com.selsela.example.ui.home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,13 +18,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class ImageListRecyclerViewAdapter extends RecyclerView.Adapter<ImageListRecyclerViewAdapter.ViewHolder> {
 
     private Context context;
     private List<Product> products;
     UpdateDataClickListener updateDataClickListener;
+    private static final int TYPE_FULL = 0;
+    private static final int TYPE_HALF = 1;
+    private static final int TYPE_QUARTER = 2;
 
     public ImageListRecyclerViewAdapter(List<Product> products, Context context, UpdateDataClickListener updateDataClickListener) {
         this.products = products;
@@ -31,9 +35,40 @@ public class ImageListRecyclerViewAdapter extends RecyclerView.Adapter<ImageList
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+    public ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.image_list, parent, false);
+        view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                final int type = viewType;
+                final ViewGroup.LayoutParams lp = view.getLayoutParams();
+                if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
+                    StaggeredGridLayoutManager.LayoutParams sglp =
+                            (StaggeredGridLayoutManager.LayoutParams) lp;
+                    switch (type) {
+                        case TYPE_FULL:
+                            sglp.setFullSpan(true);
+                            break;
+                        case TYPE_HALF:
+                            sglp.setFullSpan(false);
+                            sglp.width = view.getWidth() / 2;
+                            break;
+                        case TYPE_QUARTER:
+                            sglp.setFullSpan(false);
+                            sglp.width = view.getWidth() / 2;
+                            sglp.height = view.getHeight() / 2;
+                            break;
+                    }
+                    view.setLayoutParams(sglp);
+                    final StaggeredGridLayoutManager lm =
+                            (StaggeredGridLayoutManager) ((RecyclerView) parent).getLayoutManager();
+                    lm.invalidateSpanAssignments();
+                }
+                view.getViewTreeObserver().removeOnPreDrawListener(this);
+                return true;
+            }
+        });
         return new ViewHolder(view);
     }
 
@@ -52,6 +87,18 @@ public class ImageListRecyclerViewAdapter extends RecyclerView.Adapter<ImageList
         });
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        final int modeEight = position % 4;
+        switch (modeEight) {
+            case 0:
+                return TYPE_HALF;
+            case 1:
+            case 2:
+                return TYPE_QUARTER;
+        }
+        return TYPE_FULL;
+    }
 
     @Override
     public int getItemCount() {

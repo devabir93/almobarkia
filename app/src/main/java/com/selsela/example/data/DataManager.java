@@ -49,14 +49,16 @@ public class DataManager {
     public UserData getUserSession() {
         return getPreferencesHelper().getCurrentUser();
     }
+
     int getCountryID() {
         return getPreferencesHelper().getCountry().getId();
     }
 
-   // int getUserId() {
-       // return getUserSession() != null ? Integer.parseInt(getAuthnticate().getUserId()) : 0;
-//    }
-//    @android.support.annotation.NonNull
+    int getUserId() {
+        return getUserSession() != null ? getUserSession().getId() : 0;
+    }
+
+    //    @android.support.annotation.NonNull
     public Observable<BaseResponse<LoginData>> makeLogin(final UserBody userData) {
 
         return mSelselaService.login(userData)
@@ -143,7 +145,7 @@ public class DataManager {
 
     public Observable<BaseResponse<CountryData>> get_countries() {
         return mSelselaService.get_countries()
-                .concatMap(new Function<BaseResponse< CountryData >, ObservableSource<? extends BaseResponse<CountryData>>>() {
+                .concatMap(new Function<BaseResponse<CountryData>, ObservableSource<? extends BaseResponse<CountryData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<CountryData>> apply(final BaseResponse<CountryData> response) throws Exception {
                         return Observable.create(new ObservableOnSubscribe<BaseResponse<CountryData>>() {
@@ -189,9 +191,8 @@ public class DataManager {
     }
 
 
-
     public Observable<BaseResponse<HomeData>> get_home() {
-        return mSelselaService.get_home(mPreferencesHelper.getCountry().getId(),getUserSession().getId())
+        return mSelselaService.get_home(mPreferencesHelper.getCountry().getId(), getUserId())
                 .concatMap(new Function<BaseResponse<HomeData>, ObservableSource<? extends BaseResponse<HomeData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<HomeData>> apply(final BaseResponse<HomeData> response) throws Exception {

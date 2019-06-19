@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_6sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<ImageView
-    android:layout_marginEnd="@dimen/_8sdp"
-    android:id="@+id/imageView"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:src="@drawable/ic_image"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
 
-    />
-</android.support.constraint.ConstraintLayout>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/imageView"
+    android:layout_width="@dimen/_300sdp"
+    android:layout_height="@dimen/_300sdp"
+    android:layout_margin="@dimen/_8sdp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/ic_image"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />

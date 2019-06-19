@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary">
+
+    <ImageView
+        android:id="@+id/daimajia_slider_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_11sdp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/seguisb"
+            android:text="150"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/_17ssp" />
+
+        <TextView
+            android:id="@+id/currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/price"
+            android:layout_alignBottom="@id/price"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_toEndOf="@id/price"
+            android:fontFamily="@font/segoeui"
+            android:gravity="center"
+            android:text="د.ك"
+            android:textColor="@color/brown"
+            android:textSize="@dimen/_11ssp" />
+
+        <TextView
+            android:id="@+id/prev_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/price"
+            android:layout_alignBottom="@id/price"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_toEndOf="@id/currency"
+            android:fontFamily="@font/seguisb"
+            android:gravity="center"
+            android:text="250"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13ssp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currency"
+            android:layout_alignStart="@id/currency"
+            android:fontFamily="@font/segoeui"
+            android:gravity="center"
+            android:text="شنطة نسائية جلد طبيعي"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_11ssp" />
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+</RelativeLayout><!-- From: file:/Users/daimajia/Development/Projects/AndroidImageSlider/library/src/main/res/layout/render_type_default.xml -->
