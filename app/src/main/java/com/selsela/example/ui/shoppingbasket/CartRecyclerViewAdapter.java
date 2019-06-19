@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import com.selsela.example.R;
 
-import com.selsela.example.ui.favorites.dummy.DummyContent.DummyItem;
-
 
 
 public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder> {
@@ -45,7 +43,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public DummyItem mItem;
         public final ImageView mIdView;
 
         public final TextView mContentView;

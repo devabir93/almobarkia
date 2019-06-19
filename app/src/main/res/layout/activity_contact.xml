@@ -5,13 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <include layout="@layout/toolbar" />
-<ScrollView
-    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
+
         xmlns:material="http://schemas.android.com/tools"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -19,7 +22,6 @@
         android:layout_height="match_parent"
         android:layoutDirection="locale"
         android:textDirection="locale"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
         tools:context=".ui.contact.ContactActivity">
         <requestFocus material:ignore="MissingConstraints" />
         <TextView
@@ -68,6 +70,8 @@
             android:paddingTop="@dimen/_16sdp"
             android:paddingBottom="@dimen/_16sdp"
             android:textAlignment="viewStart"
+            android:fontFamily="@font/segoeui"
+
             android:textSize="@dimen/_11ssp"
             app:layout_constraintBottom_toTopOf="@+id/password_Login_editText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,10 +127,12 @@
             app:errorEnabled="true"
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
+            android:fontFamily="@font/segoeui"
+
             app:layout_constraintBottom_toTopOf="@id/phone_number_editText"
             app:layout_constraintEnd_toEndOf="@id/textInputEditText"
             app:layout_constraintStart_toStartOf="@id/textInputEditText"
-            app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
+            app:layout_constraintTop_toBottomOf="@id/textInputEditText"
             app:passwordToggleEnabled="true" />
 
         <android.support.design.widget.TextInputEditText
@@ -148,6 +154,8 @@
             app:errorEnabled="true"
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
+            android:fontFamily="@font/segoeui"
+
             app:layout_constraintBottom_toTopOf="@id/topic_title_editText"
             app:layout_constraintEnd_toEndOf="@id/textInputEditText"
             app:layout_constraintStart_toStartOf="@id/textInputEditText"
@@ -242,8 +250,11 @@
             android:lines="3"
             android:textAlignment="viewStart"
             android:textSize="@dimen/_11ssp"
+            android:fontFamily="@font/segoeui"
+
             app:layout_constraintEnd_toEndOf="@id/textInputEditText"
             app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintBottom_toTopOf="@id/send_textView_background"
             app:layout_constraintTop_toBottomOf="@id/phone_number_editText" />
 
         <View
@@ -289,6 +300,7 @@
             android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toEndOf="@id/textInputEditText"
             app:layout_constraintStart_toStartOf="@id/textInputEditText"
+            app:layout_constraintBottom_toTopOf="@id/contact_tetxtView"
             app:layout_constraintTop_toBottomOf="@id/topic_title_editText"
 
             />
@@ -314,6 +326,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginTop="@dimen/_9sdp"
+            android:layout_marginBottom="@dimen/_9sdp"
             android:drawableStart="@drawable/ic_call"
             android:drawablePadding="@dimen/_7sdp"
             android:fontFamily="@font/segoeui"
@@ -321,14 +334,15 @@
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/contact_tetxtView" />
 
         <TextView
+            android:id="@+id/send_message"
             android:textAlignment="viewStart"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_9sdp"
             android:drawableStart="@drawable/ic_message"
             android:drawablePadding="@dimen/_7sdp"
             android:fontFamily="@font/segoeui"
@@ -336,9 +350,10 @@
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintStart_toEndOf="@id/call_action"
-
-            app:layout_constraintTop_toBottomOf="@id/contact_tetxtView" />
+            app:layout_constraintBottom_toBottomOf="@id/call_action"
+            app:layout_constraintTop_toTopOf="@id/call_action" />
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+
 </android.support.design.widget.CoordinatorLayout>

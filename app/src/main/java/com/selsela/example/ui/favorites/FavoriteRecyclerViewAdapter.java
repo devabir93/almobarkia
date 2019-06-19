@@ -70,7 +70,13 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         } else if (product.getDiscountRatio() == 0) {
             holder.realPrice.setVisibility(View.GONE);
         }
-        holder.discountLabel.setText(product.getDiscountRatio() + "");
+        if (product.getDiscountRatio()>0) {
+            holder.discountLabel.setVisibility(View.VISIBLE);
+            holder.discountLabel.setText(product.getDiscountRatio() + "" + "%");
+        } else if (product.getDiscountRatio()==0) {
+            holder.discountLabel.setVisibility(View.GONE);
+
+        }
         holder.rateLabel.setText(product.getRate());
         holder.productDescription.setText(product.getName());
         holder.productPrice.setText(product.getPrice() + "" + currency);
@@ -132,6 +138,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
     }
 
     public void setCurrency(String currency) {
+
         this.currency = currency;
     }
 }

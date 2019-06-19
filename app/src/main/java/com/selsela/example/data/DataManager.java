@@ -3,12 +3,14 @@ package com.selsela.example.data;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user.UserData;
+import com.selsela.example.data.model.user_fav.favData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.language.LanguageUtils;
@@ -49,12 +51,13 @@ public class DataManager {
     public UserData getUserSession() {
         return getPreferencesHelper().getCurrentUser();
     }
+
     int getCountryID() {
         return getPreferencesHelper().getCountry().getId();
     }
 
-   // int getUserId() {
-       // return getUserSession() != null ? Integer.parseInt(getAuthnticate().getUserId()) : 0;
+    // int getUserId() {
+    // return getUserSession() != null ? Integer.parseInt(getAuthnticate().getUserId()) : 0;
 //    }
 //    @android.support.annotation.NonNull
     public Observable<BaseResponse<LoginData>> makeLogin(final UserBody userData) {
@@ -143,7 +146,7 @@ public class DataManager {
 
     public Observable<BaseResponse<CountryData>> get_countries() {
         return mSelselaService.get_countries()
-                .concatMap(new Function<BaseResponse< CountryData >, ObservableSource<? extends BaseResponse<CountryData>>>() {
+                .concatMap(new Function<BaseResponse<CountryData>, ObservableSource<? extends BaseResponse<CountryData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<CountryData>> apply(final BaseResponse<CountryData> response) throws Exception {
                         return Observable.create(new ObservableOnSubscribe<BaseResponse<CountryData>>() {
@@ -189,9 +192,8 @@ public class DataManager {
     }
 
 
-
     public Observable<BaseResponse<HomeData>> get_home() {
-        return mSelselaService.get_home(mPreferencesHelper.getCountry().getId(),getUserSession().getId())
+        return mSelselaService.get_home(mPreferencesHelper.getCountry().getId(), getUserSession().getId())
                 .concatMap(new Function<BaseResponse<HomeData>, ObservableSource<? extends BaseResponse<HomeData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<HomeData>> apply(final BaseResponse<HomeData> response) throws Exception {
@@ -212,4 +214,47 @@ public class DataManager {
                 });
     }
 
+    public Observable<BaseResponse<CategoriesData>> get_categories() {
+        return mSelselaService.get_categories(mPreferencesHelper.getCountry().getId(), getUserSession().getId())
+                .concatMap(new Function<BaseResponse<CategoriesData>, ObservableSource<? extends BaseResponse<CategoriesData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<CategoriesData>> apply(final BaseResponse<CategoriesData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<CategoriesData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<CategoriesData>> e) throws Exception {
+                                try {
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    }
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
+    public Observable<BaseResponse<favData>> get_user_favorites() {
+        return mSelselaService.get_user_favorites( getUserSession().getId(),getUserSession().getToken())
+                .concatMap(new Function<BaseResponse<favData>, ObservableSource<? extends BaseResponse<favData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<favData>> apply(final BaseResponse<favData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<favData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<favData>> e) throws Exception {
+                                try {
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    }
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
 }
