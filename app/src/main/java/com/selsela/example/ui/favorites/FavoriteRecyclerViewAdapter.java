@@ -69,6 +69,7 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
             holder.realPrice.setText(product.getRealPrice() + "");
         } else if (product.getDiscountRatio() == 0) {
             holder.realPrice.setVisibility(View.GONE);
+
         }
         if (product.getDiscountRatio()>0) {
             holder.discountLabel.setVisibility(View.VISIBLE);
