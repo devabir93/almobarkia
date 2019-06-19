@@ -7,11 +7,13 @@ import com.google.gson.GsonBuilder;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
+import com.selsela.example.data.model.user_fav.favData;
 import com.selsela.example.util.RxErrorHandlingCallAdapterFactory;
 import com.selsela.example.util.language.LanguageUtils;
 
@@ -56,12 +58,16 @@ public interface SelselaService {
     @GET("get_config")
     Observable<BaseResponse<ConfigData>> get_config();
 
+    @GET("get_categories")
+    Observable<BaseResponse<CategoriesData>> get_categories(@Query("country_id") int country_id, @Query("user_id") int userId);
     @GET("get_countries")
     Observable<BaseResponse<CountryData>> get_countries();
-
     @GET("get_home")
     Observable<BaseResponse<HomeData>> get_home(@Query("country_id") int country_id,
                                                 @Query("user_id") int userId);
+    @GET("user/get_user_favorites")
+    Observable<BaseResponse<favData>> get_user_favorites(@Query("user_id") int user_id,
+                                               @Query("token") String tocken_id);
 
     /******** Helper class that sets up a new services *******/
     class Creator {

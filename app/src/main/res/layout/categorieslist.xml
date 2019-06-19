@@ -6,6 +6,7 @@
     android:textDirection="locale"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_80sdp"
+
     android:layout_marginBottom="@dimen/_2sdp">
 
     <View

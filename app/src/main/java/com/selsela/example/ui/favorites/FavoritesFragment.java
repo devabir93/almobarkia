@@ -1,7 +1,7 @@
 package com.selsela.example.ui.favorites;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.selsela.example.R;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.ui.base.BaseFragment;
-import com.selsela.example.ui.favorites.dummy.DummyContent.DummyItem;
 import com.selsela.example.ui.productlist.ProductListActivity;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,17 +27,18 @@ import butterknife.Unbinder;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class FavoritesFragment extends BaseFragment {
+public class FavoritesFragment extends BaseFragment implements FavMvpView {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    @Inject
+    FavouritesPresenter favouritesPresenter;
     @BindView(R.id.favoritelist)
     RecyclerView favoritelist;
     Unbinder unbinder;
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
-    private FavoriteRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -67,10 +72,14 @@ public class FavoritesFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.favorite_item_list, container, false);
         unbinder = ButterKnife.bind(this, view);
-        favoritelist.setLayoutManager(new GridLayoutManager(getContext(), 2));
-//        adapter = new FavoriteRecyclerViewAdapter();
-//        adapter.setLayout(ProductListActivity.GRID);
-//        favoritelist.setAdapter(adapter);
+        favouritesPresenter.attachView(this);
+        favouritesPresenter.get_user_favorites();
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                favouritesPresenter.get_user_favorites();
+            }
+        });
         return view;
     }
 
@@ -87,18 +96,22 @@ public class FavoritesFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    @Override
+    public void showFav(List<Product> favorites) {
+     FavoriteRecyclerViewAdapter   adapter = new FavoriteRecyclerViewAdapter(favorites, getContext(), new FavoriteRecyclerViewAdapter.UpdateDataClickListener() {
+            @Override
+            public void onproductSelected(Product product, int position) {
+
+            }
+        });
+        adapter.setLayout(ProductListActivity.GRID);
+        favoritelist.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        favoritelist.setAdapter(adapter);
+
+    }
+
+
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
     }
 }

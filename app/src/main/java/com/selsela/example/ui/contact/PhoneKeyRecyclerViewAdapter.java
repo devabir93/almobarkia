@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.selsela.example.R;
-import com.selsela.example.ui.favorites.dummy.DummyContent.DummyItem;
 
 
 public class PhoneKeyRecyclerViewAdapter extends RecyclerView.Adapter<PhoneKeyRecyclerViewAdapter.ViewHolder> {
@@ -41,7 +40,6 @@ public class PhoneKeyRecyclerViewAdapter extends RecyclerView.Adapter<PhoneKeyRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public DummyItem mItem;
         public final TextView mIdView;
 
         public final TextView mContentView;

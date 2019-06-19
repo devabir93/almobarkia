@@ -51,9 +51,9 @@ public class ProductListActivity extends BaseActivity {
         getActivityComponent().inject(this);
 
         ButterKnife.bind(this);
-
-       // favouriteAdapter = new FavoriteRecyclerViewAdapter();
-        onLinear();
+//
+//      favouriteAdapter = new FavoriteRecyclerViewAdapter();
+//        onLinear();
     }
 
     @OnClick({R.id.list_textView, R.id.grid_textView, R.id.filter_textView})

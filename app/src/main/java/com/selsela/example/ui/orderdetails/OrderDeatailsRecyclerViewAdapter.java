@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.selsela.example.R;
-import com.selsela.example.ui.favorites.dummy.DummyContent.DummyItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -96,7 +95,6 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
         @BindView(R.id.evaluate_btt)
         TextView evaluateBtt;
 
-        public DummyItem mItem;
         public final ImageView mIdView;
 
         public final TextView mContentView;
