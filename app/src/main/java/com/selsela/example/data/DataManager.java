@@ -216,7 +216,7 @@ public class DataManager {
     }
 
     public Observable<BaseResponse<CategoriesData>> get_categories() {
-        return mSelselaService.get_categories(mPreferencesHelper.getCountry().getId(), getUserSession().getId())
+        return mSelselaService.get_categories(mPreferencesHelper.getCountry().getId(), getUserId())
                 .concatMap(new Function<BaseResponse<CategoriesData>, ObservableSource<? extends BaseResponse<CategoriesData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<CategoriesData>> apply(final BaseResponse<CategoriesData> response) throws Exception {
@@ -238,7 +238,7 @@ public class DataManager {
     }
 
     public Observable<BaseResponse<favData>> get_user_favorites() {
-        return mSelselaService.get_user_favorites( getUserSession().getId(),getUserSession().getToken())
+        return mSelselaService.get_user_favorites(getUserId(), getUserSession().getToken())
                 .concatMap(new Function<BaseResponse<favData>, ObservableSource<? extends BaseResponse<favData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<favData>> apply(final BaseResponse<favData> response) throws Exception {
