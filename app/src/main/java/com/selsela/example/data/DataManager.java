@@ -215,4 +215,48 @@ public class DataManager {
                 });
     }
 
+    public Observable<BaseResponse<CategoriesData>> get_categories() {
+        return mSelselaService.get_categories(mPreferencesHelper.getCountry().getId(), getUserSession().getId())
+                .concatMap(new Function<BaseResponse<CategoriesData>, ObservableSource<? extends BaseResponse<CategoriesData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<CategoriesData>> apply(final BaseResponse<CategoriesData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<CategoriesData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<CategoriesData>> e) throws Exception {
+                                try {
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    }
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
+    public Observable<BaseResponse<favData>> get_user_favorites() {
+        return mSelselaService.get_user_favorites( getUserSession().getId(),getUserSession().getToken())
+                .concatMap(new Function<BaseResponse<favData>, ObservableSource<? extends BaseResponse<favData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<favData>> apply(final BaseResponse<favData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<favData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<favData>> e) throws Exception {
+                                try {
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    }
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
 }
