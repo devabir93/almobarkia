@@ -13,6 +13,7 @@ import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
@@ -81,7 +82,7 @@ public interface SelselaService {
     ///Post
 
     @POST("add_order")
-    Observable<BaseResponse> add_order(@Body AddressBody addressBody);
+    Observable<BaseResponse<OrderData>> add_order(@Body AddressBody addressBody);
 
     @POST("user/check_copone")
     Observable<BaseResponse<CheckCoponData>> check_copone(@Query("user_id") int user_id,

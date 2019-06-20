@@ -11,6 +11,7 @@ import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.Color;
 import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.home.Size;
+import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.data.model.user.UserData;
@@ -403,15 +404,15 @@ public class CartManager {
         });
     }
 
-    public Observable<BaseResponse> sendOrder(final AddressBody productOrderBody) {
+    public Observable<BaseResponse<OrderData>> sendOrder(final AddressBody productOrderBody) {
 
         return mBazarlakService.add_order(productOrderBody)
-                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                .concatMap(new Function<BaseResponse<OrderData>, ObservableSource<? extends BaseResponse<OrderData>>>() {
                     @Override
-                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse response) {
-                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                    public ObservableSource<? extends BaseResponse<OrderData>> apply(final BaseResponse<OrderData> response) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<OrderData>>() {
                             @Override
-                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                            public void subscribe(ObservableEmitter<BaseResponse<OrderData>> e) {
                                 //Timber.d("response %s", response);
                                 try {
                                     if (response.getStatus()) {
