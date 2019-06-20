@@ -3,6 +3,7 @@ package com.selsela.example.injection.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.selsela.example.data.CartManager;
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.SyncService;
 import com.selsela.example.data.local.PreferencesHelper;
@@ -32,6 +33,8 @@ public interface ApplicationComponent {
     PreferencesHelper preferencesHelper();
 
     DataManager dataManager();
+
+    CartManager cartManager();
 
     RxEventBus eventBus();
 

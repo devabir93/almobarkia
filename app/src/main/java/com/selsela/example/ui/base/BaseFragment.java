@@ -178,6 +178,7 @@ public class BaseFragment extends Fragment implements MvpView {
             }, 100);
         }
     }
+
     public String getCurrency() {
 
         ConfigData configData = preferencesHelper.getCurrentUserSetting();

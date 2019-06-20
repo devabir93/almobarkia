@@ -55,7 +55,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
     UserSession mUserSession;
     @Nullable
     @BindView(R.id.my_toolbar)
-    Toolbar toolbar;
+    public Toolbar toolbar;
 
     @Nullable
     @BindView(R.id.progress)
@@ -164,6 +164,12 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
         }
     }
 
+    public void hideToolbar() {
+        if (toolbar != null && getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+    }
+
     @Override
     public void showMessageDialog(String s) {
         if (s != null && !s.isEmpty()) {
@@ -233,6 +239,10 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
                 }
             }, 100);
         }
+    }
+
+    public boolean isUserLogged() {
+        return mUserSession.hasActiveSession();
     }
 
     public boolean isFirstRun() {

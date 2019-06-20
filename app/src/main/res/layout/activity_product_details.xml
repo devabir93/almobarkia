@@ -1,239 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-   <include layout="@layout/toolbar"/>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
-    android:layoutDirection="locale"
-    android:textDirection="locale"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
+    <include layout="@layout/toolbar" />
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/constraintlayout"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:layoutDirection="locale"
+        android:textDirection="locale"
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/constraintlayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:context=".ui.productdeatials.ProductDetailsActivity">
+
+                <ImageView
+                    android:id="@+id/product_imageView"
+                    android:layout_width="@dimen/_375sdp"
+
+                    android:layout_height="@dimen/_450sdp"
+                    android:src="@drawable/ic_productdetails"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_110sdp"
+                    android:background="@drawable/view_rectanglel"
+                    app:layout_constraintBottom_toBottomOf="@id/product_imageView" />
+
+                <TextView
+                    android:id="@+id/product_descrption"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/seguisb"
+                    android:lines="2"
+                    android:text="@string/productdesc_label"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_17ssp"
+                    app:layout_constraintBottom_toBottomOf="@id/view"
+                    app:layout_constraintEnd_toStartOf="@+id/presentproductprice_label"
+                    app:layout_constraintStart_toStartOf="@id/view"
+                    app:layout_constraintTop_toTopOf="@id/view" />
+
+                <TextView
+                    android:id="@+id/productprice_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:fontFamily="@font/segoeui"
+                    android:text="@string/productprice_label"
+
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintBottom_toBottomOf="@id/view"
+                    app:layout_constraintEnd_toEndOf="@id/view"
+                    app:layout_constraintTop_toTopOf="@id/view" />
+
+                <TextView
+                    android:id="@+id/presentproductprice_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:fontFamily="@font/seguibl"
+                    android:text="110.00 د.ك"
+                    android:textAlignment="viewStart"
+
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_17ssp"
+                    app:layout_constraintEnd_toEndOf="@id/productprice_label"
+                    app:layout_constraintTop_toBottomOf="@id/productprice_label"
+
+                    />
+
+                <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                    android:id="@+id/rating_bar"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    app:layout_constraintStart_toStartOf="@id/product_descrption"
+                    app:layout_constraintTop_toBottomOf="@id/product_descrption"
+                    app:mrb_progressTint="@color/yellow" />
+
+                <TextView
+                    android:id="@+id/rating_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:text="4.4"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+                    app:layout_constraintStart_toEndOf="@id/rating_bar"
+                    app:layout_constraintTop_toTopOf="@id/rating_bar" />
+
+
+                <ImageView
+                    android:id="@+id/store_imageView"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_circle"
+                    app:layout_constraintBottom_toBottomOf="@+id/owner_store_label"
+                    app:layout_constraintStart_toStartOf="@id/product_descrption"
+                    app:layout_constraintTop_toTopOf="@+id/store_name_label" />
+
+                <TextView
+                    android:id="@+id/store_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/segoeui"
+                    android:text="اسم المتجر"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+
+                    app:layout_constraintBottom_toTopOf="@id/owner_store_label"
+
+                    app:layout_constraintStart_toEndOf="@id/store_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/view" />
+
+                <TextView
+                    android:id="@+id/owner_store_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/seguisb"
+                    android:includeFontPadding="false"
+                    android:text="عبد السلام حيد و أولاده"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toTopOf="@id/store_name_label"
+                    app:layout_constraintStart_toStartOf="@id/store_name_label"
+                    app:layout_constraintTop_toBottomOf="@id/store_name_label" />
+
+                <TextView
+                    android:id="@+id/product_details_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:fontFamily="@font/seguisb"
+                    android:text="@string/product_details_label"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintStart_toStartOf="@id/product_descrption"
+                    app:layout_constraintTop_toBottomOf="@id/owner_store_label" />
+
+                <org.sufficientlysecure.htmltextview.HtmlTextView
+                    android:id="@+id/product_details_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:fontFamily="@font/segoeui"
+                    android:lines="10"
+                    android:text="الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً "
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/product_details_label" />
+
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
 
         <android.support.constraint.ConstraintLayout
-            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/constraintlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".ui.productdeatials.ProductDetailsActivity">
+            android:background="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <ImageView
-                android:id="@+id/product_imageView"
-                android:layout_width="@dimen/_375sdp"
-
-                android:layout_height="@dimen/_450sdp"
-                android:src="@drawable/ic_productdetails"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_110sdp"
-                android:background="@drawable/view_rectanglel"
-                app:layout_constraintBottom_toBottomOf="@id/product_imageView" />
-
-            <TextView
-                android:id="@+id/product_descrption"
+                android:id="@+id/basket_notification_ic"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/seguisb"
-                android:lines="2"
-                android:textAlignment="viewStart"
-                android:text="@string/productdesc_label"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_17ssp"
-                app:layout_constraintBottom_toBottomOf="@id/view"
-                app:layout_constraintStart_toStartOf="@id/view"
-                app:layout_constraintTop_toTopOf="@id/view" />
-
-            <TextView
-                android:id="@+id/productprice_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:layout_marginEnd="@dimen/_30sdp"
-                android:fontFamily="@font/segoeui"
-                android:text="@string/productprice_label"
-
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_12ssp"
-                app:layout_constraintBottom_toBottomOf="@id/view"
-                app:layout_constraintEnd_toEndOf="@id/view"
-                app:layout_constraintTop_toTopOf="@id/view" />
-
-            <TextView
-                android:textAlignment="viewStart"
-                android:id="@+id/presentproductprice_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_7sdp"
-                android:fontFamily="@font/seguibl"
-                android:text="110.00 د.ك"
-
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_17ssp"
-                app:layout_constraintEnd_toEndOf="@id/productprice_label"
-                app:layout_constraintTop_toBottomOf="@id/productprice_label"
-
-                />
-
-            <me.zhanghai.android.materialratingbar.MaterialRatingBar
-                android:id="@+id/rating_bar"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_6sdp"
-                app:layout_constraintStart_toStartOf="@id/product_descrption"
-                app:layout_constraintTop_toBottomOf="@id/product_descrption"
-                app:mrb_progressTint="@color/yellow" />
-
-            <TextView
-                android:id="@+id/rating_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:text="4.4"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toBottomOf="@id/rating_bar"
-                app:layout_constraintStart_toEndOf="@id/rating_bar"
-                app:layout_constraintTop_toTopOf="@id/rating_bar" />
-
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:src="@drawable/ic_basketnotifi"
+                app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
+                app:layout_constraintStart_toStartOf="@id/constraintlayout"
+                app:layout_constraintTop_toTopOf="@id/constraintlayout" />
 
             <ImageView
-                android:id="@+id/store_imageView"
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_marginTop="@dimen/_21sdp"
-                android:src="@drawable/ic_circle"
-                app:layout_constraintStart_toStartOf="@id/product_descrption"
-                app:layout_constraintTop_toBottomOf="@id/view" />
+                android:id="@+id/like_imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:background="@drawable/circle"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/ic_like"
+                app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
+                app:layout_constraintEnd_toEndOf="@id/constraintlayout"
+                app:layout_constraintTop_toTopOf="@id/constraintlayout" />
 
             <TextView
-                android:id="@+id/store_name_label"
-                android:layout_width="wrap_content"
+                android:id="@+id/addcart_textView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_17sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:background="@color/colorprimary"
                 android:fontFamily="@font/segoeui"
-                android:text="اسم المتجر"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_13ssp"
+                android:gravity="center"
+                android:paddingTop="@dimen/_13sdp"
+                android:paddingBottom="@dimen/_13sdp"
+                android:text="@string/add_product_label"
+                android:textColor="@color/brown"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
 
-                app:layout_constraintBottom_toTopOf="@id/owner_store_label"
-
-                app:layout_constraintStart_toEndOf="@id/store_imageView"
-                app:layout_constraintTop_toBottomOf="@id/view" />
-
-            <TextView
-                android:id="@+id/owner_store_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/seguisb"
-                android:text="عبد السلام حيد و أولاده"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintBottom_toTopOf="@id/store_name_label"
-                app:layout_constraintStart_toStartOf="@id/store_name_label"
-                app:layout_constraintTop_toBottomOf="@id/store_name_label" />
-
-            <TextView
-                android:textAlignment="viewStart"
-                android:id="@+id/product_details_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_30sdp"
-                android:fontFamily="@font/seguisb"
-                android:text="@string/product_details_label"
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintStart_toStartOf="@id/product_descrption"
-                app:layout_constraintTop_toBottomOf="@id/owner_store_label" />
-
-            <org.sufficientlysecure.htmltextview.HtmlTextView
-                android:id="@+id/product_details_textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:textAlignment="viewStart"
-                android:fontFamily="@font/segoeui"
-                android:lines="10"
-                android:text="الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً "
-                android:textColor="@color/colorprimary"
-                android:textSize="@dimen/_13ssp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/product_details_label" />
-
+                app:layout_constraintEnd_toStartOf="@id/like_imageView"
+                app:layout_constraintStart_toEndOf="@id/basket_notification_ic"
+                app:layout_constraintTop_toTopOf="@id/constraintlayout" />
 
         </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <ImageView
-            android:id="@+id/basket_notification_ic"
-            app:layout_constraintTop_toTopOf="@id/constraintlayout"
-            app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:src="@drawable/ic_basketnotifi"
-            app:layout_constraintStart_toStartOf="@id/constraintlayout" />
-        <ImageView
-            android:id="@+id/like_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:background="@drawable/circle"
-            android:src="@drawable/ic_like"
-            android:padding="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="@id/constraintlayout"
-            app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
-            app:layout_constraintTop_toTopOf="@id/constraintlayout" />
-        
-        <TextView
-            android:id="@+id/addcart_textView"
-            app:layout_constraintStart_toEndOf="@id/basket_notification_ic"
-            app:layout_constraintEnd_toStartOf="@id/like_imageView"
-            app:layout_constraintTop_toTopOf="@id/constraintlayout"
-            app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
-            android:text="@string/add_product_label"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:textSize="@dimen/_15ssp"
-            android:fontFamily="@font/segoeui"
-            android:paddingTop="@dimen/_13sdp"
-            android:paddingBottom="@dimen/_13sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_17sdp"
-            android:layout_marginEnd="@dimen/_17sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-
-            android:background="@color/colorprimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
 
     </android.support.constraint.ConstraintLayout>
-
-</android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

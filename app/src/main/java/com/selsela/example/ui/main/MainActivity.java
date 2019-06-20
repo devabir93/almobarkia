@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.selsela.example.ui.home.HomeFragment;
 import com.selsela.example.ui.orders.OrdersFragment;
 import com.selsela.example.ui.settings.SettingsFragment;
 import com.selsela.example.ui.specialorder.SpecialOrderFragment;
+import com.selsela.example.util.DialogFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,29 +40,42 @@ public class MainActivity extends BaseActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    MainActivity.this.setTitle(R.string.title_homear);
+                    toolbar.setTitle("");
+                    toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.LightGray));
                     loadFragment(new HomeFragment());
-
                     return true;
                 case R.id.navigation_settings:
-                    MainActivity.this.setTitle(R.string.title_settigs);
+                    toolbar.setTitle("");
+                    toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
                     loadFragment(new SettingsFragment());
                     return true;
 //                case R.id.navigation_notifications:
 //                    mTextMessage.setText(R.string.title_notifications);
 //                    return true;
                 case R.id.navigation_orders:
-                    MainActivity.this.setTitle(R.string.title_myorders);
-                    loadFragment(new OrdersFragment());
-                    return true;
+                    if (isUserLogged()) {
+                        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
+                        toolbar.setTitle(R.string.title_myorders);
+                        loadFragment(new OrdersFragment());
+                        return true;
+                    } else
+                        DialogFactory.showAlertDialog(MainActivity.this, getString(R.string.signin_confrimation));
+
+                    return false;
 
                 case R.id.navigation_favourites:
-                    MainActivity.this.setTitle(R.string.title_fav);
-                    loadFragment(new FavoritesFragment());
-                    return true;
+                    if (isUserLogged()) {
+                        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
+                        toolbar.setTitle(R.string.title_fav);
+                        loadFragment(new FavoritesFragment());
+                        return true;
+                    } else
+                        DialogFactory.showAlertDialog(MainActivity.this, getString(R.string.signin_confrimation));
 
+                    return false;
                 case R.id.navigation_specialorder:
-                    MainActivity.this.setTitle(R.string.title_specialorder);
+                    toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
+                    toolbar.setTitle(R.string.title_specialorder);
                     loadFragment(new SpecialOrderFragment());
                     return true;
             }
@@ -75,8 +90,23 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         getActivityComponent().inject(this);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        toolbar();
+        toolbar.setTitle("");
+        toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.LightGray));
         loadFragment(new HomeFragment());
     }
+
+
+    public void toolbar() {
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
+        }
+    }
+
 
     private void loadFragment(Fragment fragment) {
         // load fragment

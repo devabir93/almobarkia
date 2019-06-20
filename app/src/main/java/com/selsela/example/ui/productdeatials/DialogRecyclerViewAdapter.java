@@ -13,7 +13,6 @@ import com.selsela.example.R;
 public class DialogRecyclerViewAdapter extends RecyclerView.Adapter<DialogRecyclerViewAdapter.ViewHolder> {
 
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -32,11 +31,9 @@ public class DialogRecyclerViewAdapter extends RecyclerView.Adapter<DialogRecycl
     }
 
 
-
-
     @Override
     public int getItemCount() {
-        return 3 ;
+        return 3;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

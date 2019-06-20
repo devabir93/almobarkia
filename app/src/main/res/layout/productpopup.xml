@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:layout_width="match_parent"
+<ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
+    >
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -39,67 +40,31 @@
         android:layout_marginEnd="@dimen/_25sdp"
         android:orientation="horizontal"
         app:layoutManager="LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/product_count_label"
+        app:layout_constraintBottom_toTopOf="@id/number_picker"
         app:layout_constraintTop_toBottomOf="@id/product_list"
         tools:itemCount="5"
         tools:listitem="@layout/sizecircle_list"
 
         />
 
-    <TextView
-        android:id="@+id/product_count_label"
-        android:layout_width="@dimen/_75sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="@drawable/textview_stroke"
+    <com.travijuu.numberpicker.library.NumberPicker
+        android:id="@+id/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_36sdp"
+        numberpicker:min="0"
+        numberpicker:max="10"
+        numberpicker:value="-5"
+        numberpicker:unit="1"
+        numberpicker:focusable="false"
+        android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/size_list" />
+        app:layout_constraintTop_toBottomOf="@id/size_list"
+        app:layout_constraintBottom_toTopOf="@id/maxorder_num"
+        numberpicker:custom_layout="@layout/number_picker_custom_hori_layout" />
 
-    <TextView
-        android:id="@+id/product_total"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/textview_rectanglel"
-        android:paddingStart="@dimen/_11sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_11sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:text="01"
-        android:textColor="@color/brown"
-        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-        app:layout_constraintEnd_toStartOf="@id/product_count_label"
-        app:layout_constraintTop_toTopOf="@id/product_count_label" />
-
-    <TextView
-        android:id="@+id/plus_product_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:fontFamily="@font/segoeuib"
-        android:gravity="center"
-        android:padding="@dimen/_4sdp"
-        android:text="+"
-        android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-        app:layout_constraintStart_toStartOf="@id/product_count_label"
-        app:layout_constraintTop_toTopOf="@id/product_count_label" />
-
-    <TextView
-        android:id="@+id/minus_product_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:fontFamily="@font/segoeuib"
-        android:padding="@dimen/_4sdp"
-        android:text="-"
-        android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_16ssp"
-        app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-        app:layout_constraintEnd_toEndOf="@id/product_count_label"
-        app:layout_constraintTop_toTopOf="@id/product_count_label" />
 
     <TextView
         android:id="@+id/maxorder_num"
@@ -113,7 +78,7 @@
         android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/product_count_label" />
+        app:layout_constraintTop_toBottomOf="@id/number_picker" />
 
     <TextView
         android:id="@+id/shop_label"
@@ -127,6 +92,7 @@
         android:text="@string/contiue_shopping_label"
         android:textColor="@color/brown"
         android:textSize="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/maxorder_num"
         app:layout_constraintEnd_toStartOf="@id/continue_label"

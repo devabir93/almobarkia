@@ -10,6 +10,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,6 +34,7 @@ import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
 import com.selsela.example.ui.favorites.FavoriteRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
+import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.SpannedGridLayoutManager2;
 
@@ -114,6 +118,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -134,6 +139,24 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
 
         return view;
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.home_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cart:
+                Intent intent = new Intent(getContext(), ShoppingBasketActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return false;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -183,7 +206,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
     @Override
     public void showLastProducts(List<Product> lastProducts) {
-      //  newcollectiomHomeList.setNestedScrollingEnabled(false);
+        //  newcollectiomHomeList.setNestedScrollingEnabled(false);
         spannedGridLayoutManager = new SpannedGridLayoutManager2(
                 new SpannedGridLayoutManager2.GridSpanLookup() {
                     @Override
@@ -209,6 +232,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             @Override
             public void onproductSelected(Product product, int position) {
                 Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra(Const.Details, product);
                 getContext().startActivity(intent);
 
             }

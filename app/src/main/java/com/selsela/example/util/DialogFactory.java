@@ -1,5 +1,6 @@
 package com.selsela.example.util;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import com.selsela.example.R;
+import com.tapadoo.alerter.Alerter;
 
 public final class DialogFactory {
 
@@ -48,6 +50,15 @@ public final class DialogFactory {
     public static ProgressDialog createProgressDialog(Context context,
                                                       @StringRes int messageResource) {
         return createProgressDialog(context, context.getString(messageResource));
+    }
+
+    public static void showAlertDialog(Activity activity, String message) {
+        Alerter.create(activity)
+                .setText(message)
+                .setDuration(3000)
+                .enableVibration(true)
+                .setBackgroundColorRes(R.color.md_red_500)
+                .show();
     }
 
 }

@@ -6,24 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
+
     <include layout="@layout/toolbar" />
 
     <FrameLayout
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?actionBarSize"
-        />
+        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior" />
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/backgroundcolor"
         android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled"
-        app:itemTextColor="@color/brown"
+        android:background="@drawable/backgroundcolor"
         app:itemIconTint="@color/brown"
+        app:itemTextColor="@color/brown"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

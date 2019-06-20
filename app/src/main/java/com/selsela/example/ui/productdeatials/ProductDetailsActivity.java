@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.remote.SelselaService;
@@ -74,12 +75,18 @@ public class ProductDetailsActivity extends BaseActivity {
 
         Product product = getIntent().getParcelableExtra(Const.Details);
         if (product != null) {
+            RequestOptions options = new RequestOptions()
+                    .circleCrop()
+                    .placeholder(R.mipmap.ic_launcher_round)
+                    .error(R.mipmap.ic_launcher_round);
+
+
             if (product.getImage() != null)
                 Glide.with(this).load(SelselaService.IMAGE_URL + product.getImage()).into(productImageView);
 
             if (product.getStore() != null && product.getStore().getImage() != null)
 
-                Glide.with(this).load(SelselaService.IMAGE_URL + product.getStore().getImage()).into(storeImageView);
+                Glide.with(this).load(SelselaService.IMAGE_URL + product.getStore().getImage()).apply(options).into(storeImageView);
             ratingBar.setRating(Float.parseFloat(product.getRate()));
             productDescrption.setText(product.getName());
             if (product.getDiscountRatio() > 0) {
@@ -87,7 +94,7 @@ public class ProductDetailsActivity extends BaseActivity {
                 realPrice.setPaintFlags(realPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 realPrice.setText(product.getRealPrice() + "");
             } else if (product.getDiscountRatio() == 0) {
-                realPrice.setVisibility(View.GONE);
+                realPrice.setVisibility(View.INVISIBLE);
             }
             presentproductpriceLabel.setText(product.getPrice() + "" + getCurrency());
             productDetailsTextView.setHtml(product.getDetails());
@@ -100,7 +107,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.menu_share,menu);
+        getMenuInflater().inflate(R.menu.menu_share, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -134,16 +141,16 @@ public class ProductDetailsActivity extends BaseActivity {
         RecyclerView chooseSizeRecyclerView = sheetView.findViewById(R.id.size_list);
         chooseSizeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         chooseSizeRecyclerView.setAdapter(new DialogueSizeRecyclerViewAdapter());
-        TextView verifyButton = sheetView.findViewById(R.id.shop_label);
-        TextView closeTextView = sheetView.findViewById(R.id.continue_label);
-        verifyButton.setOnClickListener(new View.OnClickListener() {
+        TextView cont_shopping = sheetView.findViewById(R.id.shop_label);
+        TextView cont_purchase = sheetView.findViewById(R.id.continue_label);
+        cont_shopping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBottomSheetDialog.dismiss();
             }
         });
 
-        closeTextView.setOnClickListener(new View.OnClickListener() {
+        cont_purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductDetailsActivity.this, ShoppingBasketActivity.class);
