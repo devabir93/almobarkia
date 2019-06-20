@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.selsela.example.data.model.Area;
+import com.selsela.example.data.model.address.Area;
 import com.selsela.example.data.model.coupon.Copone;
 
 import java.util.Arrays;

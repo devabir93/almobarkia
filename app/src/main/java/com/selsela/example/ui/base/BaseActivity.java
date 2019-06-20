@@ -18,6 +18,7 @@ import com.selsela.example.R;
 import com.selsela.example.SelselaApplication;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.local.UserSession;
+import com.selsela.example.data.model.boxes.Box;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.injection.component.ActivityComponent;
 import com.selsela.example.injection.component.DaggerActivityComponent;
@@ -26,6 +27,8 @@ import com.selsela.example.util.ViewUtil;
 import com.selsela.example.util.language.LanguageUtils;
 import com.treebo.internetavailabilitychecker.InternetAvailabilityChecker;
 import com.treebo.internetavailabilitychecker.InternetConnectivityListener;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -200,6 +203,11 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
     }
 
     @Override
+    public void isExceedWeight(Boolean aBoolean) {
+
+    }
+
+    @Override
     public void onRequestStart() {
         startRefreshing();
     }
@@ -233,5 +241,9 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
 
     public void setFirstRun(boolean b) {
         preferencesHelper.setFirstRun(b);
+    }
+
+    public List<Box> getShippingBoxes() {
+        return preferencesHelper.getShippingBoxes().getBoxs();
     }
 }

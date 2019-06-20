@@ -498,52 +498,5 @@ public class CartManager {
                 ;
     }
 
-/*
-    public Observable<Product> saveProductSizeAndColor(final Product product) {
-        return Observable.create(new ObservableOnSubscribe<Product>() {
-            @Override
-            public void subscribe(ObservableEmitter<Product> e) {
-                try {
-                    openDatabase();
-                    // List<Product> producDb = Product.find(Product.class, "product_id = ?", String.valueOf(productN.getProductId()));
-                    // if (producDb.size() == 0) {
-                    Pivot pivot;
-                    List<Color> colors = product.getColors();
-                    for (Color color :
-                            colors) {
-                        pivot = color.getPivot();
-                        color.setId(Long.valueOf(color.getColorId()));
-                        color.save();
-                        pivot.setId(Long.valueOf((pivot.getProductId() + "00" + pivot.getColorId() + "00" + pivot.getSizeId())));
-                        pivot.save();
-
-                    }
-                    //  }
-//                    else
-//                        productN=producDb.get(0);
-
-                    for (Size size :
-                            product.getSizes()) {
-                        String qurey = "SELECT DISTINCT * FROM COLOR AS c INNER JOIN PIVOT AS p on c.color_id = p.color_id WHERE p.size_id = ? and p.product_id = ?";
-                        List<Color> colorSizeList = Color.findWithQuery(Color.class, qurey, String.valueOf(size.getSizeId()), String.valueOf(product.getProductId()));
-                        Timber.d("colorSizeList %s", colorSizeList);
-                        size.setColors(colorSizeList);
-                        size.setId(Long.valueOf(size.getSizeId()));
-                        size.save();
-                        Timber.d("size updated %s", size);
-                    }
-                    product.setId(Long.valueOf(product.getProductId()));
-                    //productN.save();
-                    e.onNext(product);
-                } catch (Exception ex) {
-                    e.onError(ex);
-                } finally {
-                    e.onComplete();
-                    closeDatabase();
-                }
-            }
-        });
-    }
-*/
 
 }

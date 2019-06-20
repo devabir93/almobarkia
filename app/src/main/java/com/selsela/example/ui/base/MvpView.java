@@ -16,4 +16,5 @@ public interface MvpView {
     void showEmpty();
 
 
+    void isExceedWeight(Boolean aBoolean);
 }
