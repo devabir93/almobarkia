@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.selsela.example.data.model.boxes.BoxsData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.Country;
 import com.selsela.example.data.model.user.UserData;
@@ -31,6 +32,7 @@ public class PreferencesHelper {
     private final String currentSelectedCountry = "currentSelectedCountry";
     private final String first_run = "first_run";
     private final String currentCountries = "currentCountries";
+    private final String BoxsData = "boxes";
 
     @NonNull
     Gson gson = new GsonBuilder().create();
@@ -110,5 +112,15 @@ public class PreferencesHelper {
 
     public void setFirstRun(boolean b) {
         mPref.edit().putBoolean(first_run, b).apply();
+    }
+
+    public void setShippingBoxes(BoxsData boxsData) {
+        String jsonUser = gson.toJson(boxsData);
+        mPref.edit().putString(BoxsData, jsonUser).apply();
+    }
+
+    public BoxsData getShippingBoxes() {
+        String jsonUser = mPref.getString(BoxsData, null);
+        return gson.fromJson(jsonUser, BoxsData.class);
     }
 }

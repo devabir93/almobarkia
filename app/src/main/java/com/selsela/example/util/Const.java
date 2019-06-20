@@ -10,4 +10,6 @@ public class Const {
     public static String Usage="Usage";
     public static String Policy="Policy";
     public static String Details="Details";
+    public static final Integer KUWAIT = 965;
+
 }

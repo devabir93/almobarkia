@@ -6,16 +6,18 @@ import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Size implements Parcelable
+public class Size extends SugarRecord implements Parcelable
 {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer sizeId;
     @SerializedName("name")
     @Expose
     private String name;
@@ -32,22 +34,22 @@ public class Size implements Parcelable
 
     /**
      * 
-     * @param id
+     * @param sizeId
      * @param pivot
      * @param name
      */
-    public Size(Integer id, String name, Pivot pivot) {
+    public Size(Integer sizeId, String name, Pivot pivot) {
         super();
-        this.id = id;
+        this.sizeId = sizeId;
         this.name = name;
         this.pivot = pivot;
     }
 
     protected Size(Parcel in) {
         if (in.readByte() == 0) {
-            id = null;
+            sizeId = null;
         } else {
-            id = in.readInt();
+            sizeId = in.readInt();
         }
         name = in.readString();
         pivot = in.readParcelable(Pivot.class.getClassLoader());
@@ -55,11 +57,11 @@ public class Size implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
+        if (sizeId == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(id);
+            dest.writeInt(sizeId);
         }
         dest.writeString(name);
         dest.writeParcelable(pivot, flags);
@@ -82,12 +84,12 @@ public class Size implements Parcelable
         }
     };
 
-    public Integer getId() {
-        return id;
+    public Integer getSizeId() {
+        return sizeId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSizeId(Integer sizeId) {
+        this.sizeId = sizeId;
     }
 
     public String getName() {
@@ -108,12 +110,12 @@ public class Size implements Parcelable
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("name", name).append("pivot", pivot).toString();
+        return new ToStringBuilder(this).append("sizeId", sizeId).append("name", name).append("pivot", pivot).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(pivot).append(name).toHashCode();
+        return new HashCodeBuilder().append(sizeId).append(pivot).append(name).toHashCode();
     }
 
     @Override
@@ -125,7 +127,7 @@ public class Size implements Parcelable
             return false;
         }
         Size rhs = ((Size) other);
-        return new EqualsBuilder().append(id, rhs.id).append(pivot, rhs.pivot).append(name, rhs.name).isEquals();
+        return new EqualsBuilder().append(sizeId, rhs.sizeId).append(pivot, rhs.pivot).append(name, rhs.name).isEquals();
     }
 
 }

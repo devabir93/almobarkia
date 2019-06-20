@@ -146,6 +146,11 @@ public class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
+    public void isExceedWeight(Boolean aBoolean) {
+
+    }
+
+    @Override
     public void onRequestStart() {
         startRefreshing();
         //emptyViewHolder.showMessage(getString(R.string.fetching_data));
