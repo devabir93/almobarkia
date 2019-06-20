@@ -6,8 +6,11 @@ import com.selsela.example.data.model.user_fav.favData;
 import com.selsela.example.ui.base.BasePresenter;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
+
 import java.io.IOException;
+
 import javax.inject.Inject;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -52,7 +55,10 @@ public class FavouritesPresenter extends BasePresenter<FavMvpView> {
 
                     @Override
                     public void onNext(BaseResponse<favData> fav_Data) {
-                        getMvpView().showFav(fav_Data.getData().get_user_favorites());
+                        if (fav_Data.getData().get_user_favorites() != null && fav_Data.getData().get_user_favorites().size() > 0)
+                            getMvpView().showFav(fav_Data.getData().get_user_favorites());
+                        else
+                            getMvpView().showEmpty();
 
                     }
 
@@ -76,8 +82,6 @@ public class FavouritesPresenter extends BasePresenter<FavMvpView> {
                     }
                 });
     }
-
-
 
 
 }

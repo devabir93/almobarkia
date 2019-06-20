@@ -195,6 +195,11 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
     }
 
     @Override
+    public void showEmpty() {
+
+    }
+
+    @Override
     public void onRequestStart() {
         startRefreshing();
     }

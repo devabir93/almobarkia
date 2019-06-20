@@ -136,5 +136,7 @@
     <string name="arrived_labelً">وصل حديثاً</string>
     <string name="mosteorder_label">الأكثر طلباً</string>
     <string name="share">Share</string>
+    <string name="empty_fav">لا يوجد مفضلة</string>
+    <string name="empty_fav_label2">لإضافة منتجات إلى قائمة الرغبات انتقل إلى قائمة المنتجات ، حدد  المنتج المطلوب وانقر على أيقونة إضافة الى المفضلة</string>
 
 </resources>

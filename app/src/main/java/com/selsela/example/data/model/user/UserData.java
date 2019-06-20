@@ -18,7 +18,7 @@ public class UserData implements Parcelable {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("mobile")
+    @SerializedName("full_mobile")
     @Expose
     private long mobile;
     @SerializedName("status")
@@ -57,7 +57,17 @@ public class UserData implements Parcelable {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("country_id")
+    @Expose
+    private Integer countryId;
 
+    @SerializedName("type")
+    @Expose
+    private Integer type;
+
+    @SerializedName("prefix")
+    @Expose
+    private Integer prefix;
     /**
      * No args constructor for use in serialization
      */
@@ -118,6 +128,21 @@ public class UserData implements Parcelable {
         }
         createdAt = in.readString();
         updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            countryId = null;
+        } else {
+            countryId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            type = null;
+        } else {
+            type = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            prefix = null;
+        } else {
+            prefix = in.readInt();
+        }
     }
 
     @Override
@@ -160,6 +185,24 @@ public class UserData implements Parcelable {
         }
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
+        if (countryId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(countryId);
+        }
+        if (type == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(type);
+        }
+        if (prefix == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(prefix);
+        }
     }
 
     @Override
@@ -388,6 +431,30 @@ public class UserData implements Parcelable {
         result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
         result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
         return result;
+    }
+
+    public Integer getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(Integer prefix) {
+        this.prefix = prefix;
     }
 }
 

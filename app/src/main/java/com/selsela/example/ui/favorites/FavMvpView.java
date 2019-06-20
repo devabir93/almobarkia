@@ -10,6 +10,9 @@ import java.util.List;
 public interface FavMvpView extends MvpView {
 
     void showFav(List<Product> favorites);
+    void showEmpty();
+    void isSuccessAll(Boolean isSucess);
+    void isSuccess(    Boolean status);
 
 
 

@@ -13,6 +13,7 @@ public interface MvpView {
     void showProgressView(boolean show);
     void onRequestStart();
     void onRequestEnd();
+    void showEmpty();
 
 
 }
