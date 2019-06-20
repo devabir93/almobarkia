@@ -3,19 +3,20 @@ package com.selsela.example.data.model.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Color implements Parcelable
-{
+public class Color extends SugarRecord implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer colorId;
     @SerializedName("color_hexa")
     @Expose
     private String colorHexa;
@@ -28,21 +29,19 @@ public class Color implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Color() {
     }
 
     /**
-     * 
-     * @param id
+     * @param colorId
      * @param pivot
      * @param colorHexa
      * @param name
      */
-    public Color(Integer id, String colorHexa, String name, Pivot pivot) {
+    public Color(Integer colorId, String colorHexa, String name, Pivot pivot) {
         super();
-        this.id = id;
+        this.colorId = colorId;
         this.colorHexa = colorHexa;
         this.name = name;
         this.pivot = pivot;
@@ -50,9 +49,9 @@ public class Color implements Parcelable
 
     protected Color(Parcel in) {
         if (in.readByte() == 0) {
-            id = null;
+            colorId = null;
         } else {
-            id = in.readInt();
+            colorId = in.readInt();
         }
         colorHexa = in.readString();
         name = in.readString();
@@ -61,11 +60,11 @@ public class Color implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
+        if (colorId == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(id);
+            dest.writeInt(colorId);
         }
         dest.writeString(colorHexa);
         dest.writeString(name);
@@ -89,12 +88,12 @@ public class Color implements Parcelable
         }
     };
 
-    public Integer getId() {
-        return id;
+    public Integer getColorId() {
+        return colorId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setColorId(Integer colorId) {
+        this.colorId = colorId;
     }
 
     public String getColorHexa() {
@@ -123,12 +122,12 @@ public class Color implements Parcelable
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("colorHexa", colorHexa).append("name", name).append("pivot", pivot).toString();
+        return new ToStringBuilder(this).append("colorId", colorId).append("colorHexa", colorHexa).append("name", name).append("pivot", pivot).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(pivot).append(colorHexa).append(name).toHashCode();
+        return new HashCodeBuilder().append(colorId).append(pivot).append(colorHexa).append(name).toHashCode();
     }
 
     @Override
@@ -140,7 +139,7 @@ public class Color implements Parcelable
             return false;
         }
         Color rhs = ((Color) other);
-        return new EqualsBuilder().append(id, rhs.id).append(pivot, rhs.pivot).append(colorHexa, rhs.colorHexa).append(name, rhs.name).isEquals();
+        return new EqualsBuilder().append(colorId, rhs.colorId).append(pivot, rhs.pivot).append(colorHexa, rhs.colorHexa).append(name, rhs.name).isEquals();
     }
 
 }

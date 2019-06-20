@@ -7,10 +7,13 @@ import com.google.gson.GsonBuilder;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.boxes.BoxsData;
 import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
+import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user_fav.favData;
@@ -60,14 +63,30 @@ public interface SelselaService {
 
     @GET("get_categories")
     Observable<BaseResponse<CategoriesData>> get_categories(@Query("country_id") int country_id, @Query("user_id") int userId);
+
     @GET("get_countries")
     Observable<BaseResponse<CountryData>> get_countries();
+
     @GET("get_home")
     Observable<BaseResponse<HomeData>> get_home(@Query("country_id") int country_id,
                                                 @Query("user_id") int userId);
+
     @GET("user/get_user_favorites")
     Observable<BaseResponse<favData>> get_user_favorites(@Query("user_id") int user_id,
-                                               @Query("token") String tocken_id);
+                                                         @Query("token") String tocken_id);
+
+    @GET("get_shopping_boxes")
+    Observable<BaseResponse<BoxsData>> get_shopping_boxes();
+
+    ///Post
+
+    @POST("add_order")
+    Observable<BaseResponse> add_order(@Body AddressBody addressBody);
+
+    @POST("user/check_copone")
+    Observable<BaseResponse<CheckCoponData>> check_copone(@Query("user_id") int user_id,
+                                                          @Query("token") String tocken_id, @Query("code") String code);
+
 
     /******** Helper class that sets up a new services *******/
     class Creator {

@@ -1,22 +1,24 @@
 
 package com.selsela.example.data.model.home;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Product implements Parcelable
-{
+import java.util.List;
+
+public class Product extends SugarRecord implements Parcelable {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Integer productId;
     @SerializedName("real_price")
     @Expose
     private double realPrice;
@@ -110,13 +112,11 @@ public class Product implements Parcelable
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Product() {
     }
 
     /**
-     * 
      * @param sizes
      * @param weight
      * @param store
@@ -124,7 +124,7 @@ public class Product implements Parcelable
      * @param inFavorite
      * @param amountLeft
      * @param currency
-     * @param id
+     * @param productId
      * @param amount
      * @param rate
      * @param details
@@ -149,9 +149,9 @@ public class Product implements Parcelable
      * @param images
      * @param storeId
      */
-    public Product(Integer id, Integer realPrice, Integer discountRatio, Integer price, String code, Integer weight, Integer status, Integer categoryId, Integer storeId, Integer inSlider, Integer mostPopular, Integer recentlyCome, Integer numberOfSales, Integer amount, Integer maxOrder, Integer amountLeft, String createdAt, String updatedAt, String image, Integer hasDiscount, Integer inFavorite, String rate, String imageUrl, Integer hasColors, String name, String details, String currency, Store store, List<Color> colors, List<Size> sizes, List<Image> images) {
+    public Product(Integer productId, Integer realPrice, Integer discountRatio, Integer price, String code, Integer weight, Integer status, Integer categoryId, Integer storeId, Integer inSlider, Integer mostPopular, Integer recentlyCome, Integer numberOfSales, Integer amount, Integer maxOrder, Integer amountLeft, String createdAt, String updatedAt, String image, Integer hasDiscount, Integer inFavorite, String rate, String imageUrl, Integer hasColors, String name, String details, String currency, Store store, List<Color> colors, List<Size> sizes, List<Image> images) {
         super();
-        this.id = id;
+        this.productId = productId;
         this.realPrice = realPrice;
         this.discountRatio = discountRatio;
         this.price = price;
@@ -186,9 +186,9 @@ public class Product implements Parcelable
 
     protected Product(Parcel in) {
         if (in.readByte() == 0) {
-            id = null;
+            productId = null;
         } else {
-            id = in.readInt();
+            productId = in.readInt();
         }
         realPrice = in.readDouble();
         discountRatio = in.readDouble();
@@ -276,11 +276,11 @@ public class Product implements Parcelable
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
+        if (productId == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(id);
+            dest.writeInt(productId);
         }
         dest.writeDouble(realPrice);
         dest.writeDouble(discountRatio);
@@ -396,12 +396,12 @@ public class Product implements Parcelable
         }
     };
 
-    public double getId() {
-        return id;
+    public double getProductId() {
+        return productId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     public double getRealPrice() {
@@ -646,12 +646,12 @@ public class Product implements Parcelable
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("realPrice", realPrice).append("discountRatio", discountRatio).append("price", price).append("code", code).append("weight", weight).append("status", status).append("categoryId", categoryId).append("storeId", storeId).append("inSlider", inSlider).append("mostPopular", mostPopular).append("recentlyCome", recentlyCome).append("numberOfSales", numberOfSales).append("amount", amount).append("maxOrder", maxOrder).append("amountLeft", amountLeft).append("createdAt", createdAt).append("updatedAt", updatedAt).append("image", image).append("hasDiscount", hasDiscount).append("inFavorite", inFavorite).append("rate", rate).append("imageUrl", imageUrl).append("hasColors", hasColors).append("name", name).append("details", details).append("currency", currency).append("store", store).append("colors", colors).append("sizes", sizes).append("images", images).toString();
+        return new ToStringBuilder(this).append("productId", productId).append("realPrice", realPrice).append("discountRatio", discountRatio).append("price", price).append("code", code).append("weight", weight).append("status", status).append("categoryId", categoryId).append("storeId", storeId).append("inSlider", inSlider).append("mostPopular", mostPopular).append("recentlyCome", recentlyCome).append("numberOfSales", numberOfSales).append("amount", amount).append("maxOrder", maxOrder).append("amountLeft", amountLeft).append("createdAt", createdAt).append("updatedAt", updatedAt).append("image", image).append("hasDiscount", hasDiscount).append("inFavorite", inFavorite).append("rate", rate).append("imageUrl", imageUrl).append("hasColors", hasColors).append("name", name).append("details", details).append("currency", currency).append("store", store).append("colors", colors).append("sizes", sizes).append("images", images).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(sizes).append(weight).append(store).append(imageUrl).append(inFavorite).append(amountLeft).append(currency).append(amount).append(id).append(rate).append(details).append(createdAt).append(numberOfSales).append(name).append(maxOrder).append(discountRatio).append(realPrice).append(status).append(colors).append(categoryId).append(image).append(mostPopular).append(recentlyCome).append(code).append(hasDiscount).append(updatedAt).append(hasColors).append(price).append(inSlider).append(images).append(storeId).toHashCode();
+        return new HashCodeBuilder().append(sizes).append(weight).append(store).append(imageUrl).append(inFavorite).append(amountLeft).append(currency).append(amount).append(productId).append(rate).append(details).append(createdAt).append(numberOfSales).append(name).append(maxOrder).append(discountRatio).append(realPrice).append(status).append(colors).append(categoryId).append(image).append(mostPopular).append(recentlyCome).append(code).append(hasDiscount).append(updatedAt).append(hasColors).append(price).append(inSlider).append(images).append(storeId).toHashCode();
     }
 
     @Override
@@ -663,7 +663,7 @@ public class Product implements Parcelable
             return false;
         }
         Product rhs = ((Product) other);
-        return new EqualsBuilder().append(sizes, rhs.sizes).append(weight, rhs.weight).append(store, rhs.store).append(imageUrl, rhs.imageUrl).append(inFavorite, rhs.inFavorite).append(amountLeft, rhs.amountLeft).append(currency, rhs.currency).append(amount, rhs.amount).append(id, rhs.id).append(rate, rhs.rate).append(details, rhs.details).append(createdAt, rhs.createdAt).append(numberOfSales, rhs.numberOfSales).append(name, rhs.name).append(maxOrder, rhs.maxOrder).append(discountRatio, rhs.discountRatio).append(realPrice, rhs.realPrice).append(status, rhs.status).append(colors, rhs.colors).append(categoryId, rhs.categoryId).append(image, rhs.image).append(mostPopular, rhs.mostPopular).append(recentlyCome, rhs.recentlyCome).append(code, rhs.code).append(hasDiscount, rhs.hasDiscount).append(updatedAt, rhs.updatedAt).append(hasColors, rhs.hasColors).append(price, rhs.price).append(inSlider, rhs.inSlider).append(images, rhs.images).append(storeId, rhs.storeId).isEquals();
+        return new EqualsBuilder().append(sizes, rhs.sizes).append(weight, rhs.weight).append(store, rhs.store).append(imageUrl, rhs.imageUrl).append(inFavorite, rhs.inFavorite).append(amountLeft, rhs.amountLeft).append(currency, rhs.currency).append(amount, rhs.amount).append(productId, rhs.productId).append(rate, rhs.rate).append(details, rhs.details).append(createdAt, rhs.createdAt).append(numberOfSales, rhs.numberOfSales).append(name, rhs.name).append(maxOrder, rhs.maxOrder).append(discountRatio, rhs.discountRatio).append(realPrice, rhs.realPrice).append(status, rhs.status).append(colors, rhs.colors).append(categoryId, rhs.categoryId).append(image, rhs.image).append(mostPopular, rhs.mostPopular).append(recentlyCome, rhs.recentlyCome).append(code, rhs.code).append(hasDiscount, rhs.hasDiscount).append(updatedAt, rhs.updatedAt).append(hasColors, rhs.hasColors).append(price, rhs.price).append(inSlider, rhs.inSlider).append(images, rhs.images).append(storeId, rhs.storeId).isEquals();
     }
 
 }
