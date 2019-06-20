@@ -49,9 +49,6 @@ public class MainActivity extends BaseActivity {
                     toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
                     loadFragment(new SettingsFragment());
                     return true;
-//                case R.id.navigation_notifications:
-//                    mTextMessage.setText(R.string.title_notifications);
-//                    return true;
                 case R.id.navigation_orders:
                     if (isUserLogged()) {
                         toolbar.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.brown));
