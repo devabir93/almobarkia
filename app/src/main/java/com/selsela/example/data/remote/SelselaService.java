@@ -92,13 +92,9 @@ public interface SelselaService {
                                                           @Query("token") String tocken_id, @Query("code") String code);
 
 
+
     /******** Helper class that sets up a new services *******/
     class Creator {
-//        @Inject
-//        public LanguageUtils languageUtils;
-//        @Inject
-//        public PreferencesHelper preferencesHelper;
-
         public static SelselaService newRibotsService(Context context) {
             final PreferencesHelper sharedPreferences = new PreferencesHelper(context);
             final LanguageUtils mLanguageUtils = new LanguageUtils(context, sharedPreferences);
