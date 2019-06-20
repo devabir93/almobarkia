@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.Product;
@@ -36,9 +37,16 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
     @BindView(R.id.favoritelist)
     RecyclerView favoritelist;
     Unbinder unbinder;
+    @BindView(R.id.empty_fav)
+    LinearLayout emptyFav;
+
+    FavoriteRecyclerViewAdapter favAdapter;
+    private int selectedPos;
+
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+    private boolean isEmpty;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -73,11 +81,11 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
         View view = inflater.inflate(R.layout.favorite_item_list, container, false);
         unbinder = ButterKnife.bind(this, view);
         favouritesPresenter.attachView(this);
-        favouritesPresenter.get_user_favorites();
+        getFav();
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                favouritesPresenter.get_user_favorites();
+                getFav();
             }
         });
         return view;
@@ -98,20 +106,66 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
 
     @Override
     public void showFav(List<Product> favorites) {
-     FavoriteRecyclerViewAdapter   adapter = new FavoriteRecyclerViewAdapter(favorites, getContext(), new FavoriteRecyclerViewAdapter.UpdateDataClickListener() {
+
+        favAdapter = new FavoriteRecyclerViewAdapter(favorites, getContext(), new FavoriteRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void onproductSelected(Product product, int position) {
 
             }
         });
-        adapter.setLayout(ProductListActivity.GRID);
+        favAdapter.setLayout(ProductListActivity.GRID);
         favoritelist.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        favoritelist.setAdapter(adapter);
+        favoritelist.setAdapter(favAdapter);
+        //favoritelist.setVisibility(View.VISIBLE);
+        emptyFav.setVisibility(View.GONE);
 
     }
 
+    @Override
+    public void isSuccessAll(Boolean isSucess) {
+        if (isSucess) {
+            showEmpty();
+        } else
+            getFav();
+    }
+
+    @Override
+    public void isSuccess(Boolean status) {
+        // if (status) {
+        //   favAdapter.removeAt(selectedPos);
+        //  checkAdapterIsEmpty();
+        //   }
+
+    }
+
+    private void checkAdapterIsEmpty() {
+        if (favAdapter.getItemCount() == 0) {
+            emptyFav.setVisibility(View.VISIBLE);
+            favoritelist.setVisibility(View.GONE);
+        } else {
+            emptyFav.setVisibility(View.GONE);
+        }
+    }
+
+    private void getFav() {
+        if (hasInternetConnection()) {
+            favouritesPresenter.get_user_favorites();
+        } else {
+            stopRefreshing();
+            showEmpty();
+            hasActiveInternetConnection(false);
+        }
+    }
 
     public interface OnListFragmentInteractionListener {
 
+    }
+
+    @Override
+    public void showEmpty() {
+        stopRefreshing();
+        isEmpty = true;
+        favoritelist.setVisibility(View.GONE);
+        emptyFav.setVisibility(View.VISIBLE);
     }
 }

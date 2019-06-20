@@ -103,6 +103,14 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         return products.size();
     }
 
+//    public void removeAt(int position) {
+//        if (position < products.size()) {
+//            products.remove(position);
+//            notifyItemRemoved(position);
+//            notifyItemRangeChanged(position, products.size());
+//        }
+//    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         @BindView(R.id.like)
