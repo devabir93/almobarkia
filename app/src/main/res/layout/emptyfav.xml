@@ -15,7 +15,7 @@
         android:fontFamily="@font/segoeui"
         android:text="@string/empty_fav"
         android:textColor="@color/colorprimary"
-        android:textSize="28sp"
+        android:textSize="17sp"
 
         />
 

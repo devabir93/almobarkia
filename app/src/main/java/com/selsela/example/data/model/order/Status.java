@@ -43,35 +43,6 @@ public class Status implements Parcelable
     @SerializedName("name")
     @Expose
     private String name;
-    public final static Creator<Status> CREATOR = new Creator<Status>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Status createFromParcel(Parcel in) {
-            return new Status(in);
-        }
-
-        public Status[] newArray(int size) {
-            return (new Status[size]);
-        }
-
-    }
-    ;
-
-    protected Status(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.colorHex = ((String) in.readValue((String.class.getClassLoader())));
-        this.colorR = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.colorG = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.colorB = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.hasAction = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.actionId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.btnText = ((String) in.readValue((String.class.getClassLoader())));
-        this.btnColor = ((String) in.readValue((String.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -106,6 +77,104 @@ public class Status implements Parcelable
         this.btnColor = btnColor;
         this.name = name;
     }
+
+    protected Status(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        colorHex = in.readString();
+        if (in.readByte() == 0) {
+            colorR = null;
+        } else {
+            colorR = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            colorG = null;
+        } else {
+            colorG = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            colorB = null;
+        } else {
+            colorB = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            hasAction = null;
+        } else {
+            hasAction = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            actionId = null;
+        } else {
+            actionId = in.readInt();
+        }
+        btnText = in.readString();
+        btnColor = in.readString();
+        name = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(colorHex);
+        if (colorR == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(colorR);
+        }
+        if (colorG == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(colorG);
+        }
+        if (colorB == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(colorB);
+        }
+        if (hasAction == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(hasAction);
+        }
+        if (actionId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(actionId);
+        }
+        dest.writeString(btnText);
+        dest.writeString(btnColor);
+        dest.writeString(name);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Status> CREATOR = new Creator<Status>() {
+        @Override
+        public Status createFromParcel(Parcel in) {
+            return new Status(in);
+        }
+
+        @Override
+        public Status[] newArray(int size) {
+            return new Status[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -207,23 +276,6 @@ public class Status implements Parcelable
         }
         Status rhs = ((Status) other);
         return new EqualsBuilder().append(btnText, rhs.btnText).append(id, rhs.id).append(colorG, rhs.colorG).append(name, rhs.name).append(colorR, rhs.colorR).append(actionId, rhs.actionId).append(hasAction, rhs.hasAction).append(colorB, rhs.colorB).append(btnColor, rhs.btnColor).append(colorHex, rhs.colorHex).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(colorHex);
-        dest.writeValue(colorR);
-        dest.writeValue(colorG);
-        dest.writeValue(colorB);
-        dest.writeValue(hasAction);
-        dest.writeValue(actionId);
-        dest.writeValue(btnText);
-        dest.writeValue(btnColor);
-        dest.writeValue(name);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

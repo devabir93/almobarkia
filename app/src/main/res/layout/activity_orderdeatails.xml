@@ -78,6 +78,7 @@
                 app:layout_constraintTop_toTopOf="@id/order_label" />
 
             <TextView
+                android:id="@+id/status_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -119,6 +120,7 @@
                 app:layout_constraintTop_toTopOf="@id/product_label" />
 
             <TextView
+                android:id="@+id/product_sumtexView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -157,6 +159,7 @@
                 app:layout_constraintTop_toTopOf="@id/paymentmethod_label" />
 
             <TextView
+                android:id="@+id/payment_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -196,6 +199,7 @@
                 app:layout_constraintTop_toTopOf="@id/service_label" />
 
             <TextView
+                android:id="@+id/service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -222,6 +226,7 @@
                 app:layout_constraintTop_toBottomOf="@id/service_label" />
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
@@ -235,6 +240,7 @@
                 app:layout_constraintTop_toTopOf="@id/deliverycost_label" />
 
             <TextView
+                android:id="@+id/cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -260,6 +266,7 @@
                 app:layout_constraintTop_toBottomOf="@id/deliverycost_label" />
 
             <TextView
+                android:id="@+id/code_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
@@ -273,6 +280,7 @@
                 app:layout_constraintTop_toTopOf="@id/discountcode_label" />
 
             <TextView
+                android:id="@+id/discount_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -312,6 +320,7 @@
                 app:layout_constraintTop_toTopOf="@+id/orderstaotal_label" />
 
             <TextView
+                android:id="@+id/allorders"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"
@@ -337,6 +346,7 @@
                 app:layout_constraintTop_toBottomOf="@id/orderstaotal_label" />
 
             <TextView
+                android:id="@+id/dicountevalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
@@ -390,6 +400,7 @@
                 app:layout_constraintTop_toTopOf="@+id/Paymentamount_label" />
 
             <TextView
+                android:id="@+id/cost_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_9sdp"

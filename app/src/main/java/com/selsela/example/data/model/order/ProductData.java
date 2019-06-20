@@ -37,13 +37,13 @@ public class ProductData implements Parcelable
     private Integer sizeId;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("product_price")
     @Expose
-    private Integer productPrice;
+    private Double productPrice;
     @SerializedName("discount_ratio")
     @Expose
-    private Integer discountRatio;
+    private Double discountRatio;
     @SerializedName("store_id")
     @Expose
     private Integer storeId;
@@ -62,40 +62,6 @@ public class ProductData implements Parcelable
     @SerializedName("size")
     @Expose
     private Size size;
-    public final static Creator<ProductData> CREATOR = new Creator<ProductData>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public ProductData createFromParcel(Parcel in) {
-            return new ProductData(in);
-        }
-
-        public ProductData[] newArray(int size) {
-            return (new ProductData[size]);
-        }
-
-    }
-    ;
-
-    protected ProductData(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.orderId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.productId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.quantity = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.colorId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.sizeId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.price = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.productPrice = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.discountRatio = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.storeId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.product = ((Product) in.readValue((Product.class.getClassLoader())));
-        this.color = ((Color) in.readValue((Color.class.getClassLoader())));
-        this.size = ((Size) in.readValue((Size.class.getClassLoader())));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -122,7 +88,7 @@ public class ProductData implements Parcelable
      * @param orderId
      * @param sizeId
      */
-    public ProductData(Integer id, Integer orderId, Integer productId, Integer quantity, Integer colorId, Integer sizeId, Integer price, Integer productPrice, Integer discountRatio, Integer storeId, String createdAt, String updatedAt, Product product, Color color, Size size) {
+    public ProductData(Integer id, Integer orderId, Integer productId, Integer quantity, Integer colorId, Integer sizeId, Double price, Double productPrice, Double discountRatio, Integer storeId, String createdAt, String updatedAt, Product product, Color color, Size size) {
         super();
         this.id = id;
         this.orderId = orderId;
@@ -140,6 +106,150 @@ public class ProductData implements Parcelable
         this.color = color;
         this.size = size;
     }
+
+    protected ProductData(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            orderId = null;
+        } else {
+            orderId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            productId = null;
+        } else {
+            productId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            quantity = null;
+        } else {
+            quantity = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            colorId = null;
+        } else {
+            colorId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            sizeId = null;
+        } else {
+            sizeId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            productPrice = null;
+        } else {
+            productPrice = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            discountRatio = null;
+        } else {
+            discountRatio = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            storeId = null;
+        } else {
+            storeId = in.readInt();
+        }
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        product = in.readParcelable(Product.class.getClassLoader());
+        color = in.readParcelable(Color.class.getClassLoader());
+        size = in.readParcelable(Size.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        if (orderId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(orderId);
+        }
+        if (productId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(productId);
+        }
+        if (quantity == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(quantity);
+        }
+        if (colorId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(colorId);
+        }
+        if (sizeId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(sizeId);
+        }
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
+        if (productPrice == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(productPrice);
+        }
+        if (discountRatio == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(discountRatio);
+        }
+        if (storeId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(storeId);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeParcelable(product, flags);
+        dest.writeParcelable(color, flags);
+        dest.writeParcelable(size, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<ProductData> CREATOR = new Creator<ProductData>() {
+        @Override
+        public ProductData createFromParcel(Parcel in) {
+            return new ProductData(in);
+        }
+
+        @Override
+        public ProductData[] newArray(int size) {
+            return new ProductData[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -189,27 +299,27 @@ public class ProductData implements Parcelable
         this.sizeId = sizeId;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getProductPrice() {
+    public Double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Integer productPrice) {
+    public void setProductPrice(Double productPrice) {
         this.productPrice = productPrice;
     }
 
-    public Integer getDiscountRatio() {
+    public Double getDiscountRatio() {
         return discountRatio;
     }
 
-    public void setDiscountRatio(Integer discountRatio) {
+    public void setDiscountRatio(Double discountRatio) {
         this.discountRatio = discountRatio;
     }
 
@@ -280,28 +390,6 @@ public class ProductData implements Parcelable
         }
         ProductData rhs = ((ProductData) other);
         return new EqualsBuilder().append(colorId, rhs.colorId).append(size, rhs.size).append(productId, rhs.productId).append(product, rhs.product).append(updatedAt, rhs.updatedAt).append(id, rhs.id).append(price, rhs.price).append(color, rhs.color).append(createdAt, rhs.createdAt).append(quantity, rhs.quantity).append(discountRatio, rhs.discountRatio).append(storeId, rhs.storeId).append(productPrice, rhs.productPrice).append(sizeId, rhs.sizeId).append(orderId, rhs.orderId).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(orderId);
-        dest.writeValue(productId);
-        dest.writeValue(quantity);
-        dest.writeValue(colorId);
-        dest.writeValue(sizeId);
-        dest.writeValue(price);
-        dest.writeValue(productPrice);
-        dest.writeValue(discountRatio);
-        dest.writeValue(storeId);
-        dest.writeValue(createdAt);
-        dest.writeValue(updatedAt);
-        dest.writeValue(product);
-        dest.writeValue(color);
-        dest.writeValue(size);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }
