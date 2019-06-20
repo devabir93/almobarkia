@@ -11,6 +11,7 @@ import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user_fav.favData;
@@ -57,7 +58,9 @@ public interface SelselaService {
 
     @GET("get_config")
     Observable<BaseResponse<ConfigData>> get_config();
-
+    @GET("user/get_orders")
+    Observable<BaseResponse<OrderData>> get_orders(@Query("user_id") int user_id,
+                                                   @Query("token") String tocken_id);
     @GET("get_categories")
     Observable<BaseResponse<CategoriesData>> get_categories(@Query("country_id") int country_id, @Query("user_id") int userId);
     @GET("get_countries")

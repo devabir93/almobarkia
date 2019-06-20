@@ -78,46 +78,6 @@ public class Address implements Parcelable
     @SerializedName("area")
     @Expose
     private Area area;
-    public final static Parcelable.Creator<Address> CREATOR = new Creator<Address>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public Address createFromParcel(Parcel in) {
-            return new Address(in);
-        }
-
-        public Address[] newArray(int size) {
-            return (new Address[size]);
-        }
-
-    }
-            ;
-
-    protected Address(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.userId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.countryId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.govId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.areaId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.street = ((String) in.readValue((String.class.getClassLoader())));
-        this.subStreet = ((String) in.readValue((String.class.getClassLoader())));
-        this.buildingOrHouse = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.buildingNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.saved = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.blockNumber = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.floorNumber = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.flatNumber = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.fullAddress = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.govTxt = ((String) in.readValue((String.class.getClassLoader())));
-        this.areaTxt = ((String) in.readValue((String.class.getClassLoader())));
-        this.country = ((Country) in.readValue((Country.class.getClassLoader())));
-        this.gov = ((Gov) in.readValue((Gov.class.getClassLoader())));
-        this.area = ((Area) in.readValue((Area.class.getClassLoader())));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -174,6 +134,127 @@ public class Address implements Parcelable
         this.gov = gov;
         this.area = area;
     }
+
+    protected Address(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            countryId = null;
+        } else {
+            countryId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            govId = null;
+        } else {
+            govId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            areaId = null;
+        } else {
+            areaId = in.readInt();
+        }
+        street = in.readString();
+        subStreet = in.readString();
+        if (in.readByte() == 0) {
+            buildingOrHouse = null;
+        } else {
+            buildingOrHouse = in.readInt();
+        }
+        buildingNumber = in.readString();
+        if (in.readByte() == 0) {
+            saved = null;
+        } else {
+            saved = in.readInt();
+        }
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        govTxt = in.readString();
+        areaTxt = in.readString();
+        country = in.readParcelable(Country.class.getClassLoader());
+        gov = in.readParcelable(Gov.class.getClassLoader());
+        area = in.readParcelable(Area.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        if (countryId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(countryId);
+        }
+        if (govId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(govId);
+        }
+        if (areaId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(areaId);
+        }
+        dest.writeString(street);
+        dest.writeString(subStreet);
+        if (buildingOrHouse == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(buildingOrHouse);
+        }
+        dest.writeString(buildingNumber);
+        if (saved == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(saved);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeString(govTxt);
+        dest.writeString(areaTxt);
+        dest.writeParcelable(country, flags);
+        dest.writeParcelable(gov, flags);
+        dest.writeParcelable(area, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Address> CREATOR = new Creator<Address>() {
+        @Override
+        public Address createFromParcel(Parcel in) {
+            return new Address(in);
+        }
+
+        @Override
+        public Address[] newArray(int size) {
+            return new Address[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -363,34 +444,6 @@ public class Address implements Parcelable
         }
         Address rhs = ((Address) other);
         return new EqualsBuilder().append(countryId, rhs.countryId).append(fullAddress, rhs.fullAddress).append(street, rhs.street).append(saved, rhs.saved).append(govTxt, rhs.govTxt).append(areaId, rhs.areaId).append(country, rhs.country).append(updatedAt, rhs.updatedAt).append(id, rhs.id).append(area, rhs.area).append(areaTxt, rhs.areaTxt).append(floorNumber, rhs.floorNumber).append(subStreet, rhs.subStreet).append(createdAt, rhs.createdAt).append(govId, rhs.govId).append(userId, rhs.userId).append(buildingOrHouse, rhs.buildingOrHouse).append(flatNumber, rhs.flatNumber).append(gov, rhs.gov).append(blockNumber, rhs.blockNumber).append(buildingNumber, rhs.buildingNumber).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(userId);
-        dest.writeValue(countryId);
-        dest.writeValue(govId);
-        dest.writeValue(areaId);
-        dest.writeValue(street);
-        dest.writeValue(subStreet);
-        dest.writeValue(buildingOrHouse);
-        dest.writeValue(buildingNumber);
-        dest.writeValue(saved);
-        dest.writeValue(blockNumber);
-        dest.writeValue(floorNumber);
-        dest.writeValue(flatNumber);
-        dest.writeValue(fullAddress);
-        dest.writeValue(createdAt);
-        dest.writeValue(updatedAt);
-        dest.writeValue(govTxt);
-        dest.writeValue(areaTxt);
-        dest.writeValue(country);
-        dest.writeValue(gov);
-        dest.writeValue(area);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

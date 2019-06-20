@@ -138,5 +138,7 @@
     <string name="share">Share</string>
     <string name="empty_fav">لا يوجد مفضلة</string>
     <string name="empty_fav_label2">لإضافة منتجات إلى قائمة الرغبات انتقل إلى قائمة المنتجات ، حدد  المنتج المطلوب وانقر على أيقونة إضافة الى المفضلة</string>
+    <string name="no_orders">لا يوجد لديك طلبات</string>
+    <string name="order_details">تفاصيل الطلب</string>
 
 </resources>

@@ -30,7 +30,7 @@ public class Order implements Parcelable
     private String orderNumber;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("status_id")
     @Expose
     private Integer statusId;
@@ -60,16 +60,16 @@ public class Order implements Parcelable
     private Integer addressId;
     @SerializedName("transport_cost")
     @Expose
-    private Integer transportCost;
+    private Double transportCost;
     @SerializedName("service_cost")
     @Expose
-    private Integer serviceCost;
+    private Double serviceCost;
     @SerializedName("country_id")
     @Expose
     private Integer countryId;
     @SerializedName("conversion_factor")
     @Expose
-    private Integer conversionFactor;
+    private Double conversionFactor;
     @SerializedName("shpping_box_id")
     @Expose
     private Integer shppingBoxId;
@@ -81,7 +81,7 @@ public class Order implements Parcelable
     private Integer storeId;
     @SerializedName("admin_price")
     @Expose
-    private Integer adminPrice;
+    private Double adminPrice;
     @SerializedName("can_reson")
     @Expose
     private String canReson;
@@ -118,58 +118,6 @@ public class Order implements Parcelable
     @SerializedName("products")
     @Expose
     private List<ProductData> products = null;
-    public final static Parcelable.Creator<Order> CREATOR = new Creator<Order>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public Order createFromParcel(Parcel in) {
-            return new Order(in);
-        }
-
-        public Order[] newArray(int size) {
-            return (new Order[size]);
-        }
-
-    }
-            ;
-
-    protected Order(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.userId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.orderNumber = ((String) in.readValue((String.class.getClassLoader())));
-        this.price = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.statusId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.couponCode = ((String) in.readValue((String.class.getClassLoader())));
-        this.couponRatio = ((String) in.readValue((String.class.getClassLoader())));
-        this.paymentType = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.isKnet = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.knetToken = ((String) in.readValue((String.class.getClassLoader())));
-        this.knetResponseId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.isPayed = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.addressId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.transportCost = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.serviceCost = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.countryId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.conversionFactor = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.shppingBoxId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.trackingId = ((String) in.readValue((String.class.getClassLoader())));
-        this.storeId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.adminPrice = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.canReson = ((String) in.readValue((String.class.getClassLoader())));
-        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.createdAtText = ((String) in.readValue((String.class.getClassLoader())));
-        this.knetUrl = ((String) in.readValue((String.class.getClassLoader())));
-        this.trackingUrl = ((String) in.readValue((String.class.getClassLoader())));
-        this.user = ((UserData) in.readValue((UserData.class.getClassLoader())));
-        this.status = ((Status) in.readValue((Status.class.getClassLoader())));
-        this.address = ((Address) in.readValue((Address.class.getClassLoader())));
-        this.payment = ((Payment) in.readValue((Payment.class.getClassLoader())));
-        this.country = ((Country) in.readValue((Country.class.getClassLoader())));
-        in.readList(this.products, (ProductData.class.getClassLoader()));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -214,7 +162,7 @@ public class Order implements Parcelable
      * @param user
      * @param storeId
      */
-    public Order(Integer id, Integer userId, String orderNumber, Integer price, Integer statusId, String couponCode, String couponRatio, Integer paymentType, Integer isKnet, String knetToken, Integer knetResponseId, Integer isPayed, Integer addressId, Integer transportCost, Integer serviceCost, Integer countryId, Integer conversionFactor, Integer shppingBoxId, String trackingId, Integer storeId, Integer adminPrice, String canReson, String createdAt, String updatedAt, String createdAtText, String knetUrl, String trackingUrl, UserData user, Status status, Address address, Payment payment, Country country, List<ProductData> products) {
+    public Order(Integer id, Integer userId, String orderNumber, Double price, Integer statusId, String couponCode, String couponRatio, Integer paymentType, Integer isKnet, String knetToken, Integer knetResponseId, Integer isPayed, Integer addressId, Double transportCost, Double serviceCost, Integer countryId, Double conversionFactor, Integer shppingBoxId, String trackingId, Integer storeId, Double adminPrice, String canReson, String createdAt, String updatedAt, String createdAtText, String knetUrl, String trackingUrl, UserData user, Status status, Address address, Payment payment, Country country, List<ProductData> products) {
         super();
         this.id = id;
         this.userId = userId;
@@ -251,6 +199,240 @@ public class Order implements Parcelable
         this.products = products;
     }
 
+    protected Order(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            userId = null;
+        } else {
+            userId = in.readInt();
+        }
+        orderNumber = in.readString();
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            statusId = null;
+        } else {
+            statusId = in.readInt();
+        }
+        couponCode = in.readString();
+        couponRatio = in.readString();
+        if (in.readByte() == 0) {
+            paymentType = null;
+        } else {
+            paymentType = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            isKnet = null;
+        } else {
+            isKnet = in.readInt();
+        }
+        knetToken = in.readString();
+        if (in.readByte() == 0) {
+            knetResponseId = null;
+        } else {
+            knetResponseId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            isPayed = null;
+        } else {
+            isPayed = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            addressId = null;
+        } else {
+            addressId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            transportCost = null;
+        } else {
+            transportCost = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            serviceCost = null;
+        } else {
+            serviceCost = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            countryId = null;
+        } else {
+            countryId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            conversionFactor = null;
+        } else {
+            conversionFactor = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            shppingBoxId = null;
+        } else {
+            shppingBoxId = in.readInt();
+        }
+        trackingId = in.readString();
+        if (in.readByte() == 0) {
+            storeId = null;
+        } else {
+            storeId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            adminPrice = null;
+        } else {
+            adminPrice = in.readDouble();
+        }
+        canReson = in.readString();
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        createdAtText = in.readString();
+        knetUrl = in.readString();
+        trackingUrl = in.readString();
+        user = in.readParcelable(UserData.class.getClassLoader());
+        status = in.readParcelable(Status.class.getClassLoader());
+        address = in.readParcelable(Address.class.getClassLoader());
+        payment = in.readParcelable(Payment.class.getClassLoader());
+        country = in.readParcelable(Country.class.getClassLoader());
+        products = in.createTypedArrayList(ProductData.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        if (userId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(userId);
+        }
+        dest.writeString(orderNumber);
+        if (price == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(price);
+        }
+        if (statusId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(statusId);
+        }
+        dest.writeString(couponCode);
+        dest.writeString(couponRatio);
+        if (paymentType == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(paymentType);
+        }
+        if (isKnet == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(isKnet);
+        }
+        dest.writeString(knetToken);
+        if (knetResponseId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(knetResponseId);
+        }
+        if (isPayed == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(isPayed);
+        }
+        if (addressId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(addressId);
+        }
+        if (transportCost == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(transportCost);
+        }
+        if (serviceCost == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(serviceCost);
+        }
+        if (countryId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(countryId);
+        }
+        if (conversionFactor == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(conversionFactor);
+        }
+        if (shppingBoxId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(shppingBoxId);
+        }
+        dest.writeString(trackingId);
+        if (storeId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(storeId);
+        }
+        if (adminPrice == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeDouble(adminPrice);
+        }
+        dest.writeString(canReson);
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeString(createdAtText);
+        dest.writeString(knetUrl);
+        dest.writeString(trackingUrl);
+        dest.writeParcelable(user, flags);
+        dest.writeParcelable(status, flags);
+        dest.writeParcelable(address, flags);
+        dest.writeParcelable(payment, flags);
+        dest.writeParcelable(country, flags);
+        dest.writeTypedList(products);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Order> CREATOR = new Creator<Order>() {
+        @Override
+        public Order createFromParcel(Parcel in) {
+            return new Order(in);
+        }
+
+        @Override
+        public Order[] newArray(int size) {
+            return new Order[size];
+        }
+    };
+
     public Integer getId() {
         return id;
     }
@@ -275,11 +457,11 @@ public class Order implements Parcelable
         this.orderNumber = orderNumber;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -355,19 +537,19 @@ public class Order implements Parcelable
         this.addressId = addressId;
     }
 
-    public Integer getTransportCost() {
+    public Double getTransportCost() {
         return transportCost;
     }
 
-    public void setTransportCost(Integer transportCost) {
+    public void setTransportCost(Double transportCost) {
         this.transportCost = transportCost;
     }
 
-    public Integer getServiceCost() {
+    public Double getServiceCost() {
         return serviceCost;
     }
 
-    public void setServiceCost(Integer serviceCost) {
+    public void setServiceCost(Double serviceCost) {
         this.serviceCost = serviceCost;
     }
 
@@ -379,11 +561,11 @@ public class Order implements Parcelable
         this.countryId = countryId;
     }
 
-    public Integer getConversionFactor() {
+    public Double getConversionFactor() {
         return conversionFactor;
     }
 
-    public void setConversionFactor(Integer conversionFactor) {
+    public void setConversionFactor(Double conversionFactor) {
         this.conversionFactor = conversionFactor;
     }
 
@@ -411,11 +593,11 @@ public class Order implements Parcelable
         this.storeId = storeId;
     }
 
-    public Integer getAdminPrice() {
+    public Double getAdminPrice() {
         return adminPrice;
     }
 
-    public void setAdminPrice(Integer adminPrice) {
+    public void setAdminPrice(Double adminPrice) {
         this.adminPrice = adminPrice;
     }
 
@@ -535,46 +717,6 @@ public class Order implements Parcelable
         }
         Order rhs = ((Order) other);
         return new EqualsBuilder().append(knetToken, rhs.knetToken).append(addressId, rhs.addressId).append(statusId, rhs.statusId).append(id, rhs.id).append(adminPrice, rhs.adminPrice).append(createdAt, rhs.createdAt).append(knetUrl, rhs.knetUrl).append(userId, rhs.userId).append(isPayed, rhs.isPayed).append(products, rhs.products).append(knetResponseId, rhs.knetResponseId).append(countryId, rhs.countryId).append(conversionFactor, rhs.conversionFactor).append(isKnet, rhs.isKnet).append(serviceCost, rhs.serviceCost).append(payment, rhs.payment).append(status, rhs.status).append(paymentType, rhs.paymentType).append(trackingId, rhs.trackingId).append(couponCode, rhs.couponCode).append(canReson, rhs.canReson).append(transportCost, rhs.transportCost).append(country, rhs.country).append(updatedAt, rhs.updatedAt).append(createdAtText, rhs.createdAtText).append(couponRatio, rhs.couponRatio).append(trackingUrl, rhs.trackingUrl).append(price, rhs.price).append(address, rhs.address).append(orderNumber, rhs.orderNumber).append(shppingBoxId, rhs.shppingBoxId).append(user, rhs.user).append(storeId, rhs.storeId).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(userId);
-        dest.writeValue(orderNumber);
-        dest.writeValue(price);
-        dest.writeValue(statusId);
-        dest.writeValue(couponCode);
-        dest.writeValue(couponRatio);
-        dest.writeValue(paymentType);
-        dest.writeValue(isKnet);
-        dest.writeValue(knetToken);
-        dest.writeValue(knetResponseId);
-        dest.writeValue(isPayed);
-        dest.writeValue(addressId);
-        dest.writeValue(transportCost);
-        dest.writeValue(serviceCost);
-        dest.writeValue(countryId);
-        dest.writeValue(conversionFactor);
-        dest.writeValue(shppingBoxId);
-        dest.writeValue(trackingId);
-        dest.writeValue(storeId);
-        dest.writeValue(adminPrice);
-        dest.writeValue(canReson);
-        dest.writeValue(createdAt);
-        dest.writeValue(updatedAt);
-        dest.writeValue(createdAtText);
-        dest.writeValue(knetUrl);
-        dest.writeValue(trackingUrl);
-        dest.writeValue(user);
-        dest.writeValue(status);
-        dest.writeValue(address);
-        dest.writeValue(payment);
-        dest.writeValue(country);
-        dest.writeList(products);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

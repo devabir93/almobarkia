@@ -1,48 +1,47 @@
 package com.selsela.example.ui.orders;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.selsela.example.R;
+import com.selsela.example.data.model.home.Product;
+import com.selsela.example.data.model.order.Order;
 import com.selsela.example.ui.base.BaseFragment;
-import com.selsela.example.ui.orders.dummy.DummyContent.DummyItem;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
-public class OrdersFragment extends BaseFragment {
 
-    // TODO: Customize parameter argument names
+public class OrdersFragment extends BaseFragment implements OrdresMvpView{
+
     private static final String ARG_COLUMN_COUNT = "column-count";
+    @Inject OrdersPresenter ordersPresenter;
     @BindView(R.id.orders_list)
     RecyclerView ordersList;
+    @BindView(R.id.empty_view)
+    TextView emptyView;
     Unbinder unbinder;
+    private boolean isEmpty;
+
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     public OrdersFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
     public static OrdersFragment newInstance(int columnCount) {
         OrdersFragment fragment = new OrdersFragment();
         Bundle args = new Bundle();
@@ -67,10 +66,14 @@ public class OrdersFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_orders_list, container, false);
         unbinder = ButterKnife.bind(this, view);
-
-        ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
-        ordersList.setAdapter(new MyOrdersRecyclerViewAdapter());
-
+        ordersPresenter.attachView(this);
+        ordersPresenter.get_orders();
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ordersPresenter.get_orders();
+            }
+        });
 
         return view;
     }
@@ -88,9 +91,31 @@ public class OrdersFragment extends BaseFragment {
         unbinder.unbind();
     }
 
+    @Override
+    public void showOrders(List<Order> orders) {
+
+        ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+        ordersList.setAdapter(new MyOrdersRecyclerViewAdapter(orders, getContext(), new MyOrdersRecyclerViewAdapter.UpdateDataClickListener() {
+            @Override
+            public void onorderSelected(Order order, int position) {
+            }
+        }));
+    }
+
+    @Override
+    public void showProducts(List<Product> products) {
+
+    }
+
 
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+    }
+
+    @Override
+    public void showEmpty() {
+        stopRefreshing();
+        isEmpty = true;
+        ordersList.setVisibility(View.GONE);
+       emptyView .setVisibility(View.VISIBLE);
     }
 }

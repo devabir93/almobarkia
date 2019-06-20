@@ -19,27 +19,6 @@ public class Payment implements Parcelable
     @SerializedName("name")
     @Expose
     private String name;
-    public final static Creator<Payment> CREATOR = new Creator<Payment>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Payment createFromParcel(Parcel in) {
-            return new Payment(in);
-        }
-
-        public Payment[] newArray(int size) {
-            return (new Payment[size]);
-        }
-
-    }
-    ;
-
-    protected Payment(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -58,6 +37,43 @@ public class Payment implements Parcelable
         this.id = id;
         this.name = name;
     }
+
+    protected Payment(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(name);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Payment> CREATOR = new Creator<Payment>() {
+        @Override
+        public Payment createFromParcel(Parcel in) {
+            return new Payment(in);
+        }
+
+        @Override
+        public Payment[] newArray(int size) {
+            return new Payment[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -95,15 +111,6 @@ public class Payment implements Parcelable
         }
         Payment rhs = ((Payment) other);
         return new EqualsBuilder().append(id, rhs.id).append(name, rhs.name).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(name);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

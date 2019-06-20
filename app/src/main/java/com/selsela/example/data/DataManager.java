@@ -7,6 +7,7 @@ import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user.UserData;
@@ -237,8 +238,29 @@ public class DataManager {
                 });
     }
 
+    public Observable<BaseResponse<OrderData>> get_orders() {
+        return mSelselaService.get_orders(getUserId(), getUserSession().getToken())
+                .concatMap(new Function<BaseResponse<OrderData>, ObservableSource<? extends BaseResponse<OrderData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<OrderData>> apply(final BaseResponse<OrderData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<OrderData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<OrderData>> e) throws Exception {
+                                try {
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    }
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
     public Observable<BaseResponse<favData>> get_user_favorites() {
-        return mSelselaService.get_user_favorites(getUserId(), getUserSession().getToken())
+        return mSelselaService.get_user_favorites( getUserSession().getId(),getUserSession().getToken())
                 .concatMap(new Function<BaseResponse<favData>, ObservableSource<? extends BaseResponse<favData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<favData>> apply(final BaseResponse<favData> response) throws Exception {
