@@ -371,11 +371,6 @@ public class ProductData implements Parcelable
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("orderId", orderId).append("productId", productId).append("quantity", quantity).append("colorId", colorId).append("sizeId", sizeId).append("price", price).append("productPrice", productPrice).append("discountRatio", discountRatio).append("storeId", storeId).append("createdAt", createdAt).append("updatedAt", updatedAt).append("product", product).append("color", color).append("size", size).toString();
-    }
-
-    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(colorId).append(size).append(productId).append(product).append(updatedAt).append(id).append(price).append(color).append(createdAt).append(quantity).append(discountRatio).append(storeId).append(productPrice).append(sizeId).append(orderId).toHashCode();
     }
@@ -392,4 +387,27 @@ public class ProductData implements Parcelable
         return new EqualsBuilder().append(colorId, rhs.colorId).append(size, rhs.size).append(productId, rhs.productId).append(product, rhs.product).append(updatedAt, rhs.updatedAt).append(id, rhs.id).append(price, rhs.price).append(color, rhs.color).append(createdAt, rhs.createdAt).append(quantity, rhs.quantity).append(discountRatio, rhs.discountRatio).append(storeId, rhs.storeId).append(productPrice, rhs.productPrice).append(sizeId, rhs.sizeId).append(orderId, rhs.orderId).isEquals();
     }
 
+    @Override
+    public String
+
+
+    toString() {
+        return "ProductData{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", productId=" + productId +
+                ", quantity=" + quantity +
+                ", colorId=" + colorId +
+                ", sizeId=" + sizeId +
+                ", price=" + price +
+                ", productPrice=" + productPrice +
+                ", discountRatio=" + discountRatio +
+                ", storeId=" + storeId +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", product=" + product +
+                ", color=" + color +
+                ", size=" + size +
+                '}';
+    }
 }

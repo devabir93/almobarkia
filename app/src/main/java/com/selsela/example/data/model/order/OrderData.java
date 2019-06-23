@@ -19,26 +19,6 @@ public class OrderData implements Parcelable
     @SerializedName("orders")
     @Expose
     private List<Order> orders = null;
-    public final static Parcelable.Creator<OrderData> CREATOR = new Creator<OrderData>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public OrderData createFromParcel(Parcel in) {
-            return new OrderData(in);
-        }
-
-        public OrderData[] newArray(int size) {
-            return (new OrderData[size]);
-        }
-
-    }
-            ;
-
-    protected OrderData(Parcel in) {
-        in.readList(this.orders, (Order.class.getClassLoader()));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -55,6 +35,32 @@ public class OrderData implements Parcelable
         super();
         this.orders = orders;
     }
+
+    protected OrderData(Parcel in) {
+        orders = in.createTypedArrayList(Order.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(orders);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<OrderData> CREATOR = new Creator<OrderData>() {
+        @Override
+        public OrderData createFromParcel(Parcel in) {
+            return new OrderData(in);
+        }
+
+        @Override
+        public OrderData[] newArray(int size) {
+            return new OrderData[size];
+        }
+    };
 
     public List<Order> getOrders() {
         return orders;
@@ -84,14 +90,6 @@ public class OrderData implements Parcelable
         }
         OrderData rhs = ((OrderData) other);
         return new EqualsBuilder().append(orders, rhs.orders).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(orders);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

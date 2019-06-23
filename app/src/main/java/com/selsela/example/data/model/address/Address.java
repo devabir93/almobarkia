@@ -47,16 +47,16 @@ public class Address implements Parcelable
     private Integer saved;
     @SerializedName("block_number")
     @Expose
-    private Object blockNumber;
+    private String blockNumber;
     @SerializedName("floor_number")
     @Expose
-    private Object floorNumber;
+    private String floorNumber;
     @SerializedName("flat_number")
     @Expose
-    private Object flatNumber;
+    private String flatNumber;
     @SerializedName("full_address")
     @Expose
-    private Object fullAddress;
+    private String fullAddress;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -110,7 +110,7 @@ public class Address implements Parcelable
      * @param buildingNumber
      * @param blockNumber
      */
-    public Address(Integer id, Integer userId, Integer countryId, Integer govId, Integer areaId, String street, String subStreet, Integer buildingOrHouse, String buildingNumber, Integer saved, Object blockNumber, Object floorNumber, Object flatNumber, Object fullAddress, String createdAt, String updatedAt, String govTxt, String areaTxt, Country country, Gov gov, Area area) {
+    public Address(Integer id, Integer userId, Integer countryId, Integer govId, Integer areaId, String street, String subStreet, Integer buildingOrHouse, String buildingNumber, Integer saved, String blockNumber, String floorNumber, String flatNumber, String fullAddress, String createdAt, String updatedAt, String govTxt, String areaTxt, Country country, Gov gov, Area area) {
         super();
         this.id = id;
         this.userId = userId;
@@ -174,6 +174,10 @@ public class Address implements Parcelable
         } else {
             saved = in.readInt();
         }
+        blockNumber = in.readString();
+        floorNumber = in.readString();
+        flatNumber = in.readString();
+        fullAddress = in.readString();
         createdAt = in.readString();
         updatedAt = in.readString();
         govTxt = in.readString();
@@ -230,6 +234,10 @@ public class Address implements Parcelable
             dest.writeByte((byte) 1);
             dest.writeInt(saved);
         }
+        dest.writeString(blockNumber);
+        dest.writeString(floorNumber);
+        dest.writeString(flatNumber);
+        dest.writeString(fullAddress);
         dest.writeString(createdAt);
         dest.writeString(updatedAt);
         dest.writeString(govTxt);
@@ -336,35 +344,35 @@ public class Address implements Parcelable
         this.saved = saved;
     }
 
-    public Object getBlockNumber() {
+    public String getBlockNumber() {
         return blockNumber;
     }
 
-    public void setBlockNumber(Object blockNumber) {
+    public void setBlockNumber(String blockNumber) {
         this.blockNumber = blockNumber;
     }
 
-    public Object getFloorNumber() {
+    public String getFloorNumber() {
         return floorNumber;
     }
 
-    public void setFloorNumber(Object floorNumber) {
+    public void setFloorNumber(String floorNumber) {
         this.floorNumber = floorNumber;
     }
 
-    public Object getFlatNumber() {
+    public String getFlatNumber() {
         return flatNumber;
     }
 
-    public void setFlatNumber(Object flatNumber) {
+    public void setFlatNumber(String flatNumber) {
         this.flatNumber = flatNumber;
     }
 
-    public Object getFullAddress() {
+    public String getFullAddress() {
         return fullAddress;
     }
 
-    public void setFullAddress(Object fullAddress) {
+    public void setFullAddress(String fullAddress) {
         this.fullAddress = fullAddress;
     }
 

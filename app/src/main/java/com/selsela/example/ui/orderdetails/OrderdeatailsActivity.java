@@ -11,15 +11,22 @@ import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
 import com.selsela.example.data.model.order.Order;
+import com.selsela.example.data.model.order.ProductData;
 import com.selsela.example.ui.base.BaseActivity;
+import com.selsela.example.ui.orders.OrdersPresenter;
+import com.selsela.example.ui.orders.OrdresMvpView;
 import com.selsela.example.util.Const;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
-public class OrderdeatailsActivity extends BaseActivity implements OrderDeatailsRecyclerViewAdapter.CallBack {
+public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView {
 
-    String currency;
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.order_num)
@@ -82,6 +89,9 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
     TextView dicountevalue;
     @BindView(R.id.cost_all)
     TextView costAll;
+    private OrderDeatailsRecyclerViewAdapter adapter;
+    @Inject
+    OrdersPresenter ordersPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +99,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
         setContentView(R.layout.activity_orderdeatails);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        ordersPresenter.attachView(this);
         activityTitle = getString(R.string.order_details);
         initToolbar();
         Order order = getIntent().getParcelableExtra(Const.Details);
@@ -103,7 +114,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
         service.setText(order.getServiceCost() + "" + getCurrency());
         cost.setText(order.getTransportCost() + "" + getCurrency());
         allorders.setText(order.getPrice() + "" + getCurrency());
-        costAll.setText(order.getPrice() +""+getCurrency());
+        costAll.setText(order.getPrice() + "" + getCurrency());
 
         if (order.getCouponRatio().equals("0.00")) {
             discountcodeLabel.setVisibility(View.GONE);
@@ -113,17 +124,23 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
             dicountevalue.setVisibility(View.GONE);
             codeTextView.setVisibility(View.GONE);
 
-
         } else {
-            discountvalueTextView.setText(order.getCouponRatio());
+            discountvalueTextView.setText(order.getCouponRatio() + getCurrency());
             discountCode.setText(order.getCouponCode());
         }
-        orderdeatilsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        orderdeatilsList.setAdapter(new OrderDeatailsRecyclerViewAdapter(this, this));
-        orderdeatilsList.setNestedScrollingEnabled(false);
+
+        usernameLabel.setText(order.getUser().getName());
+        //userAddresslabel.setText(order.getAddress().getFullAddress());
+//        userAddresslabel.setText(order.getAddress().getGovTxt() + "" + " " + order.getAddress().getAreaTxt() + "" + " " + order.getAddress().getBlockNumber() + "" + order.getAddress().getStreet()
+//                + " " + order.getAddress().getAreaTxt() + " " + order.getAddress().getGovTxt() + " " + order.getAddress().getFlatNumber() + ""
+//        );
+
+        Timber.d(" order.getProducts() %s", order.getProducts());
+        showProducts(order.getProducts());
     }
 
-    private void showChangeDialog() {
+
+    private void showEvaluateDialog() {
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_evaluate, false)
@@ -137,6 +154,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //ordersPresenter.evaluateOrder()
                 dialog.dismiss();
             }
         });
@@ -149,10 +167,25 @@ public class OrderdeatailsActivity extends BaseActivity implements OrderDeatails
         });
     }
 
+
     @Override
-    public void onEmployeClick() {
-        showChangeDialog();
+    public void showOrders(List<Order> orders) {
+
     }
 
+    public void showProducts(List<ProductData> products) {
+        orderdeatilsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter = new OrderDeatailsRecyclerViewAdapter(products, this, new OrderDeatailsRecyclerViewAdapter.CallBack() {
+            @Override
+            public void onEmployeClick() {
+                showEvaluateDialog();
 
+            }
+        });
+        adapter.setCurrency(getCurrency());
+        orderdeatilsList.setAdapter(adapter);
+        orderdeatilsList.setNestedScrollingEnabled(false);
+
+
+    }
 }

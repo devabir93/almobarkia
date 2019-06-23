@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.order.Order;
+import com.selsela.example.data.model.order.ProductData;
 import com.selsela.example.ui.base.BaseFragment;
 
 import java.util.List;
@@ -101,12 +102,6 @@ public class OrdersFragment extends BaseFragment implements OrdresMvpView{
             }
         }));
     }
-
-    @Override
-    public void showProducts(List<Product> products) {
-
-    }
-
 
     public interface OnListFragmentInteractionListener {
     }
