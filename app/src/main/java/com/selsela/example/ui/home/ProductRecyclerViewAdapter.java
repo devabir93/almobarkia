@@ -1,4 +1,4 @@
-package com.selsela.example.ui.favorites;
+package com.selsela.example.ui.home;
 
 import android.content.Context;
 import android.graphics.Paint;
@@ -80,7 +80,8 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         }
         holder.rateLabel.setText(product.getRate());
         holder.productDescription.setText(product.getName());
-        holder.productPrice.setText(product.getPrice() + "" + currency);
+
+        holder.productPrice.setText(product.getPrice() + ""+currency );
         if (product.getRate() != null)
             holder.ratingBar.setRating(Float.parseFloat(product.getRate()));
 
@@ -132,6 +133,8 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         RatingBar ratingBar;
         @BindView(R.id.prprice_label)
         TextView realPrice;
+
+
 
 
         public ViewHolder(View view) {

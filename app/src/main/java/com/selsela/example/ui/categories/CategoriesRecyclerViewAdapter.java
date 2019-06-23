@@ -79,16 +79,14 @@ public class CategoriesRecyclerViewAdapter extends RecyclerView.Adapter<Categori
         TextView categoryype;
         @BindView(R.id.categories_cell)
         ImageView categoryImageView;
-        public final TextView mIdView;
-         public final TextView mContentView;
+
 
          ViewHolder(View view) {
             super(view);
             mView = view;
             ButterKnife.bind(this, view);
             view.setOnClickListener(this);
-             mIdView = (TextView) view.findViewById(R.id.categoriestype_textView);
-             mContentView = (TextView) view.findViewById(R.id.content);
+
 
         }
 

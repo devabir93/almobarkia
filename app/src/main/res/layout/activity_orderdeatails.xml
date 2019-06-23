@@ -439,7 +439,7 @@
                 android:layout_height="0dp"
                 android:background="@color/white"
                 android:fontFamily="@font/seguisb"
-                android:padding="@dimen/_6sdp"
+                android:padding="@dimen/_4sdp"
                 android:text="@string/user_details"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
@@ -494,7 +494,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:fontFamily="@font/seguisb"
-                android:padding="@dimen/_6sdp"
+                android:padding="@dimen/_4sdp"
                 android:text="@string/productdeatails_label"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
@@ -509,7 +509,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/line2"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_18sdp"
                 tools:itemCount="5"
                 tools:listitem="@layout/orderdeatils_list">
 

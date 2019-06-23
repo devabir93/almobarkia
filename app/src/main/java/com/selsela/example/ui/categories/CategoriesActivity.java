@@ -2,6 +2,7 @@ package com.selsela.example.ui.categories;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +10,12 @@ import android.view.MenuItem;
 
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.MainCategory;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
+import com.selsela.example.util.Const;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,6 +31,7 @@ public class CategoriesActivity extends BaseActivity implements CategoryMvpView 
     CategoryPresenter categoryPresenter;
     @BindView(R.id.pullToRefresh)
     SwipeRefreshLayout pullToRefresh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +59,11 @@ public class CategoriesActivity extends BaseActivity implements CategoryMvpView 
         categoriesList.setAdapter(new CategoriesRecyclerViewAdapter(categoryList, this, new CategoriesRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void onCategorySelected(MainCategory category, int position) {
-             //   Intent intent = new Intent(CategoriesActivity.this, ProductListActivity.class);
-              //   startActivity(intent);
+               Intent intent = new Intent(CategoriesActivity.this, ProductListActivity.class);
+                intent.putExtra(Const.Details,(ArrayList) category.getProducts());
+                intent.putExtra(Const.Name,category.getName());
+
+                startActivity(intent);
 
             }
         }));

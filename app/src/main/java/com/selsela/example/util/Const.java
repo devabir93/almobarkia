@@ -11,5 +11,5 @@ public class Const {
     public static String Policy="Policy";
     public static String Details="Details";
     public static final Integer KUWAIT = 965;
-
+    public static String Name = "Name";
 }

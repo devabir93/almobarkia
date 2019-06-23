@@ -31,14 +31,13 @@ import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.categories.CategoriesActivity;
 import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
-import com.selsela.example.ui.favorites.FavoriteRecyclerViewAdapter;
-import com.selsela.example.ui.favorites.ProductRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.SpannedGridLayoutManager2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -266,6 +265,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             @Override
             public void onCategorySelected(MainCategory category, int position) {
                 Intent intent = new Intent(getContext(), ProductListActivity.class);
+                intent.putExtra(Const.Details,(ArrayList)category.getProducts());
+                intent.putExtra(Const.Name,category.getName());
                 startActivity(intent);
             }
         }));
