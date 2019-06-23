@@ -32,6 +32,7 @@ import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.categories.CategoriesActivity;
 import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
 import com.selsela.example.ui.favorites.FavoriteRecyclerViewAdapter;
+import com.selsela.example.ui.favorites.ProductRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
@@ -96,7 +97,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    private FavoriteRecyclerViewAdapter adapter;
+    private ProductRecyclerViewAdapter adapter;
     private List<Product> sliderProducts;
     private SpannedGridLayoutManager2 spannedGridLayoutManager;
 
@@ -242,7 +243,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     @Override
     public void showMostPopular(List<Product> mostPopular) {
         themostorderList.setNestedScrollingEnabled(false);
-        adapter = new FavoriteRecyclerViewAdapter(mostPopular, getContext(), new FavoriteRecyclerViewAdapter.UpdateDataClickListener() {
+        adapter = new ProductRecyclerViewAdapter(mostPopular, getContext(), new ProductRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void onproductSelected(Product product, int position) {
                 Intent intent = new Intent(getContext(), ProductDetailsActivity.class);

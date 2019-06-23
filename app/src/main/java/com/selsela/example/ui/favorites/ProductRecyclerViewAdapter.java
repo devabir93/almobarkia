@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.Product;
-import com.selsela.example.data.model.user_fav.favProduct;
 import com.selsela.example.data.remote.SelselaService;
 
 import java.util.List;
@@ -26,16 +25,16 @@ import timber.log.Timber;
 import static com.selsela.example.ui.productlist.ProductListActivity.LINEAR;
 
 
-public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRecyclerViewAdapter.ViewHolder> {
+public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecyclerViewAdapter.ViewHolder> {
     int type;
     String currency;
 
     private Context context;
-    private List<favProduct> products;
+    private List<Product> products;
     UpdateDataClickListener updateDataClickListener;
 
 
-    public FavoriteRecyclerViewAdapter(List<favProduct> products, Context context, UpdateDataClickListener updateDataClickListener) {
+    public ProductRecyclerViewAdapter(List<Product> products, Context context, UpdateDataClickListener updateDataClickListener) {
         this.products = products;
         this.context = context;
         this.updateDataClickListener = updateDataClickListener;
@@ -57,12 +56,9 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final favProduct favProduct = products.get(position);
+        final Product product = products.get(position);
         // realPrice .setPaintFlags(realPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
-        if (favProduct == null)
-            return;
-        final Product product = favProduct.get_user_favorites();
         if (product == null)
             return;
         if (product.getImage() != null)

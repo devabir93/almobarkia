@@ -17,11 +17,21 @@ public class favData implements Parcelable {
 
     @SerializedName("favorites")
     @Expose
-    private List<Product> favorites = null;
+    private List<favProduct> favorites = null;
 
 
     protected favData(Parcel in) {
-        favorites = in.createTypedArrayList(Product.CREATOR);
+        favorites = in.createTypedArrayList(favProduct.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(favorites);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<favData> CREATOR = new Creator<favData>() {
@@ -36,22 +46,12 @@ public class favData implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(favorites);
-    }
-
-    public List<Product> get_user_favorites() {
+    public List<favProduct> get_user_favorites() {
 
         return favorites;
     }
 
-    public void setuser_favorites(List<Product> favorites) {
+    public void setuser_favorites(List<favProduct> favorites) {
         this.favorites = favorites;
     }
 }

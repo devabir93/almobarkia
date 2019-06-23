@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.Product;
+import com.selsela.example.data.model.user_fav.favProduct;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.productlist.ProductListActivity;
 
@@ -105,7 +106,7 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
     }
 
     @Override
-    public void showFav(List<Product> favorites) {
+    public void showFav(List<favProduct> favorites) {
 
         favAdapter = new FavoriteRecyclerViewAdapter(favorites, getContext(), new FavoriteRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
@@ -114,6 +115,7 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
             }
         });
         favAdapter.setLayout(ProductListActivity.GRID);
+        favAdapter.setCurrency(getCurrency());
         favoritelist.setLayoutManager(new GridLayoutManager(getContext(), 2));
         favoritelist.setAdapter(favAdapter);
         //favoritelist.setVisibility(View.VISIBLE);

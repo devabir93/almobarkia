@@ -44,13 +44,13 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
         final Order order = orders.get(position);
         if (order == null)
             return;
-        holder.ordersNumberLabel.setText(order.getOrderNumber() +"");
-        holder.ordershourLabel.setText(order.getStatusId() +"");
+        holder.ordersNumberLabel.setText(order.getOrderNumber() + "");
+        holder.ordershourLabel.setText(order.getStatusId() + "");
         holder.statusType.setText(order.getStatus().getName());
-        holder.constlayout.setBackgroundColor(ViewUtil.getHexColor(order.getStatus().getColorHex()));
+        holder.statusType.setTextColor(ViewUtil.getHexColor(order.getStatus().getColorHex()));
         holder.ordershourLabel.setText(order.getCreatedAtText());
         if (order.getProducts() != null)
-            holder.productSumtexView.setText(order.getProducts().size()+"");
+            holder.productSumtexView.setText(order.getProducts().size() + "");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +68,7 @@ public class MyOrdersRecyclerViewAdapter extends RecyclerView.Adapter<MyOrdersRe
         return orders.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         @BindView(R.id.status_label)
         TextView statusLabel;
