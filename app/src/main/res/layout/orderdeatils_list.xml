@@ -23,9 +23,10 @@
 
     <TextView
         android:id="@+id/aboutproduct_label"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_19sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_6sdp"
         android:lines="1"
         android:fontFamily="@font/segoeui"
@@ -33,6 +34,7 @@
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintStart_toEndOf="@id/product_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -40,7 +42,6 @@
         android:layout_width="@dimen/_16sdp"
         android:layout_height="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
-        android:background="@drawable/textview_oval"
         app:layout_constraintStart_toStartOf="@id/aboutproduct_label"
         app:layout_constraintTop_toBottomOf="@id/aboutproduct_label" />
 
@@ -49,7 +50,6 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_16sdp"
-        android:text="@string/size_type"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
         app:layout_constraintBottom_toBottomOf="@id/product_color"
@@ -91,21 +91,22 @@
         android:text="@string/availableasize_type"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_11ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/ordercount_label"
         app:layout_constraintStart_toEndOf="@id/currency_label"
-        app:layout_constraintTop_toTopOf="@id/currency_label" />
+        app:layout_constraintTop_toTopOf="@id/ordercount_label" />
 
     <TextView
         android:id="@+id/ordercount_label"
         app:layout_constraintStart_toEndOf="@id/availablesize_textView"
+        app:layout_constraintEnd_toStartOf="@id/evaluate_btt"
         app:layout_constraintTop_toTopOf="@id/currency_label"
         app:layout_constraintBottom_toBottomOf="@id/currency_label"
-        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_6sdp"
         android:text="01"
         android:textColor="@color/colorprimary"
         android:fontFamily="@font/segoeui"
         android:textSize="@dimen/_12ssp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp" />
 
    <TextView

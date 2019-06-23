@@ -81,13 +81,13 @@ public class FavoriteRecyclerViewAdapter extends RecyclerView.Adapter<FavoriteRe
         holder.rateLabel.setText(product.getRate());
         holder.productDescription.setText(product.getName());
         holder.productPrice.setText(product.getPrice() + "" + currency);
-        holder.ratingBar.setRating(Float.parseFloat(product.getRate()));
+       // holder.ratingBar.setRating(Float.parseFloat(product.getRate()));
 
-        if (product.getInFavorite() == 1) {
-            holder.like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_likedheart));
-        } else if (product.getInFavorite() == 0) {
-            holder.like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_like));
-        }
+      //  if (product.getInFavorite() == 1) {
+          //  holder.like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_likedheart));
+       // } else if (product.getInFavorite() == 0) {
+            //holder.like.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_like));
+       // }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
