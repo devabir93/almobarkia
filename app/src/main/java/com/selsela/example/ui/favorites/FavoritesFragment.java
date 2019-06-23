@@ -118,7 +118,6 @@ public class FavoritesFragment extends BaseFragment implements FavMvpView {
         favAdapter.setCurrency(getCurrency());
         favoritelist.setLayoutManager(new GridLayoutManager(getContext(), 2));
         favoritelist.setAdapter(favAdapter);
-        //favoritelist.setVisibility(View.VISIBLE);
         emptyFav.setVisibility(View.GONE);
 
     }
