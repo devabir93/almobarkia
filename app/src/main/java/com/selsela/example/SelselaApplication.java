@@ -4,7 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
+import com.orm.SugarContext;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.injection.component.ApplicationComponent;
 import com.selsela.example.injection.component.DaggerApplicationComponent;
@@ -38,13 +40,14 @@ public class SelselaApplication extends Application {
                 .setDefaultFontPath("fonts/din_next_arabic_regular.otf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
-
+        SugarContext.init(this);
         sharedPreferences = new PreferencesHelper(this);
         mLanguageUtils = new LanguageUtils(this, sharedPreferences);
         Stetho.initializeWithDefaults(this);
         InternetAvailabilityChecker.init(this);
         initInjection();
         mLanguageUtils.initLocal();
+        Fresco.initialize(this);
 
     }
 

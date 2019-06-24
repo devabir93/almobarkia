@@ -3,68 +3,114 @@ package com.selsela.example.data.model.home;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Pivot implements Parcelable
-{
+public class Pivot implements Parcelable {
 
-    @SerializedName("product_id")
+    @SerializedName("size_id")
     @Expose
-    private Integer productId;
-    @SerializedName("color_id")
+    private Integer size_id;
+    @SerializedName("product_color_id")
     @Expose
     private Integer colorId;
-    public final static Creator<Pivot> CREATOR = new Creator<Pivot>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Pivot createFromParcel(Parcel in) {
-            return new Pivot(in);
-        }
-
-        public Pivot[] newArray(int size) {
-            return (new Pivot[size]);
-        }
-
-    }
-    ;
-
-    protected Pivot(Parcel in) {
-        this.productId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.colorId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-    }
+    @SerializedName("amount")
+    @Expose
+    private Integer amount;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Pivot() {
     }
 
-    /**
-     * 
-     * @param colorId
-     * @param productId
-     */
-    public Pivot(Integer productId, Integer colorId) {
-        super();
-        this.productId = productId;
-        this.colorId = colorId;
+
+    protected Pivot(Parcel in) {
+        if (in.readByte() == 0) {
+            size_id = null;
+        } else {
+            size_id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            colorId = null;
+        } else {
+            colorId = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            amount = null;
+        } else {
+            amount = in.readInt();
+        }
     }
 
-    public Integer getProductId() {
-        return productId;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (size_id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(size_id);
+        }
+        if (colorId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(colorId);
+        }
+        if (amount == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(amount);
+        }
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Pivot> CREATOR = new Creator<Pivot>() {
+        @Override
+        public Pivot createFromParcel(Parcel in) {
+            return new Pivot(in);
+        }
+
+        @Override
+        public Pivot[] newArray(int size) {
+            return new Pivot[size];
+        }
+    };
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pivot)) return false;
+
+        Pivot pivot = (Pivot) o;
+
+        if (getSize_id() != null ? !getSize_id().equals(pivot.getSize_id()) : pivot.getSize_id() != null)
+            return false;
+        if (getColorId() != null ? !getColorId().equals(pivot.getColorId()) : pivot.getColorId() != null)
+            return false;
+        return getAmount() != null ? getAmount().equals(pivot.getAmount()) : pivot.getAmount() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getSize_id() != null ? getSize_id().hashCode() : 0;
+        result = 31 * result + (getColorId() != null ? getColorId().hashCode() : 0);
+        result = 31 * result + (getAmount() != null ? getAmount().hashCode() : 0);
+        return result;
+    }
+
+    public Integer getSize_id() {
+        return size_id;
+    }
+
+    public void setSize_id(Integer size_id) {
+        this.size_id = size_id;
     }
 
     public Integer getColorId() {
@@ -75,35 +121,11 @@ public class Pivot implements Parcelable
         this.colorId = colorId;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("productId", productId).append("colorId", colorId).toString();
+    public Integer getAmount() {
+        return amount;
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(colorId).append(productId).toHashCode();
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Pivot) == false) {
-            return false;
-        }
-        Pivot rhs = ((Pivot) other);
-        return new EqualsBuilder().append(colorId, rhs.colorId).append(productId, rhs.productId).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(productId);
-        dest.writeValue(colorId);
-    }
-
-    public int describeContents() {
-        return  0;
-    }
-
 }

@@ -24,11 +24,10 @@
                 android:layout_height="wrap_content"
                 tools:context=".ui.productdeatials.ProductDetailsActivity">
 
-                <ImageView
-                    android:id="@+id/product_imageView"
-                    android:layout_width="@dimen/_375sdp"
-
-                    android:layout_height="@dimen/_450sdp"
+                <com.daimajia.slider.library.SliderLayout
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_350sdp"
                     android:src="@drawable/ic_productdetails"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_110sdp"
                     android:background="@drawable/view_rectanglel"
-                    app:layout_constraintBottom_toBottomOf="@id/product_imageView" />
+                    app:layout_constraintBottom_toBottomOf="@id/slider" />
 
                 <TextView
                     android:id="@+id/product_descrption"
@@ -77,10 +76,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
-                    android:fontFamily="@font/seguibl"
+                    android:fontFamily="@font/segoeuib"
                     android:text="110.00 د.ك"
                     android:textAlignment="viewStart"
-
+                    android:includeFontPadding="false"
                     android:textColor="@color/colorprimary"
                     android:textSize="@dimen/_17ssp"
                     app:layout_constraintEnd_toEndOf="@id/productprice_label"

@@ -57,7 +57,7 @@ public class ContactActivity extends BaseActivity {
     TextView sendTextViewBackground;
     @BindView(R.id.contact_tetxtView)
     TextView contactTetxtView;
-    @BindView(R.id.call_action)
+    @BindView(R.id.mobile)
     TextView callAction;
 
     @Override

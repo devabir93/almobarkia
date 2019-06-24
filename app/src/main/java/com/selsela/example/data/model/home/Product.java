@@ -396,7 +396,7 @@ public class Product extends SugarRecord implements Parcelable {
         }
     };
 
-    public double getProductId() {
+    public int getProductId() {
         return productId;
     }
 

@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:material="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_rect_lightgrey"
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -18,24 +19,24 @@
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_30sdp"
         android:src="@drawable/ic_pin_code"
-        android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/changepass_textView"
-        app:layout_constraintTop_toTopOf="@id/logo"
-        app:layout_constraintStart_toEndOf="@id/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/change_dialoglabel"
-        android:fontFamily="@font/segoeuib"
-        android:textSize="@dimen/_20ssp"
-        android:textColor="@color/colorprimary"
-        android:layout_marginTop="@dimen/_10sdp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/segoeuib"
+        android:text="@string/change_dialoglabel"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo" />
 
     <android.support.design.widget.TextInputEditText
         android:id="@+id/password_current_tetxtView"
@@ -43,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:background="@drawable/textview_stroke"
         android:drawableEnd="@drawable/ic_hid"
         android:drawablePadding="@dimen/_20sdp"
@@ -71,20 +72,21 @@
         app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView"
         app:layout_constraintStart_toStartOf="@id/password_current_tetxtView"
         app:layout_constraintTop_toTopOf="@id/password_current_tetxtView" />
+
     <TextView
         android:id="@+id/user_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
         android:fontFamily="@font/seguisb"
-        android:paddingTop="@dimen/_3sdp"
-        android:paddingBottom="@dimen/_6sdp"
         android:paddingStart="@dimen/_6sdp"
+        android:paddingTop="@dimen/_3sdp"
         android:paddingEnd="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_6sdp"
         android:text="@string/passwordcurrent_label"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
-        android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="@id/line"
         app:layout_constraintStart_toStartOf="@id/line"
         app:layout_constraintTop_toTopOf="@id/line" />
@@ -93,7 +95,7 @@
         android:id="@+id/password_new_tetxtView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/textview_stroke"
         android:drawableEnd="@drawable/ic_hid"
         android:drawablePadding="@dimen/_20sdp"
@@ -121,28 +123,30 @@
         app:layout_constraintEnd_toEndOf="@id/password_new_tetxtView"
         app:layout_constraintStart_toStartOf="@id/password_new_tetxtView"
         app:layout_constraintTop_toTopOf="@id/password_new_tetxtView" />
+
     <TextView
         android:id="@+id/password_new_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
         android:fontFamily="@font/seguisb"
-        android:paddingTop="@dimen/_1sdp"
-        android:paddingBottom="@dimen/_6sdp"
         android:paddingStart="@dimen/_6sdp"
+        android:paddingTop="@dimen/_1sdp"
         android:paddingEnd="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_6sdp"
         android:text="@string/passwordnewlabel"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
-        android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="@id/line3"
         app:layout_constraintStart_toStartOf="@id/line3"
         app:layout_constraintTop_toTopOf="@id/line3" />
+
     <android.support.design.widget.TextInputEditText
         android:id="@+id/password_confirm_tetxtView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/textview_stroke"
         android:drawableEnd="@drawable/ic_hid"
         android:drawablePadding="@dimen/_20sdp"
@@ -169,52 +173,53 @@
         app:layout_constraintEnd_toEndOf="@id/password_confirm_tetxtView"
         app:layout_constraintStart_toStartOf="@id/password_confirm_tetxtView"
         app:layout_constraintTop_toTopOf="@id/password_confirm_tetxtView" />
+
     <TextView
         android:id="@+id/password_confirm_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
         android:fontFamily="@font/seguisb"
-        android:paddingTop="@dimen/_2sdp"
-        android:paddingBottom="@dimen/_6sdp"
         android:paddingStart="@dimen/_6sdp"
+        android:paddingTop="@dimen/_2sdp"
         android:paddingEnd="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_6sdp"
         android:text="@string/passwordconfirmlabel"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
-        android:layout_marginStart="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="@id/line2"
         app:layout_constraintStart_toStartOf="@id/line2"
         app:layout_constraintTop_toTopOf="@id/line2" />
 
     <TextView
         android:id="@+id/confirm_textView"
-        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
-        app:layout_constraintEnd_toStartOf="@id/cancel_textView"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:padding="@dimen/_8sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/seguisb"
+        android:padding="@dimen/_15sdp"
         android:text="@string/passwordconfirm_action"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_15ssp"
-        android:fontFamily="@font/seguisb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
+        app:layout_constraintEnd_toStartOf="@id/cancel_textView"
+        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/cancel_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/confirm_textView"
-        app:layout_constraintBottom_toBottomOf="@id/confirm_textView"
-        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
-        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/seguisb"
+        android:padding="@dimen/_15sdp"
         android:text="@string/cancel_label"
-        android:padding="@dimen/_8sdp"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_15ssp"
-        android:fontFamily="@font/seguisb"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp" />
+        app:layout_constraintBottom_toBottomOf="@id/confirm_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
+        app:layout_constraintTop_toTopOf="@id/confirm_textView" />
 
 
 </android.support.constraint.ConstraintLayout>

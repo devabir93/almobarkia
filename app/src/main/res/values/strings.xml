@@ -98,7 +98,7 @@
     <string name="total_number">350.0دك</string>
     <string name="product_details_label">تفاصيل المنتج</string>
     <string name="add_product_label">اضف للسلة</string>
-    <string name="_maxordernumber_label">أقصى كمية للطلب عدد5</string>
+    <string name="_maxordernumber_label">أقصى كمية للطلب عدد</string>
     <string name="contiue_shopping_label">متابعة التسوق</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -178,6 +178,8 @@
     <string name="empty_fav_label2">لإضافة منتجات إلى قائمة الرغبات انتقل إلى قائمة المنتجات ، حدد  المنتج المطلوب وانقر على أيقونة إضافة الى المفضلة</string>
     <string name="signin_confrimation">You need to login</string>
     <string name="no_orders">لا يوجد لديك طلبات</string>
+    <string name="add_to_cart_now">Add to Cart Now</string>
+    <string name="exceed_amount_left">Quantity has been consumed</string>
 
 
 </resources>

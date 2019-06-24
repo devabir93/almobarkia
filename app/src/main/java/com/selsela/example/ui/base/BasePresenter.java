@@ -146,5 +146,93 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
     public boolean isArabic() {
         return languageUtils.isArabic();
     }
+
+    public void getCartBadge() {
+        checkViewAttached();
+        dataManager.getCartCount()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Integer integer) {
+                        Timber.d("getCartBadge %s", integer);
+                        getMvpView().showCartBadge(integer);
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        Timber.e(e, "There was an error while login");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    public void getProductById(final int productId, final int colorId, final int imageID,int sizeId) {
+        checkViewAttached();
+        dataManager.getProductById(productId, colorId, imageID,sizeId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<ProductOrderBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ProductOrderBody productOrder) {
+                        Timber.d("productOrder %s", productOrder);
+                        getMvpView().showSavedProductOrder(productOrder);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        Timber.e(e, "There was an error while getProductById");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+    public void saveProduct(ProductOrderBody productOrder) {
+        dataManager.addTobag(productOrder)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer aBoolean) {
+                        Timber.d("saveProduct %s", aBoolean);
+                        getMvpView().showCartBadge(aBoolean);
+                        //getCartPrice();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e(e, "There was an error while addToBag");
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }
 

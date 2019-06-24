@@ -290,13 +290,13 @@ public class CartManager {
         });
     }
 
-    public Observable<Integer> addTobag(final ProductOrderBody productOrder, final boolean isFromDetails) {
+    public Observable<Integer> addTobag(final ProductOrderBody productOrder) {
         // Timber.d("productOrder %s", productOrder);
         return Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> subscriber) {
                 try {
-                    int isSavedInDatabase = saveOrderWithoutRX(productOrder, isFromDetails);
+                    int isSavedInDatabase = saveOrderWithoutRX(productOrder);
                     Timber.d("isSavedInDatabase %s", isSavedInDatabase);
 
                     subscriber.onNext(isSavedInDatabase);
@@ -310,15 +310,17 @@ public class CartManager {
 
     }
 
-    public int saveOrderWithoutRX(ProductOrderBody productOrder, boolean isFromDetails) {
+    public int saveOrderWithoutRX(ProductOrderBody productOrder) {
         int isSavedInDatabase;
         Timber.d("saveOrderWithoutRX %s", productOrder);
         List<ProductOrderBody> productOrderList = new ArrayList<>();
         if (productOrder.getColor() != null && productOrder.getSize() != null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=?",
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=? and image_id=?",
                     String.valueOf(getUserId()), String.valueOf(productOrder.getOrderId()),
                     String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getColorId()));
-        } else if (productOrder.getColor() == null && productOrder.getSize() != null) {
+        }
+/*
+        else if (productOrder.getColor() == null && productOrder.getSize() != null) {
             productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=?",
                     String.valueOf(getUserId()), String.valueOf(productOrder.getOrderId()),
                     String.valueOf(productOrder.getSizeId()));
@@ -332,7 +334,7 @@ public class CartManager {
                     String.valueOf(productOrder.getOrderId()),
                     String.valueOf(0),
                     String.valueOf(0));
-        }
+        }*/
         if (productOrderList.size() > 0) {
             Timber.d("saved productOrder");
             productOrderList.get(0).setPrice(productOrder.getPrice());
@@ -363,6 +365,8 @@ public class CartManager {
                 productOrder.setSize(productOrder.getSize());
                 productOrder.setProduct(productOrder.getProduct());
                 productOrder.setQuantity(productOrder.getQuantity());
+                productOrder.setImageId(productOrder.getImageId());
+                productOrder.setImageUrl(productOrder.getImageUrl());
                 productOrder.setAmount(productOrder.getAmount());
                 productOrder.setGiftName(productOrder.getGiftName());
                 productOrder.setGiftMessage(productOrder.getGiftMessage());
@@ -496,6 +500,34 @@ public class CartManager {
                     }
                 })
                 ;
+    }
+
+
+    public Observable<ProductOrderBody> getProductById(final int productId, final int colorId, final int imageID, final int sizeId) {
+        Timber.d(" getProductById %s %s %s", productId, colorId, imageID);
+        return Observable.create(new ObservableOnSubscribe<ProductOrderBody>() {
+            @Override
+            public void subscribe(ObservableEmitter<ProductOrderBody> e) {
+                try {
+                    openDatabase();
+                    List<ProductOrderBody> ProductOrderBodyList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and color_id=? and image_id=? and size_id=?",
+                            String.valueOf(getUserId()),
+                            String.valueOf(productId),
+                            String.valueOf(colorId),
+                            String.valueOf(imageID),
+                            String.valueOf(sizeId)
+                    );
+                    Timber.d("ProductOrderBodyList %s", ProductOrderBodyList);
+                    if (ProductOrderBodyList != null && ProductOrderBodyList.size() > 0)
+                        e.onNext(ProductOrderBodyList.get(0));
+                    e.onComplete();
+                } catch (Exception ex) {
+                    e.onError(ex);
+                } finally {
+                    closeDatabase();
+                }
+            }
+        });
     }
 
 

@@ -68,7 +68,7 @@
     <string name="total_number">350.0دك</string>
     <string name="product_details_label">تفاصيل المنتج</string>
     <string name="add_product_label">اضف للسلة</string>
-    <string name="_maxordernumber_label">أقصى كمية للطلب عدد5</string>
+    <string name="_maxordernumber_label">أقصى كمية للطلب عدد</string>
     <string name="contiue_shopping_label">متابعة التسوق</string>
     <string name="notifications_label">الاشعارات</string>
     <string name="cart_label">سلة المشتريات</string>
@@ -141,5 +141,7 @@
     <string name="signin_confrimation">يجب عليك تسجيل الدخول</string>
     <string name="no_orders">لا يوجد لديك طلبات</string>
     <string name="order_details">تفاصيل الطلب</string>
+    <string name="add_to_cart_now">Add to Cart Now</string>
+    <string name="exceed_amount_left">Quantity has been consumed</string>
 
 </resources>

@@ -14,7 +14,6 @@ import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.order.OrderData;
-import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
@@ -62,9 +61,11 @@ public interface SelselaService {
 
     @GET("get_config")
     Observable<BaseResponse<ConfigData>> get_config();
+
     @GET("user/get_orders")
     Observable<BaseResponse<OrderData>> get_orders(@Query("user_id") int user_id,
                                                    @Query("token") String tocken_id);
+
     @GET("get_categories")
     Observable<BaseResponse<CategoriesData>> get_categories(@Query("country_id") int country_id, @Query("user_id") int userId);
 
@@ -90,7 +91,6 @@ public interface SelselaService {
     @POST("user/check_copone")
     Observable<BaseResponse<CheckCoponData>> check_copone(@Query("user_id") int user_id,
                                                           @Query("token") String tocken_id, @Query("code") String code);
-
 
 
     /******** Helper class that sets up a new services *******/

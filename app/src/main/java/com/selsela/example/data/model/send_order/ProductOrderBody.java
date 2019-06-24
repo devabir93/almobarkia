@@ -25,6 +25,8 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
     int SizeId = 0;
     private Double weight;
     private Integer amount;
+    private Integer imageId;
+    private String imageUrl;
 
     public ProductOrderBody(Integer orderId, Integer quantity, Product product, String price, Size size, Color color, int isGift, String giftName, String giftMessage, int userId, String priceForSingleItem) {
         this.orderId = orderId;
@@ -71,6 +73,12 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
         } else {
             amount = in.readInt();
         }
+        if (in.readByte() == 0) {
+            imageId = null;
+        } else {
+            imageId = in.readInt();
+        }
+        imageUrl = in.readString();
         priceForSingleItem = in.readString();
     }
 
@@ -110,6 +118,13 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
             dest.writeByte((byte) 1);
             dest.writeInt(amount);
         }
+        if (imageId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(imageId);
+        }
+        dest.writeString(imageUrl);
         dest.writeString(priceForSingleItem);
     }
 
@@ -286,6 +301,8 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
                 ", SizeId=" + SizeId +
                 ", weight=" + weight +
                 ", amount=" + amount +
+                ", imageId=" + imageId +
+                ", imageUrl='" + imageUrl + '\'' +
                 ", priceForSingleItem='" + priceForSingleItem + '\'' +
                 '}';
     }
@@ -329,6 +346,10 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
             return false;
         if (getAmount() != null ? !getAmount().equals(that.getAmount()) : that.getAmount() != null)
             return false;
+        if (getImageId() != null ? !getImageId().equals(that.getImageId()) : that.getImageId() != null)
+            return false;
+        if (getImageUrl() != null ? !getImageUrl().equals(that.getImageUrl()) : that.getImageUrl() != null)
+            return false;
         return getPriceForSingleItem() != null ? getPriceForSingleItem().equals(that.getPriceForSingleItem()) : that.getPriceForSingleItem() == null;
     }
 
@@ -348,7 +369,25 @@ public class ProductOrderBody extends SugarRecord implements Parcelable, Cloneab
         result = 31 * result + getSizeId();
         result = 31 * result + (getWeight() != null ? getWeight().hashCode() : 0);
         result = 31 * result + (getAmount() != null ? getAmount().hashCode() : 0);
+        result = 31 * result + (getImageId() != null ? getImageId().hashCode() : 0);
+        result = 31 * result + (getImageUrl() != null ? getImageUrl().hashCode() : 0);
         result = 31 * result + (getPriceForSingleItem() != null ? getPriceForSingleItem().hashCode() : 0);
         return result;
+    }
+
+    public Integer getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(Integer imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

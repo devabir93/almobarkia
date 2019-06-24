@@ -10,13 +10,13 @@ import android.widget.TextView;
 import com.selsela.example.R;
 
 
-public class DialogRecyclerViewAdapter extends RecyclerView.Adapter<DialogRecyclerViewAdapter.ViewHolder> {
+public class DialogProductsRecyclerViewAdapter extends RecyclerView.Adapter<DialogProductsRecyclerViewAdapter.ViewHolder> {
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product_list, parent, false);
+                .inflate(R.layout.product_gallery_list, parent, false);
         return new ViewHolder(view);
     }
 

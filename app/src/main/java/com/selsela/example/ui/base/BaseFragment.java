@@ -17,6 +17,7 @@ import com.selsela.example.SelselaApplication;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.local.UserSession;
 import com.selsela.example.data.model.config.ConfigData;
+import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.injection.component.ActivityComponent;
 import com.selsela.example.injection.component.DaggerActivityComponent;
 import com.selsela.example.injection.module.ActivityModule;
@@ -147,6 +148,16 @@ public class BaseFragment extends Fragment implements MvpView {
 
     @Override
     public void isExceedWeight(Boolean aBoolean) {
+
+    }
+
+    @Override
+    public void showCartBadge(Integer integer) {
+
+    }
+
+    @Override
+    public void showSavedProductOrder(ProductOrderBody productOrder) {
 
     }
 

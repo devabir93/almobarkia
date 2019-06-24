@@ -20,6 +20,7 @@ import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.local.UserSession;
 import com.selsela.example.data.model.boxes.Box;
 import com.selsela.example.data.model.config.ConfigData;
+import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.injection.component.ActivityComponent;
 import com.selsela.example.injection.component.DaggerActivityComponent;
 import com.selsela.example.injection.module.ActivityModule;
@@ -214,6 +215,11 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
     }
 
     @Override
+    public void showCartBadge(Integer integer) {
+
+    }
+
+    @Override
     public void onRequestStart() {
         startRefreshing();
     }
@@ -253,7 +259,16 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
         preferencesHelper.setFirstRun(b);
     }
 
+    protected int getUserId() {
+        return mUserSession.getCurrentUser() != null ? mUserSession.getCurrentUser().getId() : 0;
+    }
+
     public List<Box> getShippingBoxes() {
         return preferencesHelper.getShippingBoxes().getBoxs();
+    }
+
+    @Override
+    public void showSavedProductOrder(ProductOrderBody productOrder) {
+
     }
 }

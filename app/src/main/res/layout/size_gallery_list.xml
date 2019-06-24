@@ -3,34 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_margin="@dimen/_5sdp"
     android:background="@color/white">
 
     <TextView
         android:id="@+id/unselected_size"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@drawable/circle"
+        android:visibility="gone"
         android:fontFamily="@font/seguisb"
         android:gravity="center"
         android:text="@string/size_type"
         android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_17ssp" />
+        android:textSize="@dimen/_12ssp" />
 
+    <!--android:paddingStart="@dimen/_16sdp"-->
+    <!--android:paddingTop="@dimen/_16sdp"-->
+    <!--android:paddingEnd="@dimen/_16sdp"-->
+    <!--android:paddingBottom="@dimen/_12sdp"-->
 
     <TextView
         android:id="@+id/selected_size"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@drawable/textview_rectanglesolidl"
         android:gravity="center"
-        android:paddingStart="@dimen/_2sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_2sdp"
-        android:paddingBottom="@dimen/_7sdp"
-        android:text="@string/size_type"
+        android:text="18-24 months"
         android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_19ssp"
+        android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </LinearLayout>

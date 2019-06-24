@@ -8,9 +8,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.util.List;
 
 public class Color extends SugarRecord implements Parcelable {
 
@@ -23,9 +23,15 @@ public class Color extends SugarRecord implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("product_image_id")
+    @Expose
+    private int productImageId;
     @SerializedName("pivot")
     @Expose
     private Pivot pivot;
+    @SerializedName("sizes")
+    @Expose
+    private List<Size> sizes = null;
 
     /**
      * No args constructor for use in serialization
@@ -55,7 +61,9 @@ public class Color extends SugarRecord implements Parcelable {
         }
         colorHexa = in.readString();
         name = in.readString();
+        productImageId = in.readInt();
         pivot = in.readParcelable(Pivot.class.getClassLoader());
+        sizes = in.createTypedArrayList(Size.CREATOR);
     }
 
     @Override
@@ -68,7 +76,9 @@ public class Color extends SugarRecord implements Parcelable {
         }
         dest.writeString(colorHexa);
         dest.writeString(name);
+        dest.writeInt(productImageId);
         dest.writeParcelable(pivot, flags);
+        dest.writeTypedList(sizes);
     }
 
     @Override
@@ -120,26 +130,61 @@ public class Color extends SugarRecord implements Parcelable {
         this.pivot = pivot;
     }
 
+    public List<Size> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<Size> sizes) {
+        this.sizes = sizes;
+    }
+
+    public int getProductImageId() {
+        return productImageId;
+    }
+
+    public void setProductImageId(int productImageId) {
+        this.productImageId = productImageId;
+    }
+
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("colorId", colorId).append("colorHexa", colorHexa).append("name", name).append("pivot", pivot).toString();
+        return "Color{" +
+                "colorId=" + colorId +
+                ", colorHexa='" + colorHexa + '\'' +
+                ", name='" + name + '\'' +
+                ", productImageId='" + productImageId + '\'' +
+                ", pivot=" + pivot +
+                ", sizes=" + sizes +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Color)) return false;
+
+        Color color = (Color) o;
+
+        if (getProductImageId() != color.getProductImageId()) return false;
+        if (getColorId() != null ? !getColorId().equals(color.getColorId()) : color.getColorId() != null)
+            return false;
+        if (getColorHexa() != null ? !getColorHexa().equals(color.getColorHexa()) : color.getColorHexa() != null)
+            return false;
+        if (getName() != null ? !getName().equals(color.getName()) : color.getName() != null)
+            return false;
+        if (getPivot() != null ? !getPivot().equals(color.getPivot()) : color.getPivot() != null)
+            return false;
+        return getSizes() != null ? getSizes().equals(color.getSizes()) : color.getSizes() == null;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(colorId).append(pivot).append(colorHexa).append(name).toHashCode();
+        int result = getColorId() != null ? getColorId().hashCode() : 0;
+        result = 31 * result + (getColorHexa() != null ? getColorHexa().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + getProductImageId();
+        result = 31 * result + (getPivot() != null ? getPivot().hashCode() : 0);
+        result = 31 * result + (getSizes() != null ? getSizes().hashCode() : 0);
+        return result;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Color) == false) {
-            return false;
-        }
-        Color rhs = ((Color) other);
-        return new EqualsBuilder().append(colorId, rhs.colorId).append(pivot, rhs.pivot).append(colorHexa, rhs.colorHexa).append(name, rhs.name).isEquals();
-    }
-
 }

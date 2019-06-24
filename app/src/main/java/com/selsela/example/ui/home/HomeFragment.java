@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -31,7 +30,6 @@ import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.categories.CategoriesActivity;
 import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
-import com.selsela.example.ui.favorites.FavoriteRecyclerViewAdapter;
 import com.selsela.example.ui.favorites.ProductRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
@@ -39,6 +37,7 @@ import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.SpannedGridLayoutManager2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -100,6 +99,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     private ProductRecyclerViewAdapter adapter;
     private List<Product> sliderProducts;
     private SpannedGridLayoutManager2 spannedGridLayoutManager;
+    private List<Product> lastProducts, mostProducts;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -157,7 +157,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
                 startActivity(intent);
                 return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -188,10 +188,14 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
                 break;
             case R.id.showallnew_label:
                 Intent intent_all = new Intent(getContext(), ProductListActivity.class);
+                intent_all.putExtra(Const.Details, (ArrayList) lastProducts);
+                intent_all.putExtra(Const.Name, getString(R.string.arrived_labelً));
                 startActivity(intent_all);
                 break;
             case R.id.showallthemost_label:
                 Intent intent_btt = new Intent(getContext(), ProductListActivity.class);
+                intent_btt.putExtra(Const.Details, (ArrayList) lastProducts);
+                intent_btt.putExtra(Const.Name, getString(R.string.mosteorder_label));
                 startActivity(intent_btt);
                 break;
         }
@@ -207,6 +211,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
     @Override
     public void showLastProducts(List<Product> lastProducts) {
+        this.lastProducts = lastProducts;
         //  newcollectiomHomeList.setNestedScrollingEnabled(false);
         spannedGridLayoutManager = new SpannedGridLayoutManager2(
                 new SpannedGridLayoutManager2.GridSpanLookup() {
@@ -226,10 +231,10 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
         );
         StaggeredGridLayoutManager lm =
                 new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        newcollectiomHomeList.setLayoutManager(lm);
+        // newcollectiomHomeList.setLayoutManager(lm);
         newcollectiomHomeList.setHasFixedSize(true);
-        // newcollectiomHomeList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        newcollectiomHomeList.setAdapter(new ImageListRecyclerViewAdapter(lastProducts, getContext(), new ImageListRecyclerViewAdapter.UpdateDataClickListener() {
+        newcollectiomHomeList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        adapter = new ProductRecyclerViewAdapter(lastProducts, getContext(), new ProductRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void onproductSelected(Product product, int position) {
                 Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
@@ -237,11 +242,15 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
                 getContext().startActivity(intent);
 
             }
-        }));
+        });
+        adapter.setLayout(ProductListActivity.GRID);
+        adapter.setCurrency(getCurrency());
+        newcollectiomHomeList.setAdapter(adapter);
     }
 
     @Override
     public void showMostPopular(List<Product> mostPopular) {
+        this.mostProducts = mostPopular;
         themostorderList.setNestedScrollingEnabled(false);
         adapter = new ProductRecyclerViewAdapter(mostPopular, getContext(), new ProductRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
@@ -252,8 +261,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             }
         });
         adapter.setLayout(ProductListActivity.GRID);
-        themostorderList.setLayoutManager(new GridLayoutManager(getContext(), 2));
         adapter.setCurrency(getCurrency());
+        themostorderList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         themostorderList.setAdapter(adapter);
 
     }
@@ -287,7 +296,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             defaultSliderView.setData(image, getCurrency());
             defaultSliderView
                     .image(SelselaService.IMAGE_URL + image.getImage())
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
                     .setOnSliderClickListener(this);
             //add your extra information
             defaultSliderView.bundle(new Bundle());
@@ -305,6 +314,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
+        startActivity(new Intent(getContext(), ProductDetailsActivity.class).putExtra(Const.Details, sliderProducts.get(mDemoSlider.getCurrentPosition())));
         // new ImageViewer.Builder(OrderDetailsActivity.this, imagesUriForFullScreen).setStartPosition(mDemoSlider.getCurrentPosition()).show();
     }
 
