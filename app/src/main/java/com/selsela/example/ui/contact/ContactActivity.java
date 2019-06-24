@@ -2,7 +2,6 @@ package com.selsela.example.ui.contact;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,13 +12,18 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
+import com.selsela.example.data.model.user.UserBody;
+import com.selsela.example.ui.auoth.LoginMvpView;
+import com.selsela.example.ui.auoth.LoginPresenter;
 import com.selsela.example.ui.base.BaseActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ContactActivity extends BaseActivity {
+public class ContactActivity extends BaseActivity implements LoginMvpView {
 
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
@@ -59,6 +63,10 @@ public class ContactActivity extends BaseActivity {
     TextView contactTetxtView;
     @BindView(R.id.call_action)
     TextView callAction;
+    @Inject
+    LoginPresenter loginPresenter;
+    @BindView(R.id.send_message)
+    TextView sendMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,10 +74,13 @@ public class ContactActivity extends BaseActivity {
         setContentView(R.layout.activity_contact);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        loginPresenter.attachView(this);
+        activityTitle=getString(R.string.callus_label);
+        initToolbar();
     }
 
     @OnClick(R.id.phoneKey)
-    public void onViewClicked() {
+    public void onViewClickedPhone() {
         showChangeDialog();
     }
 
@@ -82,8 +93,8 @@ public class ContactActivity extends BaseActivity {
         dialog.show();
         View view2 = dialog.getCustomView();
         RecyclerView phoneKeyRecyclerView = view2.findViewById(R.id.country_list);
-     phoneKeyRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-       phoneKeyRecyclerView.setAdapter(new PhoneKeyRecyclerViewAdapter());
+        phoneKeyRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        phoneKeyRecyclerView.setAdapter(new PhoneKeyRecyclerViewAdapter());
         ImageView close_Button = view2.findViewById(R.id.close_imageView);
         close_Button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,5 +102,39 @@ public class ContactActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void isSuccess(boolean isSuccess) {
+    }
+
+    @OnClick(R.id.send_textView_background)
+    public void onViewClicked() {
+        if (hasInternetConnection()) {
+            if (textInputEditText.getText().length() < 1) {
+                textInputEditText.setError(this.getString(R.string.name_erro));
+            } else if (emailaddressEditText.getText().length() < 1) {
+                emailaddressEditText.setError(this.getString(R.string.empty_label));
+            } else if (phoneNumberEditText.getText().length() < 1) {
+                phoneNumberEditText.setError(this.getString(R.string.emptyphone_label));
+            } else if (topicTitleEditText.getText().length() < 1) {
+                topicTitleEditText.setError(this.getString(R.string.emptytopic_label));
+            }else {
+                String username = textInputEditText.getText().toString();
+                String email = emailaddressEditText.getText().toString();
+                String mobile = phoneNumberEditText.getText().toString();
+                String mess = topicTitleEditText.getText().toString();
+                UserBody userBody = new UserBody();
+                userBody.setName(username);
+                userBody.setEmailL(email);
+                userBody.setMobile(mobile);
+                userBody.setMessage(mess);
+                userBody.setCountryId(preferencesHelper.getCountry().getId());
+                loginPresenter.contact_us(this, userBody);
+
+
+            }
+        }else
+            hasActiveInternetConnection(false);
     }
 }

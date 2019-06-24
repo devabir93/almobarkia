@@ -24,7 +24,6 @@
         android:id="@+id/profile_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_16sdp"
         app:layout_constraintBottom_toBottomOf="@id/ic_profilepicbackground"
         app:layout_constraintEnd_toEndOf="@id/ic_profilepicbackground"
         app:layout_constraintStart_toStartOf="@id/ic_profilepicbackground"

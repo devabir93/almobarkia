@@ -2,7 +2,6 @@ package com.selsela.example.ui.categories;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 
 import com.selsela.example.R;
 import com.selsela.example.data.model.home.MainCategory;
-import com.selsela.example.data.model.home.Product;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.util.Const;

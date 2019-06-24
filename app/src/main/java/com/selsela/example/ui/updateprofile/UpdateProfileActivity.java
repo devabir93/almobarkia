@@ -3,7 +3,6 @@ package com.selsela.example.ui.updateprofile;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -14,15 +13,20 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
+import com.selsela.example.data.model.user.UserBody;
+import com.selsela.example.data.model.user.UserData;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.contact.PhoneKeyRecyclerViewAdapter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UpdateProfileActivity extends BaseActivity {
-
+public class UpdateProfileActivity extends BaseActivity implements UpdateMvpView {
+    @Inject
+    UpdatePresenter updatePresenter;
     @BindView(R.id.ic_profilepicbackground)
     ImageView icProfilepic;
     @BindView(R.id.arlanguage_label)
@@ -64,12 +68,28 @@ public class UpdateProfileActivity extends BaseActivity {
     @BindView(R.id.profile_pic)
     ImageView profilePic;
 
+    private UserData user;
+    MaterialDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        updatePresenter.attachView(this);
+
+        fillWithUserData();
+    }
+
+    private void fillWithUserData() {
+        user = mUserSession.getCurrentUser();
+        if (user != null) {
+            emailaddressEditText.setText(user.getEmail());
+            textInputEditText.setText(user.getName());
+            phoneNumberEditText.setText(user.getMobile() + "");
+            //passwordLoginEditText.setText(user.getPasswordResetCode());
+        }
     }
 
     @OnClick(R.id.changepass_textView)
@@ -79,8 +99,7 @@ public class UpdateProfileActivity extends BaseActivity {
     }
 
     private void showChangeDialog() {
-
-        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+        dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_changepass, false)
                 .contentGravity(GravityEnum.START)
                 .build();
@@ -88,11 +107,39 @@ public class UpdateProfileActivity extends BaseActivity {
         View view2 = dialog.getCustomView();
 
         TextView verifyButton = view2.findViewById(R.id.confirm_textView);
+        final TextView current_pass_input = view2.findViewById(R.id.password_current_tetxtView);
+        final TextView password_confirm_input = view2.findViewById(R.id.password_confirm_tetxtView);
+        final TextView password_new_input = view2.findViewById(R.id.password_new_tetxtView);
         TextView closeTextView = view2.findViewById(R.id.cancel_textView);
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                // dialog.dismiss();
+
+                if (hasInternetConnection()) {
+                    if (!password_new_input.getText().toString().equals(password_confirm_input.getText().toString()))
+                        password_new_input.setError(getString(R.string.confirmpassword_label));
+                    if (password_confirm_input.getText().length() < 1) {
+                        password_confirm_input.setError(getString(R.string.passwordempty_label));
+                    } else if (password_new_input.getText().length() < 1) {
+                        password_new_input.setError(getString(R.string.passwordempty_label));
+
+                    } else {
+                        UserBody userBody = new UserBody();
+                        String current_pass = current_pass_input.getText().toString();
+                        String new_pass = password_new_input.getText().toString();
+                        String confirm_pass = password_confirm_input.getText().toString();
+                        userBody.setConfirm_password(confirm_pass);
+                        userBody.setNew_password(new_pass);
+                        userBody.setOld_password(current_pass);
+                        userBody.setToken(user.getToken());
+                        userBody.setUser_id(user.getId());
+                        updatePresenter.change_password(getApplicationContext(), userBody);
+                    }
+
+                } else
+                    hasActiveInternetConnection(false);
+
             }
         });
 
@@ -103,6 +150,7 @@ public class UpdateProfileActivity extends BaseActivity {
             }
         });
     }
+
     private void showPhoneDialog() {
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
@@ -123,9 +171,48 @@ public class UpdateProfileActivity extends BaseActivity {
         });
 
     }
+
     @OnClick(R.id.phoneKey)
     public void onViewClicked2(View view2) {
         view2.getId();
         showPhoneDialog();
     }
+
+    @Override
+    public void isSuccess(boolean isSuccess) {
+        if (isSuccess)
+            dialog.dismiss();
+    }
+
+    public void SaveUpdate() {
+        UserBody userBody = new UserBody();
+        String username = textInputEditText.getText().toString();
+        String email = emailaddressEditText.getText().toString();
+        String mobile = phoneNumberEditText.getText().toString();
+        String pass = passwordLoginEditText.getText().toString();
+        if (hasInternetConnection()) {
+            if (textInputEditText.getText().length() < 1) {
+                textInputEditText.setError(this.getString(R.string.name_erro));
+            } else if (emailaddressEditText.getText().length() < 1) {
+                emailaddressEditText.setError(this.getString(R.string.empty_label));
+            } else if (phoneNumberEditText.getText().length() < 1) {
+                phoneNumberEditText.setError(this.getString(R.string.emptyphone_label));
+            } else {
+                userBody.setName(username);
+                userBody.setEmailL(email);
+                userBody.setMobile(mobile);
+                userBody.setToken(user.getToken());
+                userBody.setUser_id(user.getId());
+                userBody.setCountryId(preferencesHelper.getCountry().getId());
+                updatePresenter.update_profile(this, userBody);
+
+            }
+        } else
+
+            hasActiveInternetConnection(false);
+
+    }
+
+
 }
+

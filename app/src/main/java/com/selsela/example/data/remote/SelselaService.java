@@ -47,7 +47,14 @@ public interface SelselaService {
 
     @POST("user/register")
     Observable<BaseResponse<LoginData>> register(@Body UserBody userBody);
-
+    @POST("contact_us")
+    Observable<BaseResponse> contact_us(@Body UserBody userBody);
+    @POST("user/update_profile")
+    Observable<BaseResponse> update_profile(@Body UserBody userBody);
+    @POST("user/change_password")
+    Observable<BaseResponse> change_password(@Body UserBody userBody);
+    @POST("user/add_rate")
+    Observable<BaseResponse> add_rate(@Body UserBody userBody);
     @GET("get_about_page")
     Observable<BaseResponse<AboutData>> get_about_page();
 

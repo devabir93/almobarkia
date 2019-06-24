@@ -1,96 +1,97 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="locale"
-    android:textDirection="locale"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:textDirection="locale">
 
 
-<TextView
-    android:id="@+id/dialog_title"
-    android:text="@string/dialog_label"
-    android:gravity="center"
-    android:textColor="@color/colorprimary"
-    android:textSize="@dimen/_27ssp"
-    android:fontFamily="@font/segoeui"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="@dimen/_40sdp"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:fontFamily="@font/segoeui"
+        android:gravity="center"
+        android:text="@string/dialog_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_22ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dialogdesc"
-        app:layout_constraintTop_toBottomOf="@id/dialog_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/segoeui"
-        android:text="@string/evaluation_desc_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:textSize="@dimen/_18ssp"
         android:layout_marginTop="@dimen/_23sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:fontFamily="@font/segoeui"
+        android:gravity="center"
+        android:text="@string/evaluation_desc_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_title" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/rate_bar"
+        android:layout_width="@dimen/_180sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_36sdp"
+        android:rating="5"
+        app:layout_constraintBottom_toTopOf="@id/rate_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialogdesc"
+        app:mrb_progressTint="@color/yellow" />
+
+    <TextView
+        android:id="@+id/rate_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:fontFamily="@font/segoeui"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_27ssp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rate_bar" />
+
+    <TextView
+        android:id="@+id/send_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/segoeui"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/send_label"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintEnd_toStartOf="@id/cancel_textView"
+        app:layout_constraintTop_toBottomOf="@id/rate_label"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-<me.zhanghai.android.materialratingbar.MaterialRatingBar
-    android:id="@+id/rate_bar"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/dialogdesc"
-    app:layout_constraintBottom_toTopOf="@id/rate_label"
-    android:rating="4"
-    android:layout_marginTop="@dimen/_36sdp"
-    app:mrb_progressTint="@color/yellow"
-    android:layout_width="@dimen/_180sdp"
-    android:layout_height="@dimen/_30sdp"
-     />
-<TextView
-    android:id="@+id/rate_label"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/rate_bar"
-    android:layout_marginTop="@dimen/_20sdp"
-    android:textColor="@color/colorprimary"
-    android:fontFamily="@font/segoeui"
-    android:textSize="@dimen/_27ssp"
-    android:gravity="center"
+    <TextView
+        android:id="@+id/cancel_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:fontFamily="@font/segoeui"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/cancel_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintBottom_toBottomOf="@id/send_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rate_label"
+        app:layout_constraintTop_toTopOf="@id/send_textView" />
 
-    android:text="4.4"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content" />
-
-<TextView
-    android:id="@+id/send_textView"
-    app:layout_constraintTop_toBottomOf="@id/rate_label"
-    app:layout_constraintEnd_toStartOf="@id/cancel_textView"
-    app:layout_constraintVertical_chainStyle="packed"
-    android:layout_marginTop="@dimen/_30sdp"
-    android:padding="@dimen/_8sdp"
-    android:text="@string/send_label"
-    android:textColor="@color/colorprimary"
-    android:textAlignment="viewStart"
-    android:textSize="@dimen/_18ssp"
-    android:fontFamily="@font/segoeui"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-<TextView
-    android:id="@+id/cancel_textView"
-    app:layout_constraintTop_toBottomOf="@id/rate_label"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="@id/send_textView"
-    app:layout_constraintTop_toTopOf="@id/send_textView"
-    android:layout_marginEnd="@dimen/_25sdp"
-    android:text="@string/cancel_label"
-    android:padding="@dimen/_8sdp"
-    android:textAlignment="viewStart"
-    android:textColor="@color/colorprimary"
-    android:textSize="@dimen/_18ssp"
-    android:fontFamily="@font/segoeui"
-    android:layout_width="wrap_content"
-    android:layout_height="0dp" />
 </android.support.constraint.ConstraintLayout>

@@ -115,6 +115,102 @@ public class DataManager {
                     }
                 });
     }
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> contact(final UserBody userData) {
+
+        return mSelselaService.contact_us(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
+    }
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> update (final UserBody userData) {
+
+        return mSelselaService.update_profile(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
+    }
+        @android.support.annotation.NonNull
+        public Observable<BaseResponse> change_pass (final UserBody userData) {
+
+            return mSelselaService.change_password(userData)
+                    .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                        @Override
+                        public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                            return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                                @Override
+                                public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                    try {
+                                        e.onNext(loginResponse);
+                                    } catch (Exception e1) {
+                                        e.onError(e1);
+                                    }
+                                    e.onComplete();
+
+
+                                }
+                            });
+                        }
+                    });
+    }
+
+
+
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> rate_product (final UserBody userData) {
+
+        return mSelselaService.add_rate(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
+    }
+
 
     public Observable<BaseResponse<AboutData>> getAbout(String about) {
         Observable<BaseResponse<AboutData>> observable = mSelselaService.get_about_page();

@@ -18,9 +18,6 @@ public class UserBody implements Parcelable {
     @SerializedName("token")
     @Expose
     private String token;
-    @SerializedName("name")
-    @Expose
-    private String username;
     @SerializedName("password")
     @Expose
     private String password;
@@ -33,6 +30,12 @@ public class UserBody implements Parcelable {
     @SerializedName("confirm_password")
     @Expose
     private String confirm_password;
+    @SerializedName("old_password")
+    @Expose
+    private String old_password;
+    @SerializedName("new_password")
+    @Expose
+    private String new_password;
     @SerializedName("device_key")
     @Expose
     private String deviceKey;
@@ -40,6 +43,18 @@ public class UserBody implements Parcelable {
     @SerializedName("country_id")
     @Expose
     private int countryId;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("order_id")
+    @Expose
+    private Integer orderId;
+    @SerializedName("products")
+    @Expose
+    private String products;
 
     public UserBody() {
     }
@@ -48,26 +63,45 @@ public class UserBody implements Parcelable {
     protected UserBody(Parcel in) {
         user_id = in.readInt();
         token = in.readString();
-        username = in.readString();
         password = in.readString();
         emailL = in.readString();
         mobile = in.readString();
         confirm_password = in.readString();
+        old_password = in.readString();
+        new_password = in.readString();
         deviceKey = in.readString();
         countryId = in.readInt();
+        message = in.readString();
+        name = in.readString();
+        if (in.readByte() == 0) {
+            orderId = null;
+        } else {
+            orderId = in.readInt();
+        }
+        products = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(user_id);
         dest.writeString(token);
-        dest.writeString(username);
         dest.writeString(password);
         dest.writeString(emailL);
         dest.writeString(mobile);
         dest.writeString(confirm_password);
+        dest.writeString(old_password);
+        dest.writeString(new_password);
         dest.writeString(deviceKey);
         dest.writeInt(countryId);
+        dest.writeString(message);
+        dest.writeString(name);
+        if (orderId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(orderId);
+        }
+        dest.writeString(products);
     }
 
     @Override
@@ -103,12 +137,12 @@ public class UserBody implements Parcelable {
         this.token = token;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String username) {
+        this.name = username;
     }
 
     public String getPassword() {
@@ -155,8 +189,48 @@ public class UserBody implements Parcelable {
         return countryId;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public void setCountryId(int countryId) {
         this.countryId = countryId;
+    }
+
+    public String getOld_password() {
+        return old_password;
+    }
+
+    public void setOld_password(String old_password) {
+        this.old_password = old_password;
+    }
+
+    public String getNew_password() {
+        return new_password;
+    }
+
+    public void setNew_password(String new_password) {
+        this.new_password = new_password;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    public String getProducts() {
+        return products;
+    }
+
+    public void setProducts(String products) {
+        this.products = products;
     }
 
     @Override
@@ -164,13 +238,18 @@ public class UserBody implements Parcelable {
         return "UserBody{" +
                 "user_id=" + user_id +
                 ", token='" + token + '\'' +
-                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", emailL='" + emailL + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", confirm_password='" + confirm_password + '\'' +
+                ", old_password='" + old_password + '\'' +
+                ", new_password='" + new_password + '\'' +
                 ", deviceKey='" + deviceKey + '\'' +
                 ", countryId=" + countryId +
+                ", message='" + message + '\'' +
+                ", name='" + name + '\'' +
+                ", orderId=" + orderId +
+                ", products='" + products + '\'' +
                 '}';
     }
 
@@ -184,8 +263,6 @@ public class UserBody implements Parcelable {
         if (user_id != userBody.user_id) return false;
         if (countryId != userBody.countryId) return false;
         if (token != null ? !token.equals(userBody.token) : userBody.token != null) return false;
-        if (username != null ? !username.equals(userBody.username) : userBody.username != null)
-            return false;
         if (password != null ? !password.equals(userBody.password) : userBody.password != null)
             return false;
         if (emailL != null ? !emailL.equals(userBody.emailL) : userBody.emailL != null)
@@ -194,20 +271,36 @@ public class UserBody implements Parcelable {
             return false;
         if (confirm_password != null ? !confirm_password.equals(userBody.confirm_password) : userBody.confirm_password != null)
             return false;
-        return deviceKey != null ? deviceKey.equals(userBody.deviceKey) : userBody.deviceKey == null;
+        if (old_password != null ? !old_password.equals(userBody.old_password) : userBody.old_password != null)
+            return false;
+        if (new_password != null ? !new_password.equals(userBody.new_password) : userBody.new_password != null)
+            return false;
+        if (deviceKey != null ? !deviceKey.equals(userBody.deviceKey) : userBody.deviceKey != null)
+            return false;
+        if (message != null ? !message.equals(userBody.message) : userBody.message != null)
+            return false;
+        if (name != null ? !name.equals(userBody.name) : userBody.name != null) return false;
+        if (orderId != null ? !orderId.equals(userBody.orderId) : userBody.orderId != null)
+            return false;
+        return products != null ? products.equals(userBody.products) : userBody.products == null;
     }
 
     @Override
     public int hashCode() {
         int result = user_id;
         result = 31 * result + (token != null ? token.hashCode() : 0);
-        result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (emailL != null ? emailL.hashCode() : 0);
         result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
         result = 31 * result + (confirm_password != null ? confirm_password.hashCode() : 0);
+        result = 31 * result + (old_password != null ? old_password.hashCode() : 0);
+        result = 31 * result + (new_password != null ? new_password.hashCode() : 0);
         result = 31 * result + (deviceKey != null ? deviceKey.hashCode() : 0);
         result = 31 * result + countryId;
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (orderId != null ? orderId.hashCode() : 0);
+        result = 31 * result + (products != null ? products.hashCode() : 0);
         return result;
     }
 }

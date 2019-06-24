@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.selsela.example.R;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.order.ProductData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
@@ -89,7 +90,7 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
 
 
     public interface CallBack {
-        void onEmployeClick();
+        void onEmployeClick(Product product);
     }
 
 
@@ -124,7 +125,7 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
 
         @OnClick(R.id.evaluate_btt)
         public void onViewClicked() {
-            callBack.onEmployeClick();
+            callBack.onEmployeClick(products.get(getAdapterPosition()).getProduct());
         }
     }
 

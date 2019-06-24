@@ -141,5 +141,8 @@
     <string name="signin_confrimation">يجب عليك تسجيل الدخول</string>
     <string name="no_orders">لا يوجد لديك طلبات</string>
     <string name="order_details">تفاصيل الطلب</string>
+    <string name="emptyphone_label">Phone number is required</string>
+    <string name="emptytopic_label">Topic is required</string>
+    <string name="callus_label">اتصل بنا</string>
 
 </resources>
