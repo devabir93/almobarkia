@@ -86,6 +86,7 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
 
     private void showChangeDialog() {
 
+
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialogchoosecountry_layout, false)
                 .contentGravity(GravityEnum.START)
