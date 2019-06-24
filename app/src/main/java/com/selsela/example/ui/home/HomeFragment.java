@@ -275,6 +275,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             @Override
             public void onCategorySelected(MainCategory category, int position) {
                 Intent intent = new Intent(getContext(), ProductListActivity.class);
+                intent.putExtra(Const.Details,(ArrayList)category.getProducts());
+                intent.putExtra(Const.Name,category.getName());
                 startActivity(intent);
             }
         }));

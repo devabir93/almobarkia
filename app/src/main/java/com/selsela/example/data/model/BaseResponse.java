@@ -2,7 +2,6 @@ package com.selsela.example.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.selsela.example.data.model.config.ConfigData;
 
 public class BaseResponse<T> {
 

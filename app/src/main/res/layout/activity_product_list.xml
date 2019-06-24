@@ -13,78 +13,102 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutDirection="locale"
-        android:background="@color/LightGray"
         android:textDirection="locale"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
         tools:context=".ui.productlist.ProductListActivity">
 
-        <TextView
-            android:id="@+id/list_textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/list_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:drawableEnd="@drawable/ic_list"
-            android:drawablePadding="@dimen/_6sdp"
-            android:fontFamily="@font/segoeui"
-            android:text="@string/list_label"
-            android:textColor="@color/colorprimary"
-            android:textSize="@dimen/_14ssp"
+            android:gravity="center"
             app:layout_constraintBottom_toTopOf="@id/filter_results"
-            app:layout_constraintEnd_toStartOf="@id/innerLine"
-            app:layout_constraintStart_toStartOf="@id/filter_results"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/grid_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/list_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_list"
+                android:drawablePadding="@dimen/_6sdp"
+                android:fontFamily="@font/segoeui"
+                android:gravity="center"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="@string/list_label"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
 
         <View
             android:id="@+id/innerLine"
             android:layout_width="1dp"
-            android:layout_height="20dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:background="#4D363636"
-            app:layout_constraintEnd_toStartOf="@id/grid_textView"
-            app:layout_constraintStart_toEndOf="@id/list_textView"
-            app:layout_constraintTop_toTopOf="@id/list_textView"
+            app:layout_constraintEnd_toEndOf="@+id/list_layout"
+            app:layout_constraintTop_toTopOf="@id/list_layout" />
 
-            />
-
-        <TextView
-
-            android:id="@+id/grid_textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/grid_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_grid"
-            android:drawablePadding="@dimen/_6sdp"
-            android:fontFamily="@font/segoeui"
-            android:text="@string/net_textView"
-            android:textColor="@color/colorprimary"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintBottom_toBottomOf="@id/list_textView"
-            app:layout_constraintEnd_toStartOf="@id/filter_textView"
-            app:layout_constraintStart_toEndOf="@id/list_textView"
-            app:layout_constraintTop_toTopOf="@id/list_textView" />
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/list_layout"
+            app:layout_constraintEnd_toStartOf="@id/filter_layout"
+            app:layout_constraintStart_toEndOf="@id/list_layout"
+            app:layout_constraintTop_toTopOf="@id/list_layout">
+
+            <TextView
+                android:id="@+id/grid_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_grid"
+                android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/segoeui"
+                android:gravity="center"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="@string/net_textView"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
 
         <View
             android:id="@+id/innerLine2"
             android:layout_width="1dp"
-            android:layout_height="20dp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_height="35dp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:background="#4D363636"
-            app:layout_constraintEnd_toStartOf="@id/filter_textView"
-            app:layout_constraintStart_toEndOf="@id/grid_textView"
-            app:layout_constraintTop_toTopOf="@id/list_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/grid_layout"
+            app:layout_constraintTop_toTopOf="@id/grid_layout" />
 
-        <TextView
-            android:id="@+id/filter_textView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/filter_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_filter"
-            android:drawablePadding="@dimen/_6sdp"
-            android:fontFamily="@font/segoeui"
-            android:text="@string/filter_label"
-            android:textColor="@color/colorprimary"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintBottom_toBottomOf="@id/list_textView"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="@id/list_layout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/grid_textView"
-            app:layout_constraintTop_toTopOf="@id/list_textView" />
+            app:layout_constraintStart_toEndOf="@id/grid_layout"
+            app:layout_constraintTop_toTopOf="@id/list_layout">
+
+            <TextView
+                android:id="@+id/filter_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_filter"
+                android:drawablePadding="@dimen/_6sdp"
+                android:fontFamily="@font/segoeui"
+                android:gravity="center"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="@string/filter_label"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_14ssp" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/filter_results"
@@ -98,16 +122,16 @@
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/list_textView" />
+            app:layout_constraintTop_toBottomOf="@id/list_layout" />
 
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_14sdp"
             android:layout_marginTop="@dimen/_19sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
             android:orientation="vertical"
             app:layoutManager="LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"

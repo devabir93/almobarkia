@@ -1,15 +1,13 @@
-package com.selsela.example.ui.orders;
-
+package com.selsela.example.ui.updateprofile;
 
 import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
-import com.selsela.example.data.model.home.HomeData;
-import com.selsela.example.data.model.order.OrderData;
+import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
+import com.selsela.example.ui.auoth.LoginMvpView;
 import com.selsela.example.ui.base.BasePresenter;
-import com.selsela.example.ui.home.HomeMvpView;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
 
@@ -25,22 +23,20 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
-public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
+public class UpdatePresenter extends BasePresenter<UpdateMvpView> {
 
     private final DataManager mDataManager;
     private Disposable mDisposable;
 
     @Inject
-    public OrdersPresenter(DataManager dataManager) {
+    public UpdatePresenter(DataManager dataManager) {
         mDataManager = dataManager;
     }
 
     @Override
-
-    public void attachView(OrdresMvpView mvpView) {
+    public void attachView(UpdateMvpView mvpView) {
         super.attachView(mvpView);
     }
-
 
     @Override
     public void detachView() {
@@ -48,55 +44,10 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
         if (mDisposable != null) mDisposable.dispose();
     }
 
-    public void get_orders() {
+    public void update_profile(final Context context, final UserBody userBody) {
         checkViewAttached();
-        getMvpView().onRequestStart();
         RxUtil.dispose(mDisposable);
-        mDataManager.get_orders()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<BaseResponse<OrderData>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(BaseResponse<OrderData> orderData) {
-                        if (orderData.getData().getOrders() != null && orderData.getData().getOrders().size() > 0)
-                             getMvpView().showOrders(orderData.getData().getOrders());
-
-                        else
-                            getMvpView().showEmpty();
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e, "There was an error while getCountries");
-                        RetrofitException error = (RetrofitException) e;
-                        try {
-                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
-                            Timber.d("getCountries %s", response);
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        getMvpView().onRequestEnd();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        getMvpView().onRequestEnd();
-                    }
-                });
-    }
-
-
-    public void rate_product(final Context context, final UserBody userBody) {
-        checkViewAttached();
-        getMvpView().showProgressView(true);
-        RxUtil.dispose(mDisposable);
-        mDataManager.rate_product(userBody)
+        mDataManager.update(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<BaseResponse>() {
@@ -107,13 +58,12 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
 
                     @Override
                     public void onNext(@NonNull BaseResponse loginResponse) {
-                        //getMvpView().isSuccess(loginResponse.getStatus());
                         getMvpView().showMessageDialog(loginResponse.getResponseMessage());
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Timber.e(e, "There was an error while rate_product");
+                        Timber.e(e, "There was an error while register");
                         RetrofitException error = (RetrofitException) e;
                         try {
                             com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
@@ -123,20 +73,57 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
-                        }
-                            getMvpView().showProgressView(false);
+                        }  //     getMvpView().showProgressView(false);
 
 
                     }
 
                     @Override
                     public void onComplete() {
-                        getMvpView().showProgressView(false);
-
                     }
                 });
     }
 
+    public void change_password(final Context context, final UserBody userBody) {
+        checkViewAttached();
+        RxUtil.dispose(mDisposable);
+        mDataManager.change_pass(userBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<BaseResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseResponse loginResponse) {
+                        getMvpView().isSuccess(loginResponse.getStatus());
+                        getMvpView().showMessageDialog(loginResponse.getResponseMessage());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Timber.e(e, "There was an error while change_password");
+                        RetrofitException error = (RetrofitException) e;
+                        try {
+                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
+                            if (response != null && response.getResponseMessage() != null)
+                                getMvpView().showMessageDialog(response.getResponseMessage());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (RetrofitException e1) {
+                            e1.printStackTrace();
+                        }  //     getMvpView().showProgressView(false);
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
 
 }
 

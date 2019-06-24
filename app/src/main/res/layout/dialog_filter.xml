@@ -40,7 +40,7 @@
 
     <io.apptik.widget.MultiSlider
         android:id="@+id/range_slider5"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         app:drawThumbsApart="true"
@@ -144,9 +144,8 @@
 
         android:id="@+id/size_list"
         app:layout_constraintTop_toBottomOf="@id/filter_size"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/startpric_label"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_20sdp"
         tools:itemCount="4"
         app:layoutManager="LinearLayoutManager"
@@ -170,7 +169,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/color_list"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintStart_toStartOf="@id/startpric_label"
         app:layout_constraintTop_toBottomOf="@id/colorfilter_label"
         app:layoutManager="LinearLayoutManager"
         android:layout_marginTop="@dimen/_24sdp"

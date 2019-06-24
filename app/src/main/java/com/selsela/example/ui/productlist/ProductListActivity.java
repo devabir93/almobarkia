@@ -1,7 +1,7 @@
 package com.selsela.example.ui.productlist;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,19 +11,22 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.materialize.color.Material;
 import com.selsela.example.R;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.ui.base.BaseActivity;
-import com.selsela.example.ui.favorites.FavoriteRecyclerViewAdapter;
+import com.selsela.example.ui.home.ProductRecyclerViewAdapter;
+import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
+import com.selsela.example.util.Const;
+import com.selsela.example.util.ViewUtil;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.apptik.widget.MultiSlider;
 
 public class ProductListActivity extends BaseActivity {
-    FavoriteRecyclerViewAdapter favouriteAdapter;
-   @BindView(R.id.my_toolbar)
+    @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.list_textView)
     TextView listTextView;
@@ -38,10 +41,11 @@ public class ProductListActivity extends BaseActivity {
     @BindView(R.id.filter_results)
     TextView filterResults;
     @BindView(R.id.product_list)
-    RecyclerView productList;
+    RecyclerView productListRecyclerview;
     public static int GRID = 1;
     public static int LINEAR = 0;
-
+    private ArrayList<Product> productlist;
+    private ProductRecyclerViewAdapter adapter;
 
 
     @Override
@@ -49,49 +53,83 @@ public class ProductListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
         getActivityComponent().inject(this);
-
         ButterKnife.bind(this);
-//
-//      favouriteAdapter = new FavoriteRecyclerViewAdapter();
-//        onLinear();
+        activityTitle = getIntent().getStringExtra(Const.Name);
+        initToolbar();
+        productlist = getIntent().getParcelableArrayListExtra(Const.Details);
+        adapter = new ProductRecyclerViewAdapter(productlist, this, new ProductRecyclerViewAdapter.UpdateDataClickListener() {
+            @Override
+            public void onproductSelected(Product product, int position) {
+                Intent intent = new Intent(ProductListActivity.this, ProductDetailsActivity.class);
+                intent.putExtra(Const.Details, product);
+
+                startActivity(intent);
+            }
+        });
+        adapter.setCurrency(getCurrency());
+        onLinear();
+        ViewUtil.setTextViewDrawableColor(listTextView, getResources().getColor(R.color.brown));
     }
 
     @OnClick({R.id.list_textView, R.id.grid_textView, R.id.filter_textView})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.list_textView:
-                listTextView.setBackgroundColor(getResources().getColor(R.color.white));
                 listTextView.setTextColor(getResources().getColor(R.color.brown));
-                gridTextView.setBackgroundColor(getResources().getColor(R.color.gray));
+                ViewUtil.setTextViewDrawableColor(listTextView, getResources().getColor(R.color.brown));
+
                 gridTextView.setTextColor(getResources().getColor(R.color.colorprimary));
-                filterTextView.setBackgroundColor(getResources().getColor(R.color.gray));
+                ViewUtil.setTextViewDrawableColor(gridTextView, getResources().getColor(R.color.colorprimary));
+
                 filterTextView.setTextColor(getResources().getColor(R.color.colorprimary));
+                ViewUtil.setTextViewDrawableColor(filterTextView, getResources().getColor(R.color.colorprimary));
+                filterResults.setVisibility(View.GONE);
                 onLinear();
                 break;
             case R.id.grid_textView:
+                gridTextView.setTextColor(getResources().getColor(R.color.brown));
+                ViewUtil.setTextViewDrawableColor(gridTextView, getResources().getColor(R.color.brown));
+                listTextView.setTextColor(getResources().getColor(R.color.colorprimary));
+                ViewUtil.setTextViewDrawableColor(listTextView, getResources().getColor(R.color.colorprimary));
+
+                filterTextView.setTextColor(getResources().getColor(R.color.colorprimary));
+                ViewUtil.setTextViewDrawableColor(filterTextView, getResources().getColor(R.color.colorprimary));
                 onGrid();
                 break;
             case R.id.filter_textView:
+                filterTextView.setTextColor(getResources().getColor(R.color.brown));
+                ViewUtil.setTextViewDrawableColor(filterTextView, getResources().getColor(R.color.brown));
+                listTextView.setTextColor(getResources().getColor(R.color.colorprimary));
+                ViewUtil.setTextViewDrawableColor(listTextView, getResources().getColor(R.color.colorprimary));
+
+                gridTextView.setTextColor(getResources().getColor(R.color.colorprimary));
+                ViewUtil.setTextViewDrawableColor(gridTextView, getResources().getColor(R.color.colorprimary));
+                filterResults.setVisibility(View.VISIBLE);
+
                 showChangeDialog();
                 break;
         }
     }
 
     private void onGrid() {
-        productList.setLayoutManager(new GridLayoutManager(this, 2));
-        favouriteAdapter.setLayout(GRID);
-        productList.setAdapter(favouriteAdapter);
-        favouriteAdapter.notifyDataSetChanged();
+        productListRecyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+        adapter.setLayout(GRID);
+        productListRecyclerview.setAdapter(adapter);
+        filterResults.setVisibility(View.GONE);
+
+        adapter.notifyDataSetChanged();
     }
 
     private void onLinear() {
         //linearMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_linear));
         // gridMenu.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_grid_un));
-        productList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        favouriteAdapter.setLayout(LINEAR);
-        productList.setAdapter(favouriteAdapter);
-        favouriteAdapter.notifyDataSetChanged();
+        ViewUtil.setTextViewDrawableColor(listTextView, getResources().getColor(R.color.brown));
+        productListRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        adapter.setLayout(LINEAR);
+        productListRecyclerview.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        listTextView.setTextColor(getResources().getColor(R.color.brown));
+        filterResults.setVisibility(View.GONE);
     }
 
     private void showChangeDialog() {

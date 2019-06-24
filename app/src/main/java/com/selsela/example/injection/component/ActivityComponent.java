@@ -8,6 +8,7 @@ import com.selsela.example.ui.auoth.RegisterActivity;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.categories.CategoriesActivity;
+import com.selsela.example.ui.contact.ContactActivity;
 import com.selsela.example.ui.countries.CountriesActivity;
 import com.selsela.example.ui.favorites.FavoritesFragment;
 import com.selsela.example.ui.home.HomeFragment;
@@ -16,6 +17,7 @@ import com.selsela.example.ui.main.SplachScreenActivity;
 import com.selsela.example.ui.orderdetails.OrderdeatailsActivity;
 import com.selsela.example.ui.orders.OrdersFragment;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
+import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 
 import dagger.Component;
 
@@ -29,6 +31,8 @@ public interface ActivityComponent {
 
     void inject(BaseActivity baseActivity);
     void inject(OrderdeatailsActivity orderdeatailsActivity);
+    void inject(ContactActivity contactActivity);
+    void inject(UpdateProfileActivity updateProfileActivity);
 
     void inject(BaseFragment baseFragment);
     void inject(FavoritesFragment favoritesFragment);

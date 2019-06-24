@@ -5,13 +5,17 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.order.Order;
 import com.selsela.example.data.model.order.ProductData;
+import com.selsela.example.data.model.user.UserBody;
+import com.selsela.example.data.model.user.UserData;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.orders.OrdersPresenter;
 import com.selsela.example.ui.orders.OrdresMvpView;
@@ -90,8 +94,11 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
     @BindView(R.id.cost_all)
     TextView costAll;
     private OrderDeatailsRecyclerViewAdapter adapter;
+    private UserData user;
+
     @Inject
     OrdersPresenter ordersPresenter;
+    private Order order;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +109,8 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
         ordersPresenter.attachView(this);
         activityTitle = getString(R.string.order_details);
         initToolbar();
-        Order order = getIntent().getParcelableExtra(Const.Details);
+        user = mUserSession.getCurrentUser();
+        order = getIntent().getParcelableExtra(Const.Details);
         if (order == null)
             return;
         orderTime.setText(order.getCreatedAtText());
@@ -135,12 +143,11 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
 //                + " " + order.getAddress().getAreaTxt() + " " + order.getAddress().getGovTxt() + " " + order.getAddress().getFlatNumber() + ""
 //        );
 
-        Timber.d(" order.getProducts() %s", order.getProducts());
         showProducts(order.getProducts());
     }
 
 
-    private void showEvaluateDialog() {
+    private void showEvaluateDialog(final Product product) {
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_evaluate, false)
@@ -151,11 +158,29 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
 
         TextView verifyButton = view2.findViewById(R.id.send_textView);
         TextView closeTextView = view2.findViewById(R.id.cancel_textView);
+        final RatingBar ratingBar = view2.findViewById(R.id.rate_bar);
+        final TextView ratetextView = view2.findViewById(R.id.rate_label);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratetextView.setText(rating + "");
+            }
+        });
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ordersPresenter.evaluateOrder()
-                dialog.dismiss();
+                if (hasInternetConnection()) {
+                    final UserBody userBody = new UserBody();
+                    userBody.setToken(user.getToken());
+                    userBody.setUser_id(user.getId());
+                    float rateVal = ratingBar.getRating();
+                    userBody.setOrderId(order.getId());
+                    userBody.setProducts("[[" + product.getId() + "," + rateVal + "]]");
+                    ordersPresenter.rate_product(getApplicationContext(),userBody);
+
+                } else
+                    hasActiveInternetConnection(false);
+                 dialog.dismiss();
             }
         });
 
@@ -177,8 +202,8 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
         orderdeatilsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new OrderDeatailsRecyclerViewAdapter(products, this, new OrderDeatailsRecyclerViewAdapter.CallBack() {
             @Override
-            public void onEmployeClick() {
-                showEvaluateDialog();
+            public void onEmployeClick(Product product) {
+                showEvaluateDialog(product);
 
             }
         });

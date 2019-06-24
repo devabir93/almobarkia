@@ -106,6 +106,7 @@
         app:layout_constraintTop_toTopOf="@id/rating_bar" />
 
     <TextView
+
         android:layout_marginStart="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/productprice_label"

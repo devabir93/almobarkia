@@ -55,6 +55,7 @@ public class RegisterActivity extends BaseActivity implements LoginMvpView {
         ButterKnife.bind(this);
         getActivityComponent().inject(this);
         loginPresenter.attachView(this);
+
     }
 
     @OnClick(R.id.sure_bt)
@@ -82,7 +83,7 @@ public class RegisterActivity extends BaseActivity implements LoginMvpView {
                 String password = passwordLoginEditText.getText().toString();
                 String confirmPassword = confirmPasswordLoginEditText.getText().toString();
                 UserBody userBody = new UserBody();
-                userBody.setUsername(username);
+                userBody.setName(username);
                 userBody.setEmailL(email);
                 userBody.setMobile(mobile);
                 userBody.setPassword(password);
