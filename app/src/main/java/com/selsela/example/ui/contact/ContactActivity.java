@@ -65,8 +65,8 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
     TextView callAction;
     @Inject
     LoginPresenter loginPresenter;
-    @BindView(R.id.send_message)
-    TextView sendMessage;
+    @BindView(R.id.email)
+    TextView email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
         loginPresenter.attachView(this);
+
         activityTitle=getString(R.string.callus_label);
         initToolbar();
     }
