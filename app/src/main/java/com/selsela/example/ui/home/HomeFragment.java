@@ -30,7 +30,6 @@ import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.categories.CategoriesActivity;
 import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
-import com.selsela.example.ui.favorites.ProductRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
