@@ -13,6 +13,7 @@ import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
@@ -54,9 +55,13 @@ public interface SelselaService {
     Observable<BaseResponse> change_password(@Body UserBody userBody);
     @POST("user/add_rate")
     Observable<BaseResponse> add_rate(@Body UserBody userBody);
+    @POST("specialOrder")
+    Observable<BaseResponse> specialOrder(@Body UserBody userBody);
     @GET("get_about_page")
     Observable<BaseResponse<AboutData>> get_about_page();
-
+    @GET("user/get_notifications")
+    Observable<BaseResponse<Notificationsdata>> get_notifications(@Query("user_id") int user_id,
+                                                                  @Query("token") String tocken_id);
     @GET("get_rules_page")
     Observable<BaseResponse<AboutData>> get_rules_page();
 

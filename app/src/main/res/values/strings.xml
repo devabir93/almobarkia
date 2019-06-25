@@ -183,6 +183,8 @@
     <string name="emptyphone_label">Phone number is required</string>
     <string name="emptytopic_label">Topic is required</string>
     <string name="callus_label">اتصل بنا</string>
+    <string name="product_erro">Product Name is required</string>
+    <string name="productde_erro">Product details is required</string>
 
 
 </resources>

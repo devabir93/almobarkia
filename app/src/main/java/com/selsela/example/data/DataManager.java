@@ -7,6 +7,7 @@ import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
@@ -212,6 +213,32 @@ public class DataManager {
     }
 
 
+
+
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> specialOrder (final UserBody userData) {
+
+        return mSelselaService.specialOrder(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
+    }
+
     public Observable<BaseResponse<AboutData>> getAbout(String about) {
         Observable<BaseResponse<AboutData>> observable = mSelselaService.get_about_page();
         if (about.equals(Const.Rules)) {
@@ -264,6 +291,32 @@ public class DataManager {
                     }
                 });
     }
+
+
+    public Observable<BaseResponse<Notificationsdata>> get_notifications() {
+        return mSelselaService.get_notifications(getUserId(),getUserSession().getToken())
+                .concatMap(new Function<BaseResponse<Notificationsdata>, ObservableSource<? extends BaseResponse<Notificationsdata>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<Notificationsdata>> apply(final BaseResponse<Notificationsdata> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<Notificationsdata>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<Notificationsdata>> e) throws Exception {
+                                try {
+                                    Timber.d("response %s", response);
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    } else e.onNext(null);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
+
 
     public Observable<BaseResponse<ConfigData>> getSettingData() {
 

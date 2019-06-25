@@ -14,9 +14,11 @@ import com.selsela.example.ui.favorites.FavoritesFragment;
 import com.selsela.example.ui.home.HomeFragment;
 import com.selsela.example.ui.main.MainActivity;
 import com.selsela.example.ui.main.SplachScreenActivity;
+import com.selsela.example.ui.notifications.NotificationsActivity;
 import com.selsela.example.ui.orderdetails.OrderdeatailsActivity;
 import com.selsela.example.ui.orders.OrdersFragment;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
+import com.selsela.example.ui.specialorder.SpecialOrderFragment;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 
 import dagger.Component;
@@ -33,12 +35,13 @@ public interface ActivityComponent {
     void inject(OrderdeatailsActivity orderdeatailsActivity);
     void inject(ContactActivity contactActivity);
     void inject(UpdateProfileActivity updateProfileActivity);
-
     void inject(BaseFragment baseFragment);
     void inject(FavoritesFragment favoritesFragment);
     void inject(OrdersFragment  ordersFragment);
-
+    void inject(SpecialOrderFragment specialOrderFragment);
     void inject(LoginActivity loginActivity);
+    void inject(NotificationsActivity notificationsActivity);
+
 
     void inject(RegisterActivity registerActivity);
 

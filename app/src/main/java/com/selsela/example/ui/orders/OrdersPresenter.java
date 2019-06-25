@@ -138,6 +138,54 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
     }
 
 
+
+
+
+    public void specialOrder(final Context context, final UserBody userBody) {
+        checkViewAttached();
+      //  getMvpView().showProgressView(true);
+        RxUtil.dispose(mDisposable);
+        mDataManager.specialOrder(userBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<BaseResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseResponse loginResponse) {
+                        getMvpView().isSuccess(loginResponse.getStatus());
+                        getMvpView().showMessageDialog(loginResponse.getResponseMessage());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Timber.e(e, "There was an error while specialOrder");
+                        RetrofitException error = (RetrofitException) e;
+                        try {
+                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
+                            if (response != null && response.getResponseMessage() != null)
+                                getMvpView().showMessageDialog(response.getResponseMessage());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (RetrofitException e1) {
+                            e1.printStackTrace();
+                        }
+                       // getMvpView().showProgressView(false);
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                       // getMvpView().showProgressView(false);
+
+                    }
+                });
+    }
+
 }
 
 

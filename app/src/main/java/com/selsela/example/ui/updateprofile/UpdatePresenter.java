@@ -87,6 +87,7 @@ public class UpdatePresenter extends BasePresenter<UpdateMvpView> {
     public void change_password(final Context context, final UserBody userBody) {
         checkViewAttached();
         RxUtil.dispose(mDisposable);
+        getMvpView().showProgressView(true);
         mDataManager.change_pass(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -114,13 +115,14 @@ public class UpdatePresenter extends BasePresenter<UpdateMvpView> {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
-                        }  //     getMvpView().showProgressView(false);
+                        }      getMvpView().showProgressView(false);
 
 
                     }
 
                     @Override
                     public void onComplete() {
+                        getMvpView().showProgressView(false);
                     }
                 });
     }

@@ -15,6 +15,7 @@ import com.selsela.example.ui.about.AboutActivity;
 import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.contact.ContactActivity;
+import com.selsela.example.ui.notifications.NotificationsActivity;
 import com.selsela.example.ui.privacypolicy.PrivacyPolicyActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
@@ -135,7 +136,10 @@ public class SettingsFragment extends BaseFragment {
         Intent intent=null;
         switch (view.getId()) {
             case R.id.notification_textView:
+                intent = new Intent(getContext(), NotificationsActivity.class);
+                getContext().startActivity(intent);
                 break;
+
             case R.id.cart_textView:
                  intent = new Intent(getContext(), ShoppingBasketActivity.class);
                 getContext().startActivity(intent);
@@ -174,6 +178,7 @@ public class SettingsFragment extends BaseFragment {
                 intent = new Intent(getContext(), LoginActivity.class);
                 getContext().startActivity(intent);
                 break;
+
         }
     }
 

@@ -55,6 +55,12 @@ public class UserBody implements Parcelable {
     @SerializedName("products")
     @Expose
     private String products;
+    @SerializedName("product_name")
+    @Expose
+    private String productName;
+    @SerializedName("product_details")
+    @Expose
+    private String productDetails;
 
     public UserBody() {
     }
@@ -231,6 +237,22 @@ public class UserBody implements Parcelable {
 
     public void setProducts(String products) {
         this.products = products;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductDetails() {
+        return productDetails;
+    }
+
+    public void setProductDetails(String productDetails) {
+        this.productDetails = productDetails;
     }
 
     @Override
