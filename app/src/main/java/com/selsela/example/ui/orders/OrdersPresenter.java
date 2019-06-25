@@ -155,9 +155,9 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
                     }
 
                     @Override
-                    public void onNext(@NonNull BaseResponse loginResponse) {
-                        getMvpView().isSuccess(loginResponse.getStatus());
-                        getMvpView().showMessageDialog(loginResponse.getResponseMessage());
+                    public void onNext(@NonNull BaseResponse response) {
+                        getMvpView().isSuccess(response.getStatus());
+                        getMvpView().showMessageDialog(response.getResponseMessage());
                     }
 
                     @Override
