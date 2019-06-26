@@ -84,7 +84,8 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         holder.productColor.setBackground(someDrawable);
 
         holder.quantitiy.setText("x" + productOrder.getQuantity());
-        holder.numberPicker.setMax(productOrder.getSize().getPivot().getAmount());
+        if (productOrder.getSize().getPivot() != null)
+            holder.numberPicker.setMax(productOrder.getSize().getPivot().getAmount());
         holder.numberPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
