@@ -6,8 +6,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
 
-public class Pivot implements Parcelable {
+public class Pivot extends SugarRecord implements Parcelable {
 
     @SerializedName("size_id")
     @Expose

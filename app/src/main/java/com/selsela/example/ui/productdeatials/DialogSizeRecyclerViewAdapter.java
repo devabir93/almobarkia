@@ -1,7 +1,9 @@
 package com.selsela.example.ui.productdeatials;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +23,18 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
     private Context context;
     private List<Size> sizeList;
     Callback callBack;
-    boolean isSelected = false;
-
+    private int selectedItem;
+    private int sPosition;
+    private boolean isSelected;
+    private SparseBooleanArray sSelectedItems;
 
     public DialogSizeRecyclerViewAdapter(Context context, Callback callBack) {
         this.callBack = callBack;
         this.context = context;
+        sSelectedItems = new SparseBooleanArray();
+        sPosition = 0;
+        selectedItem = 0;
+        isSelected = false;
     }
 
     @Override
@@ -37,39 +45,43 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Size size = sizeList.get(position);
         if (size == null)
             return;
-
-
-        if (isSelected) {
-            holder.selectedSize.setVisibility(View.VISIBLE);
+        if (selectedItem == holder.getAdapterPosition() && !isSelected) {
             holder.selectedSize.setText(size.getName());
-
-            holder.unselectedSize.setVisibility(View.GONE);
-        } else if (!isSelected) {
-            holder.selectedSize.setVisibility(View.GONE);
-            holder.selectedSize.setText(size.getName());
-
-            holder.unselectedSize.setVisibility(View.VISIBLE);
+            holder.selectedSize.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglesolidl));
+        } else {
+            if (sSelectedItems.get(holder.getAdapterPosition())) {
+                holder.selectedSize.setText(size.getName());
+                holder.selectedSize.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglesolidl));
+            } else {
+                holder.selectedSize.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_with_stroke));
+                holder.selectedSize.setText(size.getName());
+            }
         }
+
+        holder.selectedSize.setSelected(sSelectedItems.get(holder.getAdapterPosition(), false));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callBack.onSizeClick(size);
-                if (!isSelected) {
-                    holder.selectedSize.setVisibility(View.VISIBLE);
+                callBack.onSizeClick(size, position);
+                isSelected = true;
+                if (sSelectedItems.get(holder.getAdapterPosition(), false)) {
+                    holder.selectedSize.setBackground(ContextCompat.getDrawable(context, R.drawable.circle_with_stroke));
                     holder.selectedSize.setText(size.getName());
-
-                    holder.unselectedSize.setVisibility(View.GONE);
-                    isSelected = true;
-                } else if (isSelected) {
-                    holder.selectedSize.setVisibility(View.GONE);
+                    sSelectedItems.put(sPosition, false);
+                    sSelectedItems.put(holder.getAdapterPosition(), true);
+                    holder.selectedSize.setSelected(false);
+                } else {
+                    sSelectedItems.delete(holder.getAdapterPosition());
                     holder.selectedSize.setText(size.getName());
+                    holder.selectedSize.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglesolidl));
+                    holder.selectedSize.setSelected(true);
 
-                    holder.unselectedSize.setVisibility(View.VISIBLE);
-                    isSelected = false;
+
                 }
             }
         });
@@ -87,8 +99,6 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.unselected_size)
-        TextView unselectedSize;
         @BindView(R.id.selected_size)
         TextView selectedSize;
 
@@ -99,7 +109,15 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
 
     }
 
+    public void selected(int position) {
+        int previousItem = selectedItem;
+        sPosition = position;
+        notifyDataSetChanged();
+        notifyItemChanged(previousItem);
+        notifyItemChanged(position);
+    }
+
     interface Callback {
-        void onSizeClick(Size size);
+        void onSizeClick(Size size, int pos);
     }
 }

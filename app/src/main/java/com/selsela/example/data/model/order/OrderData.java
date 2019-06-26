@@ -1,34 +1,39 @@
 
 package com.selsela.example.data.model.order;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.selsela.example.data.model.order.Order;
+import com.selsela.example.data.model.user.UserData;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class OrderData implements Parcelable
-{
+import java.util.List;
+
+public class OrderData implements Parcelable {
 
     @SerializedName("orders")
     @Expose
     private List<Order> orders = null;
 
+    @SerializedName("order")
+    @Expose
+    private Order order;
+    @SerializedName("user_data")
+    @Expose
+    private UserData userData;
+
     /**
      * No args constructor for use in serialization
-     *
      */
     public OrderData() {
     }
 
     /**
-     *
      * @param orders
      */
     public OrderData(List<Order> orders) {
@@ -38,11 +43,15 @@ public class OrderData implements Parcelable
 
     protected OrderData(Parcel in) {
         orders = in.createTypedArrayList(Order.CREATOR);
+        order = in.readParcelable(Order.class.getClassLoader());
+        userData = in.readParcelable(UserData.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(orders);
+        dest.writeParcelable(order, flags);
+        dest.writeParcelable(userData, flags);
     }
 
     @Override
@@ -92,4 +101,20 @@ public class OrderData implements Parcelable
         return new EqualsBuilder().append(orders, rhs.orders).isEquals();
     }
 
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
 }

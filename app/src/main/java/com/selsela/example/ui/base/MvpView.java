@@ -26,4 +26,6 @@ public interface MvpView {
     void showCartBadge(Integer integer);
 
     void showSavedProductOrder(ProductOrderBody productOrder);
+
+    void showCartPrice(Double price);
 }

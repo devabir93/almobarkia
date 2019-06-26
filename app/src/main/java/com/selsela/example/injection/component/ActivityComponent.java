@@ -17,6 +17,7 @@ import com.selsela.example.ui.main.SplachScreenActivity;
 import com.selsela.example.ui.orderdetails.OrderdeatailsActivity;
 import com.selsela.example.ui.orders.OrdersFragment;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
+import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 
 import dagger.Component;
@@ -30,13 +31,18 @@ public interface ActivityComponent {
 
 
     void inject(BaseActivity baseActivity);
+
     void inject(OrderdeatailsActivity orderdeatailsActivity);
+
     void inject(ContactActivity contactActivity);
+
     void inject(UpdateProfileActivity updateProfileActivity);
 
     void inject(BaseFragment baseFragment);
+
     void inject(FavoritesFragment favoritesFragment);
-    void inject(OrdersFragment  ordersFragment);
+
+    void inject(OrdersFragment ordersFragment);
 
     void inject(LoginActivity loginActivity);
 
@@ -49,10 +55,14 @@ public interface ActivityComponent {
     void inject(CountriesActivity countriesActivity);
 
     void inject(SplachScreenActivity splachScreenActivity);
+
     void inject(CategoriesActivity categoriesActivity);
 
     void inject(HomeFragment homeFragment);
+
     void inject(ProductDetailsActivity productDetailsActivity);
+
+    void inject(ShoppingBasketActivity shoppingBasketActivity);
 
 
 }

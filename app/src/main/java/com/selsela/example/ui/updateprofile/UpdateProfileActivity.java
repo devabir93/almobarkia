@@ -5,6 +5,8 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -79,6 +81,8 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateMvpView
         ButterKnife.bind(this);
         updatePresenter.attachView(this);
 
+        activityTitle="";
+        initToolbar();
         fillWithUserData();
     }
 
@@ -184,12 +188,32 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateMvpView
             dialog.dismiss();
     }
 
-    public void SaveUpdate() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_save, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_save:
+                saveUpdate();
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void saveUpdate() {
         UserBody userBody = new UserBody();
         String username = textInputEditText.getText().toString();
         String email = emailaddressEditText.getText().toString();
         String mobile = phoneNumberEditText.getText().toString();
-        String pass = passwordLoginEditText.getText().toString();
         if (hasInternetConnection()) {
             if (textInputEditText.getText().length() < 1) {
                 textInputEditText.setError(this.getString(R.string.name_erro));

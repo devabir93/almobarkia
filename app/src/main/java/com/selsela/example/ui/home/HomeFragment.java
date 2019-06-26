@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -33,8 +34,12 @@ import com.selsela.example.ui.categories.CategoriesRecyclerViewAdapter;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
 import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
+import com.selsela.example.util.CartBadge;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.SpannedGridLayoutManager2;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +49,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 
 public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSliderView.OnSliderClickListener
@@ -99,6 +105,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     private List<Product> sliderProducts;
     private SpannedGridLayoutManager2 spannedGridLayoutManager;
     private List<Product> lastProducts, mostProducts;
+    private int mNotifCount = 0;
+    private RelativeLayout notifications;
+    private TextView cartNo;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -143,10 +152,66 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        homePresenter.getCartBadge();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void updateBadge(CartBadge cartBadge) {
+        this.mNotifCount = cartBadge.getCount();
+        showCartBadge(mNotifCount);
+    }
+
+
+    @Override
+    public void showCartBadge(Integer i) {
+        Timber.d("i %s", i);
+        mNotifCount = i;
+        if (cartNo != null)
+            if (i > 0) {
+                Timber.d("i %s", i);
+                cartNo.setVisibility(View.VISIBLE);
+                cartNo.setText(mNotifCount + "");
+            } else {
+                cartNo.setVisibility(View.INVISIBLE);
+            }
+
+        getActivity().invalidateOptionsMenu();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.home_menu, menu);
+        MenuItem notificationItem = menu.findItem(R.id.cart);
+        notificationItem.setVisible(true);
+        notifications = (RelativeLayout) notificationItem.getActionView();
+        cartNo = notifications.findViewById(R.id.cart_count);
+        //cartNo.setText(mNotifCount);
+        notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ShoppingBasketActivity.class));
+            }
+        });
         super.onCreateOptionsMenu(menu, inflater);
     }
+
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu) {
+//        MenuItem notificationItem = menu.findItem(R.id.cart);
+//        notificationItem.setVisible(true);
+//        notifications = (RelativeLayout) menu.findItem(R.id.notification).getActionView();
+//        cartNo = notifications.findViewById(R.id.cart_count);
+//        //cartNo.setText(mNotifCount);
+//        notifications.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(getContext(), ShoppingBasketActivity.class));
+//            }
+//        });
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -274,8 +339,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             @Override
             public void onCategorySelected(MainCategory category, int position) {
                 Intent intent = new Intent(getContext(), ProductListActivity.class);
-                intent.putExtra(Const.Details,(ArrayList)category.getProducts());
-                intent.putExtra(Const.Name,category.getName());
+                intent.putExtra(Const.Details, (ArrayList) category.getProducts());
+                intent.putExtra(Const.Name, category.getName());
                 startActivity(intent);
             }
         }));

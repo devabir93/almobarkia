@@ -2,6 +2,7 @@
 
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:numberpicker="http://schemas.android.com/tools"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,12 +13,15 @@
     <FrameLayout
         android:id="@+id/delete_layout"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#EFEFEF">
 
         <ImageView
+            android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_margin="@dimen/_20sdp"
             android:src="@drawable/ic_delet" />
     </FrameLayout>
 
@@ -40,7 +44,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/aboutproduct_label"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
@@ -57,16 +61,14 @@
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/textview_oval"
-            app:layout_constraintStart_toStartOf="@id/aboutproduct_label"
-            app:layout_constraintTop_toBottomOf="@id/aboutproduct_label" />
+            app:layout_constraintStart_toStartOf="@id/product_name"
+            app:layout_constraintTop_toBottomOf="@id/product_name" />
 
         <TextView
             android:id="@+id/product_size"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_16sdp"
-            android:text="@string/size_type"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_13ssp"
             app:layout_constraintBottom_toBottomOf="@id/product_color"
@@ -100,69 +102,30 @@
             app:layout_constraintTop_toBottomOf="@id/product_color" />
 
         <TextView
-            android:id="@+id/availablesize_textView"
+            android:id="@+id/quantitiy"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:padding="@dimen/_2sdp"
-            android:text="@string/availableasize_type"
+            android:text="X 1"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_11ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/product_total"
+            app:layout_constraintEnd_toStartOf="@id/number_picker"
             app:layout_constraintStart_toEndOf="@id/currency_label"
             app:layout_constraintTop_toTopOf="@id/currency_label" />
 
-        <TextView
-            android:id="@+id/product_count_label"
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_26sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/textview_stroke"
+        <com.travijuu.numberpicker.library.NumberPicker
+            android:id="@+id/number_picker"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            numberpicker:custom_layout="@layout/number_picker_custom_hori_layout"
+            numberpicker:focusable="false"
+            numberpicker:max="10"
+            numberpicker:min="1"
+            numberpicker:unit="1"
+            numberpicker:value="1" />
 
-        <TextView
-            android:id="@+id/product_total"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:background="@drawable/textview_rectanglel"
-            android:paddingStart="@dimen/_11sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingEnd="@dimen/_11sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:text="01"
-            android:textColor="@color/brown"
-            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-            app:layout_constraintEnd_toStartOf="@id/product_count_label"
-
-            app:layout_constraintTop_toTopOf="@id/product_count_label" />
-
-        <TextView
-            android:id="@+id/plus_product_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/segoeuib"
-            android:padding="@dimen/_4sdp"
-            android:text="+"
-            android:textColor="@color/colorprimary"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-            app:layout_constraintStart_toStartOf="@id/product_count_label"
-            app:layout_constraintTop_toTopOf="@id/product_count_label" />
-
-        <TextView
-            android:id="@+id/minus_product_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/segoeuib"
-            android:padding="@dimen/_4sdp"
-            android:text="-"
-            android:textColor="@color/colorprimary"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintBottom_toBottomOf="@id/product_count_label"
-            app:layout_constraintEnd_toEndOf="@id/product_count_label"
-            app:layout_constraintTop_toTopOf="@id/product_count_label" />
     </android.support.constraint.ConstraintLayout>
 </com.daimajia.swipe.SwipeLayout>

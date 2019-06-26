@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:layoutDirection="locale"
         android:textDirection="locale"
+        android:background="@color/white"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
         <ImageView
@@ -39,9 +40,9 @@
             android:layout_marginEnd="@dimen/_25sdp"
             android:orientation="horizontal"
             app:layoutManager="LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/number_picker"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_list"
             tools:itemCount="2"
             tools:listitem="@layout/size_gallery_list"
@@ -62,9 +63,9 @@
             numberpicker:custom_layout="@layout/number_picker_custom_hori_layout"
             numberpicker:focusable="false"
             numberpicker:max="10"
-            numberpicker:min="0"
+            numberpicker:min="1"
             numberpicker:unit="1"
-            numberpicker:value="-5" />
+            numberpicker:value="1" />
 
         <LinearLayout
             android:id="@+id/add_to_cart"
@@ -73,7 +74,7 @@
             android:layout_marginStart="@dimen/_36sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_36sdp"
-            android:background="@android:color/white"
+            android:background="@color/brown"
             android:gravity="center"
             android:orientation="horizontal"
             android:visibility="visible"
@@ -81,15 +82,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/size_list">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_bag" />
-
             <android.support.v7.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:paddingTop="@dimen/_16sdp"
@@ -131,9 +126,41 @@
             app:layout_constraintTop_toTopOf="@id/maxorder_num" />
 
         <TextView
+            android:id="@+id/cost_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_36sdp"
+            android:fontFamily="@font/segoeui"
+            android:gravity="center"
+            android:text="@string/total_cost"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/maxorder_num_value" />
+
+        <TextView
+            android:id="@+id/cost_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_36sdp"
+            android:fontFamily="@font/segoeui"
+            android:text="5"
+            android:textColor="@color/colorprimary"
+            android:textSize="@dimen/_13ssp"
+            app:layout_constraintBottom_toBottomOf="@id/cost_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/cost_label" />
+
+
+
+
+        <TextView
             android:id="@+id/shop_label"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@color/colorprimary"
             android:fontFamily="@font/seguisb"
@@ -148,7 +175,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintHorizontal_weight=".22"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/maxorder_num" />
+            app:layout_constraintTop_toBottomOf="@id/cost_label" />
 
         <TextView
             android:id="@+id/continue_label"

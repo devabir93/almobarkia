@@ -14,13 +14,13 @@
 
     <requestFocus material:ignore="MissingConstraints" />
 
-    <include layout="@layout/toolbar_transport"/>
     <ImageView
         android:id="@+id/ic_profilepicbackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_backgroundprofile"
         app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/toolbar_transport"/>
 
     <ImageView
         android:id="@+id/profile_pic"

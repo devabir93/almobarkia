@@ -29,6 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_350sdp"
                     android:src="@drawable/ic_productdetails"
+                    android:background="@color/LightGray"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,9 +78,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_7sdp"
                     android:fontFamily="@font/segoeuib"
+                    android:includeFontPadding="false"
                     android:text="110.00 د.ك"
                     android:textAlignment="viewStart"
-                    android:includeFontPadding="false"
                     android:textColor="@color/colorprimary"
                     android:textSize="@dimen/_17ssp"
                     app:layout_constraintEnd_toEndOf="@id/productprice_label"
@@ -191,15 +192,50 @@
             android:background="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <ImageView
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/basket_notification_ic"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:src="@drawable/ic_basketnotifi"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="@id/constraintlayout"
                 app:layout_constraintStart_toStartOf="@id/constraintlayout"
-                app:layout_constraintTop_toTopOf="@id/constraintlayout" />
+                app:layout_constraintTop_toTopOf="@id/constraintlayout">
+
+                <ImageView
+                    android:id="@+id/bag_iv"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:src="@drawable/ic_basketnotifi"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/cart_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/bag_iv"
+                    android:layout_alignTop="@id/bag_iv"
+                    android:background="@drawable/red_circle"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:paddingTop="@dimen/_2sdp"
+                    android:paddingEnd="@dimen/_4sdp"
+                    android:text="3"
+                    android:textColor="@color/white"
+
+                    />
+            </RelativeLayout>
+            <!--<ImageView-->
+            <!--android:id="@+id/basket_notification_ic"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_marginStart="@dimen/_6sdp"-->
+            <!--android:src="@drawable/ic_basketnotifi"-->
+            <!--app:layout_constraintBottom_toBottomOf="@id/constraintlayout"-->
+            <!--app:layout_constraintStart_toStartOf="@id/constraintlayout"-->
+            <!--app:layout_constraintTop_toTopOf="@id/constraintlayout" />-->
 
             <ImageView
                 android:id="@+id/like_imageView"
@@ -217,9 +253,9 @@
                 android:id="@+id/addcart_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_17sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_17sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:background="@color/colorprimary"
                 android:fontFamily="@font/segoeui"

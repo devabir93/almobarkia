@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -53,7 +55,7 @@ import butterknife.OnClick;
 import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 import timber.log.Timber;
 
-public class ProductDetailsActivity extends BaseActivity implements ProductsMvp, BaseSliderView.OnSliderClickListener {
+public class ProductDetailsActivity extends BaseActivity implements ProductsMvp, BaseSliderView.OnSliderClickListener, DialogSizeRecyclerViewAdapter.Callback {
 
     @BindView(R.id.view)
     View view;
@@ -76,7 +78,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     @BindView(R.id.product_details_textView)
     HtmlTextView productDetailsTextView;
     @BindView(R.id.basket_notification_ic)
-    ImageView basketNotificationIc;
+    RelativeLayout basketNotificationIc;
     @BindView(R.id.like_imageView)
     ImageView likeImageView;
     @BindView(R.id.constraintlayout)
@@ -85,6 +87,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     TextView addcartTextView;
     @BindView(R.id.rating_label)
     TextView ratingLabel;
+    @BindView(R.id.bag_iv)
+    ImageView bagIv;
+    @BindView(R.id.cart_count)
+    TextView cartCount;
     private LinearLayout addToCartSheet;
     private NumberPicker numberPicker;
     ImageView bigImageview;
@@ -99,6 +105,11 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     @BindView(R.id.slider)
     SliderLayout mDemoSlider;
     private List<String> imagesUriForFullScreen;
+    private TextView costValue;
+    public Double totalPrice;
+    private DialogSizeRecyclerViewAdapter dialogSize;
+    private String newPrice;
+    private TextView maxOrderValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +118,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
         productsPresenter.attachView(this);
+        productsPresenter.getCartBadge();
         activityTitle = getString(R.string.product_details_label);
         initToolbar();
 
@@ -137,6 +149,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
             productDetailsTextView.setHtml(product.getDetails());
             ownerStoreLabel.setText(product.getStore().getName());
             ratingLabel.setText(product.getRate());
+            if (product.getInFavorite() != null) {
+                if (product.getInFavorite() == 1) {
+                    likeImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_likedheart));
+                } else if (product.getInFavorite() == 0) {
+                    likeImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_like));
+                }
+            }
 
         }
 
@@ -194,6 +213,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     }
 
     private void showAddToCartDialog() {
+        productsPresenter.getCartPrice();
         final BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(this);
         View sheetView = getLayoutInflater().inflate(R.layout.productpopup, null);
         mBottomSheetDialog.setContentView(sheetView);
@@ -204,16 +224,9 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         addToCartSheet = sheetView.findViewById(R.id.add_to_cart);
         numberPicker = sheetView.findViewById(R.id.number_picker);
         bigImageview = sheetView.findViewById(R.id.product_imageView);
-        final TextView maxOrderValue = sheetView.findViewById(R.id.maxorder_num_value);
-        final DialogSizeRecyclerViewAdapter dialogSize = new DialogSizeRecyclerViewAdapter(this, new DialogSizeRecyclerViewAdapter.Callback() {
-            @Override
-            public void onSizeClick(Size size) {
-                selectedSize = size;
-                maxOrderValue.setText(size.getPivot().getAmount() + "");
-                productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), size.getSizeId());
-
-            }
-        });
+        costValue = sheetView.findViewById(R.id.cost_value);
+        maxOrderValue = sheetView.findViewById(R.id.maxorder_num_value);
+        dialogSize = new DialogSizeRecyclerViewAdapter(this, this);
         RecyclerView colorRecyclerview = sheetView.findViewById(R.id.product_list);
         colorRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         colorRecyclerview.setAdapter(new GalleryAdapter(this, product.getImages(), new GalleryAdapter.Callback() {
@@ -224,7 +237,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                     selectedColor = image.getColor().get(0);
                 Glide.with(getApplicationContext()).load(SelselaService.IMAGE_URL + selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
                 dialogSize.setData(selectedColor.getSizes());
-                initNumPicker();
             }
         }));
 
@@ -245,6 +257,8 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
             Glide.with(this).load(SelselaService.IMAGE_URL + selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
             bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
             dialogSize.setData(selectedColor.getSizes());
+            onSizeClick(selectedSize, 0);
+            dialogSize.notifyDataSetChanged();
 
         }
         numberPicker.setValueChangedListener(new ValueChangedListener() {
@@ -252,10 +266,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
             public void valueChanged(int value, ActionEnum action) {
                 if (value > 0) {
                     //if (action.equals(ActionEnum.INCREMENT))
-                    productPrice = AppUtils.calculateEquation(Utils.arabicToDecimal(String.valueOf(product.getPrice()))
+                    newPrice = AppUtils.calculateEquation(Utils.arabicToDecimal(String.valueOf(product.getPrice()))
                             + "*" + numberPicker.getValue());
 
-                    addToCart(Double.parseDouble(productPrice));
+                    addToCart(Double.parseDouble(newPrice));
                 }
             }
         });
@@ -299,13 +313,15 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     private void initNumPicker() {
         addToCartSheet.setVisibility(View.VISIBLE);
         numberPicker.setValue(1);
+        costValue.setText(totalPrice + "");
+
     }
 
     public void addToCart(double newPrice) {
         Timber.d("new price %s", newPrice);
-//        newPrice = Double.parseDouble(AppUtils.calculateEquation(Utils.arabicToDecimal(String.valueOf(newPrice))
-//                + "+" + totalPrice));
-        //priceSheet.setText(String.valueOf(newPrice));
+        newPrice = Double.parseDouble(AppUtils.calculateEquation(Utils.arabicToDecimal(String.valueOf(newPrice))
+                + "+" + totalPrice));
+        costValue.setText(String.valueOf(newPrice));
         // totalPriceValue.setText(totalPrice + getCurrency());
         if (selectedColor != null && selectedSize != null) {
             ProductOrderBody productOrder = new ProductOrderBody();
@@ -323,6 +339,24 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         }
     }
 
+    @Override
+    public void showCartPrice(Double price) {
+        this.totalPrice = price;
+        if (costValue != null)
+            costValue.setText(String.valueOf(totalPrice));
+    }
+
+    @Override
+    public void showCartBadge(Integer integer) {
+        super.showCartBadge(integer);
+        if (integer > 0) {
+            cartCount.setVisibility(View.VISIBLE);
+            cartCount.setText(integer + "");
+        } else {
+            cartCount.setVisibility(View.GONE);
+        }
+
+    }
 
     @Override
     public void showSavedProductOrder(ProductOrderBody productOrder) {
@@ -336,5 +370,14 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                 numberPicker.setValue(productOrder.getQuantity());
             }
         }
+    }
+
+    @Override
+    public void onSizeClick(Size size, int pos) {
+        selectedSize = size;
+        dialogSize.selected(pos);
+        maxOrderValue.setText(size.getPivot().getAmount() + "");
+        productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
+        initNumPicker();
     }
 }

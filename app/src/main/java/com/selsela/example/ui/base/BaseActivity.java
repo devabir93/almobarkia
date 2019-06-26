@@ -271,4 +271,9 @@ public class BaseActivity extends AppCompatActivity implements MvpView, Internet
     public void showSavedProductOrder(ProductOrderBody productOrder) {
 
     }
+
+    @Override
+    public void showCartPrice(Double price) {
+
+    }
 }

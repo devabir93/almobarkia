@@ -15,10 +15,10 @@ import com.selsela.example.ui.about.AboutActivity;
 import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.contact.ContactActivity;
-import com.selsela.example.ui.privacypolicy.PrivacyPolicyActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 import com.selsela.example.util.Const;
+import com.selsela.example.util.DialogFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -132,18 +132,26 @@ public class SettingsFragment extends BaseFragment {
 
     @OnClick({R.id.notification_textView, R.id.cart_textView, R.id.myaccount_textView, R.id.about_textView, R.id.rules_textView, R.id.policyusage_textView, R.id.policyrecovery_textView, R.id.contactus_textView, R.id.login_label})
     public void onViewClicked(View view) {
-        Intent intent=null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.notification_textView:
+                if (isUserLogged()) {
+                    intent = new Intent(getContext(), Notifi.class);
+                    getContext().startActivity(intent);
+                } else
+                    DialogFactory.showAlertDialog(getActivity(), getString(R.string.signin_confrimation));
                 break;
             case R.id.cart_textView:
-                 intent = new Intent(getContext(), ShoppingBasketActivity.class);
+                intent = new Intent(getContext(), ShoppingBasketActivity.class);
                 getContext().startActivity(intent);
 
                 break;
             case R.id.myaccount_textView:
-                intent = new Intent(getContext(), UpdateProfileActivity.class);
-                getContext().startActivity(intent);
+                if (isUserLogged()) {
+                    intent = new Intent(getContext(), UpdateProfileActivity.class);
+                    getContext().startActivity(intent);
+                } else
+                    DialogFactory.showAlertDialog(getActivity(), getString(R.string.signin_confrimation));
                 break;
             case R.id.about_textView:
                 intent = new Intent(getContext(), AboutActivity.class);

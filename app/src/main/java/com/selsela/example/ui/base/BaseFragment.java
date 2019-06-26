@@ -162,6 +162,11 @@ public class BaseFragment extends Fragment implements MvpView {
     }
 
     @Override
+    public void showCartPrice(Double price) {
+
+    }
+
+    @Override
     public void onRequestStart() {
         startRefreshing();
         //emptyViewHolder.showMessage(getString(R.string.fetching_data));

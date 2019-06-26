@@ -9,15 +9,18 @@ import com.selsela.example.data.model.boxes.Box;
 import com.selsela.example.data.model.boxes.BoxsData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.home.Color;
+import com.selsela.example.data.model.home.Pivot;
 import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.home.Size;
+import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.order.OrderData;
-import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.data.model.user.UserData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.injection.ApplicationContext;
+import com.selsela.example.util.AppUtils;
 import com.selsela.example.util.Const;
+import com.selsela.example.util.Utils;
 import com.selsela.example.util.language.LanguageUtils;
 
 import java.util.ArrayList;
@@ -269,6 +272,33 @@ public class CartManager {
 
     }
 
+
+    public Observable<Double> getCartPrice() {
+        return Observable.create(new ObservableOnSubscribe<Double>() {
+            @Override
+            public void subscribe(ObservableEmitter<Double> e) {
+
+                try {
+                    openDatabase();
+                    List<ProductOrderBody> productOrderList = ProductOrderBody.find(ProductOrderBody.class,
+                            "user_id=?", String.valueOf(getUserId()));
+                    double price = 0;
+                    for (ProductOrderBody productOrderBody :
+                            productOrderList) {
+                        price += Double.parseDouble(AppUtils.calculateEquation(Utils.arabicToDecimal(String.valueOf(productOrderBody.getPriceForSingleItem()))
+                                + "*" + productOrderBody.getQuantity()));
+                    }
+                    e.onNext(price);
+                    e.onComplete();
+                } catch (Exception ex) {
+                    e.onError(ex);
+                } finally {
+                    closeDatabase();
+                }
+            }
+        });
+    }
+
     public Observable<Integer> getCartCount() {
         return Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
@@ -315,7 +345,7 @@ public class CartManager {
         Timber.d("saveOrderWithoutRX %s", productOrder);
         List<ProductOrderBody> productOrderList = new ArrayList<>();
         if (productOrder.getColor() != null && productOrder.getSize() != null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=? and image_id=?",
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=?",
                     String.valueOf(getUserId()), String.valueOf(productOrder.getOrderId()),
                     String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getColorId()));
         }
@@ -341,9 +371,9 @@ public class CartManager {
             productOrderList.get(0).setWeight(productOrder.getWeight());
             productOrderList.get(0).setAmount(productOrder.getAmount());
             productOrderList.get(0).setQuantity(productOrder.getQuantity());
-            productOrderList.get(0).setGiftName(productOrder.getGiftName());
-            productOrderList.get(0).setGiftMessage(productOrder.getGiftMessage());
-            productOrderList.get(0).setGift(productOrder.getIsGift());
+//            productOrderList.get(0).setGiftName(productOrder.getGiftName());
+//            productOrderList.get(0).setGiftMessage(productOrder.getGiftMessage());
+//            productOrderList.get(0).setGift(productOrder.getIsGift());
             productOrderList.get(0).save();
         } else {
             Timber.d("else");
@@ -359,8 +389,12 @@ public class CartManager {
                 productOrder.setColor(productOrder.getColor());
                 if (productOrder.getSize() != null) {
                     Size size = productOrder.getSize();
+                    Pivot pivot = size.getPivot();
+                    //pivot.setId(pivot.getSize_id());
+                    pivot.save();
                     size.setId(Long.valueOf(size.getSizeId()));
                     size.save();
+
                 }
                 productOrder.setSize(productOrder.getSize());
                 productOrder.setProduct(productOrder.getProduct());
@@ -408,7 +442,7 @@ public class CartManager {
         });
     }
 
-    public Observable<BaseResponse<OrderData>> sendOrder(final AddressBody productOrderBody) {
+    public Observable<BaseResponse<OrderData>> sendOrder(final OrderBody productOrderBody) {
 
         return mBazarlakService.add_order(productOrderBody)
                 .concatMap(new Function<BaseResponse<OrderData>, ObservableSource<? extends BaseResponse<OrderData>>>() {

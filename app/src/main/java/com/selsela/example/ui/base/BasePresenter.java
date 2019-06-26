@@ -147,6 +147,35 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
         return languageUtils.isArabic();
     }
 
+    public void getCartPrice() {
+        checkViewAttached();
+        dataManager.getCartPrice()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Double>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(@NonNull Double price) {
+                        Timber.d("updateCart %s", price);
+                        getMvpView().showCartPrice(price);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                        Timber.e(e, "There was an error while getCartPrice");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
     public void getCartBadge() {
         checkViewAttached();
         dataManager.getCartCount()
@@ -218,7 +247,8 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                     public void onNext(Integer aBoolean) {
                         Timber.d("saveProduct %s", aBoolean);
                         getMvpView().showCartBadge(aBoolean);
-                        //getCartPrice();
+                        getCartBadge();
+                        getCartPrice();
                     }
 
                     @Override

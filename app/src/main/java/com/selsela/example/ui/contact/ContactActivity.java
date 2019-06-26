@@ -5,9 +5,12 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
@@ -75,7 +78,7 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
         ButterKnife.bind(this);
         loginPresenter.attachView(this);
 
-        activityTitle=getString(R.string.callus_label);
+        activityTitle = getString(R.string.callus_label);
         initToolbar();
     }
 
@@ -83,6 +86,9 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
     public void onViewClickedPhone() {
         showChangeDialog();
     }
+
+
+
 
     private void showChangeDialog() {
 
@@ -120,7 +126,7 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
                 phoneNumberEditText.setError(this.getString(R.string.emptyphone_label));
             } else if (topicTitleEditText.getText().length() < 1) {
                 topicTitleEditText.setError(this.getString(R.string.emptytopic_label));
-            }else {
+            } else {
                 String username = textInputEditText.getText().toString();
                 String email = emailaddressEditText.getText().toString();
                 String mobile = phoneNumberEditText.getText().toString();
@@ -135,7 +141,7 @@ public class ContactActivity extends BaseActivity implements LoginMvpView {
 
 
             }
-        }else
+        } else
             hasActiveInternetConnection(false);
     }
 }

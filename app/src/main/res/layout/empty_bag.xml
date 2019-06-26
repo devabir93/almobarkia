@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/empty_bag_1_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="28sp"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="35dp"
+        android:gravity="center"
+        android:text="@string/empty_bag_2_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="11sp" />
+
+    <Button
+        android:id="@+id/cont_shopping_btn_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        android:background="@color/brown"
+        android:fontFamily="@font/segoeui"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/go_shopping_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_17ssp" />
+</LinearLayout>
