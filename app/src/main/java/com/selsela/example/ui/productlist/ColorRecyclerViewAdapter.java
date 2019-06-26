@@ -1,6 +1,7 @@
 package com.selsela.example.ui.productlist;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.selsela.example.R;
 import com.selsela.example.data.model.filter.Color;
+import com.selsela.example.util.SomeDrawable;
+import com.selsela.example.util.ViewUtil;
 
 import java.util.List;
 
@@ -44,6 +47,9 @@ public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRecycler
         if (color==null)
             return;
        // holder.color.setText(color.getColorHexa());
+        if (color.getColorHexa()!=null)
+            SomeDrawable someDrawable = new SomeDrawable(ViewUtil.getHexColor(color.getColorHexa()), GradientDrawable.OVAL);
+
         holder.color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
