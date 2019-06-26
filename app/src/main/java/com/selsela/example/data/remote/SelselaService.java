@@ -12,6 +12,7 @@ import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
+import com.selsela.example.data.model.filter.Filterdata;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
@@ -64,6 +65,10 @@ public interface SelselaService {
                                                                   @Query("token") String tocken_id);
     @GET("get_rules_page")
     Observable<BaseResponse<AboutData>> get_rules_page();
+
+    @GET("get_filter_const")
+    Observable<BaseResponse<Filterdata>> get_filter_const();
+
 
     @GET("get_safty_page")
     Observable<BaseResponse<AboutData>> get_safty_page();

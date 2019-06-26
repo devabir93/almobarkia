@@ -18,6 +18,7 @@ import com.selsela.example.ui.notifications.NotificationsActivity;
 import com.selsela.example.ui.orderdetails.OrderdeatailsActivity;
 import com.selsela.example.ui.orders.OrdersFragment;
 import com.selsela.example.ui.productdeatials.ProductDetailsActivity;
+import com.selsela.example.ui.productlist.ProductListActivity;
 import com.selsela.example.ui.specialorder.SpecialOrderFragment;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 
@@ -41,6 +42,8 @@ public interface ActivityComponent {
     void inject(SpecialOrderFragment specialOrderFragment);
     void inject(LoginActivity loginActivity);
     void inject(NotificationsActivity notificationsActivity);
+    void inject(ProductListActivity  productListActivity);
+
 
 
     void inject(RegisterActivity registerActivity);

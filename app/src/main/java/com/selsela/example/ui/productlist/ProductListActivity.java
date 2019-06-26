@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
+import com.selsela.example.data.model.filter.Color;
+import com.selsela.example.data.model.filter.Size;
 import com.selsela.example.data.model.home.Product;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.home.ProductRecyclerViewAdapter;
@@ -20,12 +22,16 @@ import com.selsela.example.util.Const;
 import com.selsela.example.util.ViewUtil;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProductListActivity extends BaseActivity {
+public class ProductListActivity extends BaseActivity implements FilterMvpView {
+    @Inject FilterPresenter filterPresenter;
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.list_textView)
@@ -46,6 +52,9 @@ public class ProductListActivity extends BaseActivity {
     public static int LINEAR = 0;
     private ArrayList<Product> productlist;
     private ProductRecyclerViewAdapter adapter;
+    private RecyclerView colorRecyclerView;
+    private RecyclerView sizeRecyclerView;
+    private List<Color> colors;
 
 
     @Override
@@ -54,6 +63,7 @@ public class ProductListActivity extends BaseActivity {
         setContentView(R.layout.activity_product_list);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        filterPresenter.attachView(this);
         activityTitle = getIntent().getStringExtra(Const.Name);
         initToolbar();
         productlist = getIntent().getParcelableArrayListExtra(Const.Details);
@@ -133,19 +143,18 @@ public class ProductListActivity extends BaseActivity {
     }
 
     private void showChangeDialog() {
+        filterPresenter.get_filter_const();
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_filter, false)
                 .contentGravity(GravityEnum.START)
                 .build();
         dialog.show();
+
         View view2 = dialog.getCustomView();
-        RecyclerView colorRecyclerView = view2.findViewById(R.id.color_list);
-        colorRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        colorRecyclerView.setAdapter(new ColorRecyclerViewAdapter());
-        RecyclerView sizeRecyclerView = view2.findViewById(R.id.size_list);
+
+         sizeRecyclerView = view2.findViewById(R.id.size_list);
         sizeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        sizeRecyclerView.setAdapter(new SizeRecyclerViewAdapter());
         TextView verifyButton = view2.findViewById(R.id.fltert_back);
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,4 +167,28 @@ public class ProductListActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void showSize(List<Size> sizeList) {
+        sizeRecyclerView.setAdapter(new SizeRecyclerViewAdapter(sizeList, this, new SizeRecyclerViewAdapter.UpdateDataClickListener() {
+            @Override
+            public void oncolorSelected(Size size, int position) {
+
+            }
+        }));
+
+
+    }
+
+    @Override
+    public void showColor(List<Color> colorList) {
+        this.colors=colorList;
+        colorRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        colorRecyclerView.setAdapter(new ColorRecyclerViewAdapter(colorList, this, new ColorRecyclerViewAdapter.UpdateDataClickListener() {
+            @Override
+            public void oncolorSelected(Color color, int position) {
+
+            }
+        }));
+
+    }
 }

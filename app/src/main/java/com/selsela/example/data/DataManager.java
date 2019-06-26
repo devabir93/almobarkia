@@ -6,6 +6,7 @@ import com.selsela.example.data.model.about.AboutData;
 import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
+import com.selsela.example.data.model.filter.Filterdata;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
@@ -292,6 +293,29 @@ public class DataManager {
                 });
     }
 
+
+    public Observable<BaseResponse<Filterdata>> get_filter_const() {
+        return mSelselaService.get_filter_const()
+                .concatMap(new Function<BaseResponse<Filterdata>, ObservableSource<? extends BaseResponse<Filterdata>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<Filterdata>> apply(final BaseResponse<Filterdata> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<Filterdata>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<Filterdata>> e) throws Exception {
+                                try {
+                                    Timber.d("response %s", response);
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    } else e.onNext(null);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
 
     public Observable<BaseResponse<Notificationsdata>> get_notifications() {
         return mSelselaService.get_notifications(getUserId(),getUserSession().getToken())

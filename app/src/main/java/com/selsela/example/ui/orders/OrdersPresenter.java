@@ -5,11 +5,9 @@ import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
-import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.base.BasePresenter;
-import com.selsela.example.ui.home.HomeMvpView;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
 
