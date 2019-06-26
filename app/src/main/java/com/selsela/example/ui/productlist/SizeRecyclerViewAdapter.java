@@ -41,7 +41,7 @@ public class SizeRecyclerViewAdapter extends RecyclerView.Adapter<SizeRecyclerVi
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Size size = sizes.get(position);
         if (size==null)
             return;
@@ -49,7 +49,7 @@ public class SizeRecyclerViewAdapter extends RecyclerView.Adapter<SizeRecyclerVi
         holder.size.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                updateDataClickListener.oncolorSelected(size,position);
             }
         });
         holder.mView.setOnClickListener(new View.OnClickListener() {

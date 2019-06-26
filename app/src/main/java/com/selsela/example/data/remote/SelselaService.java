@@ -14,12 +14,14 @@ import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.filter.Filterdata;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.home.MainCategory;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user_fav.favData;
+import com.selsela.example.data.model.user_fav.favProduct;
 import com.selsela.example.util.RxErrorHandlingCallAdapterFactory;
 import com.selsela.example.util.language.LanguageUtils;
 
@@ -88,6 +90,9 @@ public interface SelselaService {
 
     @GET("get_countries")
     Observable<BaseResponse<CountryData>> get_countries();
+
+    @GET("filter")
+    Observable<BaseResponse<MainCategory>> filter(@Query("country_id") int country_id, @Query("category_id") int categoryId, @Query("color_id")int colorId , @Query("size_id")int sizeId,@Query("price_from") int priceForm,@Query("price_to") int priceTo );
 
     @GET("get_home")
     Observable<BaseResponse<HomeData>> get_home(@Query("country_id") int country_id,

@@ -185,6 +185,7 @@
     <string name="callus_label">اتصل بنا</string>
     <string name="product_erro">Product Name is required</string>
     <string name="productde_erro">Product details is required</string>
+    <string name="empty_filter_result">No result found</string>
 
 
 </resources>

@@ -1,5 +1,7 @@
 package com.selsela.example.data;
 
+import android.content.Context;
+
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
@@ -8,6 +10,7 @@ import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.filter.Filterdata;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.home.MainCategory;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.LoginData;
@@ -302,6 +305,30 @@ public class DataManager {
                         return Observable.create(new ObservableOnSubscribe<BaseResponse<Filterdata>>() {
                             @Override
                             public void subscribe(ObservableEmitter<BaseResponse<Filterdata>> e) throws Exception {
+                                try {
+                                    Timber.d("response %s", response);
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    } else e.onNext(null);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
+    public Observable<BaseResponse<MainCategory>> filter(int colorId, int sizeId
+            , int categoryId, int priceFrom, int priceTo) {
+        return mSelselaService.filter(getCountryID(),colorId, sizeId, categoryId, priceFrom, priceTo)
+                .concatMap(new Function<BaseResponse<MainCategory>, ObservableSource<? extends BaseResponse<MainCategory>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<MainCategory>> apply(final BaseResponse<MainCategory> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<MainCategory>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<MainCategory>> e) throws Exception {
                                 try {
                                     Timber.d("response %s", response);
                                     if (response.getStatus()) {
