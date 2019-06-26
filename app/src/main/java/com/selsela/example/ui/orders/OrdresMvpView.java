@@ -8,4 +8,6 @@ import java.util.List;
 public interface OrdresMvpView extends MvpView {
 
     void showOrders(List<Order> orders);
+    void isSuccess(boolean isSuccess);
+
 }

@@ -27,7 +27,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView {
 
@@ -93,6 +92,8 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
     TextView dicountevalue;
     @BindView(R.id.cost_all)
     TextView costAll;
+    MaterialDialog dialog;
+
     private OrderDeatailsRecyclerViewAdapter adapter;
     private UserData user;
 
@@ -106,7 +107,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
         setContentView(R.layout.activity_orderdeatails);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
-        ordersPresenter.attachView(this);
+        ordersPresenter .attachView(this);
         activityTitle = getString(R.string.order_details);
         initToolbar();
         user = mUserSession.getCurrentUser();
@@ -149,7 +150,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
 
     private void showEvaluateDialog(final Product product) {
 
-        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+        dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_evaluate, false)
                 .contentGravity(GravityEnum.START)
                 .build();
@@ -212,5 +213,10 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
         orderdeatilsList.setNestedScrollingEnabled(false);
 
 
+    }
+    @Override
+    public void isSuccess(boolean isSuccess) {
+        if (isSuccess)
+            dialog.dismiss();
     }
 }

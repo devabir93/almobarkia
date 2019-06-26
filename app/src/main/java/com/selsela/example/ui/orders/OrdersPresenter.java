@@ -5,11 +5,9 @@ import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
-import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.base.BasePresenter;
-import com.selsela.example.ui.home.HomeMvpView;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
 
@@ -137,6 +135,54 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
                 });
     }
 
+
+
+
+
+    public void specialOrder(final Context context, final UserBody userBody) {
+        checkViewAttached();
+      //  getMvpView().showProgressView(true);
+        RxUtil.dispose(mDisposable);
+        mDataManager.specialOrder(userBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<BaseResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseResponse response) {
+                        getMvpView().isSuccess(response.getStatus());
+                        getMvpView().showMessageDialog(response.getResponseMessage());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Timber.e(e, "There was an error while specialOrder");
+                        RetrofitException error = (RetrofitException) e;
+                        try {
+                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
+                            if (response != null && response.getResponseMessage() != null)
+                                getMvpView().showMessageDialog(response.getResponseMessage());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (RetrofitException e1) {
+                            e1.printStackTrace();
+                        }
+                       // getMvpView().showProgressView(false);
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                       // getMvpView().showProgressView(false);
+
+                    }
+                });
+    }
 
 }
 

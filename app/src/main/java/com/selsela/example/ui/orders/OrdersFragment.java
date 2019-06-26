@@ -103,6 +103,11 @@ public class OrdersFragment extends BaseFragment implements OrdresMvpView{
         }));
     }
 
+    @Override
+    public void isSuccess(boolean isSuccess) {
+
+    }
+
     public interface OnListFragmentInteractionListener {
     }
 

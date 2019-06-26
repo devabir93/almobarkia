@@ -190,5 +190,8 @@
     <string name="empty_bag_1_label">Your cart is empty</string>
     <string name="go_shopping_label">Go Shopping</string>
     <string name="start_shopping_label">Start shopping now</string>
+    <string name="product_erro">Product Name is required</string>
+    <string name="productde_erro">Product details is required</string>
+
 
 </resources>
