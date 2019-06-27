@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/LightGray">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.address.AddressActivity">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/switch_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:background="@color/gray"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/building"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:fontFamily="@font/segoeui"
+                android:text="@string/building_label"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|center_vertical"
+                android:layout_marginTop="8dp"
+                android:thumbTint="@color/brown"
+                android:checked="true"
+                app:layout_constraintEnd_toStartOf="@id/house"
+                app:layout_constraintStart_toEndOf="@id/building"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/house"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginEnd="@dimen/_22sdp"
+                android:fontFamily="@font/segoeui"
+                android:text="@string/home_label"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/lay2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/switch_layout"
+            app:layout_constraintStart_toStartOf="@id/switch_layout"
+            app:layout_constraintTop_toBottomOf="@id/switch_layout">
+
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/building_nmuber_EditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_22sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_22sdp"
+                android:background="@drawable/textview_stroke"
+                android:fontFamily="@font/segoeui"
+                android:gravity="start"
+
+                android:hint="@string/building_input"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_16sdp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#707070"
+                app:layout_constraintEnd_toEndOf="@id/building_nmuber_EditText"
+                app:layout_constraintStart_toStartOf="@id/building_nmuber_EditText"
+                app:layout_constraintTop_toTopOf="@id/building_nmuber_EditText" />
+
+            <TextView
+                android:id="@+id/buildingnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:background="@color/LightGray"
+                android:fontFamily="@font/seguisb"
+                android:paddingStart="@dimen/_6sdp"
+                android:paddingTop="@dimen/_1sdp"
+                android:paddingEnd="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_6sdp"
+                android:text="@string/buildingnumer_label"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_13ssp"
+
+                app:layout_constraintBottom_toBottomOf="@id/line4"
+                app:layout_constraintStart_toStartOf="@id/line4"
+                app:layout_constraintTop_toTopOf="@id/line4" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/building_lay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/building_nmuber_EditText"
+                app:layout_constraintStart_toStartOf="@id/building_nmuber_EditText"
+                app:layout_constraintTop_toBottomOf="@id/building_nmuber_EditText">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/floor_numberEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_stroke"
+                    android:fontFamily="@font/segoeui"
+                    android:gravity="start"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:hint="@string/floor_input"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_16sdp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+
+                <View
+                    android:id="@+id/line5"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#707070"
+                    app:layout_constraintEnd_toEndOf="@id/floor_numberEditText"
+                    app:layout_constraintStart_toStartOf="@id/floor_numberEditText"
+                    app:layout_constraintTop_toTopOf="@id/floor_numberEditText" />
+
+                <TextView
+                    android:id="@+id/floornumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:background="@color/LightGray"
+                    android:fontFamily="@font/seguisb"
+                    android:paddingStart="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_1sdp"
+                    android:paddingEnd="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:text="@string/floornumber_label"
+                    android:textAlignment="viewStart"
+
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintBottom_toBottomOf="@id/line5"
+                    app:layout_constraintStart_toStartOf="@id/line5"
+                    app:layout_constraintTop_toTopOf="@id/line5" />
+
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/flat_numberEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:background="@drawable/textview_stroke"
+                    android:fontFamily="@font/segoeui"
+                    android:gravity="start"
+                    android:hint="@string/flat_input"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_16sdp"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/floor_numberEditText"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+
+                <View
+                    android:id="@+id/line6"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#707070"
+                    app:layout_constraintEnd_toEndOf="@id/flat_numberEditText"
+                    app:layout_constraintStart_toStartOf="@id/flat_numberEditText"
+                    app:layout_constraintTop_toTopOf="@id/flat_numberEditText" />
+
+                <TextView
+                    android:id="@+id/productnumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:background="@color/LightGray"
+                    android:fontFamily="@font/seguisb"
+                    android:paddingStart="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_1sdp"
+                    android:paddingEnd="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:text="@string/flatnumber_label"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorprimary"
+                    android:textSize="@dimen/_13ssp"
+
+                    app:layout_constraintBottom_toBottomOf="@id/line6"
+                    app:layout_constraintStart_toStartOf="@id/line6"
+                    app:layout_constraintTop_toTopOf="@id/line6" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="@dimen/_22sdp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_marginTop="12dp"
+                android:buttonTint="@color/colorprimary"
+                android:checked="true"
+                app:layout_constraintStart_toStartOf="@id/building_nmuber_EditText"
+                app:layout_constraintTop_toBottomOf="@id/building_lay" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/segoeui"
+                android:text="@string/save_address"
+                android:textAlignment="viewStart"
+                android:textColor="@color/colorprimary"
+                android:textSize="@dimen/_13ssp"
+
+                app:layout_constraintStart_toEndOf="@id/checkBox"
+                app:layout_constraintTop_toTopOf="@id/checkBox" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

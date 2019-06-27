@@ -138,6 +138,9 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
         ButterKnife.bind(this, view);
         homePresenter.attachView(this);
         homePresenter.getHome();
+        homePresenter.getCartBadge();
+        if (!preferencesHelper.getCountry().getPrefix().equals(Const.KUWAIT))
+            homePresenter.getShippingBoxes();
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -172,7 +175,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             if (i > 0) {
                 Timber.d("i %s", i);
                 cartNo.setVisibility(View.VISIBLE);
-                cartNo.setText(mNotifCount + "");
+                cartNo.setText(i + "");
             } else {
                 cartNo.setVisibility(View.INVISIBLE);
             }
@@ -187,7 +190,12 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
         notificationItem.setVisible(true);
         notifications = (RelativeLayout) notificationItem.getActionView();
         cartNo = notifications.findViewById(R.id.cart_count);
-        //cartNo.setText(mNotifCount);
+        if (mNotifCount > 0) {
+            cartNo.setVisibility(View.VISIBLE);
+            cartNo.setText(mNotifCount + "");
+        } else {
+            cartNo.setVisibility(View.INVISIBLE);
+        }
         notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -362,7 +370,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
             defaultSliderView.setData(image, getCurrency());
             defaultSliderView
                     .image(SelselaService.IMAGE_URL + image.getImage())
-                    .setScaleType(BaseSliderView.ScaleType.CenterInside)
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
                     .setOnSliderClickListener(this);
             //add your extra information
             defaultSliderView.bundle(new Bundle());

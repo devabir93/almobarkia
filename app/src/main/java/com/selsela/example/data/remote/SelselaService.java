@@ -7,17 +7,18 @@ import com.google.gson.GsonBuilder;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.address.AddressData;
 import com.selsela.example.data.model.boxes.BoxsData;
 import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
+import com.selsela.example.data.model.country.GovsData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
-import com.selsela.example.data.model.filter.Filterdata;
+import com.selsela.example.data.model.filter.FilterData;
 import com.selsela.example.data.model.home.HomeData;
-import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.notifications.Notificationsdata;
+import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.order.OrderData;
-import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user_fav.favData;
@@ -49,26 +50,40 @@ public interface SelselaService {
 
     @POST("user/register")
     Observable<BaseResponse<LoginData>> register(@Body UserBody userBody);
+
     @POST("contact_us")
     Observable<BaseResponse> contact_us(@Body UserBody userBody);
+
     @POST("user/update_profile")
     Observable<BaseResponse> update_profile(@Body UserBody userBody);
+
     @POST("user/change_password")
     Observable<BaseResponse> change_password(@Body UserBody userBody);
+
     @POST("user/add_rate")
     Observable<BaseResponse> add_rate(@Body UserBody userBody);
+
     @POST("specialOrder")
     Observable<BaseResponse> specialOrder(@Body UserBody userBody);
+
+
+    @POST("user/check_copone")
+    Observable<BaseResponse<CheckCoponData>> checkCopon(@Query("user_id") int user_id,
+                                                        @Query("token") String tocken_id, @Query("code") String code);
+
+
     @GET("get_about_page")
     Observable<BaseResponse<AboutData>> get_about_page();
+
     @GET("user/get_notifications")
     Observable<BaseResponse<Notificationsdata>> get_notifications(@Query("user_id") int user_id,
                                                                   @Query("token") String tocken_id);
+
     @GET("get_rules_page")
     Observable<BaseResponse<AboutData>> get_rules_page();
 
     @GET("get_filter_const")
-    Observable<BaseResponse<Filterdata>> get_filter_const();
+    Observable<BaseResponse<FilterData>> get_filter_const();
 
 
     @GET("get_safty_page")
@@ -99,11 +114,19 @@ public interface SelselaService {
                                                          @Query("token") String tocken_id);
 
     @GET("get_shopping_boxes")
-    Observable<BaseResponse<BoxsData>> get_shopping_boxes();
+    Observable<BaseResponse<BoxsData>> get_shopping_boxes(@Query("country_id") int country_id);
+
+    @GET("user/get_address")
+    Observable<BaseResponse<AddressData>> get_address(@Query("user_id") int user_id,
+                                                      @Query("token") String tocken_id,
+                                                      @Query("country_id") int country_id);
+
+    @GET("get_govs")
+    Observable<BaseResponse<GovsData>> get_govs(@Query("country_id") int countryId);
 
     ///Post
 
-    @POST("add_order")
+    @POST("user/add_order")
     Observable<BaseResponse<OrderData>> add_order(@Body OrderBody addressBody);
 
     @POST("user/check_copone")

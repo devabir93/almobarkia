@@ -4,14 +4,14 @@ package com.selsela.example.data.model.filter;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Filterdata implements Parcelable
+public class FilterData implements Parcelable
 {
 
     @SerializedName("colors")
@@ -20,24 +20,24 @@ public class Filterdata implements Parcelable
     @SerializedName("sizes")
     @Expose
     private List<Size> sizes = null;
-    public final static Creator<Filterdata> CREATOR = new Creator<Filterdata>() {
+    public final static Creator<FilterData> CREATOR = new Creator<FilterData>() {
 
 
         @SuppressWarnings({
             "unchecked"
         })
-        public Filterdata createFromParcel(Parcel in) {
-            return new Filterdata(in);
+        public FilterData createFromParcel(Parcel in) {
+            return new FilterData(in);
         }
 
-        public Filterdata[] newArray(int size) {
-            return (new Filterdata[size]);
+        public FilterData[] newArray(int size) {
+            return (new FilterData[size]);
         }
 
     }
     ;
 
-    protected Filterdata(Parcel in) {
+    protected FilterData(Parcel in) {
         in.readList(this.colors, (com.selsela.example.data.model.filter.Color.class.getClassLoader()));
         in.readList(this.sizes, (com.selsela.example.data.model.filter.Size.class.getClassLoader()));
     }
@@ -46,7 +46,7 @@ public class Filterdata implements Parcelable
      * No args constructor for use in serialization
      * 
      */
-    public Filterdata() {
+    public FilterData() {
     }
 
     /**
@@ -54,7 +54,7 @@ public class Filterdata implements Parcelable
      * @param sizes
      * @param colors
      */
-    public Filterdata(List<Color> colors, List<Size> sizes) {
+    public FilterData(List<Color> colors, List<Size> sizes) {
         super();
         this.colors = colors;
         this.sizes = sizes;
@@ -91,10 +91,10 @@ public class Filterdata implements Parcelable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Filterdata) == false) {
+        if ((other instanceof FilterData) == false) {
             return false;
         }
-        Filterdata rhs = ((Filterdata) other);
+        FilterData rhs = ((FilterData) other);
         return new EqualsBuilder().append(sizes, rhs.sizes).append(colors, rhs.colors).isEquals();
     }
 

@@ -34,32 +34,6 @@ public class Area implements Parcelable
     @SerializedName("name")
     @Expose
     private String name;
-    public final static Parcelable.Creator<Area> CREATOR = new Creator<Area>() {
-
-
-        @SuppressWarnings({
-                "unchecked"
-        })
-        public Area createFromParcel(Parcel in) {
-            return new Area(in);
-        }
-
-        public Area[] newArray(int size) {
-            return (new Area[size]);
-        }
-
-    }
-            ;
-
-    protected Area(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.transportCost = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.govId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.deletedAt = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-    }
 
     /**
      * No args constructor for use in serialization
@@ -88,6 +62,69 @@ public class Area implements Parcelable
         this.deletedAt = deletedAt;
         this.name = name;
     }
+
+    protected Area(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        if (in.readByte() == 0) {
+            transportCost = null;
+        } else {
+            transportCost = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            govId = null;
+        } else {
+            govId = in.readInt();
+        }
+        name = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        if (transportCost == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(transportCost);
+        }
+        if (govId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(govId);
+        }
+        dest.writeString(name);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Area> CREATOR = new Creator<Area>() {
+        @Override
+        public Area createFromParcel(Parcel in) {
+            return new Area(in);
+        }
+
+        @Override
+        public Area[] newArray(int size) {
+            return new Area[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -165,20 +202,6 @@ public class Area implements Parcelable
         }
         Area rhs = ((Area) other);
         return new EqualsBuilder().append(updatedAt, rhs.updatedAt).append(id, rhs.id).append(createdAt, rhs.createdAt).append(name, rhs.name).append(govId, rhs.govId).append(deletedAt, rhs.deletedAt).append(transportCost, rhs.transportCost).isEquals();
-    }
-
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(createdAt);
-        dest.writeValue(updatedAt);
-        dest.writeValue(transportCost);
-        dest.writeValue(govId);
-        dest.writeValue(deletedAt);
-        dest.writeValue(name);
-    }
-
-    public int describeContents() {
-        return  0;
     }
 
 }

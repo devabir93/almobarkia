@@ -5,20 +5,22 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/toolbar"></include>
+
     <include
         android:id="@+id/empty_bag_layout"
         layout="@layout/empty_bag"
         android:visibility="gone" />
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cart_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/cart_layout"
+        android:background="@color/LightGray"
         android:layoutDirection="locale"
         android:orientation="vertical"
         android:textDirection="locale"
-        android:background="@color/LightGray"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
 
         tools:context=".ui.shoppingbasket.ShoppingBasketActivity">
@@ -36,7 +38,7 @@
             tools:listitem="@layout/shoppingbasket_list" />
 
         <TextView
-            android:id="@+id/total_amount"
+            android:id="@+id/amount_background"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/colorprimary"
@@ -64,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight=".22"
-            app:layout_constraintStart_toEndOf="@id/total_amount" />
+            app:layout_constraintStart_toEndOf="@id/amount_background" />
 
         <TextView
 
@@ -90,10 +92,11 @@
             android:text="@string/amount_label"
             android:textColor="@color/brown"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintStart_toStartOf="@id/total_amount"
-            app:layout_constraintTop_toTopOf="@id/total_amount" />
+            app:layout_constraintStart_toStartOf="@id/amount_background"
+            app:layout_constraintTop_toTopOf="@id/amount_background" />
 
         <TextView
+            android:id="@+id/total_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_22sdp"
@@ -101,7 +104,7 @@
             android:text="@string/total_number"
             android:textColor="@color/brown"
             android:textSize="@dimen/_15ssp"
-            app:layout_constraintStart_toStartOf="@id/total_amount"
+            app:layout_constraintStart_toStartOf="@id/amount_background"
             app:layout_constraintTop_toBottomOf="@+id/total_amount_label" />
     </android.support.constraint.ConstraintLayout>
 </android.support.design.widget.CoordinatorLayout>

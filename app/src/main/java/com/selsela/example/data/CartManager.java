@@ -19,7 +19,6 @@ import com.selsela.example.data.model.user.UserData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.injection.ApplicationContext;
 import com.selsela.example.util.AppUtils;
-import com.selsela.example.util.Const;
 import com.selsela.example.util.Utils;
 import com.selsela.example.util.language.LanguageUtils;
 
@@ -348,6 +347,12 @@ public class CartManager {
             productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=?",
                     String.valueOf(getUserId()), String.valueOf(productOrder.getOrderId()),
                     String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getColorId()));
+        } else if (productOrder.getColor() == null && productOrder.getSize() == null) {
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and order_id=? and size_id=? and color_id=?",
+                    String.valueOf(getUserId()),
+                    String.valueOf(productOrder.getOrderId()),
+                    String.valueOf(0),
+                    String.valueOf(0));
         }
 /*
         else if (productOrder.getColor() == null && productOrder.getSize() != null) {
@@ -508,7 +513,7 @@ public class CartManager {
     }
 
     public Observable<List<Box>> getShippingBoxes() {
-        return mBazarlakService.get_shopping_boxes()
+        return mBazarlakService.get_shopping_boxes(getCountryID())
                 .concatMap(new Function<BaseResponse<BoxsData>, ObservableSource<? extends List<Box>>>() {
                     @Override
                     public ObservableSource<? extends List<Box>> apply(final BaseResponse<BoxsData> response) {
@@ -517,14 +522,9 @@ public class CartManager {
                             public void subscribe(ObservableEmitter<List<Box>> e) {
 
                                 try {
-                                    if (response.getStatus()) {
-                                        if (getPreferencesHelper().getCountry() != null &&
-                                                !getPreferencesHelper().getCountry().getPrefix().equals(Const.KUWAIT))
-                                            getPreferencesHelper().setShippingBoxes(response.getData());
-                                        //Timber.d("getPreferencesHelper() %s",getPreferencesHelper().getShippingBoxes().getBoxs());
-                                        e.onNext(response.getData().getBoxs());
-                                    } else
-                                        e.onNext(null);
+
+                                    if(response.getData()!=null &&response.getData().getBoxs()!=null)
+                                    e.onNext(response.getData().getBoxs());
                                 } catch (Exception e1) {
                                     e.onError(e1);
                                 }

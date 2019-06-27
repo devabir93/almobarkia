@@ -5,6 +5,7 @@ import com.selsela.example.data.CartManager;
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.local.UserSession;
 import com.selsela.example.data.model.BaseResponse;
+import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
@@ -77,12 +78,14 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                     @Override
                     public void onNext(@NonNull BaseResponse<OrderData> response) {
                         Timber.d("response %s", response);
-                        if (response.getStatus() &&
-                                response.getData() != null &&
-                                response.getData().getOrder().getKnetUrl() != null && !response.getData().getOrder().getKnetUrl().isEmpty() &&
-                                response.getData().getOrder().getKnetToken() != null && !response.getData().getOrder().getKnetToken().isEmpty()) {
-                            getMvpView().doPayment(response.getData().getOrder());
-                        } else if (response.getStatus()) {
+//                        if (response.getStatus() &&
+//                                response.getData() != null &&
+//                                response.getData().getOrder().getKnetUrl() != null && !response.getData().getOrder().getKnetUrl().isEmpty() &&
+//                                response.getData().getOrder().getKnetToken() != null && !response.getData().getOrder().getKnetToken().isEmpty()) {
+//                            getMvpView().doPayment(response.getData().getOrder());
+//                        } else
+
+                        if (response.getStatus()) {
                             getMvpView().showSuccess(response.getResponseMessage());
                         }
 
@@ -94,11 +97,11 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                         getMvpView().onRequestEnd();
                         try {
                             RetrofitException error = (RetrofitException) e;
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
                             Timber.d("response %s", response);
                             if (response != null) {
 
-                                getMvpView().showMessageDialog(response.getResponseMessage());
+                                getMvpView().showMessageDialog(response);
 
                             }
 
@@ -107,12 +110,12 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                         } catch (HttpException e1) {
                             e1.printStackTrace();
                         }
+                        getMvpView().showProgressView(false);
                     }
 
                     @Override
                     public void onComplete() {
-                        getMvpView().onRequestEnd();
-                        //getMvpView().showProgresBar(false);
+                        getMvpView().showProgressView(false);
                     }
                 });
     }
@@ -151,7 +154,6 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                 });
     }
 
-
     public void deleteOrder(ProductOrderBody checkedProductOrders) {
         checkViewAttached();
         RxUtil.dispose(mDisposable);
@@ -187,4 +189,53 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                     }
                 });
     }
+
+    public void checkCopon(String code) {
+        checkViewAttached();
+        getMvpView().showProgressView(true);
+        Timber.d("checkCopon");
+        RxUtil.dispose(mDisposable);
+        mDataManager.checkCopon(code)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<BaseResponse<CheckCoponData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseResponse<CheckCoponData> generalResponse) {
+                        if (generalResponse.getStatus())
+                            getMvpView().showCoupone(generalResponse.getData().getCopone());
+                        else {
+                            getMvpView().showMessageDialog(generalResponse.getResponseMessage());
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e(e, "There was an error while checkCopon");
+                        RetrofitException error = (RetrofitException) e;
+                        try {
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null) {
+                                Timber.d("checkCopon", response.getResponseMessage());
+                                getMvpView().showMessageDialog(response);
+                            }
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        getMvpView().showProgressView(false);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        getMvpView().showProgressView(false);
+
+                    }
+                });
+
+    }
+
 }

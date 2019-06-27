@@ -96,7 +96,6 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
     }
 
     public void getShippingBoxes() {
-        getMvpView().showProgressView(true);
         checkViewAttached();
 //        RxUtil.dispose(mDisposable);
         dataManager.getShippingBoxes()
@@ -111,11 +110,7 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                     @Override
                     public void onNext(@NonNull List<Box> getGovs) {
                         Timber.d("getShippingBoxes %s", getGovs);
-                        if (getGovs != null && getGovs.size() > 0) {
-                            //getMvpView().showBoxes(getGovs);
-                        } else {
-                            getMvpView().showEmpty();
-                        }
+
                     }
 
                     @Override
@@ -133,12 +128,10 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                             e1.printStackTrace();
                         }
                         //getMvpView().showError();
-                        getMvpView().showProgressView(false);
                     }
 
                     @Override
                     public void onComplete() {
-                        getMvpView().showProgressView(false);
                     }
                 });
     }

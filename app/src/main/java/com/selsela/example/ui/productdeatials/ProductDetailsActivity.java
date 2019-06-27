@@ -206,12 +206,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     }
 
 
-    @OnClick(R.id.addcart_textView)
-    public void onViewClicked(View view2) {
-        view2.getId();
-        showAddToCartDialog();
-    }
-
     private void showAddToCartDialog() {
         productsPresenter.getCartPrice();
         final BottomSheetDialog mBottomSheetDialog = new BottomSheetDialog(this);
@@ -235,7 +229,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                 selectedImage = image;
                 if (image.getColor() != null && image.getColor().size() > 0)
                     selectedColor = image.getColor().get(0);
-                Glide.with(getApplicationContext()).load(SelselaService.IMAGE_URL + selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
+                Glide.with(getApplicationContext()).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
                 dialogSize.setData(selectedColor.getSizes());
             }
         }));
@@ -251,14 +245,20 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
 
         if (product.getImages() != null && product.getImages().size() > 0) {
             selectedImage = product.getImages().get(0);
-            selectedColor = selectedImage.getColor().get(0);
-            selectedSize = selectedColor.getSizes().get(0);
-            productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
-            Glide.with(this).load(SelselaService.IMAGE_URL + selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
-            bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
-            dialogSize.setData(selectedColor.getSizes());
-            onSizeClick(selectedSize, 0);
-            dialogSize.notifyDataSetChanged();
+
+            if (selectedImage.getColor() != null && selectedImage.getColor().size() > 0) {
+                selectedColor = selectedImage.getColor().get(0);
+                selectedSize = selectedColor.getSizes().get(0);
+                dialogSize.setData(selectedColor.getSizes());
+                dialogSize.notifyDataSetChanged();
+                onSizeClick(selectedSize, 0);
+                productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
+                bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
+            } else
+                productsPresenter.getProductById(product.getProductId(), 0, 0, 0);
+
+            Glide.with(this).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
+
 
         }
         numberPicker.setValueChangedListener(new ValueChangedListener() {
@@ -335,6 +335,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
             productOrder.setPriceForSingleItem(String.valueOf(product.getPrice()));
             productOrder.setPrice(String.valueOf(newPrice));
             productOrder.setUserId(getUserId());
+            productOrder.setImageUrl(selectedImage.getImageUrl());
             productsPresenter.saveProduct(productOrder);
         }
     }
@@ -379,5 +380,19 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         maxOrderValue.setText(size.getPivot().getAmount() + "");
         productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
         initNumPicker();
+    }
+
+    @OnClick({R.id.basket_notification_ic, R.id.like_imageView, R.id.addcart_textView})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.basket_notification_ic:
+                startActivity(new Intent(getApplicationContext(), ShoppingBasketActivity.class));
+                break;
+            case R.id.like_imageView:
+                break;
+            case R.id.addcart_textView:
+                showAddToCartDialog();
+                break;
+        }
     }
 }

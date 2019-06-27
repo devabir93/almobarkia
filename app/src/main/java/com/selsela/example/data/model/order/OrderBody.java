@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.orm.SugarRecord;
+import com.selsela.example.data.model.coupon.Copone;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 
 import java.util.Arrays;
@@ -88,9 +89,15 @@ public class OrderBody extends SugarRecord implements Parcelable {
     @SerializedName("box_id")
     @Expose
     private int box_id;
+
+    @SerializedName("country_id")
+    @Expose
+    private Integer countryId;
+
     private List<ProductOrderBody> productList;
     private Integer[][] productArray;
     private double pricePerPiece;
+    private Copone coupon;
 
     public OrderBody() {
     }
@@ -120,8 +127,14 @@ public class OrderBody extends SugarRecord implements Parcelable {
         building_or_house = in.readInt();
         productsStrings = in.readString();
         box_id = in.readInt();
+        if (in.readByte() == 0) {
+            countryId = null;
+        } else {
+            countryId = in.readInt();
+        }
         productList = in.createTypedArrayList(ProductOrderBody.CREATOR);
         pricePerPiece = in.readDouble();
+        coupon = in.readParcelable(Copone.class.getClassLoader());
     }
 
     @Override
@@ -149,8 +162,15 @@ public class OrderBody extends SugarRecord implements Parcelable {
         dest.writeInt(building_or_house);
         dest.writeString(productsStrings);
         dest.writeInt(box_id);
+        if (countryId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(countryId);
+        }
         dest.writeTypedList(productList);
         dest.writeDouble(pricePerPiece);
+        dest.writeParcelable(coupon, flags);
     }
 
     @Override
@@ -380,10 +400,44 @@ public class OrderBody extends SugarRecord implements Parcelable {
                 ", building_or_house=" + building_or_house +
                 ", productsStrings='" + productsStrings + '\'' +
                 ", box_id=" + box_id +
+                ", countryId=" + countryId +
                 ", productList=" + productList +
                 ", productArray=" + Arrays.toString(productArray) +
                 ", pricePerPiece=" + pricePerPiece +
+                ", coupon=" + coupon +
                 '}';
+    }
+
+    public double getTransport_cost() {
+        return transport_cost;
+    }
+
+    public void setTransport_cost(double transport_cost) {
+        this.transport_cost = transport_cost;
+    }
+
+    public int getCoupon_id() {
+        return coupon_id;
+    }
+
+    public void setCoupon_id(int coupon_id) {
+        this.coupon_id = coupon_id;
+    }
+
+    public int getBox_id() {
+        return box_id;
+    }
+
+    public void setBox_id(int box_id) {
+        this.box_id = box_id;
+    }
+
+    public void setCoupon(Copone coupon) {
+        this.coupon = coupon;
+    }
+
+    public Copone getCoupon() {
+        return coupon;
     }
 
     @Override
@@ -429,9 +483,12 @@ public class OrderBody extends SugarRecord implements Parcelable {
             return false;
         if (getProductsStrings() != null ? !getProductsStrings().equals(orderBody.getProductsStrings()) : orderBody.getProductsStrings() != null)
             return false;
+        if (countryId != null ? !countryId.equals(orderBody.countryId) : orderBody.countryId != null)
+            return false;
         if (getProductList() != null ? !getProductList().equals(orderBody.getProductList()) : orderBody.getProductList() != null)
             return false;
-        return Arrays.deepEquals(getProductArray(), orderBody.getProductArray());
+        if (!Arrays.deepEquals(getProductArray(), orderBody.getProductArray())) return false;
+        return getCoupon() != null ? getCoupon().equals(orderBody.getCoupon()) : orderBody.getCoupon() == null;
     }
 
     @Override
@@ -463,34 +520,20 @@ public class OrderBody extends SugarRecord implements Parcelable {
         result = 31 * result + getBuilding_or_house();
         result = 31 * result + (getProductsStrings() != null ? getProductsStrings().hashCode() : 0);
         result = 31 * result + getBox_id();
+        result = 31 * result + (countryId != null ? countryId.hashCode() : 0);
         result = 31 * result + (getProductList() != null ? getProductList().hashCode() : 0);
         result = 31 * result + Arrays.deepHashCode(getProductArray());
         temp = Double.doubleToLongBits(getPricePerPiece());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (getCoupon() != null ? getCoupon().hashCode() : 0);
         return result;
     }
 
-    public double getTransport_cost() {
-        return transport_cost;
+    public Integer getCountryId() {
+        return countryId;
     }
 
-    public void setTransport_cost(double transport_cost) {
-        this.transport_cost = transport_cost;
-    }
-
-    public int getCoupon_id() {
-        return coupon_id;
-    }
-
-    public void setCoupon_id(int coupon_id) {
-        this.coupon_id = coupon_id;
-    }
-
-    public int getBox_id() {
-        return box_id;
-    }
-
-    public void setBox_id(int box_id) {
-        this.box_id = box_id;
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
     }
 }

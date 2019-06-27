@@ -111,7 +111,7 @@
     <string name="confirm_label">تأكيد الدفع</string>
     <string name="welcome_label">مرحبا بك معنا</string>
     <string name="mohafza_label">المحافظة</string>
-    <string name="manteqa_label">المنقطة</string>
+    <string name="manteqa_label">المنطقة</string>
     <string name="peicenum_label">رقم القطعة</string>
     <string name="streetnum_label">رقم الشارع</string>
     <string name="jadnum_label">رقم الجادة</string>
@@ -154,5 +154,22 @@
     <string name="go_shopping_label">Go Shopping</string>
     <string name="product_erro">Product Name is required</string>
     <string name="productde_erro">Product details is required</string>
+    <string name="no_result_found">No result found</string>
+    <string name="building_input">ادخل رقم المبنى</string>
+    <string name="floor_input">ادخل رقم الطابق</string>
+    <string name="flat_input">ادخل رقم الشقة</string>
+    <string name="save_address">حفظ العنوان في قائمة العناوين</string>
+    <string name="house_input">ادخل رقم المنزل</string>
+    <string name="housenumer_label">رقم المنزل</string>
+    <string name="verify">Verify</string>
+    <string name="cash">نقدا</string>
+    <string name="knet">كي نت</string>
+    <string name="payment_activity">الدفع</string>
+    <string name="confirm_payment_activity">تأكيد الدفع</string>
+    <string name="gov">Gov</string>
+    <string name="block_input">ادخل رقم القطعة</string>
+    <string name="neigh">الحي</string>
+    <string name="neigh_input">ادخل الحي</string>
+    <string name="logout">Logout</string>
 
 </resources>

@@ -71,7 +71,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         holder.numberPicker.setValue(productOrder.getQuantity());
         holder.numberPicker.setMax(product.getAmount());
 
-        Glide.with(context).load(SelselaService.IMAGE_URL + productOrder.getImageUrl()).thumbnail(.7f).into(holder.productImage);
+        Glide.with(context).load(productOrder.getImageUrl()).thumbnail(.7f).into(holder.productImage);
         holder.delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 updateDataClickListener.onDeleteOrder(position);

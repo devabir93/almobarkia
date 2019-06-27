@@ -3,10 +3,14 @@ package com.selsela.example.data;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.address.AddressData;
+import com.selsela.example.data.model.address.Gov;
 import com.selsela.example.data.model.category.CategoriesData;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.country.CountryData;
-import com.selsela.example.data.model.filter.Filterdata;
+import com.selsela.example.data.model.country.GovsData;
+import com.selsela.example.data.model.coupon.CheckCoponData;
+import com.selsela.example.data.model.filter.FilterData;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
@@ -17,6 +21,8 @@ import com.selsela.example.data.model.user_fav.favData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.language.LanguageUtils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -63,6 +69,10 @@ public class DataManager {
         return getUserSession() != null ? getUserSession().getId() : 0;
     }
 
+    String getUserToken() {
+        return getUserSession() != null ? getUserSession().getToken() : "";
+    }
+
     //    @android.support.annotation.NonNull
     public Observable<BaseResponse<LoginData>> makeLogin(final UserBody userData) {
 
@@ -76,8 +86,6 @@ public class DataManager {
                                 try {
                                     UserData user = loginResponse.getData().getUserData();
                                     getPreferencesHelper().addUserSession(user);
-                                    if (!languageUtils.isArabic())
-                                        loginResponse.setResponseMessage(loginResponse.getResponseMessageEn());
                                     e.onNext(loginResponse);
                                 } catch (Exception e1) {
                                     e.onError(e1);
@@ -117,6 +125,7 @@ public class DataManager {
                     }
                 });
     }
+
     @android.support.annotation.NonNull
     public Observable<BaseResponse> contact(final UserBody userData) {
 
@@ -140,8 +149,9 @@ public class DataManager {
                     }
                 });
     }
+
     @android.support.annotation.NonNull
-    public Observable<BaseResponse> update (final UserBody userData) {
+    public Observable<BaseResponse> update(final UserBody userData) {
 
         return mSelselaService.update_profile(userData)
                 .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
@@ -163,34 +173,34 @@ public class DataManager {
                     }
                 });
     }
-        @android.support.annotation.NonNull
-        public Observable<BaseResponse> change_pass (final UserBody userData) {
 
-            return mSelselaService.change_password(userData)
-                    .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
-                        @Override
-                        public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
-                            return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
-                                @Override
-                                public void subscribe(ObservableEmitter<BaseResponse> e) {
-                                    try {
-                                        e.onNext(loginResponse);
-                                    } catch (Exception e1) {
-                                        e.onError(e1);
-                                    }
-                                    e.onComplete();
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> change_pass(final UserBody userData) {
 
-
+        return mSelselaService.change_password(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
                                 }
-                            });
-                        }
-                    });
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
     }
 
 
-
     @android.support.annotation.NonNull
-    public Observable<BaseResponse> rate_product (final UserBody userData) {
+    public Observable<BaseResponse> rate_product(final UserBody userData) {
 
         return mSelselaService.add_rate(userData)
                 .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
@@ -214,10 +224,8 @@ public class DataManager {
     }
 
 
-
-
     @android.support.annotation.NonNull
-    public Observable<BaseResponse> specialOrder (final UserBody userData) {
+    public Observable<BaseResponse> specialOrder(final UserBody userData) {
 
         return mSelselaService.specialOrder(userData)
                 .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
@@ -233,6 +241,28 @@ public class DataManager {
                                 }
                                 e.onComplete();
 
+
+                            }
+                        });
+                    }
+                });
+    }
+
+    public Observable<BaseResponse<CheckCoponData>> checkCopon(String code) {
+        return mSelselaService.checkCopon(getUserId(), getUserToken(), code)
+                .concatMap(new Function<BaseResponse<CheckCoponData>, ObservableSource<? extends BaseResponse<CheckCoponData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<CheckCoponData>> apply(final BaseResponse<CheckCoponData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<CheckCoponData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<CheckCoponData>> e) throws Exception {
+                                try {
+                                    Timber.d("response %s", response);
+                                    e.onNext(response);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
 
                             }
                         });
@@ -294,14 +324,61 @@ public class DataManager {
     }
 
 
-    public Observable<BaseResponse<Filterdata>> get_filter_const() {
-        return mSelselaService.get_filter_const()
-                .concatMap(new Function<BaseResponse<Filterdata>, ObservableSource<? extends BaseResponse<Filterdata>>>() {
+    public Observable<BaseResponse<AddressData>> get_address() {
+        return mSelselaService.get_address(getUserId(), getUserToken(), getCountryID())
+                .concatMap(new Function<BaseResponse<AddressData>, ObservableSource<? extends BaseResponse<AddressData>>>() {
                     @Override
-                    public ObservableSource<? extends BaseResponse<Filterdata>> apply(final BaseResponse<Filterdata> response) throws Exception {
-                        return Observable.create(new ObservableOnSubscribe<BaseResponse<Filterdata>>() {
+                    public ObservableSource<? extends BaseResponse<AddressData>> apply(final BaseResponse<AddressData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<AddressData>>() {
                             @Override
-                            public void subscribe(ObservableEmitter<BaseResponse<Filterdata>> e) throws Exception {
+                            public void subscribe(ObservableEmitter<BaseResponse<AddressData>> e) throws Exception {
+                                try {
+                                    Timber.d("response %s", response);
+                                    if (response.getStatus()) {
+                                        e.onNext(response);
+                                    } else e.onNext(null);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                });
+    }
+
+
+    public Observable<List<Gov>> getGov() {
+        return mSelselaService.get_govs(getCountryID())
+                .concatMap(new Function<BaseResponse<GovsData>, ObservableSource<? extends List<Gov>>>() {
+                    @Override
+                    public ObservableSource<? extends List<Gov>> apply(final BaseResponse<GovsData> response) {
+                        return Observable.create(new ObservableOnSubscribe<List<Gov>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<List<Gov>> e) {
+
+                                try {
+                                    if (response.getStatus())
+                                        e.onNext(response.getData().getGovs());
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+                            }
+                        });
+                    }
+                })
+                ;
+    }
+
+    public Observable<BaseResponse<FilterData>> get_filter_const() {
+        return mSelselaService.get_filter_const()
+                .concatMap(new Function<BaseResponse<FilterData>, ObservableSource<? extends BaseResponse<FilterData>>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse<FilterData>> apply(final BaseResponse<FilterData> response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse<FilterData>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse<FilterData>> e) throws Exception {
                                 try {
                                     Timber.d("response %s", response);
                                     if (response.getStatus()) {
@@ -318,7 +395,7 @@ public class DataManager {
     }
 
     public Observable<BaseResponse<Notificationsdata>> get_notifications() {
-        return mSelselaService.get_notifications(getUserId(),getUserSession().getToken())
+        return mSelselaService.get_notifications(getUserId(), getUserSession().getToken())
                 .concatMap(new Function<BaseResponse<Notificationsdata>, ObservableSource<? extends BaseResponse<Notificationsdata>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<Notificationsdata>> apply(final BaseResponse<Notificationsdata> response) throws Exception {
@@ -339,7 +416,6 @@ public class DataManager {
                     }
                 });
     }
-
 
 
     public Observable<BaseResponse<ConfigData>> getSettingData() {
@@ -432,8 +508,9 @@ public class DataManager {
                     }
                 });
     }
+
     public Observable<BaseResponse<favData>> get_user_favorites() {
-        return mSelselaService.get_user_favorites( getUserSession().getId(),getUserSession().getToken())
+        return mSelselaService.get_user_favorites(getUserSession().getId(), getUserSession().getToken())
                 .concatMap(new Function<BaseResponse<favData>, ObservableSource<? extends BaseResponse<favData>>>() {
                     @Override
                     public ObservableSource<? extends BaseResponse<favData>> apply(final BaseResponse<favData> response) throws Exception {
@@ -453,5 +530,6 @@ public class DataManager {
                     }
                 });
     }
+
 
 }

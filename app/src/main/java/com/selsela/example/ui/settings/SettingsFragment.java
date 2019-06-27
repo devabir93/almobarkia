@@ -16,7 +16,6 @@ import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.contact.ContactActivity;
 import com.selsela.example.ui.notifications.NotificationsActivity;
-import com.selsela.example.ui.privacypolicy.PrivacyPolicyActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 import com.selsela.example.util.Const;
@@ -63,6 +62,8 @@ public class SettingsFragment extends BaseFragment {
     @BindView(R.id.contactus_textView)
     TextView contactusTextView;
     Unbinder unbinder;
+    @BindView(R.id.username)
+    TextView username;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -109,14 +110,13 @@ public class SettingsFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         unbinder = ButterKnife.bind(this, view);
-        return view;
-    }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if (isUserLogged()) {
+            username.setVisibility(View.VISIBLE);
+            loginLabel.setText(getString(R.string.logout));
+            username.setText(mUserSession.getCurrentUser().getName());
         }
+        return view;
     }
 
 
@@ -182,8 +182,14 @@ public class SettingsFragment extends BaseFragment {
                 break;
 
             case R.id.login_label:
-                intent = new Intent(getContext(), LoginActivity.class);
-                getContext().startActivity(intent);
+                if (!isUserLogged()) {
+                    intent = new Intent(getContext(), LoginActivity.class);
+                    getContext().startActivity(intent);
+                } else {
+                    logout();
+                    username.setVisibility(View.GONE);
+                    loginLabel.setText(getString(R.string.login_label));
+                }
                 break;
 
         }

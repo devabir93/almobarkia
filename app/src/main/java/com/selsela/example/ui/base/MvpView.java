@@ -1,6 +1,7 @@
 package com.selsela.example.ui.base;
 
 
+import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 
 /**
@@ -20,6 +21,7 @@ public interface MvpView {
 
     void showEmpty();
 
+    void showMessageDialog(BaseResponse response);
 
     void isExceedWeight(Boolean aBoolean);
 

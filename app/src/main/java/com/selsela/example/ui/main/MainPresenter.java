@@ -1,12 +1,8 @@
 package com.selsela.example.ui.main;
 
-import android.content.Context;
-
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
-import com.selsela.example.data.model.about.AboutData;
 import com.selsela.example.data.model.config.ConfigData;
-import com.selsela.example.ui.about.AboutMvpView;
 import com.selsela.example.ui.base.BasePresenter;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
@@ -67,9 +63,9 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                         Timber.e(e, "There was an error while register");
                         RetrofitException error = (RetrofitException) e;
                         try {
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
-                            if (response != null && response.getResponseMessage() != null)
-                                getMvpView().showMessageDialog(response.getResponseMessage());
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null)
+                                getMvpView().showMessageDialog(response);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {

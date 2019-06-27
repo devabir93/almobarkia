@@ -31,16 +31,20 @@
         android:layoutDirection="locale"
         android:orientation="vertical"
         android:textDirection="locale"
+        android:id="@+id/address_layout"
+        android:background="@color/brown"
+        android:padding="@dimen/_2sdp"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
-        tools:context=".ui.address1.Address1Activity">
+        tools:context=".ui.address.AddressActivity">
 
         <TextView
+            android:id="@+id/address_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/segoeui"
-            android:background="@drawable/textview_rectanglel"
+            android:background="@color/LightGray"
             android:lines="2"
-            android:padding="@dimen/_17sdp"
+            android:padding="@dimen/_15sdp"
             android:text="م.ح: محافظة/ م: منطقة /ق: رقم قطعة / ش: شارع/ ر.ب: رقم بناية/ر.ط:رقم طابق/ ر.ش: رقم شقة"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_12ssp"

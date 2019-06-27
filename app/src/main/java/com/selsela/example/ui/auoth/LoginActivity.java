@@ -66,6 +66,8 @@ public class LoginActivity extends BaseActivity
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
         loginPresenter.attachView(this);
+        activityTitle="";
+        initToolbar();
     }
 
     @Override

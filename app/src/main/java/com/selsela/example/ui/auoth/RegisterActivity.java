@@ -55,6 +55,9 @@ public class RegisterActivity extends BaseActivity implements LoginMvpView {
         ButterKnife.bind(this);
         getActivityComponent().inject(this);
         loginPresenter.attachView(this);
+        activityTitle = "";
+        initToolbar();
+        phoneKey.setText(preferencesHelper.getCountry().getPrefix());
 
     }
 
@@ -100,6 +103,7 @@ public class RegisterActivity extends BaseActivity implements LoginMvpView {
         showMessageDialog("registerd done");
 
     }
+
     private void showPhoneDialog() {
 
         final MaterialDialog dialog = new MaterialDialog.Builder(this)

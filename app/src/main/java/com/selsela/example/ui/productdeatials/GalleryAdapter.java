@@ -9,9 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.selsela.example.R;
-import com.selsela.example.data.model.home.Color;
 import com.selsela.example.data.model.home.Image;
-import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.util.ViewUtil;
 
 import java.util.List;
@@ -49,11 +47,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Recycler
         final Image image = sliderList.get(position);
         if (image == null)
             return;
-        Glide.with(context).load(SelselaService.IMAGE_URL + sliderList.get(position).getImageUrl()).thumbnail(.7f).into(holder.productImageView);
-        holder.productImageView.setBackgroundColor(ViewUtil.getHexColor(sliderList.get(position).getColor().get(0).getColorHexa()));
+        Glide.with(context).load(sliderList.get(position).getImageUrl()).thumbnail(.7f).into(holder.productImageView);
+        if (sliderList.get(position).getColor() != null && sliderList.get(position).getColor().size() > 0) {
+            holder.productImageView.setBackgroundColor(ViewUtil.getHexColor(sliderList.get(position).getColor().get(0).getColorHexa()));
+        }
         holder.productImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    callback.onImageClick(image);
+                callback.onImageClick(image);
             }
         });
 

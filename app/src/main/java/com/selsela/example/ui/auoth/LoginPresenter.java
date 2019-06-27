@@ -67,9 +67,9 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                         Timber.e(e, "There was an error while login");
                         RetrofitException error = (RetrofitException) e;
                         try {
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
-                            if (response != null && response.getResponseMessage() != null)
-                                getMvpView().showMessageDialog(response.getResponseMessage());
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null )
+                                getMvpView().showMessageDialog(response);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {
@@ -106,9 +106,9 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                         Timber.e(e, "There was an error while register");
                         RetrofitException error = (RetrofitException) e;
                         try {
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
-                            if (response != null && response.getResponseMessage() != null)
-                                getMvpView().showMessageDialog(response.getResponseMessage());
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null )
+                                getMvpView().showMessageDialog(response);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {
@@ -144,9 +144,9 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                         Timber.e(e, "There was an error while register");
                         RetrofitException error = (RetrofitException) e;
                         try {
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
-                            if (response != null && response.getResponseMessage() != null)
-                                getMvpView().showMessageDialog(response.getResponseMessage());
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null )
+                                getMvpView().showMessageDialog(response);
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {

@@ -16,7 +16,7 @@ import java.util.List;
 public class BoxsData implements Parcelable
 {
 
-    @SerializedName("boxs")
+    @SerializedName("boxes")
     @Expose
     private List<Box> boxs = null;
 

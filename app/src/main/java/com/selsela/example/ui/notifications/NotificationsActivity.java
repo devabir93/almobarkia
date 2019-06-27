@@ -19,7 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationsActivity extends BaseActivity implements NotificationsMvpView {
-@Inject NotificationsPresenter notificationsPresenter;
+    @Inject
+    NotificationsPresenter notificationsPresenter;
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.notifications_recycleView)
@@ -41,7 +42,7 @@ public class NotificationsActivity extends BaseActivity implements Notifications
                 notificationsPresenter.get_notifications();
             }
         });
-        activityTitle=getString(R.string.notifications_label);
+        activityTitle = getString(R.string.notifications_label);
         initToolbar();
 
     }
@@ -57,6 +58,7 @@ public class NotificationsActivity extends BaseActivity implements Notifications
         }));
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

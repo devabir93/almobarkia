@@ -25,8 +25,7 @@
         <activity android:name=".ui.webview.WebViewActivity" />
         <activity android:name=".ui.privacypolicy.PrivacyPolicyActivity" />
         <activity android:name=".ui.payment.PaymentActivity" />
-        <activity android:name=".ui.address2.Address2Activity" />
-        <activity android:name=".ui.address1.Address1Activity" />
+        <activity android:name=".ui.address.AddressActivity" />
         <activity android:name=".ui.updateprofile.UpdateProfileActivity" />
         <activity android:name=".ui.contact.ContactActivity" />
         <activity android:name=".ui.previeworder.PreviewActivity" />

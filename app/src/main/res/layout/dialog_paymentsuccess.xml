@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:material="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:layoutDirection="locale"
     android:orientation="vertical"
+    android:padding="@dimen/_14sdp"
     android:textDirection="locale">
 
     <requestFocus material:ignore="MissingConstraints" />
@@ -20,57 +21,57 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
         android:src="@drawable/ic_checked"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/paymentdone_textView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/paymentdone_textView"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/done_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/segoeuib"
-        android:textSize="@dimen/_20ssp"
-        android:textColor="@color/colorprimary"
         android:gravity="center"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
-    
-    <TextView
-        android:id="@+id/feedback_textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/cancel_action"
-        app:layout_constraintTop_toBottomOf="@id/paymentdone_textView"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/feedback_label"
-        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/done_label"
         android:textColor="@color/colorprimary"
-        android:fontFamily="@font/segoeui"
-        android:textSize="@dimen/_13ssp"
-        android:textAlignment="viewStart"
-        android:layout_marginStart="@dimen/_35sdp"
-        android:layout_marginEnd="@dimen/_35sdp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
     <TextView
-        android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_18sdp"
+        android:id="@+id/feedback_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_35sdp"
         android:fontFamily="@font/segoeui"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/feedback_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toTopOf="@id/cancel_action"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentdone_textView" />
+
+    <TextView
+        android:id="@+id/cancel_action"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
+        android:fontFamily="@font/segoeui"
         android:gravity="center"
         android:padding="@dimen/_8sdp"
         android:text="@string/closeaction_label"
-        android:id="@+id/cancel_action"
-        app:layout_constraintTop_toBottomOf="@id/feedback_textView"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_18sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/feedback_textView" />
 
 
 </android.support.constraint.ConstraintLayout>

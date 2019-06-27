@@ -45,6 +45,8 @@ public class GuestScreenActivity extends BaseActivity {
         setContentView(R.layout.activity_continue_reg);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        activityTitle="";
+        initToolbar();
     }
 
     @OnClick({R.id.phoneKey, R.id.followup_bt})

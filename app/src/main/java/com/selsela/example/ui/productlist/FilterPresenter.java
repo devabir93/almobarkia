@@ -3,7 +3,7 @@ package com.selsela.example.ui.productlist;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
-import com.selsela.example.data.model.filter.Filterdata;
+import com.selsela.example.data.model.filter.FilterData;
 import com.selsela.example.ui.base.BasePresenter;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
@@ -46,14 +46,14 @@ public class FilterPresenter extends BasePresenter<FilterMvpView> {
         mDataManager.get_filter_const()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<BaseResponse<Filterdata>>() {
+                .subscribe(new Observer<BaseResponse<FilterData>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(BaseResponse<Filterdata> filterData) {
+                    public void onNext(BaseResponse<FilterData> filterData) {
                         getMvpView().showSize(filterData.getData().getSizes());
                         getMvpView().showColor(filterData.getData().getColors());
 

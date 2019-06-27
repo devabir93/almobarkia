@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -16,11 +18,13 @@ import com.selsela.example.R;
 import com.selsela.example.SelselaApplication;
 import com.selsela.example.data.local.PreferencesHelper;
 import com.selsela.example.data.local.UserSession;
+import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.injection.component.ActivityComponent;
 import com.selsela.example.injection.component.DaggerActivityComponent;
 import com.selsela.example.injection.module.ActivityModule;
+import com.selsela.example.util.ErrorResponseAdapter;
 import com.selsela.example.util.ViewUtil;
 import com.selsela.example.util.language.LanguageUtils;
 
@@ -201,5 +205,30 @@ public class BaseFragment extends Fragment implements MvpView {
         String cur = configData.getConfig().getCurrency();
         String cur_en = configData.getConfig().getCurrencyEn();
         return isArabic() ? cur : cur_en;
+    }
+
+    @Override
+    public void showMessageDialog(BaseResponse response) {
+        MaterialDialog dialog = new MaterialDialog.Builder(getContext())
+                .customView(R.layout.error_layout, false)
+                .contentGravity(GravityEnum.START)
+                .title(response.getResponseMessage())
+                .positiveText(R.string.dialog_action_ok)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .build();
+        if (response.getErrors() != null && response.getErrors().size() > 0) {
+            View view = dialog.getCustomView();
+            RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
+            ErrorResponseAdapter errorResponseAdapter = new ErrorResponseAdapter(response.getErrors());
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+            recyclerView.setAdapter(errorResponseAdapter);
+        }
+        dialog.show();
+
     }
 }

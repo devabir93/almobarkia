@@ -2,7 +2,7 @@
 
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:numberpicker="http://schemas.android.com/tools"
+    xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/product_imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_86sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_85sdp"
             android:background="@color/white"
             android:padding="@dimen/_4sdp"
             android:src="@drawable/ic_productbasket"
@@ -120,7 +120,7 @@
             android:layout_height="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            numberpicker:custom_layout="@layout/number_picker_custom_hori_layout"
+            numberpicker:custom_layout="@layout/number_picker_custom_hori_layout_small"
             numberpicker:focusable="false"
             numberpicker:max="10"
             numberpicker:min="1"

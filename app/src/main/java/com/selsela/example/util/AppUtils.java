@@ -229,7 +229,7 @@ public final class AppUtils {
         double result = new ExpressionBuilder(equ)
                 .build()
                 .evaluate();
-        Timber.d("result %s", result);
+        Timber.d("result calculateDiscount %s", result);
         return String.format(Locale.ENGLISH, "%.01f", result);
     }
 

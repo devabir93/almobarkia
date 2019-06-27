@@ -12,14 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.selsela.example.R;
+import com.selsela.example.data.local.DataHolder;
+import com.selsela.example.data.model.coupon.Copone;
 import com.selsela.example.data.model.order.Order;
 import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.send_order.ProductOrderBody;
 import com.selsela.example.data.model.user.UserData;
-import com.selsela.example.ui.address1.Address1Activity;
+import com.selsela.example.ui.address.AddressActivity;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.util.AppUtils;
-import com.selsela.example.util.Const;
 import com.selsela.example.util.Utils;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 
@@ -72,25 +73,21 @@ public class ShoppingBasketActivity extends BaseActivity implements PaymentMvpVi
         paymentPresenter.getSavedOrders();
         activityTitle = getString(R.string.cart_label);
         initToolbar();
+        DataHolder.clearOrder();
         orderBody = new OrderBody();
     }
 
     @OnClick(R.id.contiue_buying_action)
     public void onViewClicked() {
-        Intent intent = new Intent(this, Address1Activity.class);
-        startActivity(intent);
+        prepareOrder();
     }
 
 
     private void prepareOrder() {
         orderBody.setProductsStrings(Arrays.deepToString(convertObjectToArray(mProductOrderList)));
         orderBody.setProductList(mProductOrderList);
-        UserData user = mUserSession.getCurrentUser();
-        if (user != null) {
-            orderBody.setName(user.getName());
-            orderBody.setMobile(String.valueOf(user.getMobile()));
-        }
-        startActivity(new Intent(this, Address1Activity.class).putExtra(Const.ORDER, orderBody));
+        DataHolder.setOrder(orderBody);
+        startActivity(new Intent(this, AddressActivity.class));
     }
 
     @Override
@@ -155,6 +152,11 @@ public class ShoppingBasketActivity extends BaseActivity implements PaymentMvpVi
 
     @Override
     public void addedToBag(Integer aBoolean) {
+
+    }
+
+    @Override
+    public void showCoupone(Copone copone) {
 
     }
 

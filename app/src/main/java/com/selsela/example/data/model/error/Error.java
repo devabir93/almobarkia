@@ -1,5 +1,5 @@
 
-package com.selsela.almobarakia.data.model;
+package com.selsela.example.data.model.error;
 
 import android.os.Parcel;
 import android.os.Parcelable;

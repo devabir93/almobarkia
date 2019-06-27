@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Color extends SugarRecord implements Parcelable {
 
-    @SerializedName("id")
+    @SerializedName("color_id")
     @Expose
     private Integer colorId;
     @SerializedName("color_hexa")
@@ -187,4 +187,6 @@ public class Color extends SugarRecord implements Parcelable {
         result = 31 * result + (getSizes() != null ? getSizes().hashCode() : 0);
         return result;
     }
+
+
 }

@@ -10,6 +10,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.List;
+
 public class Gov implements Parcelable
 {
 
@@ -31,31 +33,9 @@ public class Gov implements Parcelable
     @SerializedName("name")
     @Expose
     private String name;
-    public final static Creator<Gov> CREATOR = new Creator<Gov>() {
-
-
-        @SuppressWarnings({
-            "unchecked"
-        })
-        public Gov createFromParcel(Parcel in) {
-            return new Gov(in);
-        }
-
-        public Gov[] newArray(int size) {
-            return (new Gov[size]);
-        }
-
-    }
-    ;
-
-    protected Gov(Parcel in) {
-        this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.countryId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
-        this.deletedAt = ((Object) in.readValue((Object.class.getClassLoader())));
-        this.name = ((String) in.readValue((String.class.getClassLoader())));
-    }
+    @SerializedName("areas")
+    @Expose
+    private List<Area> areas;
 
     /**
      * No args constructor for use in serialization
@@ -82,6 +62,60 @@ public class Gov implements Parcelable
         this.deletedAt = deletedAt;
         this.name = name;
     }
+
+    protected Gov(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            countryId = null;
+        } else {
+            countryId = in.readInt();
+        }
+        createdAt = in.readString();
+        updatedAt = in.readString();
+        name = in.readString();
+        areas = in.createTypedArrayList(Area.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        if (countryId == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(countryId);
+        }
+        dest.writeString(createdAt);
+        dest.writeString(updatedAt);
+        dest.writeString(name);
+        dest.writeTypedList(areas);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<Gov> CREATOR = new Creator<Gov>() {
+        @Override
+        public Gov createFromParcel(Parcel in) {
+            return new Gov(in);
+        }
+
+        @Override
+        public Gov[] newArray(int size) {
+            return new Gov[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -133,37 +167,55 @@ public class Gov implements Parcelable
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("countryId", countryId).append("createdAt", createdAt).append("updatedAt", updatedAt).append("deletedAt", deletedAt).append("name", name).toString();
+        return "Gov{" +
+                "id=" + id +
+                ", countryId=" + countryId +
+                ", createdAt='" + createdAt + '\'' +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", deletedAt=" + deletedAt +
+                ", name='" + name + '\'' +
+                ", areas=" + areas +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Gov)) return false;
+
+        Gov gov = (Gov) o;
+
+        if (getId() != null ? !getId().equals(gov.getId()) : gov.getId() != null) return false;
+        if (getCountryId() != null ? !getCountryId().equals(gov.getCountryId()) : gov.getCountryId() != null)
+            return false;
+        if (getCreatedAt() != null ? !getCreatedAt().equals(gov.getCreatedAt()) : gov.getCreatedAt() != null)
+            return false;
+        if (getUpdatedAt() != null ? !getUpdatedAt().equals(gov.getUpdatedAt()) : gov.getUpdatedAt() != null)
+            return false;
+        if (getDeletedAt() != null ? !getDeletedAt().equals(gov.getDeletedAt()) : gov.getDeletedAt() != null)
+            return false;
+        if (getName() != null ? !getName().equals(gov.getName()) : gov.getName() != null)
+            return false;
+        return getAreas() != null ? getAreas().equals(gov.getAreas()) : gov.getAreas() == null;
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(updatedAt).append(countryId).append(id).append(createdAt).append(name).append(deletedAt).toHashCode();
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getCountryId() != null ? getCountryId().hashCode() : 0);
+        result = 31 * result + (getCreatedAt() != null ? getCreatedAt().hashCode() : 0);
+        result = 31 * result + (getUpdatedAt() != null ? getUpdatedAt().hashCode() : 0);
+        result = 31 * result + (getDeletedAt() != null ? getDeletedAt().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getAreas() != null ? getAreas().hashCode() : 0);
+        return result;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof Gov) == false) {
-            return false;
-        }
-        Gov rhs = ((Gov) other);
-        return new EqualsBuilder().append(updatedAt, rhs.updatedAt).append(countryId, rhs.countryId).append(id, rhs.id).append(createdAt, rhs.createdAt).append(name, rhs.name).append(deletedAt, rhs.deletedAt).isEquals();
+    public List<Area> getAreas() {
+        return areas;
     }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(countryId);
-        dest.writeValue(createdAt);
-        dest.writeValue(updatedAt);
-        dest.writeValue(deletedAt);
-        dest.writeValue(name);
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
     }
-
-    public int describeContents() {
-        return  0;
-    }
-
 }
