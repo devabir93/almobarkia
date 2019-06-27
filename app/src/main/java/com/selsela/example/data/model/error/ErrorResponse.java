@@ -1,5 +1,5 @@
 
-package com.selsela.almobarakia.data.model;
+package com.selsela.example.data.model.error;
 
 import java.util.List;
 import android.os.Parcel;
@@ -46,7 +46,7 @@ public class ErrorResponse implements Parcelable
     protected ErrorResponse(Parcel in) {
         this.status = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.responseMessage = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.errors, (com.selsela.almobarakia.data.model.Error.class.getClassLoader()));
+        in.readList(this.errors, (Error.class.getClassLoader()));
         this.data = ((Object) in.readValue((Object.class.getClassLoader())));
     }
 

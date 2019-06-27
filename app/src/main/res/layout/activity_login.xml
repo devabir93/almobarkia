@@ -215,6 +215,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_21sdp"
+            android:fontFamily="@font/seguisb"
+
             android:text="@string/forget_password"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_12sdp"
@@ -222,6 +224,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password_Login_editText" />
 
+
+
     </android.support.constraint.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
 </android.support.design.widget.CoordinatorLayout>
 

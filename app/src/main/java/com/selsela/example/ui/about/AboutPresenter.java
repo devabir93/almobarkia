@@ -3,6 +3,7 @@ package com.selsela.example.ui.about;
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.about.AboutData;
+import com.selsela.example.data.model.error.ErrorResponse;
 import com.selsela.example.ui.base.BasePresenter;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;
@@ -63,7 +64,7 @@ public class AboutPresenter extends BasePresenter<AboutMvpView> {
                         Timber.e(e, "There was an error while register");
                         RetrofitException error = (RetrofitException) e;
                         try {
-                            com.selsela.almobarakia.data.model.ErrorResponse response = error.getErrorBodyAs(com.selsela.almobarakia.data.model.ErrorResponse.class);
+                            ErrorResponse response = error.getErrorBodyAs(ErrorResponse.class);
                             if (response != null && response.getResponseMessage() != null)
                                 getMvpView().showMessageDialog(response.getResponseMessage());
                         } catch (IOException e1) {

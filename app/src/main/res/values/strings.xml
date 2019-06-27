@@ -186,6 +186,11 @@
     <string name="product_erro">Product Name is required</string>
     <string name="productde_erro">Product details is required</string>
     <string name="empty_filter_result">No result found</string>
+    <string name="forget_password_label">Please enter your email address or mobile to recover your password</string>
+    <string name="forget_password_label2">يرجى كتابة كلمة البريد الإلكتروني أو الهاتف لإستعادة كلمة المرور</string>
+    <string name="username_or_mobile_label">البريد الالكتروني أو رقم الهاتف</string>
+    <string name="sendlabel">ارسال</string>
+    <string name="countryandlanguage_label">الدولة واللغة</string>
 
 
 </resources>

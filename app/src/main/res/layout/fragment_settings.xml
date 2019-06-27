@@ -137,11 +137,40 @@
         android:layout_height="25dp"
 
         />
+
+
+    <TextView
+        android:background="#0D331E01"
+        android:id="@+id/countryandlanguage_textView"
+        android:text="@string/countryandlanguage_label"
+        app:layout_constraintTop_toBottomOf="@id/myaccount_textView"
+        app:layout_constraintStart_toStartOf="@id/notification_textView"
+        app:layout_constraintEnd_toEndOf="@id/notification_textView"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:paddingTop="@dimen/_9sdp"
+        android:paddingBottom="@dimen/_9sdp"
+        android:textSize="@dimen/_17ssp"
+        android:fontFamily="@font/segoeui"
+        android:textColor="@color/colorprimary"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        />
+    <View
+        app:layout_constraintTop_toTopOf="@id/countryandlanguage_textView"
+        app:layout_constraintBottom_toBottomOf="@id/countryandlanguage_textView"
+        app:layout_constraintEnd_toEndOf="@id/countryandlanguage_textView"
+        android:background="@color/colorprimary"
+        android:layout_width="1dp"
+        android:layout_height="25dp"
+
+        />
+
     <TextView
         android:background="#0D331E01"
         android:id="@+id/about_textView"
         android:text="@string/about_label"
-        app:layout_constraintTop_toBottomOf="@id/myaccount_textView"
+        app:layout_constraintTop_toBottomOf="@id/countryandlanguage_textView"
         app:layout_constraintStart_toStartOf="@id/notification_textView"
         app:layout_constraintEnd_toEndOf="@id/notification_textView"
         android:layout_marginTop="@dimen/_15sdp"

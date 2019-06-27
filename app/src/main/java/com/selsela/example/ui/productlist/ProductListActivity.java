@@ -161,7 +161,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
 
         sizeRecyclerView = view2.findViewById(R.id.size_list);
         colorRecyclerView = view2.findViewById(R.id.color_list);
-        TextView verifyButton = view2.findViewById(R.id.fltert_back);
+        TextView verifyButton = view2.findViewById(R.id.filter_action);
         MultiSlider multiSlider = view2.findViewById(R.id.range_slider5);
         final TextView from_price = view2.findViewById(R.id.start_price);
         final TextView to_price = view2.findViewById(R.id.endprice_label_box);
@@ -179,7 +179,8 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                filterPresenter.filter(selectedColor.getId(), selectedSize.getId(), productlist.get(0).getCategoryId(), fromPrice, toPrice);
+                if (selectedColor!=null&&selectedSize!=null&&productlist.get(0)!=null)
+                   filterPresenter.filter(selectedColor.getId(), selectedSize.getId(), productlist.get(0).getCategoryId(), fromPrice, toPrice);
             }
         });
 
@@ -219,6 +220,13 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
     public void showProducts(List<Product> products) {
         dialog.dismiss();
         adapter.setProducts(products);
+    }
+
+    @Override
+    public void isSuccess(boolean isSuccess) {
+        if (isSuccess)
+            dialog.dismiss();
+
     }
 
     @Override

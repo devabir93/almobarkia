@@ -2,26 +2,26 @@ package com.selsela.example.ui.auoth;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
+import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.contact.PhoneKeyRecyclerViewAdapter;
 
+import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GuestScreenActivity extends BaseActivity {
-
+public class GuestScreenActivity extends BaseActivity implements LoginMvpView {
+    @Inject LoginPresenter loginPresenter;
     @BindView(R.id.logo)
     ImageView logo;
     @BindView(R.id.welcome_textView)
@@ -44,6 +44,7 @@ public class GuestScreenActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continue_reg);
         getActivityComponent().inject(this);
+        loginPresenter.attachView(this);
         ButterKnife.bind(this);
     }
 
@@ -54,6 +55,7 @@ public class GuestScreenActivity extends BaseActivity {
                 showPhoneDialog();
                 break;
             case R.id.followup_bt:
+                guestLogin();
                 break;
         }
     }
@@ -76,6 +78,30 @@ public class GuestScreenActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+
+    }
+
+    public void guestLogin() {
+        if (hasInternetConnection()) {
+            if (usernameEditText.getText().length() < 1) {
+                usernameEditText.setError(this.getString(R.string.empty_label));
+            } else if (phoneNumberEditText.getText().length() < 1) {
+                phoneNumberEditText.setError(this.getString(R.string.phone_empty_label));
+            } else {
+                UserBody userBody = new UserBody();
+                userBody.setMobile(phoneNumberEditText.getText().toString());
+                userBody.setName(usernameEditText.getText().toString());
+                loginPresenter.guest_log_reg(this, userBody);
+            }
+
+        } else
+                hasActiveInternetConnection(false);
+
+        }
+
+    @Override
+    public void isSuccess(boolean isSuccess) {
+
 
     }
 }

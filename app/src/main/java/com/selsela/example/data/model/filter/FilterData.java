@@ -42,10 +42,7 @@ public class Filterdata implements Parcelable
         in.readList(this.sizes, (com.selsela.example.data.model.filter.Size.class.getClassLoader()));
     }
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
+
     public Filterdata() {
     }
 

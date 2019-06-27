@@ -11,6 +11,7 @@ import com.selsela.example.data.model.country.CountryData;
 import com.selsela.example.data.model.filter.Filterdata;
 import com.selsela.example.data.model.home.HomeData;
 import com.selsela.example.data.model.home.MainCategory;
+import com.selsela.example.data.model.home.Product;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.LoginData;
@@ -20,6 +21,8 @@ import com.selsela.example.data.model.user_fav.favData;
 import com.selsela.example.data.remote.SelselaService;
 import com.selsela.example.util.Const;
 import com.selsela.example.util.language.LanguageUtils;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -143,6 +146,39 @@ public class DataManager {
                     }
                 });
     }
+
+
+    @android.support.annotation.NonNull
+    public Observable<BaseResponse> guest_log_reg(final UserBody userData) {
+
+        return mSelselaService.guest_log_reg(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
+    }
+
+
+
+
+
+
+
+
     @android.support.annotation.NonNull
     public Observable<BaseResponse> update (final UserBody userData) {
 
@@ -166,6 +202,15 @@ public class DataManager {
                     }
                 });
     }
+
+
+
+
+
+
+
+
+
         @android.support.annotation.NonNull
         public Observable<BaseResponse> change_pass (final UserBody userData) {
 
@@ -188,6 +233,30 @@ public class DataManager {
                             });
                         }
                     });
+    }
+
+   @android.support.annotation.NonNull
+    public Observable<BaseResponse> forget_password (final UserBody userData) {
+
+        return mSelselaService.change_password(userData)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends BaseResponse>>() {
+                    @Override
+                    public ObservableSource<? extends BaseResponse> apply(final BaseResponse loginResponse) {
+                        return Observable.create(new ObservableOnSubscribe<BaseResponse>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<BaseResponse> e) {
+                                try {
+                                    e.onNext(loginResponse);
+                                } catch (Exception e1) {
+                                    e.onError(e1);
+                                }
+                                e.onComplete();
+
+
+                            }
+                        });
+                    }
+                });
     }
 
 
@@ -367,6 +436,28 @@ public class DataManager {
                 });
     }
 
+
+    public Observable<List<Product>> getSearchResult(final String key) {
+
+        return mSelselaService.search(key)
+                .concatMap(new Function<BaseResponse, ObservableSource<? extends List<Product>>>() {
+                    @Override
+                    public ObservableSource<? extends List<Product>> apply(final BaseResponse response) throws Exception {
+                        return Observable.create(new ObservableOnSubscribe<List<Product>>() {
+                            @Override
+                            public void subscribe(ObservableEmitter<List<Product>> e) throws Exception {
+                                try {
+                                    Timber.d("productsResponse %s", response);
+                                   // e.onNext(response.);
+                                    e.onComplete();
+                                } catch (Exception ex) {
+                                    e.onError(ex);
+                                }
+                            }
+                        });
+                    }
+                });
+    }
 
 
     public Observable<BaseResponse<ConfigData>> getSettingData() {

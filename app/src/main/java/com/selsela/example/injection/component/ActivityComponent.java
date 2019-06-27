@@ -3,6 +3,7 @@ package com.selsela.example.injection.component;
 import com.selsela.example.injection.PerActivity;
 import com.selsela.example.injection.module.ActivityModule;
 import com.selsela.example.ui.about.AboutActivity;
+import com.selsela.example.ui.auoth.GuestScreenActivity;
 import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.auoth.RegisterActivity;
 import com.selsela.example.ui.base.BaseActivity;
@@ -43,20 +44,13 @@ public interface ActivityComponent {
     void inject(LoginActivity loginActivity);
     void inject(NotificationsActivity notificationsActivity);
     void inject(ProductListActivity  productListActivity);
-
-
-
+    void inject(GuestScreenActivity guestScreenActivity);
     void inject(RegisterActivity registerActivity);
-
     void inject(AboutActivity aboutActivity);
-
     void inject(MainActivity mainActivity);
-
     void inject(CountriesActivity countriesActivity);
-
     void inject(SplachScreenActivity splachScreenActivity);
     void inject(CategoriesActivity categoriesActivity);
-
     void inject(HomeFragment homeFragment);
     void inject(ProductDetailsActivity productDetailsActivity);
 

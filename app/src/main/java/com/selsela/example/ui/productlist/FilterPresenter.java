@@ -1,6 +1,5 @@
 package com.selsela.example.ui.productlist;
 
-
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.filter.Filterdata;
@@ -45,7 +44,7 @@ public class FilterPresenter extends BasePresenter<FilterMvpView> {
 
     public void get_filter_const() {
         checkViewAttached();
-        getMvpView().showProgressView(true);
+        //getMvpView().showProgressView(true);
 
         getMvpView().onRequestStart();
         RxUtil.dispose(mDisposable);

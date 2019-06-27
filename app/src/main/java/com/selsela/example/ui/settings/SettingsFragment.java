@@ -15,8 +15,8 @@ import com.selsela.example.ui.about.AboutActivity;
 import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.contact.ContactActivity;
+import com.selsela.example.ui.countries.CountriesActivity;
 import com.selsela.example.ui.notifications.NotificationsActivity;
-import com.selsela.example.ui.privacypolicy.PrivacyPolicyActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
 import com.selsela.example.util.Const;
@@ -62,6 +62,8 @@ public class SettingsFragment extends BaseFragment {
     @BindView(R.id.contactus_textView)
     TextView contactusTextView;
     Unbinder unbinder;
+    @BindView(R.id.countryandlanguage_textView)
+    TextView countryandlanguageTextView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -131,9 +133,9 @@ public class SettingsFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.notification_textView, R.id.cart_textView, R.id.myaccount_textView, R.id.about_textView, R.id.rules_textView, R.id.policyusage_textView, R.id.policyrecovery_textView, R.id.contactus_textView, R.id.login_label})
+    @OnClick({R.id.notification_textView, R.id.cart_textView, R.id.myaccount_textView,R.id.countryandlanguage_textView , R.id.about_textView, R.id.rules_textView, R.id.policyusage_textView, R.id.policyrecovery_textView, R.id.contactus_textView, R.id.login_label})
     public void onViewClicked(View view) {
-        Intent intent=null;
+        Intent intent = null;
         switch (view.getId()) {
             case R.id.notification_textView:
                 intent = new Intent(getContext(), NotificationsActivity.class);
@@ -141,7 +143,7 @@ public class SettingsFragment extends BaseFragment {
                 break;
 
             case R.id.cart_textView:
-                 intent = new Intent(getContext(), ShoppingBasketActivity.class);
+                intent = new Intent(getContext(), ShoppingBasketActivity.class);
                 getContext().startActivity(intent);
 
                 break;
@@ -179,6 +181,11 @@ public class SettingsFragment extends BaseFragment {
                 getContext().startActivity(intent);
                 break;
 
+
+            case R.id.countryandlanguage_textView:
+                intent = new Intent(getContext(), CountriesActivity.class);
+                getContext().startActivity(intent);
+                break;
         }
     }
 

@@ -21,7 +21,6 @@ import com.selsela.example.data.model.send_order.AddressBody;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.data.model.user_fav.favData;
-import com.selsela.example.data.model.user_fav.favProduct;
 import com.selsela.example.util.RxErrorHandlingCallAdapterFactory;
 import com.selsela.example.util.language.LanguageUtils;
 
@@ -52,10 +51,14 @@ public interface SelselaService {
     Observable<BaseResponse<LoginData>> register(@Body UserBody userBody);
     @POST("contact_us")
     Observable<BaseResponse> contact_us(@Body UserBody userBody);
+    @POST("user/guest_log_reg")
+    Observable<BaseResponse> guest_log_reg(@Body UserBody userBody);
     @POST("user/update_profile")
     Observable<BaseResponse> update_profile(@Body UserBody userBody);
     @POST("user/change_password")
     Observable<BaseResponse> change_password(@Body UserBody userBody);
+    @POST("user/forget_password")
+    Observable<BaseResponse> forget_password(@Body UserBody userBody);
     @POST("user/add_rate")
     Observable<BaseResponse> add_rate(@Body UserBody userBody);
     @POST("specialOrder")
@@ -90,6 +93,8 @@ public interface SelselaService {
 
     @GET("get_countries")
     Observable<BaseResponse<CountryData>> get_countries();
+    @GET("search")
+    Observable<BaseResponse> search(@Query("field_text")  String key);
 
     @GET("filter")
     Observable<BaseResponse<MainCategory>> filter(@Query("country_id") int country_id, @Query("category_id") int categoryId, @Query("color_id")int colorId , @Query("size_id")int sizeId,@Query("price_from") int priceForm,@Query("price_to") int priceTo );
