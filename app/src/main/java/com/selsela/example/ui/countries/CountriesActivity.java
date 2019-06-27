@@ -76,7 +76,6 @@ public class CountriesActivity extends BaseActivity implements CountryMvpView {
             public void onCountrySelected(Country country, int position) {
                 preferencesHelper.addCountry(country);
                 setFirstRun(false);
-
                 Intent intent = new Intent(CountriesActivity.this, MainActivity.class);
                 startActivity(intent);
             }

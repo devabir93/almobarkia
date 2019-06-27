@@ -3,11 +3,14 @@ package com.selsela.example.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.selsela.example.R;
 import com.selsela.example.data.model.config.ConfigData;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.countries.CountriesActivity;
+
 import javax.inject.Inject;
+
 public class SplachScreenActivity extends BaseActivity implements MainMvpView {
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
@@ -35,13 +38,13 @@ public class SplachScreenActivity extends BaseActivity implements MainMvpView {
                     Intent mainIntent = new Intent(SplachScreenActivity.this, CountriesActivity.class);
                     SplachScreenActivity.this.startActivity(mainIntent);
                     SplachScreenActivity.this.finish();
-                }else{
-                    Intent intent = new Intent(SplachScreenActivity.this,MainActivity.class);
-                SplachScreenActivity.this.startActivity(intent);
-                SplachScreenActivity.this.finish();
-                 }
+                } else {
+                    Intent intent = new Intent(SplachScreenActivity.this, MainActivity.class);
+                    SplachScreenActivity.this.startActivity(intent);
+                    SplachScreenActivity.this.finish();
+                }
 
-        }
-             } ,SPLASH_DISPLAY_LENGTH);
-}
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+    }
 }
