@@ -16,6 +16,7 @@ import com.selsela.example.data.model.country.GovsData;
 import com.selsela.example.data.model.coupon.CheckCoponData;
 import com.selsela.example.data.model.filter.FilterData;
 import com.selsela.example.data.model.home.HomeData;
+import com.selsela.example.data.model.home.MainCategory;
 import com.selsela.example.data.model.notifications.Notificationsdata;
 import com.selsela.example.data.model.order.OrderBody;
 import com.selsela.example.data.model.order.OrderData;
@@ -53,12 +54,16 @@ public interface SelselaService {
 
     @POST("contact_us")
     Observable<BaseResponse> contact_us(@Body UserBody userBody);
+    @POST("user/guest_log_reg")
+    Observable<BaseResponse> guest_log_reg(@Body UserBody userBody);
 
     @POST("user/update_profile")
     Observable<BaseResponse> update_profile(@Body UserBody userBody);
 
     @POST("user/change_password")
     Observable<BaseResponse> change_password(@Body UserBody userBody);
+    @POST("user/forget_password")
+    Observable<BaseResponse> forget_password(@Body UserBody userBody);
 
     @POST("user/add_rate")
     Observable<BaseResponse> add_rate(@Body UserBody userBody);
@@ -104,6 +109,11 @@ public interface SelselaService {
 
     @GET("get_countries")
     Observable<BaseResponse<CountryData>> get_countries();
+    @GET("search")
+    Observable<BaseResponse> search(@Query("field_text")  String key);
+
+    @GET("filter")
+    Observable<BaseResponse<MainCategory>> filter(@Query("country_id") int country_id, @Query("category_id") int categoryId, @Query("color_id")int colorId , @Query("size_id")int sizeId,@Query("price_from") int priceForm,@Query("price_to") int priceTo );
 
     @GET("get_home")
     Observable<BaseResponse<HomeData>> get_home(@Query("country_id") int country_id,

@@ -15,6 +15,7 @@ import com.selsela.example.ui.about.AboutActivity;
 import com.selsela.example.ui.auoth.LoginActivity;
 import com.selsela.example.ui.base.BaseFragment;
 import com.selsela.example.ui.contact.ContactActivity;
+import com.selsela.example.ui.countries.CountriesActivity;
 import com.selsela.example.ui.notifications.NotificationsActivity;
 import com.selsela.example.ui.shoppingbasket.ShoppingBasketActivity;
 import com.selsela.example.ui.updateprofile.UpdateProfileActivity;
@@ -64,6 +65,8 @@ public class SettingsFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.username)
     TextView username;
+    @BindView(R.id.countryandlanguage_textView)
+    TextView countryandlanguageTextView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -132,7 +135,7 @@ public class SettingsFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.notification_textView, R.id.cart_textView, R.id.myaccount_textView, R.id.about_textView, R.id.rules_textView, R.id.policyusage_textView, R.id.policyrecovery_textView, R.id.contactus_textView, R.id.login_label})
+    @OnClick({R.id.notification_textView, R.id.cart_textView, R.id.myaccount_textView,R.id.countryandlanguage_textView , R.id.about_textView, R.id.rules_textView, R.id.policyusage_textView, R.id.policyrecovery_textView, R.id.contactus_textView, R.id.login_label})
     public void onViewClicked(View view) {
         Intent intent = null;
         switch (view.getId()) {
@@ -192,6 +195,11 @@ public class SettingsFragment extends BaseFragment {
                 }
                 break;
 
+
+            case R.id.countryandlanguage_textView:
+                intent = new Intent(getContext(), CountriesActivity.class);
+                getContext().startActivity(intent);
+                break;
         }
     }
 

@@ -41,28 +41,24 @@ public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRecycler
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         final Color color = colors.get(position);
-        if (color == null)
+        if (color==null)
             return;
-        // holder.color.setText(color.getColorHexa());
-        //if (color.getColorHexa()!=null)
-        SomeDrawable someDrawable = new SomeDrawable(ViewUtil.getHexColor(color.getColorHexa()), GradientDrawable.OVAL);
+        if (color.getColorHexa()!=null) {
+            SomeDrawable someDrawable = new SomeDrawable(ViewUtil.getHexColor(color.getColorHexa()), GradientDrawable.OVAL);
+            holder.color.setBackground(someDrawable);
+        }
 
         holder.color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateDataClickListener.oncolorSelected(color,position);
 
             }
         });
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 

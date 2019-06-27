@@ -15,6 +15,8 @@ public interface HomeMvpView extends MvpView {
     void showMostPopular(List<Product> mostPopular);
     void showCategories(List<MainCategory> categoryList);
     void showStores(List<Store> stores);
+    void showSearchResult(List<Product> products);
+
 
 
 }

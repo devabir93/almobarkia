@@ -41,6 +41,12 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
 
     }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+        notifyDataSetChanged();
+
+    }
+
     public void setLayout(int type) {
         Timber.d("type %s", type);
         this.type = type;
@@ -81,7 +87,7 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         holder.rateLabel.setText(product.getRate());
         holder.productDescription.setText(product.getName());
 
-        holder.productPrice.setText(product.getPrice() + ""+currency );
+        holder.productPrice.setText(product.getPrice() + "" + currency);
         if (product.getRate() != null)
             holder.ratingBar.setRating(Float.parseFloat(product.getRate()));
 
@@ -133,8 +139,6 @@ public class ProductRecyclerViewAdapter extends RecyclerView.Adapter<ProductRecy
         RatingBar ratingBar;
         @BindView(R.id.prprice_label)
         TextView realPrice;
-
-
 
 
         public ViewHolder(View view) {

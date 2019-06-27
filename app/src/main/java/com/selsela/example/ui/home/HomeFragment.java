@@ -96,6 +96,7 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     SliderLayout mDemoSlider;
     @BindView(R.id.custom_indicator)
     PagerIndicator custom_indicator;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -359,6 +360,16 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     @Override
     public void showStores(List<Store> stores) {
 
+    }
+
+    @Override
+    public void showSearchResult(List<Product> products) {
+    Intent intent = new Intent(getContext(),ProductListActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelableArrayList(Const.PRODUCT, (ArrayList) products);
+       // b.putString(Const.TYPE, ProductCategoryFragment.class.getName());
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
 

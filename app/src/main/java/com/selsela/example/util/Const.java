@@ -13,4 +13,6 @@ public class Const {
     public static String Details = "Details";
     public static final Integer KUWAIT = 965;
     public static String Name = "Name";
+    public static String PRODUCT = "PRODUCT";
+    public static String TYPE = "TYPE";
 }

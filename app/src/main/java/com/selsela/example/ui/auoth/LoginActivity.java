@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.GravityEnum;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.selsela.example.R;
 import com.selsela.example.data.model.user.UserBody;
-import com.selsela.example.ui.about.AboutActivity;
 import com.selsela.example.ui.base.BaseActivity;
 import com.selsela.example.ui.main.MainActivity;
 
@@ -52,6 +52,10 @@ public class LoginActivity extends BaseActivity
     TextView forgetPassword;
     @BindView(R.id.linearLayout5)
     ConstraintLayout linearLayout5;
+    @BindView(R.id.line2)
+    View line2;
+    @BindView(R.id.passuser_data)
+    TextView passuserData;
 
 
     public LoginActivity() {
@@ -97,11 +101,13 @@ public class LoginActivity extends BaseActivity
         if (loginResponse) {
 
             startActivity(new Intent(this, MainActivity.class)
-                   .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                             Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK)
-           );
+            );
         }
+        //else if (loginResponse)
+          // dialog.dismiss();
     }
 
     private void login() {
@@ -152,4 +158,51 @@ public class LoginActivity extends BaseActivity
     public void onRequestEnd() {
 
     }
+
+    @OnClick(R.id.forget_password)
+    public void onViewClicked() {
+        showChangeDialog();
+
+
+    }
+
+    private void showChangeDialog() {
+        dialog = new MaterialDialog.Builder(this)
+                .customView(R.layout.dialog2_forgetpass, false)
+                .contentGravity(GravityEnum.START)
+                .build();
+        dialog.show();
+        View view2 = dialog.getCustomView();
+        final TextView email_addreess = view2.findViewById(R.id.email_editText);
+        final TextView verifyButton  = view2.findViewById(R.id.send_label);
+        final TextView cancelButton = view2.findViewById(R.id.cancel_textView);
+        verifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hasInternetConnection()) {
+                    if (email_addreess.getText().length() < 1) {
+                        email_addreess.setError(getString(R.string.empty_label));
+
+                    } else {
+                        UserBody userBody = new UserBody();
+                        String email = email_addreess.getText().toString();
+                        userBody.setEmailL(email);
+                        loginPresenter.forget_password(getApplicationContext(), userBody);
+
+
+                    }
+                } else
+                    hasActiveInternetConnection(false);
+
+            }
+                });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
 }
+

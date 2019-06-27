@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
+import com.selsela.example.data.model.error.ErrorResponse;
 import com.selsela.example.data.model.order.OrderData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.base.BasePresenter;
@@ -141,7 +142,7 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
 
     public void specialOrder(final Context context, final UserBody userBody) {
         checkViewAttached();
-      //  getMvpView().showProgressView(true);
+       getMvpView().showProgressView(true);
         RxUtil.dispose(mDisposable);
         mDataManager.specialOrder(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -171,14 +172,14 @@ public class OrdersPresenter extends BasePresenter<OrdresMvpView> {
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
                         }
-                       // getMvpView().showProgressView(false);
+                        getMvpView().showProgressView(false);
 
 
                     }
 
                     @Override
                     public void onComplete() {
-                       // getMvpView().showProgressView(false);
+                        getMvpView().showProgressView(false);
 
                     }
                 });

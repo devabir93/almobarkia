@@ -29,9 +29,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.apptik.widget.MultiSlider;
 
 public class ProductListActivity extends BaseActivity implements FilterMvpView {
-    @Inject FilterPresenter filterPresenter;
+    @Inject
+    FilterPresenter filterPresenter;
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     @BindView(R.id.list_textView)
@@ -55,6 +57,10 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
     private RecyclerView colorRecyclerView;
     private RecyclerView sizeRecyclerView;
     private List<Color> colors;
+    private MaterialDialog dialog;
+    private Size selectedSize;
+    private Color selectedColor;
+    private int fromPrice, toPrice;
 
 
     @Override
@@ -145,7 +151,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
     private void showChangeDialog() {
         filterPresenter.get_filter_const();
 
-        final MaterialDialog dialog = new MaterialDialog.Builder(this)
+        dialog = new MaterialDialog.Builder(this)
                 .customView(R.layout.dialog_filter, false)
                 .contentGravity(GravityEnum.START)
                 .build();
@@ -153,13 +159,28 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
 
         View view2 = dialog.getCustomView();
 
-         sizeRecyclerView = view2.findViewById(R.id.size_list);
-        sizeRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        TextView verifyButton = view2.findViewById(R.id.fltert_back);
+        sizeRecyclerView = view2.findViewById(R.id.size_list);
+        colorRecyclerView = view2.findViewById(R.id.color_list);
+        TextView verifyButton = view2.findViewById(R.id.filter_action);
+        MultiSlider multiSlider = view2.findViewById(R.id.range_slider5);
+        final TextView from_price = view2.findViewById(R.id.start_price);
+        final TextView to_price = view2.findViewById(R.id.endprice_label_box);
+        multiSlider.setOnThumbValueChangeListener(new MultiSlider.OnThumbValueChangeListener() {
+            @Override
+            public void onValueChanged(MultiSlider multiSlider, MultiSlider.Thumb thumb, int thumbIndex, int value) {
+                if (thumbIndex == 0) {
+                    fromPrice = value;
+                    from_price.setText(fromPrice + "");
+                } else
+                    toPrice = value;
+                to_price.setText(toPrice + "");
+            }
+        });
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                if (selectedColor!=null&&selectedSize!=null&&productlist.get(0)!=null)
+                   filterPresenter.filter(selectedColor.getId(), selectedSize.getId(), productlist.get(0).getCategoryId(), fromPrice, toPrice);
             }
         });
 
@@ -172,6 +193,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
         sizeRecyclerView.setAdapter(new SizeRecyclerViewAdapter(sizeList, this, new SizeRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void oncolorSelected(Size size, int position) {
+                selectedSize = size;
 
             }
         }));
@@ -181,14 +203,35 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView {
 
     @Override
     public void showColor(List<Color> colorList) {
-        this.colors=colorList;
+        this.colors = colorList;
         colorRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         colorRecyclerView.setAdapter(new ColorRecyclerViewAdapter(colorList, this, new ColorRecyclerViewAdapter.UpdateDataClickListener() {
             @Override
             public void oncolorSelected(Color color, int position) {
+                selectedColor = color;
+
 
             }
         }));
 
+    }
+
+    @Override
+    public void showProducts(List<Product> products) {
+        dialog.dismiss();
+        adapter.setProducts(products);
+    }
+
+    @Override
+    public void isSuccess(boolean isSuccess) {
+        if (isSuccess)
+            dialog.dismiss();
+
+    }
+
+    @Override
+    public void showEmptyFilterResult() {
+        dialog.dismiss();
+        showMessageDialog(getString(R.string.empty_filter_result));
     }
 }

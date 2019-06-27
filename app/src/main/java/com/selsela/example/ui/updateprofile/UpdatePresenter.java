@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
+import com.selsela.example.data.model.error.ErrorResponse;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.auoth.LoginMvpView;

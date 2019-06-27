@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
+import com.selsela.example.data.model.error.ErrorResponse;
 import com.selsela.example.data.model.user.LoginData;
 import com.selsela.example.data.model.user.UserBody;
 import com.selsela.example.ui.base.BasePresenter;
@@ -45,6 +46,8 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
 
     public void login(final Context context, final UserBody userBody) {
         checkViewAttached();
+        getMvpView().showProgressView(true);
+
         RxUtil.dispose(mDisposable);
         mDataManager.makeLogin(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,18 +78,25 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
                         }
+                        getMvpView().showProgressView(false);
+
 
                     }
 
                     @Override
                     public void onComplete() {
+                        getMvpView().showProgressView(false);
+
                     }
                 });
     }
 
     public void register(final Context context, final UserBody userBody) {
         checkViewAttached();
+        getMvpView().showProgressView(true);
+
         RxUtil.dispose(mDisposable);
+
         mDataManager.makeRegister(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -114,16 +124,22 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
                         }
+                        getMvpView().showProgressView(false);
+
 
                     }
 
                     @Override
                     public void onComplete() {
+                        getMvpView().showProgressView(false);
+
                     }
                 });
     }
+
     public void contact_us(final Context context, final UserBody userBody) {
         checkViewAttached();
+        getMvpView().showProgressView(true);
         RxUtil.dispose(mDisposable);
         mDataManager.contact(userBody)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -151,19 +167,112 @@ public class LoginPresenter extends BasePresenter<LoginMvpView> {
                             e1.printStackTrace();
                         } catch (RetrofitException e1) {
                             e1.printStackTrace();
-                        }  //     getMvpView().showProgressView(false);
+                        }
+                        getMvpView().showProgressView(false);
 
 
                     }
 
                     @Override
                     public void onComplete() {
+                        getMvpView().showProgressView(false);
+
+                    }
+                });
+    }
+
+    public void guest_log_reg(final Context context, final UserBody userBody) {
+        checkViewAttached();
+        getMvpView().showProgressView(true);
+        RxUtil.dispose(mDisposable);
+        mDataManager.guest_log_reg(userBody)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<BaseResponse>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        mDisposable = d;
+                    }
+
+                    @Override
+                    public void onNext(@NonNull BaseResponse loginResponse) {
+                        getMvpView().showMessageDialog(loginResponse.getResponseMessage());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Timber.e(e, "There was an error while guet_login");
+                        RetrofitException error = (RetrofitException) e;
+                        try {
+                            BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                            if (response != null && response.getResponseMessage() != null)
+                                getMvpView().showMessageDialog(response.getResponseMessage());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        } catch (RetrofitException e1) {
+                            e1.printStackTrace();
+                        }
+                        getMvpView().showProgressView(false);
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        getMvpView().showProgressView(false);
+
                     }
                 });
     }
 
 
 
-}
+        public void forget_password( final Context context, final UserBody userBody){
+            checkViewAttached();
+            getMvpView().showProgressView(true);
+            RxUtil.dispose(mDisposable);
+            mDataManager.forget_password(userBody)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(new Observer<BaseResponse>() {
+                        @Override
+                        public void onSubscribe(@NonNull Disposable d) {
+                            mDisposable = d;
+                        }
+
+                        @Override
+                        public void onNext(@NonNull BaseResponse loginResponse) {
+                            getMvpView().showMessageDialog(loginResponse.getResponseMessage());
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Timber.e(e, "There was an error while register");
+                            RetrofitException error = (RetrofitException) e;
+                            try {
+                                BaseResponse response = error.getErrorBodyAs(BaseResponse.class);
+                                if (response != null)
+                                    getMvpView().showMessageDialog(response.);
+                            } catch (IOException e1) {
+                                e1.printStackTrace();
+                            } catch (RetrofitException e1) {
+                                e1.printStackTrace();
+                            }
+                            getMvpView().showProgressView(false);
+
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            getMvpView().showProgressView(false);
+
+                        }
+                    });
+        }
+
+
+    }
+
 
 

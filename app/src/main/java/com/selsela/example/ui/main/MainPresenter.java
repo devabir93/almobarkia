@@ -3,6 +3,8 @@ package com.selsela.example.ui.main;
 import com.selsela.example.data.DataManager;
 import com.selsela.example.data.model.BaseResponse;
 import com.selsela.example.data.model.config.ConfigData;
+import com.selsela.example.data.model.error.ErrorResponse;
+import com.selsela.example.ui.about.AboutMvpView;
 import com.selsela.example.ui.base.BasePresenter;
 import com.selsela.example.util.RetrofitException;
 import com.selsela.example.util.RxUtil;

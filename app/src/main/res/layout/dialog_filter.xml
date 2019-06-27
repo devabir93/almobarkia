@@ -45,22 +45,24 @@
         android:layout_marginTop="28dp"
         app:drawThumbsApart="true"
         app:layout_constraintEnd_toEndOf="@id/endprice_label_box"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/startpric_label"
+        app:layout_constraintStart_toStartOf="@id/flterprice_label"
         app:layout_constraintTop_toBottomOf="@id/startpric_label"
-        app:stepsThumbsApart="5"
+        app:stepsThumbsApart="100"
+        app:thumbValue1="100"
+        app:thumbValue2="1000"
         app:thumbColor="@color/brown"
-
+        app:trackColor="@color/colorprimary"
         app:thumbNumber="2" />
 
 
 
     <TextView
+        android:id="@+id/start_price"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingStart="@dimen/_9sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:paddingTop="@dimen/_5sdp"
-        android:text="@string/startprice_label"
+        android:text="100"
         android:textAlignment="viewStart"
         android:background="@drawable/textview_rectanglel"
         app:layout_constraintStart_toEndOf="@id/startpric_label"
@@ -86,11 +88,11 @@
         android:paddingStart="@dimen/_9sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:paddingTop="@dimen/_5sdp"
-        android:text="@string/endprice_label"
+        android:text="1000"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/textview_rectanglel"
         app:layout_constraintTop_toTopOf="@id/startpric_label"
-        android:layout_marginEnd="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -147,6 +149,8 @@
         app:layout_constraintStart_toStartOf="@id/startpric_label"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+
         tools:itemCount="4"
         app:layoutManager="LinearLayoutManager"
         android:orientation="horizontal"
@@ -174,6 +178,8 @@
         app:layoutManager="LinearLayoutManager"
         android:layout_marginTop="@dimen/_24sdp"
         android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+
         android:orientation="horizontal"
         tools:listitem="@layout/colorslist"
         android:layout_width="match_parent"

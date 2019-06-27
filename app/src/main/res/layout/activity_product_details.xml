@@ -93,6 +93,8 @@
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_6sdp"
+                    android:isIndicator="true"
+
                     app:layout_constraintStart_toStartOf="@id/product_descrption"
                     app:layout_constraintTop_toBottomOf="@id/product_descrption"
                     app:mrb_progressTint="@color/yellow" />
