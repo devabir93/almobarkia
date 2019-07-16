@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:layoutDirection="locale"
+    android:textDirection="locale"
     android:layout_height="match_parent">
 
     <include layout="@layout/toolbar" />
@@ -90,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_25sdp"
             android:background="@color/colorprimary"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:gravity="center"
             android:paddingTop="@dimen/_7sdp"
             android:paddingBottom="@dimen/_12sdp"
@@ -109,7 +110,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:gravity="center"
             android:paddingTop="@dimen/_7sdp"
             android:paddingBottom="@dimen/_12sdp"
@@ -167,7 +168,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:background="@color/brown"
             android:drawableEnd="@drawable/ic_next"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:paddingStart="@dimen/_40sdp"
             android:paddingTop="@dimen/_10sdp"
             android:paddingEnd="@dimen/_20sdp"

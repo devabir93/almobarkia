@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
     android:background="@color/LightGray">
 
     <android.support.constraint.ConstraintLayout
@@ -21,6 +23,7 @@
             android:layout_marginEnd="@dimen/_22sdp"
             android:background="@color/gray"
             android:padding="@dimen/_8sdp"
+            android:layoutDirection="rtl"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -29,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_22sdp"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:text="@string/building_label"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
@@ -44,7 +47,7 @@
                 android:layout_gravity="center|center_vertical"
                 android:layout_marginTop="8dp"
                 android:thumbTint="@color/brown"
-                android:checked="true"
+                android:checked="false"
                 app:layout_constraintEnd_toStartOf="@id/house"
                 app:layout_constraintStart_toEndOf="@id/building"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +58,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginEnd="@dimen/_22sdp"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:text="@string/home_label"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
@@ -81,7 +84,7 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_22sdp"
                 android:background="@drawable/textview_stroke"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:gravity="start"
 
                 android:hint="@string/building_input"
@@ -114,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
@@ -142,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/textview_stroke"
-                    android:fontFamily="@font/segoeui"
+                    android:fontFamily="@font/din_next_arabic_regular"
                     android:gravity="start"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:hint="@string/floor_input"
@@ -175,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:background="@color/LightGray"
-                    android:fontFamily="@font/seguisb"
+                    android:fontFamily="@font/din_next_arabic_bold"
                     android:paddingStart="@dimen/_6sdp"
                     android:paddingTop="@dimen/_1sdp"
                     android:paddingEnd="@dimen/_6sdp"
@@ -197,7 +200,7 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_16sdp"
                     android:background="@drawable/textview_stroke"
-                    android:fontFamily="@font/segoeui"
+                    android:fontFamily="@font/din_next_arabic_regular"
                     android:gravity="start"
                     android:hint="@string/flat_input"
                     android:imeOptions="actionNext"
@@ -229,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:background="@color/LightGray"
-                    android:fontFamily="@font/seguisb"
+                    android:fontFamily="@font/din_next_arabic_bold"
                     android:paddingStart="@dimen/_6sdp"
                     android:paddingTop="@dimen/_1sdp"
                     android:paddingEnd="@dimen/_6sdp"
@@ -259,7 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:text="@string/save_address"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"

@@ -6,10 +6,12 @@
     <color name="gray">#ffdfdfdf</color>
     <color name="LightGray">#FBFBFB</color>
     <color name="colorprimary">#331E01</color>
+    <color name="transcolorprimary">#8C331E01</color>
     <color name="brown">#E1C79B</color>
     <color name="yellow">#F3B700</color>
     <color name="transparent">#0000</color>
     <color name="grey">#DEDEDE</color>
+    <color name="app_menu_grey">#F3F3F3</color>
 
     <!--100% — FF-->
     <!--95% — F2-->

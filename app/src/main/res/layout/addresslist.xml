@@ -41,7 +41,7 @@
             android:id="@+id/address_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:background="@color/LightGray"
             android:lines="2"
             android:padding="@dimen/_15sdp"

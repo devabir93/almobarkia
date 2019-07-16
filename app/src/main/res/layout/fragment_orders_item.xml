@@ -10,10 +10,14 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constlayout"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_99sdp"
-        android:background="#26000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#F2F0ED"
         android:orientation="horizontal"
+        android:paddingTop="@dimen/_14sdp"
+        android:paddingBottom="@dimen/_14sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,8 +26,7 @@
             android:id="@+id/status_label"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:fontFamily="@font/segoeuisl"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:text="@string/status"
             android:textAlignment="viewStart"
             android:textColor="@color/colorprimary"
@@ -36,9 +39,8 @@
             android:id="@+id/status_type"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_14sdp"
-            android:fontFamily="@font/segoeui"
-            android:text="@string/status_type"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:textAlignment="viewStart"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_13ssp"
@@ -53,49 +55,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:fontFamily="@font/segoeui"
-        android:text="@string/ordershour_label"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:textAlignment="viewStart"
-        android:textColor="@color/colorprimary"
+        android:textColor="#80331E01"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toStartOf="@id/constlayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/orders_number_label" />
 
     <TextView
         android:id="@+id/orders_number_label"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
-        android:fontFamily="@font/segoeuib"
-        android:text="@string/order_number_label"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@id/ordershour_label"
+        app:layout_constraintBottom_toTopOf="@id/product_sumtexView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/ordershour_label" />
+        app:layout_constraintTop_toTopOf="@id/constlayout" />
 
     <TextView
         android:id="@+id/products_total_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/segoeuisl"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:text="@string/products_total_label"
         android:textAlignment="viewStart"
-        android:textColor="@color/colorprimary"
+        android:textColor="#80331E01"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="@id/orders_number_label"
-        app:layout_constraintTop_toBottomOf="@id/orders_number_label" />
+        app:layout_constraintTop_toBottomOf="@id/orders_number_label"
+        app:layout_constraintBottom_toBottomOf="@id/constlayout"
+
+        />
 
     <TextView
         android:id="@+id/product_sumtexView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_11sdp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:text="03"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"

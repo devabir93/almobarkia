@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/productImageview"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_115sdp"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_110sdp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
         android:padding="@dimen/_6sdp"
@@ -29,7 +29,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:background="@drawable/textview_oval"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:paddingStart="@dimen/_2sdp"
         android:paddingTop="@dimen/_5sdp"
         android:paddingEnd="@dimen/_2sdp"
@@ -46,9 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:maxLines="2"
-        android:text="@string/productdesc_label"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +59,7 @@
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
         android:id="@+id/rating_bar"
         android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_10sdp"
+        android:layout_height="@dimen/_12sdp"
         app:layout_constraintStart_toStartOf="@id/product_descrption"
         app:layout_constraintTop_toBottomOf="@id/product_descrption"
         app:layout_constraintBottom_toTopOf="@id/productprice_label"
@@ -76,7 +75,7 @@
         android:textSize="@dimen/_11ssp"
         app:layout_constraintBottom_toBottomOf="@id/rating_bar"
         app:layout_constraintStart_toEndOf="@id/rating_bar"
-        app:layout_constraintTop_toTopOf="@id/rating_bar" />
+        />
 
 
 
@@ -84,7 +83,6 @@
         android:id="@+id/productprice_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/productprice_label"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_11ssp"
         app:layout_constraintBottom_toBottomOf="@id/productImageview"

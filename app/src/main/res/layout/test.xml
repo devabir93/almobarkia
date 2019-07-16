@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/LightGray"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:paddingTop="@dimen/_3sdp"
         android:paddingBottom="@dimen/_1sdp"
         android:paddingStart="@dimen/_6sdp"

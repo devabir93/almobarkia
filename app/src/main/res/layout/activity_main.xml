@@ -5,9 +5,24 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale"
     tools:context=".ui.main.MainActivity">
 
-    <include layout="@layout/toolbar" />
+    <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/my_toolbar"
+            style="@style/CustomActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp" />
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/frame_container"
@@ -16,18 +31,81 @@
         android:layout_marginBottom="?actionBarSize"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior" />
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/backgroundcolor"
-        app:itemIconTint="@color/brown"
-        app:itemTextColor="@color/brown"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        android:layout_gravity="bottom">
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/colorprimary"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:itemBackground="@drawable/bottom_nav__background_selector"
+            app:itemIconTint="@drawable/bottom_nav_selector"
+            app:itemTextAppearanceActive="@style/bottom_nav_text_appearance"
+            app:itemTextAppearanceInactive="@style/bottom_nav_inactive_text_appearance"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
+
+        <LinearLayout
+            android:id="@+id/line_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_7sdp"
+            android:weightSum="5"
+            app:layout_constraintBottom_toTopOf="@id/nav_view"
+            app:layout_constraintStart_toStartOf="@id/nav_view">
+
+            <View
+
+                android:id="@+id/pos0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/brown" />
+
+            <View
+
+                android:id="@+id/pos1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/brown"
+                android:visibility="invisible" />
+
+            <View
+
+                android:id="@+id/pos2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/brown"
+                android:visibility="invisible" />
+
+            <View
+
+                android:id="@+id/pos3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/brown"
+                android:visibility="invisible" />
+
+            <View
+                android:id="@+id/pos4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/brown"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.design.widget.CoordinatorLayout>

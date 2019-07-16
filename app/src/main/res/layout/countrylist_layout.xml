@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_flag"
         android:drawablePadding="@dimen/_15sdp"
-        android:fontFamily="@font/segoeui"
+        android:fontFamily="@font/din_next_arabic_regular"
         android:text="@string/country_label"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"

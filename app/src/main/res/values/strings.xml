@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Almobarakia</string>
+    <string name="app_name">سوق المباركية</string>
 
     <string name="action_settings">Settings</string>
 
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_error_title">Sorry</string>
-    <string name="order_details">تفاصيل الطلب</string>
+    <string name="order_details">Order Details</string>
 
     <string name="empty_ribots">There aren\'t any ribots</string>
     <string name="error_loading_ribots">There was a problem loading the ribots</string>
@@ -22,169 +22,209 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="forget_password">نسيت كلمة المرور؟</string>
-    <string name="username">اسم المستخدم</string>
-    <string name="sign_uplabel">انشاء حساب</string>
-    <string name="visitor">دخول زائر</string>
-    <string name="user_data_label">ادخل البريد الالكتروني / رقم الجوال</string>
-    <string name="password">ادخل كلمة المرور</string>
-    <string name="requriments">الرجاء ادخال البيانات التالية لانشاء حساب جديد</string>
-    <string name="email_label">ادخل البريد الالكتروني</string>
-    <string name="user_name_label">ادخل اسمك</string>
-    <string name="phone_numberlabel">ادخل رقم الجوال</string>
-    <string name="sure_label">تأكيد</string>
-    <string name="hello_label">مرحبا بك </string>
-    <string name="data_entry_label">الرجاء إدخال البانات  للمتابعة</string>
-    <string name="followup_label">متابعة</string>
-    <string name="visitor_label">عزيزي الزائر</string>
-    <string name="choosecountry_label">اختر الدولة المناسبة</string>
-    <string name="country_label">السعودية</string>
-    <string name="dialog_label">تقييم المنتج</string>
-    <string name="evaluation_desc_label">نشكر ثقتك بنا نرجوا اخبارنا برأيك لنقدم لكم افضل خدمة</string>
-    <string name="send_label">إرسال</string>
-    <string name="cancel_label">الغاء</string>
-    <string name="desc">about</string>
-    <string name="done_label">تمت العملية بنجاح</string>
-    <string name="feedback_label">شكرا لثقتك بنا يمكنك متابعة الطلب من خلال شاشة طلباتي</string>
-    <string name="closeaction_label">إغلاق</string>
-    <string name="language_label">اختر اللغة</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="forget_password"> Forgot your password? </string>
+        
+    <string name="username"> Username </string>
+        
+    <string name="sign_uplabel"> Create account </string>
+        
+    <string name="visitor"> Guest Login </string>
+        
+    <string name="user_data_label"> Enter email / mobile number </string>
+        
+    <string name="password"> Enter password </string>
+        
+    <string name="requirements"> Please enter the following data to create a new account </string>
+        
+    <string name="email_label"> Enter email </string>
+        
+    <string name="user_name_label"> Enter your name </string>
+        
+    <string name="phone_numberlabel"> Enter mobile number </string>
+        
+    <string name="sure_label"> Confirm </string>
+        
+    <string name="hello_label"> Welcome </string>
+        
+    <string name="data_entry_label"> Please enter data to continue </string>
+        
+    <string name="followup_label"> Continue </string>
+        
+    <string name="visitor_label"> Dear Guest </string>
+        
+    <string name="choosecountry_label"> Choose the appropriate country </string>
+        
+    <string name="country_label"> Saudi Arabia </string>
+        
+    <string name="dialog_label"> Product Evaluation </string>
+        
+    <string name="evaluation_desc_label"> We thank you for your trust. Please let us know what you think to offer you the best service </string>
+    <string name="send_label">send</string>
+    <string name="cancel_label">Cancel</string>
+    <string name="desc">About</string>
+    <string name="done_label">Done Successfully</string>
+    <string name="feedback_label">Thank you for your confidence in us You can follow the order through my orders screen</string>
+    <string name="closeaction_label">Close</string>
     <string name="languageenglish_label">choose the language</string>
     <string name="arlanguage_label">العربية</string>
     <string name="enlanguage_label">English</string>
-    <string name="choose_country_label">اختر الدولة</string>
-    <string name="countrychoose_desc">الرجاء تحديد الدولة لعرض المنتجات</string>
-    <string name="productdesc_label">فستان مزركش صناعة تركية</string>
-    <string name="product_label">طقم فاخر من الاخر</string>
-    <string name="productprice_label">110.00</string>
+    <string name="choose_country_label">Choose country</string>
+    <string name="countrychoose_desc">Please select the country to display the products</string>
     <string name="currency_label">د.ك</string>
-    <string name="filter_results">نتائج الفلترة</string>
-    <string name="list_label">قائمة</string>
-    <string name="net_textView">شبكة</string>
-    <string name="filter_label">فلترة</string>
-    <string name="title_activity_poduct">PoductActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="filtercolors_label">فلترة حسب السعر</string>
-    <string name="mini">من</string>
-    <string name="startprice_label">500</string>
-    <string name="max">إلى</string>
-    <string name="endprice_label">800</string>
-    <string name="filtersize_label">فلترة حسب الحجم</string>
+    <string name="filter_results">Filter Result</string>
+    <string name="list_label">Menu</string>
+    <string name="net_textView">Grid</string>
+    <string name="filter_label">Filter</string>
+    <string name="filtercolors_label">Filter by price</string>
+    <string name="mini">From</string>
+    <string name="max">To</string>
+    <string name="filtersize_label">Filter by size</string>
     <string name="size_type">S</string>
-    <string name="filterprice_label">فتلرة حسب اللون</string>
-    <string name="aboutus_label">تطبيق المباركية</string>
-    <string name="category_label">اكسسوارات</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="filterprice_label">Filter by color</string>
+    <string name="aboutus_label">سوق المباركية</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_homear">الرئيسية</string>
-    <string name="title_fav">المفضلة</string>
-    <string name="title_myorders">طلباتي</string>
-    <string name="title_specialorder">طلب خاص</string>
-    <string name="title_settigs">المزيد</string>
-    <string name="status">الحالة</string>
-    <string name="status_type">قيد المراجعة</string>
-    <string name="ordershour_label">منذ 01 ساعة</string>
-    <string name="order_number_label">#012345</string>
-    <string name="products_total_label">عدد المنتجات</string>
-    <string name="aboutproduct_label">طقم فاخر من الاخر</string>
-    <string name="manufa_type">صناعة عالمية</string>
+    <string name="title_home">Home</string>
+    <string name="title_fav">Favourite</string>
+    <string name="title_myorders">My orders</string>
+    <string name="title_specialorder">Spacial order</string>
+    <string name="title_settigs">More</string>
+    <string name="status">Status</string>
+    <string name="products_total_label">Products count</string>
     <string name="availableasize_type">X</string>
-    <string name="amount_label">المبلغ الإجمالي</string>
-    <string name="contiue_buying_label">متابعة الشراء</string>
-    <string name="total_number">350.0دك</string>
-    <string name="product_details_label">تفاصيل المنتج</string>
-    <string name="add_product_label">اضف للسلة</string>
-    <string name="_maxordernumber_label">أقصى كمية للطلب عدد</string>
-    <string name="contiue_shopping_label">متابعة التسوق</string>
+    <string name="amount_label">Total amount</string>
+    <string name="contiue_buying_label">Continue Purchase</string>
+    <string name="product_details_label">Product details</string>
+    <string name="add_product_label">Add to cart</string>
+    <string name="_maxordernumber_label">Maximum order quantity</string>
+    <string name="contiue_shopping_label">Continue shopping</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="notifications_label">الاشعارات</string>
-    <string name="cart_label">سلة المشتريات</string>
-    <string name="myaccount_label">حسابي</string>
-    <string name="about_label">عن التطبيق</string>
-    <string name="rules_label">الشروط والأحكام</string>
-    <string name="plolicy_label">سياسية الأستخدام</string>
-    <string name="policyrecovery_label">سياسية الاسترجاع</string>
-    <string name="under_Review">قيد المراجعة</string>
-    <string name="payments_label">طريقة الدفع المختاره</string>
-    <string name="service_label">خدمات</string>
-    <string name="deliverycost_label">تكلفة التوصيل</string>
-    <string name="discountcode_label">كود كبون الخصم</string>
-    <string name="orderstotal_label">اجمالي الطلبات</string>
-    <string name="discountvalue_label">قيمة الخصم</string>
-    <string name="paymentamount_label">اجمالي المبلغ للدفع</string>
-    <string name="_note_label">المبلع شامل تكلفة الضريبة المضافة</string>
-    <string name="user_details">تفاصيل المستخدم</string>
-    <string name="evaluate_label">تقييم</string>
-    <string name="confirm">تأكيد الدفع</string>
-    <string name="bill_details">تفاصيل الفاتورة</string>
-    <string name="empty_label">Email is equired</string>
+    <string name="notifications_label">Notifications</string>
+    <string name="cart_label">Shopping cart</string>
+    <string name="myaccount_label">My account</string>
+    <string name="about_label">About app</string>
+    <string name="rules_label"> Terms and Conditions </string>
+    <string name="plolicy_label"> Usage Policy </string>
+    <string name="policyrecovery_label"> Return Policy </string>
+    <string name="under_Review"> Under revision </string>
+    <string name="payments_label"> Selected payment method </string>
+    <string name="service_label"> Services </string>
+    <string name="deliverycost_label"> Delivery Cost </string>
+    <string name="discountcode_label"> Discount coupon code </string>
+    <string name="ordererstotal_label"> Total orders </string>
+    <string name="discountvalue_label"> Discount value </string>
+    <string name="paymentamount_label"> Total amount to pay </string>
+    <string name="_note_label"> The total amount is inclusive VAT</string>
+    <string name="user_details"> User Name </string>
+    <string name="evaluate_label"> Evaluate </string>
+    <string name="confirm"> Confirm payment </string>
+    <string name="bill_details"> Invoice Details </string>
+    <string name="empty_label">Email is required</string>
     <string name="name_erro">Name is required</string>
-    <string name="phone_empty_label">Phone number  is equired</string>
-    <string name="passwordempty_label">Password is equired</string>
+    <string name="phone_empty_label">Phone number is required</string>
+    <string name="passwordempty_label">Password is required</string>
     <string name="confirmpassword_label"> Password not matched</string>
 
-    <string name="emailadress_label">البريد الالكتروني</string>
-    <string name="phone_label"> رقم الجوال</string>
-    <string name="message_label">أدخل نص الرسالة هنا</string>
-    <string name="topic_label">الموضوع</string>
-    <string name="change_dialoglabel">تعديل كلمة المرور</string>
-    <string name="passwordcurrent_label">كلمة المرور الحالية</string>
-    <string name="passwordnewlabel">كلمة المرور الجديدة</string>
-    <string name="passwordconfirmlabel">تأكيد كلمة المرور الجديدة</string>
-    <string name="passwordconfirm_action">تأكيد</string>
-    <string name="productname_label">اسم المنتج</string>
-    <string name="productdetails_label">تفاصيل</string>
-    <string name="sendorderlabel">إرسال الطلب</string>
-    <string name="newaddress_label">عنوان جديد</string>
-    <string name="passwordword_label">كلمة المرور</string>
-    <string name="contact_direct_label">للتواصل المباشر</string>
-    <string name="welcome_headr_label">يسعدنا استقبال أرائكم واقتراحاتكم</string>
-    <string name="name_label">الاسم</string>
-    <string name="confirm_label">تأكيد الدفع</string>
-    <string name="welcome_label">مرحبا بك معنا</string>
-    <string name="mohafza_label">المحافظة</string>
-    <string name="manteqa_label">المنقطة</string>
-    <string name="peicenum_label">رقم القطعة</string>
-    <string name="streetnum_label">رقم الشارع</string>
-    <string name="jadnum_label">رقم الجادة</string>
-    <string name="building_label">بناية</string>
-    <string name="home_label">منزل</string>
-    <string name="buildingnumer_label">رقم المبنى</string>
-    <string name="floornumber_label">رقم الطابق</string>
-    <string name="flatnumber_label">رقم الشقة</string>
-    <string name="aladdress_label">العنوان</string>
-    <string name="paymentmethod_label">طريقة الدفع المناسبة لك</string>
-    <string name="cobondiscount_label">ادخل كبون الخصم اذا كنت تمتلك واحداً</string>
-    <string name="code_label">كود الخصم</string>
-    <string name="privacy_label">سياسية الخصوصةلتطبيق المباركية</string>
-    <string name="login_label">تسجيل الدخول</string>
-    <string name="sendmessage_label">إرسال رسالة</string>
-    <string name="contatcus_label">اتصل بنا</string>
-    <string name="productdeatails_label">تفاصيل المنتجات</string>
-    <string name="search_label">عن ماذا تبحث؟</string>
-    <string name="searchdefine_label">يمكنك البحث عن تصنيف أو منتج معين</string>
-    <string name="categories_label">التصنيفات</string>
-    <string name="show_label">عرض الكل</string>
-    <string name="arrived_labelً">وصل حديثاً</string>
-    <string name="mosteorder_label">الأكثر طلباً</string>
+    <string name="emailadress_label"> Email </string>
+        
+    <string name="phone_label"> Mobile number </string>
+        
+    <string name="message_label"> Enter your message text here </string>
+        
+    <string name="topic_label"> Subject </string>
+        
+    <string name="change_dialoglabel"> Change password </string>
+        
+    <string name="passwordcurrent_label"> Current password </string>
+        
+    <string name="passwordnewlabel"> New password </string>
+        
+    <string name="passwordconfirmlabel"> Confirm new password </string>
+        
+    <string name="passwordconfirm_action"> Confirm </string>
+        
+    <string name="productname_label"> Product title </string>
+        
+    <string name="productdetails_label"> Details </string>
+        
+    <string name="sendorderlabel"> Send Order </string>
+        
+    <string name="newaddress_label"> New Address </string>
+        
+    <string name="passwordword_label"> Password </string>
+        
+    <string name="contact_direct_label"> Direct connection </string>
+        
+    <string name="welcome_headr_label"> We are happy to receive your comments and suggestions </string>
+        
+    <string name="name_label"> Name </string>
+        
+    <string name="confirm_label"> Confirm payment </string>
+        
+    <string name="welcome_label"> Welcome to us </string>
+        
+    <string name="mohafza_label"> Governorate </string>
+        
+    <string name="manteqa_label"> Area </string>
+        
+    <string name="peicenum_label"> Block No. </string>
+        
+    <string name="streetnum_label"> Street No. </string>
+        
+    <string name="jadnum_label"> Avenue No. </string>
+        
+    <string name="building_label"> Building </string>
+        
+    <string name="home_label"> House </string>
+        
+    <string name="buildingnumer_label"> Building No. </string>
+        
+    <string name="floornumber_label"> Floor No. </string>
+        
+    <string name="flatnumber_label"> apartment No. </string>
+        
+    <string name="aladdress_label"> Address </string>
+        
+    <string name="paymentmethod_label"> The appropriate payment method for you </string>
+        
+    <string name="cobondiscount_label"> Enter the discount coupon if you have one </string>
+        
+    <string name="code_label"> Discount code </string>
+        
+    <string name="privacy_label"> Privacy policy </string>
+        
+    <string name="login_label"> login </string>
+        
+    <string name="sendmessage_label"> Send message </string>
+        
+    <string name="contatabus_label"> Contact us </string>
+        
+    <string name="productdeatails_label"> Product details </string>
+        
+    <string name="search_label"> What are you looking for? </string>
+        
+    <string name="searchdefine_label"> You can search for a specific label or product </string>
+        
+    <string name="categories_label"> Categories </string>
+        
+    <string name="show_label"> View all </string>
+        
+    <string name="arrived_label"> Recently arrived </string>
+        
+    <string name="mosteorder_label"> Most popular </string>
     <string name="share">Share</string>
-    <string name="empty_fav">لا يوجد مفضلة</string>
-    <string name="empty_fav_label2">لإضافة منتجات إلى قائمة الرغبات انتقل إلى قائمة المنتجات ، حدد  المنتج المطلوب وانقر على أيقونة إضافة الى المفضلة</string>
+    <string name="empty_fav">You have no favorite</string>
+    <string name="empty_fav_label2"> To add products to your Favorites list go to the product list, select the desired product and click the Add to Favorites icon </string>
     <string name="signin_confrimation">You need to login</string>
-    <string name="no_orders">لا يوجد لديك طلبات</string>
+    <string name="no_orders">You have no orders</string>
     <string name="add_to_cart_now">Add to Cart Now</string>
     <string name="exceed_amount_left">Quantity has been consumed</string>
     <string name="emptyphone_label">Phone number is required</string>
-    <string name="emptytopic_label">Topic is required</string>
-    <string name="callus_label">اتصل بنا</string>
+    <string name="emptytopic_label">Field is required</string>
+    <string name="callus_label">Contact us</string>
     <string name="save">Save</string>
-    <string name="total_cost">المبلغ الاجمالي</string>
+    <string name="total_cost">Total amount</string>
     <string name="empty_bag_3_label">for more options</string>
     <string name="empty_bag_2_label">To add products to your cart Go to the product list, select the product then click "Add" button</string>
     <string name="empty_bag_1_label">Your cart is empty</string>
@@ -193,28 +233,62 @@
     <string name="product_erro">Product Name is required</string>
     <string name="productde_erro">Product details is required</string>
     <string name="no_result_found">No result found</string>
-    <string name="building_input">ادخل رقم المبنى</string>
-    <string name="floor_input">ادخل رقم الطابق</string>
-    <string name="flat_input">ادخل رقم الشقة</string>
-    <string name="save_address">حفظ العنوان في قائمة العناوين</string>
-    <string name="house_input">ادخل رقم المنزل</string>
-    <string name="housenumer_label">رقم المنزل</string>
+    <string name="building_input"> Enter building No. </string>
+        
+    <string name="floor_input"> Enter the floor No. </string>
+        
+    <string name="flat_input"> Enter apartment No. </string>
+        
+    <string name="save_address"> Save address to address list </string>
+        
+    <string name="house_input"> Enter home No. </string>
+        
+    <string name="housenumer_label"> House No. </string>
     <string name="verify">Verify</string>
-    <string name="cash">نقدا</string>
-    <string name="knet">كي نت</string>
-    <string name="payment_activity">الدفع</string>
-    <string name="confirm_payment_activity">تأكيد الدفع</string>
+    <string name="cash">Cash</string>
+    <string name="knet">Knet</string>
+    <string name="payment_activity">Payment</string>
+    <string name="confirm_payment_activity">Payment Confirmation</string>
     <string name="gov">Gov</string>
-    <string name="block_input">ادخل رقم القطعة</string>
-    <string name="neigh">الحي</string>
-    <string name="neigh_input">ادخل الحي</string>
+    <string name="block_input">Enter block No.</string>
+    <string name="neigh">Neighborhood</string>
+    <string name="neigh_input">Enter the neighborhood</string>
     <string name="logout">Logout</string>
     <string name="empty_filter_result">No result found</string>
     <string name="forget_password_label">Please enter your email address or mobile to recover your password</string>
-    <string name="forget_password_label2">يرجى كتابة كلمة البريد الإلكتروني أو الهاتف لإستعادة كلمة المرور</string>
-    <string name="username_or_mobile_label">البريد الالكتروني أو رقم الهاتف</string>
-    <string name="sendlabel">ارسال</string>
-    <string name="countryandlanguage_label">الدولة واللغة</string>
+    <string name="username_or_mobile_label">Email or phone number</string>
+    <string name="sendlabel">Send</string>
+    <string name="countryandlanguage_label">Country &amp; Language </string>
+    <string name="title_activity_guest">Guest Login</string>
+    <string name="change_country">Change Country</string>
+    <string name="change_country_confirmation">When you change the country of display, only the selected country products will be displayed in the shopping cart.</string>
+    <string name="delete_confirm">OK, Delete</string>
+    <string name="search">Search</string>
+    <string name="search_result">Search Result</string>
+    <string name="discountpercentage_label">Discount rate</string>
+    <string name="sizes">Sizes</string>
+    <string name="colors"> Colors </string>
+    <string name="add_image"> Add image </string>
+    <string name="no_result_search">No result search found</string>
+    <string name="category_label2">Select a sub sections to display the products list</string>
+    <string name="create_password">Create Password</string>
+    <string name="create">Create</string>
+    <string name="streetnum_input">Enter street No.</string>
+    <string name="substreet_input">Enter the Avenue No. (sub street)</string>
 
+    <string name="exceed_weight">You exceeded the allowed weigh of shipping which is 5000 gram.</string>
+    <string name="language_label">اختر اللغة</string>
+    <string name="empty_result_search">No search result fount</string>
+    <string name="fav_error">You cannot favourit product, please login first</string>
+    <string name="empty_gov">Governorate is required</string>
+    <string name="empty_area">Area is required</string>
+    <string name="enter_product_name">Enter product name</string>
+    <string name="enter_details">Enter more details</string>
+    <string name="store_name">Store name</string>
+    <string name="enter_current_password">Enter current password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="enter_confirm_new_password">R-enter new password</string>
+    <string name="enter_coupon">Enter coupon</string>
+    <string name="confirm_password">Confirm password</string>
 
 </resources>

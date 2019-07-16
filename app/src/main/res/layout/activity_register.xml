@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:material="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layoutDirection="locale"
+    android:textDirection="locale">
 
     <include layout="@layout/toolbar_transport" />
 
@@ -32,7 +34,6 @@
                 android:id="@+id/logo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:src="@drawable/ic_logo"
                 app:layout_constraintBottom_toTopOf="@+id/signup_textView"
@@ -45,7 +46,7 @@
                 android:id="@+id/signup_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:gravity="center"
                 android:text="@string/sign_uplabel"
 
@@ -61,8 +62,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/segoeui"
-                android:text="@string/requriments"
+                android:fontFamily="@font/din_next_arabic_regular"
+                android:text="@string/requirements"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
                 android:textSize="@dimen/_11ssp"
@@ -80,7 +81,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:background="@drawable/textview_stroke"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:gravity="start"
                 android:hint="@string/user_name_label"
                 android:imeOptions="actionNext"
@@ -112,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
@@ -133,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/textview_stroke"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:hint="@string/email_label"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
@@ -169,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
@@ -191,7 +192,7 @@
 
                 android:background="@drawable/textview_stroke"
                 android:drawablePadding="12dp"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:hint="@string/phone_numberlabel"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
@@ -204,7 +205,7 @@
                 app:errorEnabled="true"
                 app:hintAnimationEnabled="false"
                 app:hintEnabled="false"
-                app:layout_constraintBottom_toTopOf="@id/password_Login_editText"
+                app:layout_constraintBottom_toTopOf="@id/password_Login_layout"
                 app:layout_constraintEnd_toEndOf="@id/username_EditText"
                 app:layout_constraintStart_toStartOf="@id/username_EditText"
                 app:layout_constraintTop_toBottomOf="@id/emailaddress_editText"
@@ -225,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
@@ -249,7 +250,6 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_12sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="+965"
                 android:textAlignment="viewStart"
 
                 android:textColor="@color/colorprimary"
@@ -258,40 +258,50 @@
                 app:layout_constraintTop_toTopOf="@id/phone_number_editText" />
 
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/password_Login_editText"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_Login_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
-
                 android:background="@drawable/textview_stroke"
-
-                android:drawableEnd="@drawable/ic_hid"
-                android:drawablePadding="@dimen/_20sdp"
-                android:fontFamily="@font/segoeui"
-                android:hint="@string/password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:maxLines="1"
                 android:paddingStart="@dimen/_12sdp"
-                android:paddingTop="@dimen/_16sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_12sdp"
-                android:paddingBottom="@dimen/_16sdp"
-                android:textAlignment="viewStart"
-                android:textSize="@dimen/_11ssp"
-                app:layout_constraintBottom_toTopOf="@id/confirm_password_Login_editText"
+                android:paddingBottom="@dimen/_10sdp"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
+                app:layout_constraintBottom_toTopOf="@id/confirm_password_Login_confirm"
                 app:layout_constraintEnd_toEndOf="@id/username_EditText"
                 app:layout_constraintStart_toStartOf="@id/username_EditText"
-                app:layout_constraintTop_toBottomOf="@+id/phone_number_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/phone_number_editText"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/password_Login_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/LightGray"
+                    android:fontFamily="@font/din_next_arabic_regular"
+                    android:hint="@string/password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintBottom_toTopOf="@id/confirm_password_Login_editText"
+                    app:layout_constraintEnd_toEndOf="@id/username_EditText"
+                    app:layout_constraintStart_toStartOf="@id/username_EditText"
+                    app:layout_constraintTop_toBottomOf="@+id/phone_number_editText" />
+            </android.support.design.widget.TextInputLayout>
 
             <View
                 android:id="@+id/line4"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="#707070"
-                app:layout_constraintEnd_toEndOf="@id/password_Login_editText"
-                app:layout_constraintStart_toStartOf="@id/password_Login_editText"
-                app:layout_constraintTop_toTopOf="@id/password_Login_editText" />
+                app:layout_constraintEnd_toEndOf="@id/password_Login_layout"
+                app:layout_constraintStart_toStartOf="@id/password_Login_layout"
+                app:layout_constraintTop_toTopOf="@id/password_Login_layout" />
 
             <TextView
                 android:id="@+id/pass_data"
@@ -299,7 +309,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
@@ -314,40 +324,51 @@
                 app:layout_constraintTop_toTopOf="@id/line4" />
 
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/confirm_password_Login_editText"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/confirm_password_Login_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/textview_stroke"
-
-                android:drawableEnd="@drawable/ic_hid"
-                android:drawablePadding="@dimen/_20sdp"
-                android:fontFamily="@font/segoeui"
-                android:hint="@string/password"
-                android:imeOptions="actionNext"
-                android:inputType="textPassword"
-                android:maxLines="1"
                 android:paddingStart="@dimen/_12sdp"
-                android:paddingTop="@dimen/_16sdp"
+                android:paddingTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_12sdp"
-                android:paddingBottom="@dimen/_16sdp"
-                android:textAlignment="viewStart"
-                android:textSize="@dimen/_11ssp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/sure_bt"
                 app:layout_constraintEnd_toEndOf="@id/username_EditText"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/username_EditText"
-                app:layout_constraintTop_toBottomOf="@+id/password_Login_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/password_Login_layout"
+                app:passwordToggleEnabled="true">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/confirm_password_Login_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@color/LightGray"
+                    android:drawableEnd="@drawable/ic_hid"
+                    android:drawablePadding="@dimen/_20sdp"
+                    android:fontFamily="@font/din_next_arabic_regular"
+                    android:hint="@string/enter_confirm_new_password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:textAlignment="viewStart"
+                    android:textSize="@dimen/_11ssp" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <View
                 android:id="@+id/line5"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="#707070"
-                app:layout_constraintEnd_toEndOf="@id/confirm_password_Login_editText"
-                app:layout_constraintStart_toStartOf="@id/confirm_password_Login_editText"
-                app:layout_constraintTop_toTopOf="@id/confirm_password_Login_editText" />
+                app:layout_constraintEnd_toEndOf="@id/confirm_password_Login_confirm"
+                app:layout_constraintStart_toStartOf="@id/confirm_password_Login_confirm"
+                app:layout_constraintTop_toTopOf="@id/confirm_password_Login_confirm" />
 
             <TextView
 
@@ -356,12 +377,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:background="@color/LightGray"
-                android:fontFamily="@font/seguisb"
+                android:fontFamily="@font/din_next_arabic_bold"
                 android:paddingStart="@dimen/_6sdp"
                 android:paddingTop="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_6sdp"
                 android:paddingBottom="@dimen/_6sdp"
-                android:text="@string/passwordword_label"
+                android:text="@string/confirm_password"
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorprimary"
 
@@ -379,7 +400,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginBottom="@dimen/_22sdp"
                 android:background="@color/colorprimary"
-                android:fontFamily="@font/segoeui"
+                android:fontFamily="@font/din_next_arabic_regular"
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_13sdp"
                 android:text="@string/sure_label"
@@ -388,16 +409,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/username_EditText"
                 app:layout_constraintStart_toStartOf="@id/username_EditText"
-                app:layout_constraintTop_toBottomOf="@+id/confirm_password_Login_editText" />
+                app:layout_constraintTop_toBottomOf="@+id/confirm_password_Login_confirm" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:visibility="gone"
         android:layout_gravity="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,19 +1,40 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.30.0'
+    }
+}
+
 apply plugin: 'com.android.application'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
 //TODO uncomment line below after adding fabric api secret and key to fabric.properties
-//apply plugin: 'io.fabric'
+apply plugin: 'io.fabric'
 
 android {
+
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId 'com.selsela.example'
+        applicationId 'net.selsela.almobarakeya'
         minSdkVersion 21
         targetSdkVersion 28
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
-        versionCode 1000
-        // Major -> Millions, Minor -> Thousands, Bugfix -> Hundreds. E.g 1.3.72 == 1,003,072
-        versionName '0.1.0'
+        versionCode 4
+        versionName '0.0.4'
+
+//
+//        storePassword 'mobarakya123’
+//        keyAlias = 'selsela_mobarakya'
+//        keyPassword 'mobarakya123'
     }
 
     bundle {
@@ -26,11 +47,22 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file('/Users/abeer/Desktop/Selsela/almobarkia/app/keystore')
+            keyAlias = 'selsela_mobarakya'
+            storePassword 'mobarakya123'
+            keyPassword 'mobarakya123'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable = true
 
         }
 
@@ -143,8 +175,8 @@ dependencies {
         exclude module: "fastadapter"
     }
     implementation 'com.mikepenz:actionitembadge:3.3.1@aar'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     implementation 'me.zhanghai.android.materialratingbar:library:1.3.1'
     implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
@@ -152,7 +184,6 @@ dependencies {
     implementation 'com.github.rey5137:material:1.2.5'
     implementation 'com.jaredrummler:material-spinner:1.2.5'
     implementation 'org.sufficientlysecure:html-textview:3.6'
-    implementation 'com.github.travijuu:numberpicker:1.0.7'
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
     implementation 'com.llollox:androidtoggleswitch:2.0.1'
@@ -181,6 +212,7 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.stfalcon:frescoimageviewer:0.5.0'
     implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'com.github.esafirm.android-image-picker:imagepicker:1.13.1'
 
     ////dimens
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
@@ -227,3 +259,4 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
     testImplementation 'org.robolectric:robolectric:3.3'
 }
+apply plugin: 'com.google.gms.google-services'

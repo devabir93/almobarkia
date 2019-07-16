@@ -30,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/segoeuib"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:text="@string/change_dialoglabel"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_20ssp"
@@ -38,40 +38,51 @@
         app:layout_constraintStart_toEndOf="@id/logo"
         app:layout_constraintTop_toTopOf="@id/logo" />
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/password_current_tetxtView"
-        android:layout_width="match_parent"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_current_tetxtView_layout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:background="@drawable/textview_stroke"
-        android:drawableEnd="@drawable/ic_hid"
-        android:drawablePadding="@dimen/_20sdp"
-        android:hint="ادخل كلمة المرور الحالية"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        android:maxLines="1"
         android:paddingStart="@dimen/_12sdp"
-        android:paddingTop="@dimen/_16sdp"
+        android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_16sdp"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintBottom_toTopOf="@id/password_new_tetxtView"
+        android:paddingBottom="@dimen/_10sdp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/password_new_tetxtView_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:passwordToggleEnabled="true">
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password_current_tetxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/LightGray"
+            android:drawableEnd="@drawable/ic_hid"
+            android:drawablePadding="@dimen/_20sdp"
+            android:hint="@string/enter_current_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <View
         android:id="@+id/line"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#707070"
-        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView"
-        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView"
-        app:layout_constraintTop_toTopOf="@id/password_current_tetxtView" />
+        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintTop_toTopOf="@id/password_current_tetxtView_layout" />
 
     <TextView
         android:id="@+id/user_data"
@@ -79,7 +90,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:paddingStart="@dimen/_6sdp"
         android:paddingTop="@dimen/_3sdp"
         android:paddingEnd="@dimen/_6sdp"
@@ -91,38 +102,48 @@
         app:layout_constraintStart_toStartOf="@id/line"
         app:layout_constraintTop_toTopOf="@id/line" />
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/password_new_tetxtView"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_new_tetxtView_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/textview_stroke"
-        android:drawableEnd="@drawable/ic_hid"
-        android:drawablePadding="@dimen/_20sdp"
-        android:hint="ادخل كلمة المرور الجديدة"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        android:maxLines="1"
         android:paddingStart="@dimen/_12sdp"
-        android:paddingTop="@dimen/_16sdp"
+        android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_16sdp"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintBottom_toTopOf="@id/password_confirm_tetxtView"
-        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView"
-        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView"
-        app:layout_constraintTop_toBottomOf="@id/password_current_tetxtView" />
+        android:paddingBottom="@dimen/_10sdp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintBottom_toTopOf="@id/password_confirm_tetxtView_layout"
+        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintTop_toBottomOf="@id/password_current_tetxtView_layout"
+        app:passwordToggleEnabled="true">
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password_new_tetxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/LightGray"
+            android:drawableEnd="@drawable/ic_hid"
+            android:drawablePadding="@dimen/_20sdp"
+            android:hint="@string/enter_new_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <View
         android:id="@+id/line3"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#707070"
-        app:layout_constraintEnd_toEndOf="@id/password_new_tetxtView"
-        app:layout_constraintStart_toStartOf="@id/password_new_tetxtView"
-        app:layout_constraintTop_toTopOf="@id/password_new_tetxtView" />
+        app:layout_constraintEnd_toEndOf="@id/password_new_tetxtView_layout"
+        app:layout_constraintStart_toStartOf="@id/password_new_tetxtView_layout"
+        app:layout_constraintTop_toTopOf="@id/password_new_tetxtView_layout" />
 
     <TextView
         android:id="@+id/password_new_label"
@@ -130,7 +151,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:paddingStart="@dimen/_6sdp"
         android:paddingTop="@dimen/_1sdp"
         android:paddingEnd="@dimen/_6sdp"
@@ -142,37 +163,47 @@
         app:layout_constraintStart_toStartOf="@id/line3"
         app:layout_constraintTop_toTopOf="@id/line3" />
 
-    <android.support.design.widget.TextInputEditText
-        android:id="@+id/password_confirm_tetxtView"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/password_confirm_tetxtView_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/textview_stroke"
-        android:drawableEnd="@drawable/ic_hid"
-        android:drawablePadding="@dimen/_20sdp"
-        android:hint="اعد ادخال كلمة المرور الجديدة"
-        android:imeOptions="actionNext"
-        android:inputType="textPassword"
-        android:maxLines="1"
         android:paddingStart="@dimen/_12sdp"
-        android:paddingTop="@dimen/_16sdp"
+        android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_16sdp"
-        android:textAlignment="viewStart"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView"
-        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView"
-        app:layout_constraintTop_toBottomOf="@id/password_new_tetxtView" />
+        android:paddingBottom="@dimen/_10sdp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintStart_toStartOf="@id/password_current_tetxtView_layout"
+        app:layout_constraintTop_toBottomOf="@id/password_new_tetxtView_layout"
+        app:passwordToggleEnabled="true">
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/password_confirm_tetxtView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/LightGray"
+            android:drawableEnd="@drawable/ic_hid"
+            android:drawablePadding="@dimen/_20sdp"
+            android:hint="@string/enter_confirm_new_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textSize="@dimen/_11ssp" />
+    </android.support.design.widget.TextInputLayout>
 
     <View
         android:id="@+id/line2"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#707070"
-        app:layout_constraintEnd_toEndOf="@id/password_confirm_tetxtView"
-        app:layout_constraintStart_toStartOf="@id/password_confirm_tetxtView"
-        app:layout_constraintTop_toTopOf="@id/password_confirm_tetxtView" />
+        app:layout_constraintEnd_toEndOf="@id/password_confirm_tetxtView_layout"
+        app:layout_constraintStart_toStartOf="@id/password_confirm_tetxtView_layout"
+        app:layout_constraintTop_toTopOf="@id/password_confirm_tetxtView_layout" />
 
     <TextView
         android:id="@+id/password_confirm_label"
@@ -180,7 +211,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:background="@color/LightGray"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:paddingStart="@dimen/_6sdp"
         android:paddingTop="@dimen/_2sdp"
         android:paddingEnd="@dimen/_6sdp"
@@ -197,28 +228,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:padding="@dimen/_15sdp"
         android:text="@string/passwordconfirm_action"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_15ssp"
 
         app:layout_constraintEnd_toStartOf="@id/cancel_textView"
-        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
+        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView_layout"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/cancel_textView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:fontFamily="@font/seguisb"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:padding="@dimen/_15sdp"
         android:text="@string/cancel_label"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintBottom_toBottomOf="@id/confirm_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView"
+        app:layout_constraintTop_toBottomOf="@id/password_confirm_tetxtView_layout"
         app:layout_constraintTop_toTopOf="@id/confirm_textView" />
 
 

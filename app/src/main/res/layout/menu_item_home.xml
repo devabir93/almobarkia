@@ -5,7 +5,7 @@
     android:id="@+id/notification"
     android:layout_height="?attr/actionBarSize"
     android:gravity="center_vertical"
-    android:paddingStart="12dp"
+    android:paddingStart="10dp"
     >
 
     <ImageView
@@ -24,11 +24,12 @@
         android:layout_alignEnd="@id/bag_iv"
         android:layout_alignBottom="@id/bag_iv"
         android:layout_marginBottom="-2dp"
-        android:background="@drawable/accent_circle"
+        android:background="@drawable/red_circle"
         android:paddingStart="@dimen/_4sdp"
         android:paddingTop="@dimen/_2sdp"
         android:paddingEnd="@dimen/_4sdp"
         android:visibility="gone"
+        android:textColor="@color/white"
 
         />
 </RelativeLayout>

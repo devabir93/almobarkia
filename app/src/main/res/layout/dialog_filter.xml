@@ -3,187 +3,183 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layoutDirection="locale"
-    android:textDirection="locale"
+    android:layout_height="wrap_content"
+
     android:background="@color/white"
     tools:context=".ui.productlist.ProductListActivity">
 
 
-
     <TextView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:textColor="@color/colorprimary"
-        android:fontFamily="@font/segoeuib"
-        android:textSize="@dimen/_14ssp"
-        android:textAlignment="viewStart"
         android:id="@+id/flterprice_label"
-        android:text="@string/filtercolors_label"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:fontFamily="@font/din_next_arabic_bold"
+        android:text="@string/filtercolors_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/startpric_label"
-        app:layout_constraintTop_toBottomOf="@id/flterprice_label"
-        app:layout_constraintStart_toStartOf="@id/flterprice_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
         android:text="@string/mini"
         android:textAlignment="viewStart"
-        android:textSize="@dimen/_13ssp"
         android:textColor="@color/colorprimary"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintStart_toStartOf="@id/flterprice_label"
+        app:layout_constraintTop_toBottomOf="@id/flterprice_label" />
 
 
     <io.apptik.widget.MultiSlider
         android:id="@+id/range_slider5"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_18sdp"
         android:layout_marginTop="28dp"
         app:drawThumbsApart="true"
         app:layout_constraintEnd_toEndOf="@id/endprice_label_box"
         app:layout_constraintStart_toStartOf="@id/flterprice_label"
         app:layout_constraintTop_toBottomOf="@id/startpric_label"
-        app:stepsThumbsApart="100"
-        app:thumbValue1="100"
-        app:thumbValue2="1000"
+        app:stepsThumbsApart="50"
         app:thumbColor="@color/brown"
-        app:trackColor="@color/colorprimary"
-        app:thumbNumber="2" />
-
+        app:thumbNumber="2"
+        app:thumbValue1="1"
+        app:thumbValue2="5000"
+        app:trackColor="@color/colorprimary" />
 
 
     <TextView
         android:id="@+id/start_price"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingStart="@dimen/_9sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:text="100"
-        android:textAlignment="viewStart"
-        android:background="@drawable/textview_rectanglel"
-        app:layout_constraintStart_toEndOf="@id/startpric_label"
-        app:layout_constraintTop_toTopOf="@id/startpric_label"
-        android:layout_marginStart="@dimen/_10sdp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/textview_rectanglel"
+        android:paddingStart="@dimen/_9sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:text="1"
+        android:textAlignment="viewStart"
+        app:layout_constraintStart_toEndOf="@id/startpric_label"
+        app:layout_constraintTop_toTopOf="@id/startpric_label" />
 
     <TextView
         android:id="@+id/endpric_label"
-       app:layout_constraintEnd_toStartOf="@id/endprice_label_box"
-        app:layout_constraintTop_toTopOf="@id/startpric_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_8sdp"
         android:text="@string/max"
-        android:textSize="@dimen/_13ssp"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toStartOf="@id/endprice_label_box"
+        app:layout_constraintTop_toTopOf="@id/startpric_label" />
+
     <TextView
         android:id="@+id/endprice_label_box"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingStart="@dimen/_9sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:text="1000"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/textview_rectanglel"
-        app:layout_constraintTop_toTopOf="@id/startpric_label"
-        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/textview_rectanglel"
+        android:paddingStart="@dimen/_9sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:text="5000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/startpric_label" />
 
 
-    
     <TextView
         android:id="@+id/fltert_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/color_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@color/brown"
-        android:fontFamily="@font/seguisb"
-        android:textSize="@dimen/_17ssp"
+        android:fontFamily="@font/din_next_arabic_bold"
         android:gravity="center"
-        android:paddingTop="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_16sdp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_list" />
 
-<TextView
-    app:layout_constraintStart_toStartOf="@id/flterprice_label"
-    app:layout_constraintTop_toBottomOf="@id/range_slider5"
-    android:layout_marginTop="@dimen/_30sdp"
-    android:text="@string/filtersize_label"
-    android:fontFamily="@font/segoeuib"
-    android:textSize="@dimen/_14ssp"
-    android:id="@+id/filter_size"
-    android:textAlignment="viewStart"
-    android:textColor="@color/colorprimary"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/filter_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/din_next_arabic_bold"
+        android:text="@string/filtersize_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="@id/flterprice_label"
+        app:layout_constraintTop_toBottomOf="@id/range_slider5" />
 
     <TextView
         android:id="@+id/filter_action"
-        app:layout_constraintTop_toTopOf="@id/fltert_back"
-        app:layout_constraintBottom_toBottomOf="@id/fltert_back"
-        app:layout_constraintStart_toStartOf="@id/fltert_back"
-        app:layout_constraintEnd_toEndOf="@id/fltert_back"
-        android:drawableStart="@drawable/ic_done"
-        android:textColor="@color/colorprimary"
-        android:fontFamily="@font/seguibl"
-        android:textSize="@dimen/_17ssp"
-        android:text="@string/filter_label"
-        android:drawablePadding="@dimen/_8sdp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:drawableStart="@drawable/ic_done"
+        android:drawablePadding="@dimen/_8sdp"
+        android:text="@string/filter_label"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_17ssp"
+        app:layout_constraintBottom_toBottomOf="@id/fltert_back"
+        app:layout_constraintEnd_toEndOf="@id/fltert_back"
+        app:layout_constraintStart_toStartOf="@id/fltert_back"
+        app:layout_constraintTop_toTopOf="@id/fltert_back" />
 
 
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/size_list"
-        app:layout_constraintTop_toBottomOf="@id/filter_size"
-        app:layout_constraintStart_toStartOf="@id/startpric_label"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-
-        tools:itemCount="4"
-        app:layoutManager="LinearLayoutManager"
         android:orientation="horizontal"
-        tools:listitem="@layout/sizelist"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
-<TextView
-    android:id="@+id/colorfilter_label"
-    app:layout_constraintTop_toBottomOf="@id/size_list"
-    app:layout_constraintStart_toStartOf="@id/flterprice_label"
-    android:layout_marginTop="@dimen/_24sdp"
-    android:text="@string/filterprice_label"
-    android:fontFamily="@font/segoeuib"
-    android:textSize="@dimen/_14ssp"
-    android:textAlignment="viewStart"
-    android:textColor="@color/colorprimary"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/startpric_label"
+        app:layout_constraintTop_toBottomOf="@id/filter_size"
+        tools:itemCount="4"
+        tools:listitem="@layout/sizelist"/>
+
+    <TextView
+        android:id="@+id/colorfilter_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:fontFamily="@font/din_next_arabic_bold"
+        android:text="@string/filterprice_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintStart_toStartOf="@id/flterprice_label"
+        app:layout_constraintTop_toBottomOf="@id/size_list" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/color_list"
-      app:layout_constraintStart_toStartOf="@id/startpric_label"
-        app:layout_constraintTop_toBottomOf="@id/colorfilter_label"
-        app:layoutManager="LinearLayoutManager"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-
-        android:orientation="horizontal"
-        tools:listitem="@layout/colorslist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:orientation="horizontal"
 
-    </android.support.v7.widget.RecyclerView>
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="@id/startpric_label"
+        app:layout_constraintTop_toBottomOf="@id/colorfilter_label"
+        tools:listitem="@layout/colorslist"/>
+
 </android.support.constraint.ConstraintLayout>

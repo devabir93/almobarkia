@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layoutDirection="locale"
-        android:textDirection="locale"
         android:background="@color/white"
-        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+        android:layoutDirection="locale"
+        android:textDirection="locale">
 
         <ImageView
             android:id="@+id/product_imageView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_300sdp"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_productdetails"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +31,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layoutManager="LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="@id/product_imageView"
+            app:layout_constraintTop_toBottomOf="@id/product_imageView"
             tools:listitem="@layout/product_gallery_list" />
 
         <android.support.v7.widget.RecyclerView
@@ -62,12 +65,11 @@
             app:layout_constraintTop_toBottomOf="@id/size_list"
             numberpicker:custom_layout="@layout/number_picker_custom_hori_layout"
             numberpicker:focusable="false"
-            numberpicker:max="10"
             numberpicker:min="1"
             numberpicker:unit="1"
             numberpicker:value="1" />
 
-        <LinearLayout
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/add_to_cart"
             android:layout_width="0dp"
             android:layout_height="@dimen/_45sdp"
@@ -76,31 +78,24 @@
             android:layout_marginEnd="@dimen/_36sdp"
             android:background="@color/brown"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:orientation="horizontal"
+            android:text="@string/add_to_cart_now"
+            android:textAlignment="center"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/_12ssp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/size_list">
+            app:layout_constraintTop_toBottomOf="@id/size_list" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:paddingTop="@dimen/_16sdp"
-                android:paddingBottom="@dimen/_12sdp"
-                android:text="@string/add_to_cart_now"
-                android:textAlignment="center"
-                android:textColor="@color/primary"
-                android:textSize="@dimen/_12ssp" />
-        </LinearLayout>
 
         <TextView
             android:id="@+id/maxorder_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="center"
             android:text="@string/_maxordernumber_label"
             android:textColor="@color/colorprimary"
@@ -115,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:text="5"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_13ssp"
@@ -129,9 +124,9 @@
             android:id="@+id/cost_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_36sdp"
-            android:fontFamily="@font/segoeui"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="center"
             android:text="@string/total_cost"
             android:textColor="@color/colorprimary"
@@ -145,7 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_36sdp"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:text="5"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_13ssp"
@@ -155,15 +150,13 @@
             app:layout_constraintTop_toTopOf="@id/cost_label" />
 
 
-
-
         <TextView
             android:id="@+id/shop_label"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_16sdp"
             android:background="@color/colorprimary"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:gravity="center"
             android:paddingTop="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
@@ -181,7 +174,7 @@
             android:id="@+id/continue_label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:gravity="center"
             android:paddingTop="@dimen/_13sdp"
             android:paddingBottom="@dimen/_13sdp"
@@ -196,4 +189,4 @@
             app:layout_constraintTop_toTopOf="@id/shop_label" />
 
     </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

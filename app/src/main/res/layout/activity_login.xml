@@ -4,7 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:material="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/LightGray"
+    android:layoutDirection="locale"
+    android:textDirection="locale">
 
     <include layout="@layout/toolbar_transport" />
 
@@ -14,14 +17,14 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/LightGray"
         android:fitsSystemWindows="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layoutDirection="locale"
         android:orientation="vertical"
-        android:textDirection="locale"
-        app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
+        android:textDirection="locale">
+
+        <include layout="@layout/toolbar_transport" />
 
         <requestFocus material:ignore="MissingConstraints" />
 
@@ -43,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:text="@string/login_label"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_23ssp"
@@ -61,7 +64,7 @@
             android:layout_marginEnd="@dimen/_25sdp"
             android:layout_marginBottom="@dimen/_16sdp"
             android:background="@drawable/textview_stroke"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="start"
             android:hint="@string/user_data_label"
             android:imeOptions="actionNext"
@@ -86,9 +89,9 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_25sdp"
             android:background="@drawable/textview_stroke"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="start"
-            android:hint="@string/user_data_label"
+            android:hint="@string/password"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
             android:paddingStart="@dimen/_12sdp"
@@ -117,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:background="@color/LightGray"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:paddingStart="@dimen/_6sdp"
             android:paddingTop="@dimen/_3sdp"
             android:paddingEnd="@dimen/_6sdp"
@@ -144,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
             android:background="@color/LightGray"
-            android:fontFamily="@font/seguisb"
+            android:fontFamily="@font/din_next_arabic_bold"
             android:paddingStart="@dimen/_6sdp"
             android:paddingTop="@dimen/_3sdp"
             android:paddingEnd="@dimen/_6sdp"
@@ -165,7 +168,7 @@
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_25sdp"
             android:background="@color/colorprimary"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:padding="@dimen/_8sdp"
             android:text="@string/login_label"
             android:textColor="@color/brown"
@@ -183,7 +186,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_25sdp"
             android:background="@color/brown"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:padding="@dimen/_8sdp"
             android:text="@string/sign_uplabel"
             android:textColor="@color/colorprimary"
@@ -198,7 +201,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/segoeui"
+            android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="center"
             android:padding="@dimen/_8sdp"
             android:text="@string/visitor"
@@ -213,10 +216,9 @@
             android:id="@+id/forget_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_21sdp"
-            android:fontFamily="@font/seguisb"
-
+            android:fontFamily="@font/din_next_arabic_bold"
+            android:padding="@dimen/_8sdp"
             android:text="@string/forget_password"
             android:textColor="@color/colorprimary"
             android:textSize="@dimen/_12sdp"
@@ -225,14 +227,14 @@
             app:layout_constraintTop_toBottomOf="@id/password_Login_editText" />
 
 
-
     </android.support.constraint.ConstraintLayout>
+
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:visibility="gone"
         android:layout_gravity="center"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

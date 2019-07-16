@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/colorprimary</item>
         <item name="colorAccent">@color/brown</item>
         <item name="dialogCornerRadius">5dp</item>
+        <item name="android:fontFamily">@font/din_next_arabic_regular</item>
         <item name="android:includeFontPadding">false</item>
     </style>
 
@@ -27,7 +28,18 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="colorControlNormal">@color/colorprimary</item>
         <item name="android:textColorPrimary">@color/colorprimary</item>
+        <item name="android:textColorSecondary">@color/colorprimary</item>
+        <item name="actionMenuTextColor">@color/colorprimary</item>
         <item name="android:background">@color/brown</item>
+    </style>
+
+    <style name="bottom_nav_text_appearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:textColor">@color/colorprimary</item>
+    </style>
+
+    <style name="bottom_nav_inactive_text_appearance">
+        <item name="android:textColor">@color/brown</item>
+
     </style>
 
 </resources>
