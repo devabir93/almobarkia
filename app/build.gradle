@@ -28,8 +28,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
-        versionCode 4
-        versionName '0.0.4'
+        versionCode 5
+        versionName '0.0.5'
 
 //
 //        storePassword 'mobarakya123’
@@ -62,7 +62,7 @@ android {
 
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            debuggable = true
+           // debuggable = true
 
         }
 

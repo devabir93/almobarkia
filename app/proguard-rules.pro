@@ -75,6 +75,8 @@
 # http://proguard.sourceforge.net/manual/examples.html#stacktrace
 -renamesourcefileattribute SourceFile
 -keepattributes SourceFile,LineNumberTable
+-keep class net.selsela.almobarakeya.data.model.** { *; }
+
 
 
 -keepattributes *Annotation*

@@ -51,7 +51,7 @@
 
         <meta-data
             android:name="DATABASE"
-            android:value="selsela_almobarakeya.db" />
+            android:value="almobarakeya_selsela.DB" />
         <meta-data
             android:name="VERSION"
             android:value="3" />
