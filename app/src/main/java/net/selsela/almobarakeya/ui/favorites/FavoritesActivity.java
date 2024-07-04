@@ -79,7 +79,7 @@ public class FavoritesActivity extends BaseActivity implements FavMvpView {
             public void onFavProduct(Product product, int pos) {
                 selectedPos = pos;
                 favProduct = product;
-                favouritesPresenter.addToFav(product.getProductId(), getApplicationContext());
+                favouritesPresenter.addToFav(product, getApplicationContext());
 
             }
         });

@@ -8,15 +8,14 @@ import com.crashlytics.android.Crashlytics;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.orm.SugarContext;
+import com.treebo.internetavailabilitychecker.InternetAvailabilityChecker;
+
 import net.selsela.almobarakeya.data.local.PreferencesHelper;
 import net.selsela.almobarakeya.injection.component.ApplicationComponent;
 import net.selsela.almobarakeya.injection.component.DaggerApplicationComponent;
 import net.selsela.almobarakeya.injection.module.ApplicationModule;
 import net.selsela.almobarakeya.util.language.Language;
 import net.selsela.almobarakeya.util.language.LanguageUtils;
-
-import com.orm.SugarDb;
-import com.treebo.internetavailabilitychecker.InternetAvailabilityChecker;
 
 import java.util.Locale;
 
@@ -36,7 +35,6 @@ public class SelselaApplication extends Application {
         Fabric.with(this, new Crashlytics());
         if (net.selsela.almobarakeya.BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-//            Fabric.with(this, new Crashlytics());
         }
 
         sharedPreferences = new PreferencesHelper(this);
@@ -55,6 +53,7 @@ public class SelselaApplication extends Application {
         super.onTerminate();
         SugarContext.terminate();
     }
+
     private Context setLang() {
         String currnetLang = sharedPreferences.getWithKey(Language.KEY());
         if (currnetLang.equals("")) {

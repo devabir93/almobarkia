@@ -92,10 +92,10 @@ public class OldAddressFragment extends BaseFragment implements OldAddressAdapte
     public void onAddressSelected(Address address, int adapterPosition) {
         adapter.selected(adapterPosition);
         this.adress = address;
+        Timber.d("onAddressSelected %s", address);
         DataHolder.getOrder().setTransport_cost(address.getArea().getTransportCost());
         DataHolder.getOrder().setOld_address(address.getId());
         DataHolder.getOrder().setFull_address(address.getFullAddress());
-        Timber.d("onAddressSelected %s", address);
     }
 
     @Override

@@ -22,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:fontFamily="@font/din_next_arabic_bold"
-            android:text="150"
-            android:textColor="@color/brown"
+            android:textColor="@color/white"
             android:textSize="@dimen/_17ssp" />
 
         <TextView
@@ -36,8 +35,7 @@
             android:layout_toEndOf="@id/price"
             android:fontFamily="@font/din_next_arabic_regular"
             android:gravity="center"
-            android:text="د.ك"
-            android:textColor="@color/brown"
+            android:textColor="@color/white"
             android:textSize="@dimen/_11ssp" />
 
         <TextView
@@ -50,7 +48,6 @@
             android:layout_toEndOf="@id/currency"
             android:fontFamily="@font/din_next_arabic_bold"
             android:gravity="center"
-            android:text="250"
             android:textColor="@color/white"
             android:textSize="@dimen/_13ssp" />
 

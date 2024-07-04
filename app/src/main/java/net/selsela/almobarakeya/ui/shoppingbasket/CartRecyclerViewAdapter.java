@@ -13,6 +13,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.LimitExceededListener;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.home.Product;
 import net.selsela.almobarakeya.data.model.send_order.ProductOrderBody;
@@ -20,10 +25,6 @@ import net.selsela.almobarakeya.util.AppUtils;
 import net.selsela.almobarakeya.util.SomeDrawable;
 import net.selsela.almobarakeya.util.Utils;
 import net.selsela.almobarakeya.util.ViewUtil;
-import com.travijuu.numberpicker.library.Enums.ActionEnum;
-import com.travijuu.numberpicker.library.Interface.LimitExceededListener;
-import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
-import com.travijuu.numberpicker.library.NumberPicker;
 
 import java.util.List;
 
@@ -102,14 +103,9 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 //        } else if (!isExceed)
 //            holder.numberPicker.setActionEnabled(ActionEnum.INCREMENT, true);
         //holder.quantitiy.setText("x" + productOrder.getQuantity());
-        if (productOrder.getSize() != null && productOrder.getSize().getPivot() != null) {
-            Integer amount = (productOrder.getSize().getPivot().getAmount());
-            holder.numberPicker.setMax(amount);
-        } else {
-            if (product.getMaxOrder() > 0) {
-                holder.numberPicker.setMax(product.getMaxOrder());
 
-            }
+        if (product.getMaxOrder() > 0) {
+            holder.numberPicker.setMax(productOrder.getAmount());
         }
 
         holder.numberPicker.setValueChangedListener(new ValueChangedListener() {

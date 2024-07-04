@@ -62,46 +62,30 @@ public class SizeRecyclerViewAdapter extends RecyclerView.Adapter<SizeRecyclerVi
         holder.itemView.setEnabled(clickable);
 
         holder.size.setText(size.getName());
-        if (selectedItem == holder.getAdapterPosition() && !isSelected) {
+        if (selectedItem == holder.getAdapterPosition()) {
             //selected
             sSelectedItems.put(selectedItem, false);
-            holder.size.setBackgroundColor(ContextCompat.getColor(context, R.color.brown));
-            holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
+            holder.size.setBackgroundColor(ContextCompat.getColor(context, R.color.colorprimary));
+            holder.size.setTextColor(ContextCompat.getColor(context, R.color.white));
         } else {
-            if (sSelectedItems.get(holder.getAdapterPosition())) {
-                //selected
-                holder.size.setBackgroundColor(ContextCompat.getColor(context, R.color.brown));
-                holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
-            } else {
-                ///unselected
-                holder.size.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglel));
-                holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
-            }
+            ///unselected
+            holder.size.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglel));
+            holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
         }
-
-        holder.size.setSelected(sSelectedItems.get(holder.getAdapterPosition(), false));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isSelected = true;
-                if (sSelectedItems.get(holder.getAdapterPosition(), false)) {
+                if (selectedItem != holder.getAdapterPosition()) {
                     //selected
-                    sSelectedItems.delete(holder.getAdapterPosition());
-                    holder.size.setSelected(false);
-                    holder.size.setBackgroundColor(ContextCompat.getColor(context, R.color.brown));
-                    holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
+                    notifyItemChanged(selectedItem);
+                    selectedItem = holder.getAdapterPosition();
+                    holder.size.setBackgroundColor(ContextCompat.getColor(context, R.color.colorprimary));
+                    holder.size.setTextColor(ContextCompat.getColor(context, R.color.white));
 
+                    updateDataClickListener.onSizeSelected(size, position);
 
-                } else {
-                    ///unselected
-                    holder.size.setBackground(ContextCompat.getDrawable(context, R.drawable.textview_rectanglel));
-                    holder.size.setTextColor(ContextCompat.getColor(context, R.color.colorprimary));
-                    sSelectedItems.put(sPosition, false);
-                    sSelectedItems.put(holder.getAdapterPosition(), true);
-                    holder.size.setSelected(true);
                 }
-                updateDataClickListener.onSizeSelected(size, position);
             }
         });
     }
@@ -126,11 +110,8 @@ public class SizeRecyclerViewAdapter extends RecyclerView.Adapter<SizeRecyclerVi
     }
 
     public void selected(int position) {
-        int previousItem = selectedItem;
-        sPosition = position;
+        selectedItem = position;
         notifyDataSetChanged();
-        notifyItemChanged(previousItem);
-        notifyItemChanged(position);
     }
 
     public interface UpdateDataClickListener {

@@ -24,17 +24,11 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
     private List<Size> sizeList;
     Callback callBack;
     private int selectedItem;
-    private int sPosition;
-    private boolean isSelected;
-    private SparseBooleanArray sSelectedItems;
 
     public DialogSizeRecyclerViewAdapter(Context context, Callback callBack) {
         this.callBack = callBack;
         this.context = context;
-        sSelectedItems = new SparseBooleanArray();
-        sPosition = 0;
         selectedItem = 0;
-        isSelected = false;
     }
 
     @Override
@@ -61,8 +55,6 @@ public class DialogSizeRecyclerViewAdapter extends RecyclerView.Adapter<DialogSi
             holder.selectedSize.setSelected(false);
 
         }
-
-        holder.selectedSize.setSelected(sSelectedItems.get(holder.getAdapterPosition(), false));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

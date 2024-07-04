@@ -89,18 +89,6 @@
         app:layout_constraintStart_toStartOf="@id/product_descrption"
         app:layout_constraintTop_toBottomOf="@id/rating_bar" />
 
-
-    <TextView
-        android:id="@+id/prprice_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:text="140.00"
-        android:textColor="@color/colorprimary"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintStart_toEndOf="@id/productprice_label"
-        app:layout_constraintTop_toTopOf="@id/productprice_label" />
-
     <ImageView
         android:id="@+id/like"
         android:layout_width="@dimen/_20sdp"

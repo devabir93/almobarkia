@@ -21,11 +21,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha=".82"
+        android:visibility="invisible"
         android:background="@drawable/horizental_gradiant_rect"
-        app:layout_constraintTop_toTopOf="@id/categoriestype_textView"
         app:layout_constraintBottom_toBottomOf="@id/categoriestype_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/categoriestype_textView" />
 
     <TextView
         android:id="@+id/categoriestype_textView"
@@ -36,7 +37,7 @@
         android:paddingTop="@dimen/_8sdp"
         android:paddingBottom="@dimen/_13sdp"
         android:textAlignment="viewStart"
-        android:textColor="@color/brown"
+        android:textColor="@color/colorprimary"
         android:textSize="@dimen/_18ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

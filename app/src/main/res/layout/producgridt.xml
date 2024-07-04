@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_6sdp"
     android:background="@color/white"
-    android:elevation="4dp"
+    android:elevation="0dp"
     android:layoutDirection="locale"
     android:orientation="vertical"
     android:paddingBottom="@dimen/_8sdp"

@@ -211,7 +211,7 @@
             android:fontFamily="@font/din_next_arabic_regular"
             android:padding="@dimen/_8sdp"
             android:text="@string/followup_label"
-            android:textColor="@color/brown"
+            android:textColor="@color/white"
             android:textSize="@dimen/_17ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

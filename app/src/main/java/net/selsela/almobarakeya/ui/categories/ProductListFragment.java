@@ -24,6 +24,7 @@ import net.selsela.almobarakeya.data.model.home.MainCategory;
 import net.selsela.almobarakeya.data.model.home.Product;
 import net.selsela.almobarakeya.data.model.home.Size;
 import net.selsela.almobarakeya.ui.base.BaseFragment;
+import net.selsela.almobarakeya.ui.favorites.FavProduct;
 import net.selsela.almobarakeya.ui.home.ProductRecyclerViewAdapter;
 import net.selsela.almobarakeya.ui.main.UpdateCategories;
 import net.selsela.almobarakeya.ui.productdeatials.ProductDetailsActivity;
@@ -34,6 +35,7 @@ import net.selsela.almobarakeya.util.Const;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +87,6 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
     CategoryPresenter categoryPresenter;
     private ProductRecyclerViewAdapter productAdapter;
     private List<Product> productlist;
-    private Product selectedProdcut;
     private boolean hasFilteredData;
     private List<MainCategory> originalSubCategories;
     private MainCategory category;
@@ -93,6 +94,8 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
     private List<MainCategory> mainCategories;
     int selectedCategoryPos = 0;
     private MainCategoryMenuAdapter mainCategoryAdapter;
+    private boolean found;
+    private Product favedProduct;
 
     public void setSelectedCategoryPos(int selectedCategoryPos) {
         this.selectedCategoryPos = selectedCategoryPos;
@@ -117,6 +120,8 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
         setHasOptionsMenu(true);
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
     }
 
     @Override
@@ -145,17 +150,49 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void updateProduct(FavProduct favProduct) {
+        if (productlist.contains(favProduct.getFav())) {
+            Timber.d("category index");
+            int itemIndex = productlist.indexOf(favProduct.getFav());
+            if (itemIndex != -1) {
+                productlist.set(itemIndex, favProduct.getFav());
+                productAdapter.notifyDataSetChanged();
+            }
+        }
+        for (MainCategory mainCategory :
+                mainCategories) {
+            for (MainCategory category :
+                    mainCategory.getSubCategories()) {
+                if (category.getProducts() != null && category.getProducts().size() > 0) {
+                    if (category.getProducts().contains(favProduct.getFav())) {
+                        int itemIndex = category.getProducts().indexOf(favProduct.getFav());
+                        if (itemIndex != -1) {
+                            Timber.d("category index");
+                            category.getProducts().set(itemIndex, favProduct.getFav());
+                            found = true;
+                            break;
+                        }
+                        if (found) break;
+                    }
+                }
+                if (found) break;
+            }
+        }
     }
 
     @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
+    public void isSuccess(Boolean status) {
+        super.isSuccess(status);
+//        if (status) {
+//            updateProduct(new FavProduct(favedProduct));
+//        }
     }
-
 
     private void initMainCategoryRecyclerview() {
         if (mainCategories != null && mainCategories.size() > 0) {
@@ -198,8 +235,8 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
 
             @Override
             public void onFavProduct(Product product, int pos) {
-                selectedProdcut = product;
-                categoryPresenter.addToFav(product.getProductId(), getContext());
+                favedProduct = product;
+                categoryPresenter.addToFav(product, getContext());
             }
 
         });
@@ -319,21 +356,7 @@ public class ProductListFragment extends BaseFragment implements CategoryMvpView
     }
 
     @Override
-    public void isSuccess(Boolean status) {
-        super.isSuccess(status);
-        if (status) {
-            toggleFav();
-        }
-    }
-
-    private void toggleFav() {
-        selectedProdcut.setInFavorite(selectedProdcut.getInFavorite() == 1 ? 0 : 1);
-        productAdapter.notifyDataSetChanged();
-    }
-
-    @Override
     public void showCategories(List<MainCategory> categoryList) {
-
         mainCategories = categoryList;
         initMainCategoryRecyclerview();
 

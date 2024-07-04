@@ -338,7 +338,7 @@
             android:paddingTop="@dimen/_13sdp"
             android:paddingBottom="@dimen/_13sdp"
             android:text="@string/add_product_label"
-            android:textColor="@color/brown"
+            android:textColor="@color/white"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

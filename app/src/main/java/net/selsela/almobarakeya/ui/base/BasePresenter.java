@@ -8,7 +8,9 @@ import net.selsela.almobarakeya.data.DataManager;
 import net.selsela.almobarakeya.data.local.UserSession;
 import net.selsela.almobarakeya.data.model.BaseResponse;
 import net.selsela.almobarakeya.data.model.boxes.Box;
+import net.selsela.almobarakeya.data.model.home.Product;
 import net.selsela.almobarakeya.data.model.send_order.ProductOrderBody;
+import net.selsela.almobarakeya.ui.favorites.FavProduct;
 import net.selsela.almobarakeya.util.CartBadge;
 import net.selsela.almobarakeya.util.RetrofitException;
 import net.selsela.almobarakeya.util.language.LanguageUtils;
@@ -75,10 +77,10 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
         }
     }
 
-    public void addToFav(int prodcutID, Context context) {
+    public void addToFav(final Product prodcut, Context context) {
         if (userSession.hasActiveSession()) {
             checkViewAttached();
-            dataManager.addToFav(prodcutID)
+            dataManager.addToFav(prodcut.getProductId())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(new Observer<BaseResponse>() {
@@ -90,8 +92,12 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                         @Override
                         public void onNext(BaseResponse response) {
                             Timber.d("response %s", response);
+                            if (response.getStatus()) {
+                                Product finalProduct = prodcut;
+                                finalProduct.setInFavorite(finalProduct.getInFavorite() == 1 ? 0 : 1);
+                                EventBus.getDefault().postSticky(new FavProduct(finalProduct));
+                            }
                             getMvpView().isSuccess(response.getStatus());
-                            //getMvpView().showSnackBar(response.getResponseMessage());
                         }
 
                         @Override
@@ -221,7 +227,6 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                 });
     }
 
-
     public void getCartBadge() {
         checkViewAttached();
         cartManager.getCartCount()
@@ -251,9 +256,9 @@ public class BasePresenter<T extends MvpView> implements Presenter<T> {
                 });
     }
 
-    public void getProductById(final int productId, final int colorId, final int imageID, int sizeId) {
+    public void getProductById(final int productId, final int colorId, int sizeId) {
         checkViewAttached();
-        cartManager.getProductById(productId, colorId, imageID, sizeId)
+        cartManager.getProductById(productId, colorId, sizeId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<ProductOrderBody>() {

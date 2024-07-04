@@ -3,6 +3,7 @@ package net.selsela.almobarakeya.data;
 import android.content.Context;
 
 import com.orm.SugarDb;
+
 import net.selsela.almobarakeya.data.local.PreferencesHelper;
 import net.selsela.almobarakeya.data.model.BaseResponse;
 import net.selsela.almobarakeya.data.model.boxes.Box;
@@ -336,26 +337,26 @@ public class CartManager {
         int isSavedInDatabase;
         Timber.d("saveOrderWithoutRX %s", productOrder);
         List<ProductOrderBody> productOrderList = new ArrayList<>();
-        if (productOrder.getColor() != null && productOrder.getSize() != null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? and color_id=? and image_id=?",
+        if (productOrder.getColor() != null && productOrder.getSize() != null && productOrder.getProduct().getHasColors() == 1) {
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? and color_id=?",
                     String.valueOf(getUserId()), String.valueOf(getCountryID()), String.valueOf(productOrder.getOrderId()),
-                    String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getColorId()), String.valueOf(productOrder.getImageId()));
-        } else if (productOrder.getColor() == null && productOrder.getSize() == null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? and color_id=? and image_id=?",
+                    String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getColorId()));
+        } else if (productOrder.getColor() == null && productOrder.getSize() == null && productOrder.getProduct().getHasColors() == 0) {
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? and color_id=? ",
                     String.valueOf(getUserId()),
                     String.valueOf(getCountryID()),
                     String.valueOf(productOrder.getOrderId()),
                     String.valueOf(0),
                     String.valueOf(0)
-                    , String.valueOf(productOrder.getImageId()));
-        } else if (productOrder.getColor() == null && productOrder.getSize() != null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? and image_id=?",
+            );
+        } else if (productOrder.getColor() == null && productOrder.getSize() != null && productOrder.getProduct().getHasColors() == 2) {
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and size_id=? ",
                     String.valueOf(getUserId()), String.valueOf(getCountryID()), String.valueOf(productOrder.getOrderId()),
-                    String.valueOf(productOrder.getSizeId()), String.valueOf(productOrder.getImageId()));
-        } else if (productOrder.getSize() == null && productOrder.getColor() != null) {
-            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and color_id=? and image_id=?",
+                    String.valueOf(productOrder.getSizeId()));
+        } else if (productOrder.getSize() == null && productOrder.getColor() != null && productOrder.getProduct().getHasColors() == 3) {
+            productOrderList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and color_id=? ",
                     String.valueOf(getUserId()), String.valueOf(getCountryID()), String.valueOf(productOrder.getOrderId()),
-                    String.valueOf(productOrder.getColorId()), String.valueOf(productOrder.getImageId()));
+                    String.valueOf(productOrder.getColorId()));
         }
         if (productOrderList.size() > 0) {
             Timber.d("saved productOrder");
@@ -363,9 +364,6 @@ public class CartManager {
             productOrderList.get(0).setWeight(productOrder.getWeight());
             productOrderList.get(0).setAmount(productOrder.getAmount());
             productOrderList.get(0).setQuantity(productOrder.getQuantity());
-//            productOrderList.get(0).setGiftName(productOrder.getGiftName());
-//            productOrderList.get(0).setGiftMessage(productOrder.getGiftMessage());
-//            productOrderList.get(0).setGift(productOrder.getIsGift());
             productOrderList.get(0).save();
         } else {
             Timber.d("else");
@@ -397,9 +395,6 @@ public class CartManager {
                 productOrder.setImageId(productOrder.getImageId());
                 productOrder.setImageUrl(productOrder.getImageUrl());
                 productOrder.setAmount(productOrder.getAmount());
-                productOrder.setGiftName(productOrder.getGiftName());
-                productOrder.setGiftMessage(productOrder.getGiftMessage());
-                productOrder.setGift(productOrder.getIsGift());
                 productOrder.setPriceForSingleItem(productOrder.getPriceForSingleItem());
                 Product product = productOrder.getProduct();
                 product.save();
@@ -479,18 +474,25 @@ public class CartManager {
                 try {
                     openDatabase();
                     boolean isExceeds = false;
-                    List<ProductOrderBody> productOrderList = ProductOrderBody.find(ProductOrderBody.class,
-                            "user_id=? and country_id=?", String.valueOf(getUserId()), String.valueOf(getCountryID()));
-                    //  Timber.d("productOrderList %s", productOrderList);
-                    double totalWeight = 0;
-                    for (ProductOrderBody productOrderBody : productOrderList
-                    ) {
-                        if (productOrder != null && productOrderBody.getOrderId().equals(productOrder.getOrderId()))
-                            productOrderBody.setQuantity(productOrder.getQuantity());
-                        totalWeight += productOrderBody.getProduct().getWeight() * productOrderBody.getQuantity();
+                    if (getCountryID() != Const.KUWAIT) {
+                        List<ProductOrderBody> productOrderList = ProductOrderBody.find(ProductOrderBody.class,
+                                "user_id=? and country_id=?", String.valueOf(getUserId()), String.valueOf(getCountryID()));
+                        //  Timber.d("productOrderList %s", productOrderList);
+                        double totalWeight = 0;
+
+                        if (productOrderList.size() > 0) {
+                            for (ProductOrderBody productOrderBody : productOrderList) {
+                                if (productOrder != null && productOrderBody.getOrderId().equals(productOrder.getOrderId()))
+                                    productOrderBody.setQuantity(productOrder.getQuantity());
+                                totalWeight += productOrderBody.getProduct().getWeight() * productOrderBody.getQuantity();
+                            }
+                        } else {
+                            totalWeight = productOrder.getWeight() * productOrder.getQuantity();
+                        }
+
+                        if (totalWeight > 5000)
+                            isExceeds = true;
                     }
-                    if (totalWeight > 5000)
-                        isExceeds = true;
                     e.onNext(isExceeds);
                     e.onComplete();
                 } catch (Exception ex) {
@@ -529,19 +531,18 @@ public class CartManager {
     }
 
 
-    public Observable<ProductOrderBody> getProductById(final int productId, final int colorId, final int imageID, final int sizeId) {
-        Timber.d(" getProductById %s %s %s", productId, colorId, imageID);
+    public Observable<ProductOrderBody> getProductById(final int productId, final int colorId, final int sizeId) {
+        Timber.d(" getProductById %s %s", productId, colorId);
         return Observable.create(new ObservableOnSubscribe<ProductOrderBody>() {
             @Override
             public void subscribe(ObservableEmitter<ProductOrderBody> e) {
                 try {
                     openDatabase();
-                    List<ProductOrderBody> ProductOrderBodyList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and color_id=? and image_id=? and size_id=?",
+                    List<ProductOrderBody> ProductOrderBodyList = ProductOrderBody.find(ProductOrderBody.class, "user_id=? and country_id=? and order_id=? and color_id=? and size_id=?",
                             String.valueOf(getUserId()),
                             String.valueOf(getCountryID()),
                             String.valueOf(productId),
                             String.valueOf(colorId),
-                            String.valueOf(imageID),
                             String.valueOf(sizeId)
                     );
                     Timber.d("ProductOrderBodyList %s", ProductOrderBodyList);

@@ -110,7 +110,7 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
         orderBody = DataHolder.getOrder();
 
         UserData userData = mUserSession.getCurrentUser();
-        if(userData!=null){
+        if (userData != null) {
 
             usernameTetxtView.setText(userData.getName());
             phonenumberTetxtView.setText(userData.getMobile() + "");
@@ -130,13 +130,17 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
             @Override
             public void afterTextChanged(Editable s) {
-                orderBody.setCoupon_id(0);
-                orderBody.setCoupon(null);
-                cobonTextInput.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null);
+                clearcoupon();
 
             }
         });
 
+    }
+
+    private void clearcoupon() {
+        orderBody.setCoupon_id(0);
+        orderBody.setCoupon(null);
+        cobonTextInput.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null);
     }
 
     @OnClick({R.id.back_btt_textView, R.id.followup_textView, R.id.verify})
@@ -181,10 +185,12 @@ public class PaymentActivity extends BaseActivity implements PaymentMvpView {
 
     @Override
     public void showCoupone(Copone copone) {
-        if (copone.getRatio() > 0 && copone.getStatus() == 1) {
+        if (copone != null && copone.getRatio() > 0 && copone.getStatus() == 1) {
             orderBody.setCoupon_id(copone.getId());
             orderBody.setCoupon(copone);
             cobonTextInput.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, ContextCompat.getDrawable(this, R.drawable.ic_checked_confirm), null);
+        } else {
+            clearcoupon();
         }
 
     }

@@ -14,8 +14,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
+import timber.log.Timber;
+
 public class Product extends SugarRecord implements Parcelable {
 
+    public static String productSlider = "product";
+    public static String adsSlider = "ads";
     @SerializedName("id")
     @Expose
     private Integer productId;
@@ -31,6 +35,12 @@ public class Product extends SugarRecord implements Parcelable {
     @SerializedName("code")
     @Expose
     private String code;
+    @SerializedName("slide_type")
+    @Expose
+    private String slideType;
+    @SerializedName("url")
+    @Expose
+    private String url;
     @SerializedName("weight")
     @Expose
     private double weight;
@@ -103,7 +113,7 @@ public class Product extends SugarRecord implements Parcelable {
     @SerializedName("colors")
     @Expose
     private List<Color> colors = null;
-    @SerializedName("sizes")
+    @SerializedName("sizes_array")
     @Expose
     private List<Size> sizes = null;
     @SerializedName("images")
@@ -194,6 +204,8 @@ public class Product extends SugarRecord implements Parcelable {
         discountRatio = in.readDouble();
         price = in.readDouble();
         code = in.readString();
+        slideType = in.readString();
+        url = in.readString();
         weight = in.readDouble();
         if (in.readByte() == 0) {
             status = null;
@@ -286,6 +298,8 @@ public class Product extends SugarRecord implements Parcelable {
         dest.writeDouble(discountRatio);
         dest.writeDouble(price);
         dest.writeString(code);
+        dest.writeString(slideType);
+        dest.writeString(url);
         dest.writeDouble(weight);
         if (status == null) {
             dest.writeByte((byte) 0);
@@ -561,6 +575,7 @@ public class Product extends SugarRecord implements Parcelable {
     }
 
     public void setInFavorite(Integer inFavorite) {
+        Timber.d("setInFavorite %s", inFavorite);
         this.inFavorite = inFavorite;
     }
 
@@ -666,4 +681,20 @@ public class Product extends SugarRecord implements Parcelable {
         return new EqualsBuilder().append(productId, rhs.productId).isEquals();
     }
 
+
+    public String getSlideType() {
+        return slideType;
+    }
+
+    public void setSlideType(String slideType) {
+        this.slideType = slideType;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 }

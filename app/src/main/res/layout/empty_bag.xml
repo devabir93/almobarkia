@@ -37,10 +37,10 @@
         android:layout_marginStart="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_25sdp"
-        android:background="@color/brown"
+        android:background="@color/colorprimary"
         android:fontFamily="@font/din_next_arabic_regular"
         android:padding="@dimen/_8sdp"
         android:text="@string/go_shopping_label"
-        android:textColor="@color/colorprimary"
+        android:textColor="@color/white"
         android:textSize="@dimen/_17ssp" />
 </LinearLayout>

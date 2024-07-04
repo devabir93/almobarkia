@@ -66,8 +66,7 @@ public class ColorRecyclerViewAdapter extends RecyclerView.Adapter<ColorRecycler
             holder.selectedColor.setBackground(someDrawable);
         }
 
-        if (selectedItem == holder.getAdapterPosition()
-        ) {
+        if (selectedItem == holder.getAdapterPosition()) {
             holder.selectedColor.setSelected(true);
             holder.selectedColor.setVisibility(View.VISIBLE);
             holder.color.setVisibility(View.INVISIBLE);

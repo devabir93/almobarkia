@@ -48,6 +48,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView, 
     private boolean isFromSearch;
     private EditText searchEditText;
     private SearchView searchView;
+    private Product favedProduct;
 
 
     @Override
@@ -81,8 +82,8 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView, 
 
                 @Override
                 public void onFavProduct(Product product, int pos) {
-                    selectedPos = pos;
-                    filterPresenter.addToFav(product.getProductId(),getApplicationContext());
+                    favedProduct = product;
+                    filterPresenter.addToFav(product,getApplicationContext());
                 }
 
             });
@@ -116,7 +117,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView, 
         searchEditText.setTextColor(getResources().getColor(R.color.colorprimary));
         searchEditText.setHintTextColor(getResources().getColor(R.color.transcolorprimary));
         searchEditText.setHint(getString(R.string.search_label));
-        searchEditText.setBackground(ContextCompat.getDrawable(this, R.drawable.rect_brown));
+       // searchEditText.setBackground(ContextCompat.getDrawable(this, R.drawable.rect_primary));
         int closeButtonId = getResources().getIdentifier("android:id/search_close_btn", null, null);
         ImageView closeButtonImage = (ImageView) searchView.findViewById(android.support.v7.appcompat.R.id.search_close_btn);
         closeButtonImage.setOnClickListener(new View.OnClickListener() {
@@ -149,7 +150,7 @@ public class ProductListActivity extends BaseActivity implements FilterMvpView, 
     }
 
     private void toggleFav() {
-        productlist.get(selectedPos).setInFavorite(productlist.get(selectedPos).getInFavorite() == 1 ? 0 : 1);
+        //productlist.get(selectedPos).setInFavorite(productlist.get(selectedPos).getInFavorite() == 1 ? 0 : 1);
         adapter.notifyDataSetChanged();
     }
 

@@ -26,12 +26,15 @@ public class Color extends SugarRecord implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("product_image_id")
+    @SerializedName("quantity")
     @Expose
-    private int productImageId;
+    private int quantity;
     @SerializedName("pivot")
     @Expose
     private Pivot pivot;
+    @SerializedName("image")
+    @Expose
+    private Image image;
     @SerializedName("sizes")
     @Expose
     private List<Size> sizes = null;
@@ -69,8 +72,9 @@ public class Color extends SugarRecord implements Parcelable {
         }
         colorHexa = in.readString();
         name = in.readString();
-        productImageId = in.readInt();
+        quantity = in.readInt();
         pivot = in.readParcelable(Pivot.class.getClassLoader());
+        image = in.readParcelable(Image.class.getClassLoader());
         sizes = in.createTypedArrayList(Size.CREATOR);
     }
 
@@ -90,8 +94,9 @@ public class Color extends SugarRecord implements Parcelable {
         }
         dest.writeString(colorHexa);
         dest.writeString(name);
-        dest.writeInt(productImageId);
+        dest.writeInt(quantity);
         dest.writeParcelable(pivot, flags);
+        dest.writeParcelable(image, flags);
         dest.writeTypedList(sizes);
     }
 
@@ -152,14 +157,6 @@ public class Color extends SugarRecord implements Parcelable {
         this.sizes = sizes;
     }
 
-    public int getProductImageId() {
-        return productImageId;
-    }
-
-    public void setProductImageId(int productImageId) {
-        this.productImageId = productImageId;
-    }
-
     @Override
     public String toString() {
         return "Color{" +
@@ -167,7 +164,6 @@ public class Color extends SugarRecord implements Parcelable {
                 ", cId=" + cId +
                 ", colorHexa='" + colorHexa + '\'' +
                 ", name='" + name + '\'' +
-                ", productImageId=" + productImageId +
                 ", pivot=" + pivot +
                 ", sizes=" + sizes +
                 '}';
@@ -180,7 +176,6 @@ public class Color extends SugarRecord implements Parcelable {
 
         Color color = (Color) o;
 
-        if (getProductImageId() != color.getProductImageId()) return false;
         if (getColorId() != null ? !getColorId().equals(color.getColorId()) : color.getColorId() != null)
             return false;
         if (getcId() != null ? !getcId().equals(color.getcId()) : color.getcId() != null)
@@ -200,10 +195,25 @@ public class Color extends SugarRecord implements Parcelable {
         result = 31 * result + (getcId() != null ? getcId().hashCode() : 0);
         result = 31 * result + (getColorHexa() != null ? getColorHexa().hashCode() : 0);
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
-        result = 31 * result + getProductImageId();
         result = 31 * result + (getPivot() != null ? getPivot().hashCode() : 0);
         result = 31 * result + (getSizes() != null ? getSizes().hashCode() : 0);
         return result;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public Integer getcId() {

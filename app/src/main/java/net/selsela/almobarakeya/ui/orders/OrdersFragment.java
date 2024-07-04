@@ -62,7 +62,7 @@ public class OrdersFragment extends BaseFragment implements OrdresMvpView {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_orders_list, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         ordersPresenter.attachView(this);
         if (isUserLogged())
             ordersPresenter.get_orders();
@@ -86,7 +86,6 @@ public class OrdersFragment extends BaseFragment implements OrdresMvpView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override

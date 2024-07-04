@@ -21,6 +21,11 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
+
+        <!--fabric-->
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
         <activity android:name=".ui.notifications.NotificationsActivity" />
         <activity android:name=".ui.webview.WebViewActivity" />
         <activity android:name=".ui.privacypolicy.PrivacyPolicyActivity" />
@@ -54,7 +59,7 @@
             android:value="almobarakeya_selsela.DB" />
         <meta-data
             android:name="VERSION"
-            android:value="3" />
+            android:value="2" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />

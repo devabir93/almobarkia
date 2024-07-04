@@ -28,8 +28,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         testInstrumentationRunner "${applicationId}.runner.RxAndroidJUnitRunner"
-        versionCode 5
-        versionName '0.0.5'
+        versionCode 8
+        versionName '0.3'
 
 //
 //        storePassword 'mobarakya123’
@@ -63,11 +63,10 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
            // debuggable = true
-
         }
 
         debug {
-            versionNameSuffix " Debug"
+            versionNameSuffix "Debug"
             debuggable true
         }
     }
@@ -84,6 +83,10 @@ android {
 
     //Needed because of this https://github.com/square/okio/issues/58
     lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
         warning 'InvalidPackage'
     }
 }

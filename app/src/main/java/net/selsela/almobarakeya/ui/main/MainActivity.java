@@ -124,18 +124,22 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                     return true;
                 } else {
                     DialogFactory.showAlertDialog(MainActivity.this, getString(R.string.signin_confrimation));
+                    return false;
                 }
 
-                return false;
-
             case R.id.navigation_specialorder:
-                showToolbar();
-                toolbar.setTitle(R.string.title_specialorder);
-                hideOtherViews();
-                pos3.setVisibility(View.VISIBLE);
-                getSupportFragmentManager().beginTransaction().hide(active).show(fragment4).commit();
-                active = fragment4;
-                return true;
+                if (isUserLogged()) {
+                    showToolbar();
+                    toolbar.setTitle(R.string.title_specialorder);
+                    hideOtherViews();
+                    pos3.setVisibility(View.VISIBLE);
+                    getSupportFragmentManager().beginTransaction().hide(active).show(fragment4).commit();
+                    active = fragment4;
+                    return true;
+                } else {
+                    DialogFactory.showAlertDialog(MainActivity.this, getString(R.string.signin_confrimation));
+                    return false;
+                }
             case R.id.navigation_settings:
                 hideToolbar();
                 hideOtherViews();
@@ -166,6 +170,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public void showToolbar() {
         if (getSupportActionBar() != null)
             getSupportActionBar().show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
 

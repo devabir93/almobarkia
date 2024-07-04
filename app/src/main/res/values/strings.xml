@@ -290,5 +290,9 @@
     <string name="enter_confirm_new_password">R-enter new password</string>
     <string name="enter_coupon">Enter coupon</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="order_image">Order image</string>
+    <string name="details_label">Order details</string>
+    <string name="order_cost">Order cost</string>
+    <string name="reject">Reject</string>
 
 </resources>

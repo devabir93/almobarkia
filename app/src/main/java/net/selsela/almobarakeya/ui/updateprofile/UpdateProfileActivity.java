@@ -153,13 +153,6 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateMvpView
             title.setText(getString(R.string.create_password));
         }
 
-//        current_pass_input.performClick();
-//        password_confirm_input.performClick();
-//        password_new_input.performClick();
-//        current_pass_input.setOnTouchListener(this);
-//        password_confirm_input.setOnTouchListener(this);
-//        password_new_input.setOnTouchListener(this);
-
         TextView closeTextView = view2.findViewById(R.id.cancel_textView);
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override

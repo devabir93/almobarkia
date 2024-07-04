@@ -1,6 +1,7 @@
 package net.selsela.almobarakeya.ui.shoppingbasket;
 
 import com.google.gson.Gson;
+
 import net.selsela.almobarakeya.data.CartManager;
 import net.selsela.almobarakeya.data.DataManager;
 import net.selsela.almobarakeya.data.local.UserSession;
@@ -171,7 +172,7 @@ public class PaymentPresenter extends BasePresenter<PaymentMvpView> {
                         Timber.d("productOrderList %s", productOrderList);
                         getMvpView().isSuccess(true);
                         if (productOrderList != null && productOrderList.size() > 0) {
-                            // getMvpView().showSavedOrders(productOrderList);
+                            getMvpView().showSavedOrders(productOrderList);
                             EventBus.getDefault().postSticky(new CartBadge(productOrderList.size()));
                         } else {
                             EventBus.getDefault().postSticky(new CartBadge(0));

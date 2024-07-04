@@ -1,18 +1,19 @@
 
 package net.selsela.almobarakeya.data.model.home;
 
-import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Image implements Parcelable
-{
+import java.util.List;
+
+public class Image implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -29,19 +30,20 @@ public class Image implements Parcelable
     @SerializedName("image_url")
     @Expose
     private String imageUrl;
+    @SerializedName("type")
+    @Expose
+    private String type;
     @SerializedName("color")
     @Expose
     private List<Color> color = null;
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public Image() {
     }
 
     /**
-     * 
      * @param id
      * @param color
      * @param imageUrl
@@ -77,6 +79,7 @@ public class Image implements Parcelable
             isMain = in.readInt();
         }
         imageUrl = in.readString();
+        type = in.readString();
         color = in.createTypedArrayList(Color.CREATOR);
     }
 
@@ -102,6 +105,7 @@ public class Image implements Parcelable
             dest.writeInt(isMain);
         }
         dest.writeString(imageUrl);
+        dest.writeString(type);
         dest.writeTypedList(color);
     }
 
@@ -192,4 +196,11 @@ public class Image implements Parcelable
         return new EqualsBuilder().append(id, rhs.id).append(color, rhs.color).append(imageUrl, rhs.imageUrl).append(image, rhs.image).append(isMain, rhs.isMain).append(productId, rhs.productId).isEquals();
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

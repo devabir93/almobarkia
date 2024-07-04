@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.address.Address;
 
@@ -31,17 +31,13 @@ public class OldAddressAdapter extends RecyclerView.Adapter<OldAddressAdapter.Si
 
     boolean isArabic;
 
-    private boolean multiSelect = false;
     private String type;
-    private SparseBooleanArray sSelectedItems;
     private int selectedItem;
-    private int sPosition;
     private ViewHolderCallback mViewHolderCallback;
 
     //  @Inject
     public OldAddressAdapter() {
         addresses = new ArrayList<>();
-        sSelectedItems = new SparseBooleanArray();
     }
 
     public void setData(Context context, List<Address> addresses, ViewHolderCallback viewHolderCallback) {
@@ -66,13 +62,11 @@ public class OldAddressAdapter extends RecyclerView.Adapter<OldAddressAdapter.Si
         final Address address = addresses.get(position);
         Timber.d("pressed %s", address);
         holder.addressTextview.setText(address.getFullAddress());
-        if (sSelectedItems.get(holder.getAdapterPosition())) {
-            holder.addressLayout.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.brown));
+        if (selectedItem == (holder.getAdapterPosition())) {
+            holder.addressLayout.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorprimary));
         } else {
             holder.addressLayout.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.grey));
         }
-        holder.addressLayout.setSelected(sSelectedItems.get(holder.getAdapterPosition(), false));
-
         holder.deleteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,11 +90,8 @@ public class OldAddressAdapter extends RecyclerView.Adapter<OldAddressAdapter.Si
     }
 
     public void selected(int position) {
-        int previousItem = selectedItem;
-        sPosition = position;
+        selectedItem = position;
         notifyDataSetChanged();
-        notifyItemChanged(previousItem);
-        notifyItemChanged(position);
     }
 
     public void setAddresses(List<Address> addresses) {
@@ -133,10 +124,11 @@ public class OldAddressAdapter extends RecyclerView.Adapter<OldAddressAdapter.Si
 
         @Override
         public void onClick(View view) {
-            sSelectedItems.put(sPosition, false);
-            sSelectedItems.put(getAdapterPosition(), true);
-            Timber.d("onClick %s", addresses.get(getAdapterPosition()));
-            mViewHolderCallback.onAddressSelected(addresses.get(getAdapterPosition()), getAdapterPosition());
+            if (selectedItem != getAdapterPosition()) {
+                notifyItemChanged(selectedItem);
+                addressLayout.setBackgroundColor(ContextCompat.getColor(mcontext, R.color.colorprimary));
+                mViewHolderCallback.onAddressSelected(addresses.get(getAdapterPosition()), getAdapterPosition());
+            }
         }
     }
 }

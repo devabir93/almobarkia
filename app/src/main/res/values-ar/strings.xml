@@ -10,7 +10,7 @@
     <string name="requirements">الرجاء ادخال البيانات التالية لانشاء حساب جديد</string>
     <string name="email_label">ادخل البريد الالكتروني</string>
     <string name="user_name_label">ادخل اسمك</string>
-    <string name="phone_numberlabel">ادخل رقم الجوال</string>
+    <string name="phone_numberlabel">ادخل رقم التليفون</string>
     <string name="sure_label">تأكيد</string>
     <string name="hello_label">مرحبا بك </string>
     <string name="data_entry_label">الرجاء إدخال البانات  للمتابعة</string>
@@ -79,7 +79,7 @@
     <string name="bill_details">تفاصيل الفاتورة</string>
     <string name="empty_label">البريد الإلكتروني مطلوب</string>
     <string name="emailadress_label">البريد الالكتروني</string>
-    <string name="phone_label"> رقم الجوال</string>
+    <string name="phone_label"> رقم التليفون</string>
     <string name="message_label">أدخل نص الرسالة هنا</string>
     <string name="topic_label">الموضوع</string>
     <string name="change_dialoglabel">تعديل كلمة المرور</string>
@@ -201,4 +201,8 @@
     <string name="enter_confirm_new_password">اعد ادخال كلمة المرور الجديدة</string>
     <string name="enter_coupon">ادخل كبون الخصم</string>
     <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="order_image">صورة الطلب</string>
+    <string name="details_label">نص الطلب</string>
+    <string name="order_cost">تكلفة الطلب</string>
+    <string name="reject">رفض</string>
 </resources>

@@ -1,6 +1,7 @@
 package net.selsela.almobarakeya.ui.home;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.home.MainCategory;
 import net.selsela.almobarakeya.data.model.home.Product;
@@ -119,6 +120,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     private String flag = "";
     private String MostPopular = "MostPopular";
     private String LastProducts = "LastProducts";
+    private Product favedProduct;
+    private boolean found;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -135,6 +138,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
         super.onCreate(savedInstanceState);
         getActivityComponent().inject(this);
         setHasOptionsMenu(true);
+        if (!EventBus.getDefault().isRegistered(this))
+            EventBus.getDefault().register(this);
     }
 
     @Override
@@ -205,8 +210,6 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
     @Override
     public void onStart() {
         super.onStart();
-        if (!EventBus.getDefault().isRegistered(this))
-            EventBus.getDefault().register(this);
         homePresenter.getCartBadge();
     }
 
@@ -225,27 +228,64 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void updateProduct(FavProduct favProduct) {
+        Timber.d("updateProduct");
 
         if (mostProducts.contains(favProduct.getFav())) {
+            Timber.d("mostProducts");
             int itemIndex = mostProducts.indexOf(favProduct.getFav());
-            favProduct.getFav().setInFavorite(favProduct.getFav().getInFavorite() == 1 ? 0 : 1);
             if (itemIndex != -1) {
-
                 mostProducts.set(itemIndex, favProduct.getFav());
                 mostAdapter.notifyDataSetChanged();
             }
         }
 
         if (lastProducts.contains(favProduct.getFav())) {
+            Timber.d("lastProducts");
             int itemIndex = lastProducts.indexOf(favProduct.getFav());
-            favProduct.getFav().setInFavorite(favProduct.getFav().getInFavorite() == 1 ? 0 : 1);
             if (itemIndex != -1) {
                 lastProducts.set(itemIndex, favProduct.getFav());
                 laseAdapter.notifyDataSetChanged();
             }
         }
+
+
+        if (sliderProducts != null && sliderProducts.contains(favProduct.getFav())) {
+            Timber.d("sliderProduct");
+            int itemIndex = sliderProducts.indexOf(favProduct.getFav());
+            if (itemIndex != -1) {
+                Timber.d("sliderProduct index");
+                sliderProducts.set(itemIndex, favProduct.getFav());
+            }
+        }
+        for (MainCategory mainCategory :
+                categoryList) {
+            for (MainCategory category :
+                    mainCategory.getSubCategories()) {
+                if (category.getProducts() != null && category.getProducts().size() > 0) {
+                    if (category.getProducts().contains(favProduct.getFav())) {
+                        int itemIndex = category.getProducts().indexOf(favProduct.getFav());
+                        if (itemIndex != -1) {
+                            Timber.d("category index");
+                            category.getProducts().set(itemIndex, favProduct.getFav());
+                            categriesAdapter.notifyDataSetChanged();
+                            found = true;
+                            break;
+                        }
+                        if (found) break;
+                    }
+                }
+                if (found) break;
+            }
+        }
     }
 
+    @Override
+    public void isSuccess(Boolean status) {
+        super.isSuccess(status);
+//        if (status) {
+//            updateProduct(new FavProduct(favedProduct));
+//        }
+    }
 
     @Override
     public void showCartBadge(Integer i) {
@@ -360,9 +400,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
             @Override
             public void onFavProduct(Product product, int pos) {
-                flag = LastProducts;
-                selectedPos = pos;
-                homePresenter.addToFav(product.getProductId(), getContext());
+                favedProduct = product;
+                homePresenter.addToFav(product, getContext());
             }
         });
         laseAdapter.setLayoutWidth(true);
@@ -385,9 +424,8 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
 
             @Override
             public void onFavProduct(Product product, int pos) {
-                flag = MostPopular;
-                selectedPos = pos;
-                homePresenter.addToFav(product.getProductId(), getContext());
+                favedProduct = product;
+                homePresenter.addToFav(product, getContext());
 
             }
         });
@@ -444,17 +482,26 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
                     .putString("extra", image.getImage());
             mDemoSlider.addSlider(defaultSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Default);
         mDemoSlider.setCustomIndicator(custom_indicator);
+        mDemoSlider.stopAutoCycle();
         // mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setCustomAnimation(null);
         mDemoSlider.setDuration(5000);
         mDemoSlider.addOnPageChangeListener(this);
     }
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        startActivity(new Intent(getContext(), ProductDetailsActivity.class).putExtra(Const.Details, sliderProducts.get(mDemoSlider.getCurrentPosition())));
+        if (sliderProducts.get(mDemoSlider.getCurrentPosition()).getSlideType().equals(Product.productSlider))
+            startActivity(new Intent(getContext(), ProductDetailsActivity.class).putExtra(Const.Details, sliderProducts.get(mDemoSlider.getCurrentPosition())));
+        else {
+            String url = sliderProducts.get(mDemoSlider.getCurrentPosition()).getUrl();
+            if (!url.startsWith("http://") && !url.startsWith("https://"))
+                url = "http://" + url;
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        }
         // new ImageViewer.Builder(OrderDetailsActivity.this, imagesUriForFullScreen).setStartPosition(mDemoSlider.getCurrentPosition()).show();
     }
 
@@ -492,22 +539,4 @@ public class HomeFragment extends BaseFragment implements HomeMvpView, BaseSlide
         DialogFactory.showAlertDialog(getActivity(), getString(R.string.no_result_search));
     }
 
-    @Override
-    public void isSuccess(Boolean status) {
-        super.isSuccess(status);
-        if (status) {
-            toggleFav();
-        }
-    }
-
-
-    private void toggleFav() {
-        if (flag.equals(MostPopular)) {
-            mostProducts.get(selectedPos).setInFavorite(mostProducts.get(selectedPos).getInFavorite() == 1 ? 0 : 1);
-            mostAdapter.notifyDataSetChanged();
-        } else if (flag.equals(LastProducts)) {
-            lastProducts.get(selectedPos).setInFavorite(lastProducts.get(selectedPos).getInFavorite() == 1 ? 0 : 1);
-            laseAdapter.notifyDataSetChanged();
-        }
-    }
 }

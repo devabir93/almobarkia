@@ -304,7 +304,7 @@
                 android:paddingTop="@dimen/_9sdp"
                 android:paddingBottom="@dimen/_9sdp"
                 android:text="@string/sendorderlabel"
-                android:textColor="@color/brown"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_15ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/textInputEditText"

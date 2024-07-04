@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.features.ReturnMode;
 import com.esafirm.imagepicker.model.Image;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.order.Order;
 import net.selsela.almobarakeya.data.model.user.UserBody;
@@ -234,6 +235,8 @@ public class SpecialOrderFragment extends BaseFragment implements OrdresMvpView 
                 String product_name = productNameEditText.getText().toString();
                 String product_details = productdetailsEditText.getText().toString();
 
+                builder.addFormDataPart("token", mUserSession.getCurrentUser().getToken());
+                builder.addFormDataPart("user_id", String.valueOf(mUserSession.getCurrentUser().getId()));
                 builder.addFormDataPart("mobile", phone_num);
                 builder.addFormDataPart("name", user_name);
                 builder.addFormDataPart("product_name", product_name);

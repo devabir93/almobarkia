@@ -4,15 +4,26 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/product_imageView"
+
+    <View
+        android:visibility="invisible"
+        android:id="@+id/selected_view"
         android:layout_width="@dimen/_72sdp"
         android:layout_height="@dimen/_80sdp"
-        android:background="@color/white"
+        android:background="@color/brown"
         android:padding="@dimen/_2sdp"
-        android:src="@drawable/ic_productbasket"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <ImageView
+        android:id="@+id/product_imageView"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_78sdp"
+        android:background="@color/white"
+        android:padding="@dimen/_2sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@id/selected_view"
+        app:layout_constraintEnd_toEndOf="@id/selected_view"
+        app:layout_constraintBottom_toBottomOf="@id/selected_view"
+        app:layout_constraintTop_toTopOf="@id/selected_view" />
 </android.support.constraint.ConstraintLayout>

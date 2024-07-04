@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+
 import net.selsela.almobarakeya.R;
-import net.selsela.almobarakeya.data.model.home.Image;
+import net.selsela.almobarakeya.data.model.home.Color;
 import net.selsela.almobarakeya.util.ViewUtil;
 
 import java.util.List;
@@ -26,10 +27,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Recycler
 
     Callback callback;
 
-    private List<Image> sliderList;
+    private List<Color> sliderList;
     private Context context;
+    private int selectedItem;
 
-    public GalleryAdapter(Context context, List<Image> list, Callback callback) {
+    public GalleryAdapter(Context context, List<Color> list, Callback callback) {
         this.sliderList = list;
         this.context = context;
         this.callback = callback;
@@ -44,18 +46,34 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Recycler
     @Override
     public void onBindViewHolder(final RecyclerViewHolders holder, final int position) {
 
-        final Image image = sliderList.get(position);
-        if (image == null)
+        final Color Color = sliderList.get(position);
+        if (Color == null)
             return;
-        Glide.with(context).load(sliderList.get(position).getImageUrl()).thumbnail(.7f).into(holder.productImageView);
-        if (sliderList.get(position).getColor() != null && sliderList.get(position).getColor().size() > 0) {
-            holder.productImageView.setBackgroundColor(ViewUtil.getHexColor(sliderList.get(position).getColor().get(0).getColorHexa()));
+
+        if (selectedItem == holder.getAdapterPosition()) {
+            //selected
+            holder.selectedView.setVisibility(View.VISIBLE);
+        } else if (selectedItem != holder.getAdapterPosition()) {
+            ///unselected
+            holder.selectedView.setVisibility(View.INVISIBLE);
+
         }
+        if (Color.getImage() != null) {
+            Glide.with(context).load(sliderList.get(position).getImage().getImageUrl()).thumbnail(.7f).into(holder.productImageView);
+
+        } else
+            holder.productImageView.setBackgroundColor(ViewUtil.getHexColor(sliderList.get(position).getColorHexa()));
         holder.productImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onImageClick(image);
+                if (selectedItem != holder.getAdapterPosition()) {
+                    notifyItemChanged(selectedItem);
+                    callback.onImageClick(Color,holder.getAdapterPosition());
+                    holder.selectedView.setVisibility(View.VISIBLE);
+
+                }
             }
         });
+
 
     }
 
@@ -65,13 +83,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.Recycler
 
     }
 
+
+    public void selected(int position) {
+        selectedItem = position;
+        notifyDataSetChanged();
+    }
+
     public interface Callback {
-        void onImageClick(Image image);
+        void onImageClick(Color Color, int adapterPosition);
     }
 
     public class RecyclerViewHolders extends RecyclerView.ViewHolder {
         @BindView(R.id.product_imageView)
         ImageView productImageView;
+        @BindView(R.id.selected_view)
+        View selectedView;
 
         public RecyclerViewHolders(View itemView) {
             super(itemView);

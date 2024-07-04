@@ -30,15 +30,15 @@
         <item name="android:textColorPrimary">@color/colorprimary</item>
         <item name="android:textColorSecondary">@color/colorprimary</item>
         <item name="actionMenuTextColor">@color/colorprimary</item>
-        <item name="android:background">@color/brown</item>
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="bottom_nav_text_appearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:textColor">@color/colorprimary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="bottom_nav_inactive_text_appearance">
-        <item name="android:textColor">@color/brown</item>
+        <item name="android:textColor">@color/colorprimary</item>
 
     </style>
 

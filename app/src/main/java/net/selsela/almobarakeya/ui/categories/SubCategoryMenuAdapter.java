@@ -54,7 +54,7 @@ public class SubCategoryMenuAdapter extends RecyclerView.Adapter<SubCategoryMenu
         if (selectedItem == holder.getAdapterPosition()
         ) {
             holder.textView.setSelected(true);
-            holder.textView.setBackgroundColor(context.getResources().getColor(R.color.brown));
+            holder.textView.setBackgroundColor(context.getResources().getColor(R.color.white));
         } else if (selectedItem != holder.getAdapterPosition()) {
             holder.textView.setSelected(false);
             holder.textView.setBackgroundColor(context.getResources().getColor(R.color.app_menu_grey));
@@ -98,7 +98,7 @@ public class SubCategoryMenuAdapter extends RecyclerView.Adapter<SubCategoryMenu
             if (selectedItem != getAdapterPosition()) {
                 notifyItemChanged(selectedItem);
                 selectedItem = getAdapterPosition();
-                textView.setBackgroundColor(ContextCompat.getColor(context, R.color.brown));
+                textView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
                 textView.setSelected(true);
                 sClickListener.onItemClick(getAdapterPosition(), mCategories.get(getAdapterPosition()).getProducts());
             }

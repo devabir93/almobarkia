@@ -109,15 +109,11 @@ public class ShoppingBasketActivity extends BaseActivity implements PaymentMvpVi
         this.pos = pos;
         this.quantity = quantity;
         this.newPrice = newPrice;
-        // if (actionEnum.equals(ActionEnum.INCREMENT))
-        //   paymentPresenter.checkMaxWeight();
-        //checkMaxWeight();
-        // else {
+
         updateQuantity();
-        // productAdapter.isExceed(false);
         productAdapter.notifyItemChanged(pos);
         productAdapter.notifyDataSetChanged();
-        // }
+
     }
 
     @Override
@@ -214,28 +210,6 @@ public class ShoppingBasketActivity extends BaseActivity implements PaymentMvpVi
         return playersObjects;
 
     }
-
-    private void checkMaxWeight() {
-        List<ProductOrderBody> newList = new ArrayList<ProductOrderBody>();
-
-        for (ProductOrderBody foo : mProductOrderList) {
-            newList.add(foo.clone());
-        }
-        newList.get(pos).setQuantity(quantity);
-        newList.get(pos).setPrice(newPrice);
-        newList.get(pos).setWeight(newList.get(pos).getProduct().getWeight() * quantity);
-        boolean isExceeds = false;
-        double totalWeight = 0;
-        for (ProductOrderBody productOrderBody : newList
-        ) {
-            totalWeight += productOrderBody.getProduct().getWeight() * productOrderBody.getQuantity();
-        }
-        if (totalWeight >= 5000)
-            isExceeds = true;
-
-        isExceedWeight(isExceeds);
-    }
-
     @Override
     public void isExceedWeight(Boolean aBoolean) {
         super.isExceedWeight(aBoolean);

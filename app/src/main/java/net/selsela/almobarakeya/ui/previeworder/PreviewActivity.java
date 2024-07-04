@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.local.DataHolder;
 import net.selsela.almobarakeya.data.model.boxes.Box;
@@ -245,10 +246,7 @@ public class PreviewActivity extends BaseActivity implements PaymentMvpView {
                                 Timber.d("MaxBox %s", MaxBox);
                             }
                         }
-                        transportCost = getMinBox(totalWeight)
-                        //   * preferencesHelper.getCountry().getConversionFactor()
-                        ;
-
+                        transportCost = getMinBox(totalWeight);
                         calculatePrice();
                     }
                 }
@@ -259,7 +257,7 @@ public class PreviewActivity extends BaseActivity implements PaymentMvpView {
     }
 
     Double getMinBox(double totalWeight) {
-        Timber.d("getMinBox %s", totalWeight);
+        Timber.d("totalWeight %s", totalWeight);
         List<Box> minboxes = new ArrayList<>();
         if (totalWeight <= min) {
             mBox = minBox;
@@ -269,9 +267,7 @@ public class PreviewActivity extends BaseActivity implements PaymentMvpView {
             return MaxBox.getCost();
         }
         for (Box box : boxes) {
-            if (box.getWeight() > totalWeight
-                //&& box.getWeight() <= max
-            ) {
+            if (box.getWeight() >= totalWeight) {
                 minboxes.add(box);
             }
         }

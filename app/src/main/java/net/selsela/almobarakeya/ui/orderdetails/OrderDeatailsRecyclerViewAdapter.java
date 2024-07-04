@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.home.Product;
 import net.selsela.almobarakeya.data.model.order.ProductData;
@@ -35,6 +36,7 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
     private List<ProductData> products;
 
     private CallBack callBack;
+    private boolean isShow;
 
     public OrderDeatailsRecyclerViewAdapter(List<ProductData> products, Context context, CallBack callBack) {
         Timber.d("products %s", products);
@@ -59,6 +61,7 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Timber.d("onBindViewHolder");
         final ProductData product = products.get(position);
+        holder.evaluateBtt.setVisibility(isShow ? View.VISIBLE : View.INVISIBLE);
         Timber.d("product %s", product);
         if (product == null)
             return;
@@ -86,6 +89,10 @@ public class OrderDeatailsRecyclerViewAdapter extends RecyclerView.Adapter<Order
     @Override
     public int getItemCount() {
         return products.size();
+    }
+
+    public void showRateButton(boolean b) {
+        this.isShow = b;
     }
 
 

@@ -72,7 +72,7 @@
             android:layout_marginStart="@dimen/_22sdp"
             android:layout_marginTop="@dimen/_21sdp"
             android:layout_marginEnd="@dimen/_21sdp"
-            android:background="@color/gray"
+            android:background="@color/colorprimary"
             android:padding="@dimen/_8sdp"
             android:layoutDirection="rtl"
             app:layout_constraintTop_toBottomOf="@id/root_layout">
@@ -84,7 +84,7 @@
                 android:layout_marginStart="@dimen/_22sdp"
                 android:fontFamily="@font/din_next_arabic_regular"
                 android:text="@string/arlanguage_label"
-                android:textColor="@color/colorprimary"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_vertical"
                 android:layout_marginTop="8dp"
-                android:thumbTint="@color/brown"
+                android:thumbTint="@color/white"
                 android:checked="false"
                 app:layout_constraintEnd_toStartOf="@id/enlanguage_label"
                 app:layout_constraintStart_toEndOf="@id/arlanguage_label"
@@ -110,7 +110,7 @@
                 android:layout_marginEnd="@dimen/_22sdp"
                 android:fontFamily="@font/din_next_arabic_regular"
                 android:text="@string/enlanguage_label"
-                android:textColor="@color/colorprimary"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -87,7 +87,7 @@ public class AddressActivity extends BaseActivity {
     private void onAddresss() {
         flag = NEW_ADDRESS;
         showNewAddress();
-        addressLabel.setTextColor(getResources().getColor(R.color.brown));
+        addressLabel.setTextColor(getResources().getColor(R.color.white));
         addressLabel.setBackgroundColor(getResources().getColor(R.color.colorprimary));
 
         listLabel.setTextColor(getResources().getColor(R.color.colorprimary));
@@ -102,7 +102,7 @@ public class AddressActivity extends BaseActivity {
 
         addressLabel.setTextColor(getResources().getColor(R.color.colorprimary));
         addressLabel.setBackgroundColor(getResources().getColor(R.color.white));
-        listLabel.setTextColor(getResources().getColor(R.color.brown));
+        listLabel.setTextColor(getResources().getColor(R.color.white));
         listLabel.setBackgroundColor(getResources().getColor(R.color.colorprimary));
 
     }

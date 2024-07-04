@@ -111,7 +111,7 @@
 
    <TextView
        android:id="@+id/evaluate_btt"
-       android:background="@color/brown"
+       android:background="@color/white"
        android:text="@string/evaluate_label"
        android:textColor="@color/colorprimary"
        android:textSize="@dimen/_13ssp"

@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_30sdp"
         android:src="@drawable/ic_checked"
+        android:tint="#57EB8D"
         app:layout_constraintBottom_toTopOf="@id/paymentdone_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

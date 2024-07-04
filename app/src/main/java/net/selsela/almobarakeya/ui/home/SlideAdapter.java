@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.home.Product;
 
@@ -33,16 +34,18 @@ public class SlideAdapter extends BaseSliderView {
         TextView currency = (TextView) v.findViewById(R.id.currency);
         TextView prev_price = (TextView) v.findViewById(R.id.prev_price);
         TextView title = (TextView) v.findViewById(R.id.title);
-        price.setText(product.getPrice() + "");
-        if (product.getDiscountRatio() > 0) {
-            prev_price.setVisibility(View.VISIBLE);
-            prev_price.setPaintFlags(prev_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            prev_price.setText(product.getRealPrice() + "");
-        } else if (product.getDiscountRatio() == 0) {
-            prev_price.setVisibility(View.GONE);
+        if (product.getSlideType().equals(Product.productSlider)) {
+            price.setText(product.getPrice() + "");
+            if (product.getDiscountRatio() > 0) {
+                prev_price.setVisibility(View.VISIBLE);
+                prev_price.setPaintFlags(prev_price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                prev_price.setText(product.getRealPrice() + "");
+            } else if (product.getDiscountRatio() == 0) {
+                prev_price.setVisibility(View.GONE);
+            }
+            currency.setText(curr);
         }
         title.setText(product.getName());
-        currency.setText(curr);
         bindEventAndShow(v, target);
         return v;
     }

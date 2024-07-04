@@ -12,7 +12,6 @@ import net.selsela.almobarakeya.ui.auoth.LoginActivity;
 import net.selsela.almobarakeya.ui.auoth.RegisterActivity;
 import net.selsela.almobarakeya.ui.base.BaseActivity;
 import net.selsela.almobarakeya.ui.base.BaseFragment;
-import net.selsela.almobarakeya.ui.categories.CategoriesActivity;
 import net.selsela.almobarakeya.ui.categories.ProductListFragment;
 import net.selsela.almobarakeya.ui.contact.ContactActivity;
 import net.selsela.almobarakeya.ui.countries.CountriesActivity;
@@ -71,8 +70,6 @@ public interface ActivityComponent {
     void inject(CountriesActivity countriesActivity);
 
     void inject(SplachScreenActivity splachScreenActivity);
-
-    void inject(CategoriesActivity categoriesActivity);
 
     void inject(HomeFragment homeFragment);
 

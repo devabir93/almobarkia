@@ -47,8 +47,8 @@ import retrofit2.http.Query;
 
 public interface SelselaService {
 
-    String ENDPOINT = "http://selsela.info/mobarakia/public/api/";
-    String IMAGE_URL = "http://selsela.info/mobarakia/public/uploads/";
+    String ENDPOINT = "http://almubarakiya.co/public/api/";
+    String IMAGE_URL = "http://almubarakiya.co/public/uploads/";
 
     @POST("user/update_device_key")
     Observable<BaseResponse> update_device_key(@Query("user_id") int user_id,

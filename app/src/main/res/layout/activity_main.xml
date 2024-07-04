@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorprimary"
+            android:background="@color/white"
             android:elevation="0dp"
             app:elevation="0dp"
             app:itemBackground="@drawable/bottom_nav__background_selector"
@@ -69,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/brown" />
+                android:background="@drawable/rect_white_strock_brown" />
 
             <View
 
@@ -77,7 +77,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/brown"
+                android:background="@drawable/rect_white_strock_brown"
                 android:visibility="invisible" />
 
             <View
@@ -86,7 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/brown"
+                android:background="@drawable/rect_white_strock_brown"
                 android:visibility="invisible" />
 
             <View
@@ -95,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/brown"
+                android:background="@drawable/rect_white_strock_brown"
                 android:visibility="invisible" />
 
             <View
@@ -103,7 +103,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/brown"
+                android:background="@drawable/rect_white_strock_brown"
                 android:visibility="invisible" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>

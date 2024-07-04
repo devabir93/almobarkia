@@ -27,13 +27,13 @@
         android:id="@+id/startpric_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_30sdp"
         android:text="@string/mini"
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@id/start_price"
         app:layout_constraintStart_toStartOf="@id/flterprice_label"
-        app:layout_constraintTop_toBottomOf="@id/flterprice_label" />
+        app:layout_constraintTop_toTopOf="@id/start_price" />
 
 
     <io.apptik.widget.MultiSlider
@@ -42,15 +42,17 @@
         android:layout_height="@dimen/_18sdp"
         android:layout_marginTop="28dp"
         app:drawThumbsApart="true"
-        app:layout_constraintEnd_toEndOf="@id/endprice_label_box"
+
+        app:layout_constraintEnd_toEndOf="@id/currency_to"
         app:layout_constraintStart_toStartOf="@id/flterprice_label"
         app:layout_constraintTop_toBottomOf="@id/startpric_label"
+        app:rangeColor="@color/colorprimary"
         app:stepsThumbsApart="50"
-        app:thumbColor="@color/brown"
+        app:thumbColor="@color/white"
         app:thumbNumber="2"
         app:thumbValue1="1"
         app:thumbValue2="5000"
-        app:trackColor="@color/colorprimary" />
+        app:trackColor="@color/gray" />
 
 
     <TextView
@@ -58,15 +60,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:background="@drawable/textview_rectanglel"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="#1A707070"
         android:paddingStart="@dimen/_9sdp"
         android:paddingTop="@dimen/_5sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:text="1"
         android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
         app:layout_constraintStart_toEndOf="@id/startpric_label"
-        app:layout_constraintTop_toTopOf="@id/startpric_label" />
+        app:layout_constraintTop_toBottomOf="@id/flterprice_label" />
+
+    <TextView
+        android:id="@+id/currency_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/currency_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@id/start_price"
+        app:layout_constraintStart_toEndOf="@id/start_price"
+        app:layout_constraintTop_toTopOf="@id/start_price" />
+
 
     <TextView
         android:id="@+id/endpric_label"
@@ -77,22 +95,40 @@
         android:textAlignment="viewStart"
         android:textColor="@color/colorprimary"
         android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/startpric_label"
         app:layout_constraintEnd_toStartOf="@id/endprice_label_box"
+
         app:layout_constraintTop_toTopOf="@id/startpric_label" />
 
     <TextView
         android:id="@+id/endprice_label_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:background="@drawable/textview_rectanglel"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:background="#1A707070"
         android:paddingStart="@dimen/_9sdp"
         android:paddingTop="@dimen/_5sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:text="5000"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/colorprimary"
+        app:layout_constraintBottom_toBottomOf="@id/startpric_label"
+        app:layout_constraintEnd_toStartOf="@id/currency_to"
         app:layout_constraintTop_toTopOf="@id/startpric_label" />
+
+
+    <TextView
+        android:id="@+id/currency_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:text="@string/currency_label"
+        android:textAlignment="viewStart"
+        android:textColor="@color/colorprimary"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintBottom_toBottomOf="@id/start_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/start_price" />
 
 
     <TextView
@@ -100,7 +136,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
-        android:background="@color/brown"
+        android:background="@color/colorprimary"
         android:fontFamily="@font/din_next_arabic_bold"
         android:gravity="center"
         android:paddingTop="@dimen/_10sdp"
@@ -127,11 +163,11 @@
         android:id="@+id/filter_action"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:drawableStart="@drawable/ic_done"
+        android:drawableStart="@drawable/ic_done_white"
         android:drawablePadding="@dimen/_8sdp"
+        android:gravity="center"
         android:text="@string/filter_label"
-        android:textColor="@color/colorprimary"
+        android:textColor="@color/white"
         android:textSize="@dimen/_17ssp"
         app:layout_constraintBottom_toBottomOf="@id/fltert_back"
         app:layout_constraintEnd_toEndOf="@id/fltert_back"
@@ -153,7 +189,7 @@
         app:layout_constraintStart_toStartOf="@id/startpric_label"
         app:layout_constraintTop_toBottomOf="@id/filter_size"
         tools:itemCount="4"
-        tools:listitem="@layout/sizelist"/>
+        tools:listitem="@layout/sizelist" />
 
     <TextView
         android:id="@+id/colorfilter_label"
@@ -180,6 +216,6 @@
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintStart_toStartOf="@id/startpric_label"
         app:layout_constraintTop_toBottomOf="@id/colorfilter_label"
-        tools:listitem="@layout/colorslist"/>
+        tools:listitem="@layout/colorslist" />
 
 </android.support.constraint.ConstraintLayout>

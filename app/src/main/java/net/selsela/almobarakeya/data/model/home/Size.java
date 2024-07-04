@@ -18,6 +18,12 @@ public class Size extends SugarRecord implements Parcelable
     @SerializedName("id")
     @Expose
     private Integer sizeId;
+    @SerializedName("parent_category_id")
+    @Expose
+    private Integer parent_category_id;
+    @SerializedName("category_id")
+    @Expose
+    private Integer category_id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -51,6 +57,16 @@ public class Size extends SugarRecord implements Parcelable
         } else {
             sizeId = in.readInt();
         }
+        if (in.readByte() == 0) {
+            parent_category_id = null;
+        } else {
+            parent_category_id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            category_id = null;
+        } else {
+            category_id = in.readInt();
+        }
         name = in.readString();
         pivot = in.readParcelable(Pivot.class.getClassLoader());
     }
@@ -62,6 +78,18 @@ public class Size extends SugarRecord implements Parcelable
         } else {
             dest.writeByte((byte) 1);
             dest.writeInt(sizeId);
+        }
+        if (parent_category_id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(parent_category_id);
+        }
+        if (category_id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(category_id);
         }
         dest.writeString(name);
         dest.writeParcelable(pivot, flags);
@@ -130,4 +158,19 @@ public class Size extends SugarRecord implements Parcelable
         return new EqualsBuilder().append(sizeId, rhs.sizeId).append(pivot, rhs.pivot).append(name, rhs.name).isEquals();
     }
 
+    public Integer getParent_category_id() {
+        return parent_category_id;
+    }
+
+    public void setParent_category_id(Integer parent_category_id) {
+        this.parent_category_id = parent_category_id;
+    }
+
+    public Integer getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(Integer category_id) {
+        this.category_id = category_id;
+    }
 }

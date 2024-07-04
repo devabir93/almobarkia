@@ -125,7 +125,7 @@ public class NewAddressMoreFragment extends BaseFragment {
 
     public OrderBody getMoreNewAddress() {
 
-        if (switch1.isChecked()) {
+        if (!switch1.isChecked()) {
             if (buildingNmuberEditText.getEditableText().length() < 1) {
                 buildingNmuberEditText.setError(getContext().getString(R.string.topic_label));
                 return null;

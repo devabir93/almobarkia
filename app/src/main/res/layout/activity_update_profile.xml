@@ -18,7 +18,9 @@
         android:id="@+id/ic_profilepicbackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:src="@drawable/profile_image"
         android:background="@drawable/ic_backgroundprofile"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include layout="@layout/toolbar_transport" />
@@ -38,7 +40,7 @@
         android:id="@+id/switch_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray"
+        android:background="@color/colorprimary"
         android:layoutDirection="rtl"
         android:visibility="gone"
         android:padding="@dimen/_8sdp"
@@ -52,21 +54,19 @@
             android:fontFamily="@font/din_next_arabic_regular"
             android:text="@string/arlanguage_label"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorprimary"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Switch
-
-
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_vertical"
             android:layout_marginTop="8dp"
             android:checked="false"
-            android:thumbTint="@color/brown"
+            android:thumbTint="@color/white"
             app:layout_constraintEnd_toStartOf="@id/enlanguage_label"
             app:layout_constraintStart_toEndOf="@id/arlanguage_label"
             app:layout_constraintTop_toTopOf="parent" />
@@ -79,7 +79,7 @@
             android:fontFamily="@font/din_next_arabic_regular"
             android:text="@string/enlanguage_label"
             android:textAlignment="viewStart"
-            android:textColor="@color/colorprimary"
+            android:textColor="@color/white"
             android:textSize="@dimen/_16ssp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -269,8 +269,6 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_14sdp"
         android:background="@drawable/textview_stroke"
-        android:drawableEnd="@drawable/ic_hid"
-        android:drawablePadding="@dimen/_20sdp"
         android:imeOptions="actionNext"
         android:inputType="textPassword"
         android:maxLines="1"

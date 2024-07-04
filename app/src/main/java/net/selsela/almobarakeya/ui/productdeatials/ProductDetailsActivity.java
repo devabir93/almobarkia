@@ -22,6 +22,11 @@ import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
+
 import net.selsela.almobarakeya.R;
 import net.selsela.almobarakeya.data.model.home.Color;
 import net.selsela.almobarakeya.data.model.home.Image;
@@ -36,10 +41,6 @@ import net.selsela.almobarakeya.ui.shoppingbasket.ShoppingBasketActivity;
 import net.selsela.almobarakeya.util.AppUtils;
 import net.selsela.almobarakeya.util.Const;
 import net.selsela.almobarakeya.util.Utils;
-import com.stfalcon.frescoimageviewer.ImageViewer;
-import com.travijuu.numberpicker.library.Enums.ActionEnum;
-import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
-import com.travijuu.numberpicker.library.NumberPicker;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
@@ -125,6 +126,11 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     private List<Size> sizeList;
     private Boolean isExceed;
     private TextView maxOrderLabel;
+    private Integer selectedSizeId = 0;
+    private Integer selectedImageId = 0;
+    private Integer selectedColorId = 0;
+    private Integer amount;
+    private GalleryAdapter galleryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -217,9 +223,10 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                     .putString("extra", image.getImage());
             mDemoSlider.addSlider(defaultSliderView);
         }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Default);
         mDemoSlider.setCustomIndicator(customIndicator);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setCustomAnimation(null);
+        mDemoSlider.stopAutoCycle();
         mDemoSlider.setDuration(5000);
     }
 
@@ -281,38 +288,41 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         maxOrderValue = sheetView.findViewById(R.id.maxorder_num_value);
         maxOrderLabel = sheetView.findViewById(R.id.maxorder_num);
         dialogSize = new DialogSizeRecyclerViewAdapter(this, this);
-        if (product.getMaxOrder() > 0)
+        Timber.d("max %s", product.getMaxOrder());
+        if (product.getMaxOrder() > 0) {
+            maxOrderValue.setText(product.getMaxOrder() + "");
             numberPicker.setMax(product.getMaxOrder());
-        else {
+        } else {
+            amount = product.getAmountLeft();
+            numberPicker.setMax(product.getAmountLeft());
             maxOrderValue.setVisibility(View.GONE);
             maxOrderLabel.setVisibility(View.GONE);
         }
-        maxOrderValue.setText(product.getMaxOrder() + "");
-
 
         RecyclerView colorRecyclerview = sheetView.findViewById(R.id.product_list);
         colorRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         if (product.getHasColors() == 2) {
             sizeList = product.getSizes();
-        } else if (product.getHasColors() == 0)
+        } else if (product.getHasColors() == 0 || product.getHasColors() == 3)
             sizeRecyclerview.setVisibility(View.GONE);
-
-        colorRecyclerview.setAdapter(new GalleryAdapter(this, product.getImages(), new GalleryAdapter.Callback() {
+        galleryAdapter = new GalleryAdapter(this, product.getColors(), new GalleryAdapter.Callback() {
             @Override
-            public void onImageClick(Image image) {
-                selectedImage = image;
+            public void onImageClick(Color color, int pos) {
                 initNumPicker();
-                if (image.getColor() != null && image.getColor().size() > 0)
-                    selectedColor = image.getColor().get(0);
-                Glide.with(getApplicationContext()).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
-                if (product.getHasColors() == 1)
-                    sizeList = selectedColor.getSizes();
-                dialogSize.setData(sizeList);
-                if (sizeList != null && sizeList.size() > 0)
-                    onSizeClick(sizeList.get(0), 0);
+                galleryAdapter.selected(pos);
+                switch (product.getHasColors()) {
+                    case 1:
+                        onHasColor1(color);
+                        break;
+                    case 3:
+                        onHasColor3(color);
+                        break;
+                }
+                productsPresenter.getProductById(product.getProductId(), selectedColorId, selectedSizeId);
 
             }
-        }));
+        });
+        colorRecyclerview.setAdapter(galleryAdapter);
 
 
         RecyclerView chooseSizeRecyclerView = sheetView.findViewById(R.id.size_list);
@@ -323,27 +333,27 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
 
         /////// set first image clicked
 
-        if (product.getImages() != null && product.getImages().size() > 0) {
-            selectedImage = product.getImages().get(0);
-
-            if (selectedImage.getColor() != null && selectedImage.getColor().size() > 0) {
-                selectedColor = selectedImage.getColor().get(0);
-                if (product.getHasColors() == 1)
-                    sizeList = selectedColor.getSizes();
-                selectedSize = sizeList.get(0);
-                dialogSize.setData(selectedColor.getSizes());
-                dialogSize.notifyDataSetChanged();
-                if (sizeList != null && sizeList.size() > 0)
-                    onSizeClick(selectedSize, 0);
-                productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
-                //  bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
-            } else
-                productsPresenter.getProductById(product.getProductId(), 0, 0, 0);
-
-            Glide.with(this).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
-
-
+        switch (product.getHasColors()) {
+            case 0:
+                onHasColor0();
+                break;
+            case 1:
+                if (product.getColors() != null && product.getColors().size() > 0)
+                    onHasColor1(product.getColors().get(0));
+                break;
+            case 2:
+                onHasColor2();
+                break;
+            case 3:
+                if (product.getColors() != null && product.getColors().size() > 0)
+                    onHasColor3(product.getColors().get(0));
+                break;
         }
+
+        Timber.d("%s,%s,%s", product.getProductId(), selectedColorId, selectedSizeId);
+        if (product != null)
+            productsPresenter.getProductById(product.getProductId(), selectedColorId, selectedSizeId);
+
         numberPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
@@ -356,16 +366,6 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                 }
             }
         });
-
-//        numberPicker.setLimitExceededListener(new LimitExceededListener() {
-//            @Override
-//            public void limitExceeded(int limit, int exceededValue) {
-//                Timber.d("limit %s , exceededvalue %s", limit, exceededValue);
-//                if (exceededValue >= limit) {
-//                    showMessageDialog(getString(R.string.exceed_amount_left));
-//                }
-//            }
-//        });
         addToCartSheet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -391,6 +391,78 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
                 startActivity(intent);
             }
         });
+    }
+
+
+    public void onHasColor0() {
+        Glide.with(this).load(product.getImageUrl()).thumbnail(.7f).into(bigImageview);
+    }
+
+    public void onHasColor1(Color selectedColor) {
+        this.selectedColor = selectedColor;
+        this.selectedImage = selectedColor.getImage();
+        selectedColorId = selectedColor.getColorId();
+        sizeList = selectedColor.getSizes();
+        if (sizeList != null && sizeList.size() > 0) {
+            selectedSize = sizeList.get(0);
+            selectedSizeId = selectedSize.getSizeId();
+            dialogSize.setData(sizeList);
+            dialogSize.notifyDataSetChanged();
+            onSizeClick(selectedSize, 0);
+            //  bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
+        }
+        if (selectedColor.getImage() != null)
+            Glide.with(this).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
+        else
+            Glide.with(this).load(product.getImageUrl()).thumbnail(.7f).into(bigImageview);
+        if (selectedColor.getQuantity() > 0) {
+            amount = selectedColor.getQuantity();
+            numberPicker.setMax(selectedColor.getQuantity());
+        }
+
+    }
+
+    public void onHasColor2() {
+        sizeList = product.getSizes();
+        if (sizeList != null && sizeList.size() > 0) {
+            selectedSize = sizeList.get(0);
+            selectedSizeId = selectedSize.getSizeId();
+            dialogSize.setData(sizeList);
+            dialogSize.notifyDataSetChanged();
+            onSizeClick(selectedSize, 0);
+            //  bigImageview.setBackgroundColor(ViewUtil.getHexColor(selectedColor.getColorHexa()));
+        }
+        Glide.with(this).load(product.getImageUrl()).thumbnail(.7f).into(bigImageview);
+
+    }
+
+
+    public void onHasColor3(Color selectedColor) {
+        this.selectedColor = selectedColor;
+        this.selectedImage = selectedColor.getImage();
+        selectedColorId = selectedColor.getColorId();
+        sizeList = selectedColor.getSizes();
+        if (selectedColor.getImage() != null)
+            Glide.with(this).load(selectedImage.getImageUrl()).thumbnail(.7f).into(bigImageview);
+        else
+            Glide.with(this).load(product.getImageUrl()).thumbnail(.7f).into(bigImageview);
+        if (selectedColor.getQuantity() > 0) {
+            numberPicker.setMax(selectedColor.getQuantity());
+            amount = selectedColor.getQuantity();
+        }
+    }
+
+    @Override
+    public void onSizeClick(Size size, int pos) {
+        selectedSize = size;
+        selectedSizeId = size.getSizeId();
+        dialogSize.selected(pos);
+        // initNumPicker();
+        productsPresenter.getProductById(product.getProductId(), selectedColorId, selectedSizeId);
+        if (size.getPivot().getAmount() > 0) {
+            amount = size.getPivot().getAmount();
+            numberPicker.setMax(size.getPivot().getAmount());
+        }
     }
 
     private void initNumPicker() {
@@ -427,6 +499,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         productOrder = new ProductOrderBody();
         productOrder.setProduct(product);
         productOrder.setQuantity(numberPicker.getValue());
+        productOrder.setAmount(amount);
         productOrder.setColor(selectedColor);
         if (selectedColor != null)
             productOrder.setColorId(selectedColor.getColorId());
@@ -438,8 +511,13 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
         productOrder.setPriceForSingleItem(String.valueOf(product.getPrice()));
         productOrder.setPrice(String.valueOf(newPrice));
         productOrder.setUserId(getUserId());
-        productOrder.setImageId(selectedImage.getId());
-        productOrder.setImageUrl(selectedImage.getImageUrl());
+        productOrder.setImageId(selectedImageId);
+        if (selectedImage != null)
+            productOrder.setImageUrl(selectedImage.getImageUrl());
+        else
+            productOrder.setImageUrl(product.getImageUrl());
+
+
         productsPresenter.checkMaxWeight(productOrder);
 
 
@@ -487,25 +565,12 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
             initNumPicker();
     }
 
-    @Override
-    public void onSizeClick(Size size, int pos) {
-        selectedSize = size;
-        dialogSize.selected(pos);
-        maxOrderValue.setVisibility(View.VISIBLE);
-        maxOrderLabel.setVisibility(View.VISIBLE);
-        maxOrderValue.setText(size.getPivot().getAmount() + "");
-        // initNumPicker();
-        productsPresenter.getProductById(product.getProductId(), selectedColor.getColorId(), selectedColor.getProductImageId(), selectedSize.getSizeId());
-        if (size.getPivot().getAmount() > 0)
-            numberPicker.setMax(size.getPivot().getAmount());
-
-    }
 
     @OnClick({R.id.like_imageView, R.id.addcart_textView, R.id.product_details_label})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.like_imageView:
-                productsPresenter.addToFav(product.getProductId(), this);
+                productsPresenter.addToFav(product, this);
                 break;
             case R.id.addcart_textView:
                 showAddToCartDialog();
@@ -528,7 +593,7 @@ public class ProductDetailsActivity extends BaseActivity implements ProductsMvp,
     }
 
     private void toggleFav() {
-        product.setInFavorite(product.getInFavorite() == 1 ? 0 : 1);
+        //product.setInFavorite(product.getInFavorite() == 1 ? 0 : 1);
         if (product.getInFavorite() != null) {
             if (product.getInFavorite() == 1) {
                 likeImageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_likedheart));

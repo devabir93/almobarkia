@@ -208,6 +208,7 @@ public class OrderdeatailsActivity extends BaseActivity implements OrdresMvpView
 
             }
         });
+        adapter.showRateButton(order.getStatusId()==4);
         adapter.setCurrency(order.getCountry().getCurreny());
         orderdeatilsList.setAdapter(adapter);
         orderdeatilsList.setNestedScrollingEnabled(false);
